@@ -1,0 +1,10 @@
+Package: TargomoR
+Type: Package
+Title: An Interface to the Targomo API
+Version: 0.0.0.9000
+Authors@R: person("Chris", "Mason-Thom", email = "christopher.w.thom@outlook.com", role=c("aut","cre"))
+Description: This package allows R users to exploit the Targomo JavaScript API.
+License: 
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.0
