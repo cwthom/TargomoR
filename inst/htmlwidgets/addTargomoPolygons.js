@@ -4,6 +4,7 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lng, lat, times, tr
 
     // get the map
     var map = this;
+    console.log(map);
 
     // create a layer for the polygons
     var polygonLayer = r360.leafletPolygonLayer().addTo(map);

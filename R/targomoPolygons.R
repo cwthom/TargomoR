@@ -16,10 +16,10 @@ addTargomoPolygons = function(map,
                               stroke = 10) {
 
   map$dependencies <- c(map$dependencies,
-                        list(targomoDependency()),
+                        #list(targomoDependency()),
                         list(polygonDependency()))
 
   leaflet::invokeMethod(map, leaflet::getMapData(map), 'addTargomoPolygons',
-                        api_key, lat, lon, times, transport, stroke)
+                        api_key, lng, lat, times, transport, stroke)
 
 }
