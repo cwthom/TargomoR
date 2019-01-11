@@ -2,7 +2,7 @@
   "name": "TargomoR",
   "scripts": {
     "build": "webpack --config webpack.config.js",
-	"watch": "webpack --config webpack.config.js --watch --progress",
+    "watch": "webpack --config webpack.config.js --watch --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -14,7 +14,14 @@
   },
   "homepage": "https://github.com/cwthom/TargomoR#readme",
   "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-loader": "^2.1.1",
+    "path": "^0.12.7",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
+  },
+  "dependencies": {
+    "@targomo/core": "^0.2.7",
+    "@targomo/leaflet": "0.0.2"
   }
 }
