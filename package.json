@@ -1,0 +1,20 @@
+{
+  "name": "TargomoR",
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+	"watch": "webpack --config webpack.config.js --watch --progress",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cwthom/TargomoR.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cwthom/TargomoR/issues"
+  },
+  "homepage": "https://github.com/cwthom/TargomoR#readme",
+  "devDependencies": {
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
+  }
+}

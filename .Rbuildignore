@@ -5,3 +5,7 @@
 ^.Rhistory$
 ^.Renviron$
 ^TODO.md$
+^node_modules$
+^package.*\.json$
+^webpack\.config\.js$
+^inst/htmlwidgets/bindings$
