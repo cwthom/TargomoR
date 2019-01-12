@@ -1,5 +1,6 @@
 {
   "name": "TargomoR",
+  "private": true,
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch --progress",
@@ -22,6 +23,7 @@
   },
   "dependencies": {
     "@targomo/core": "^0.2.7",
-    "@targomo/leaflet": "0.0.2"
+    "@targomo/leaflet": "0.0.2",
+    "route360": "^0.5.3"
   }
 }

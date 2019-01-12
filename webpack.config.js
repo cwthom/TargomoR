@@ -42,18 +42,30 @@ let library_binding = function(name) {
 	    {
 		  test: /\.js$/,
 		  exclude: /node_modules/,
-		  load: "eslint-loader"
+		  loader: "eslint-loader"
 	    },
 	  ]
 	},
 	output: {
 	  filename: name + "-bindings.js",
-	  path: build_path + "/" name
+	  path: build_path + "/" + name
 	}
   }
 }
 
+const config = [
+  
+  // unstable (new) targomo API - don't use yet
+  // library_prod("@targomo/core", "targomo-core"),
+  // library_prod("@targomo/leaflet", "targomo-leaflet"),
+  
+  // stable route360 API
+  library_prod("route360", "route360"),
+  
+  // bindings
+  library_binding("tgm-polygons")
+  // library_binding("tgm-routes")
+  
+];
 
-
-
-	
+module.exports = config
