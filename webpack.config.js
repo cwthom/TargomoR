@@ -12,7 +12,7 @@ const path = require('path');
 const binding_path = "./inst/htmlwidgets/bindings/";
 const build_path = path.resolve(__dirname, "./inst/htmlwidgets/build");
 
-let library_prod = function(name, filename = name) {
+let library_prod = function(name, filename = name, library = undefined) {
   let foldername = filename;
   filename = filename + "-prod"
   var config = {
@@ -28,6 +28,14 @@ let library_prod = function(name, filename = name) {
 	  path: build_path + "/" + foldername
 	}
   }
+  if (typeof library != 'undefined') {
+    // save the library as a variable
+    // https://webpack.js.org/configuration/output/#output-library
+    config.output.library = library;
+    // do not use 'var' in the assignment
+    // https://webpack.js.org/configuration/output/#output-librarytarget
+    config.output.libraryTarget = "assign";
+  }
   return config;
 }
 
@@ -36,6 +44,7 @@ let library_binding = function(name) {
   return {
 	mode: "production", // production run, minifies the file
 	entry: filename,
+	devtool: "source-map", // include external map file
 	module: {
 	  // lint the bindings using ./inst/htmlwidgets/bindings/.eslintrc.js
 	  rules: [
@@ -59,13 +68,10 @@ const config = [
   // library_prod("@targomo/core", "targomo-core"),
   // library_prod("@targomo/leaflet", "targomo-leaflet"),
   
-  // stable route360 API
-  library_prod("route360", "route360"),
-  
-  // bindings
-  library_binding("tgm-polygons")
-  // library_binding("tgm-routes")
-  
+  // polygons
+  library_prod("route360", "targomo", "r360"),
+  library_binding("targomo")
+    
 ];
 
 module.exports = config

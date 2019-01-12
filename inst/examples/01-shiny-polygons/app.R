@@ -12,7 +12,6 @@ ui <- fluidPage(
                   choices = c("walk", "car"), selected = "car")
     ),
     mainPanel(
-      useTargomoR(),
       leafletOutput("map")
     )
   )

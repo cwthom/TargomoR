@@ -1,4 +1,4 @@
-/* global LeafletWidget, L */
+/* global LeafletWidget, L, r360 */
 
 LeafletWidget.methods.addTargomoPolygons = function(api_key, lng, lat, times, transport, stroke) {
 
@@ -17,7 +17,7 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lng, lat, times, tr
     var travelOptions = r360.travelOptions();
 
     travelOptions.setServiceKey(api_key);
-    travelOptions.setServiceUrl("https://api.targomo.com/britishisles/");
+    travelOptions.setServiceUrl('https://api.targomo.com/britishisles/');
     travelOptions.addSource(source);
     travelOptions.setTravelTimes(times);
     travelOptions.setTravelType(transport);

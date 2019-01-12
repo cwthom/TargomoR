@@ -1,9 +1,3 @@
-polygonDependency <- function() {
-  htmltools::htmlDependency(name = "targomoPolygons", version = "0.1",
-                            src = system.file("htmlwidgets/bindings", package = "TargomoR"),
-                            script = "tgm-polygons-bindings.js")
-}
-
 #' Add Targomo Polygons
 #'
 #' @export
@@ -16,8 +10,7 @@ addTargomoPolygons = function(map,
                               stroke = 10) {
 
   map$dependencies <- c(map$dependencies,
-                        list(targomoDependency()),
-                        list(polygonDependency()))
+                        targomoDependency())
 
   leaflet::invokeMethod(map, leaflet::getMapData(map), 'addTargomoPolygons',
                         api_key, lng, lat, times, transport, stroke)
