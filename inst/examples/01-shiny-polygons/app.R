@@ -9,7 +9,9 @@ ui <- fluidPage(
 
     sidebarPanel(
       selectInput("transport", "Mode of Transport",
-                  choices = c("walk", "car"), selected = "car")
+                  choices = c("walk", "bike", "car", "transit"), selected = "car"),
+      sliderInput("stroke", "Stroke Width",
+                  min = 5, max = 30, value = 10, step = 5)
     ),
     mainPanel(
       leafletOutput("map")
@@ -23,7 +25,7 @@ server <- function(input, output, session) {
 
   output$map <- renderLeaflet({
     map <- basemap %>%
-      addTargomoPolygons(transport = input$transport)
+      addTargomoPolygons(transport = input$transport, stroke = input$stroke)
     return(map)
   })
 
