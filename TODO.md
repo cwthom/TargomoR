@@ -1,9 +1,14 @@
 ## Things to do on TargmoR
 
-- Read more about webpacking
-- Read more about npm 
-  + @targomo/core
-  + @targomo/leaflet
-- set up new js file with `import { TargomoClient} from '@targomo/core'` at top
-- try to get polygons out of new API
-- bundle js files and get a version working in a shiny app
+* Include fuller set of options in polygon bindings
+  * multiple sources
+  * accept data.frame input for sources
+  * boolean for adding marker?
+  * union/intersection etc
+  * colour change
+  * invert
+  * legend
+  * layerId, group etc
+* Establish final file structure
+* Establish necessities of webpack.config.js
+* Establish licencing 
