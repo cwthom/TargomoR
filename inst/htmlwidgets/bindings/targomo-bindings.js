@@ -1,6 +1,6 @@
 /* global LeafletWidget, L, r360 */
 
-LeafletWidget.methods.addTargomoPolygons = function(api_key, lng, lat, times, transport, stroke) {
+LeafletWidget.methods.addTargomoPolygons = function(api_key, lng, lat, options) {
 
   (function() {
 
@@ -27,11 +27,12 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lng, lat, times, tr
     travelOptions.setServiceKey(api_key);
     travelOptions.setServiceUrl('https://api.targomo.com/britishisles/');
     travelOptions.addSource(source);
-    travelOptions.setTravelTimes(times);
-    travelOptions.setTravelType(transport);
+    travelOptions.setTravelTimes(options.times);
+    travelOptions.setTravelType(options.transport);
 
     // set the strokewidth
-    polygonLayer.setStrokeWidth(stroke);
+    polygonLayer.setStrokeWidth(options.stroke);
+    polygonLayer.setInverse(options.invert);
 
     // query the API
     r360.PolygonService.getTravelTimePolygons(travelOptions, function(polygons){

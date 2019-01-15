@@ -9,9 +9,15 @@ ui <- fluidPage(
 
     sidebarPanel(
       selectInput("transport", "Mode of Transport",
-                  choices = c("walk", "bike", "car", "transit"), selected = "car"),
+                  choices = c("Walking" = "walk",
+                              "Cycling" = "bike",
+                              "Car" = "car",
+                              "Public Transport" = "transit"),
+                  selected = "car"),
       sliderInput("stroke", "Stroke Width",
-                  min = 5, max = 30, value = 10, step = 5)
+                  min = 5, max = 30, value = 10, step = 5),
+      checkboxInput("invert", "Invert Polygons?")
+
     ),
     mainPanel(
       leafletOutput("map")
@@ -25,7 +31,9 @@ server <- function(input, output, session) {
 
   output$map <- renderLeaflet({
     map <- basemap %>%
-      addTargomoPolygons(transport = input$transport, stroke = input$stroke)
+      addTargomoPolygons(options = targomoOptions(transport = input$transport,
+                                                  stroke = input$stroke,
+                                                  invert = input$invert))
     return(map)
   })
 

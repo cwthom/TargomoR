@@ -5,8 +5,7 @@
 \title{Add Targomo Polygons}
 \usage{
 addTargomoPolygons(map, api_key = Sys.getenv("TARGOMO_API_KEY"),
-  lng = 0, lat = 51, times = c(600, 1200, 1800),
-  transport = "walk", stroke = 10)
+  lng = 0, lat = 51, options = targomoOptions())
 }
 \description{
 Add Targomo Polygons
