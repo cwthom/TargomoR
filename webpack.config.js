@@ -62,11 +62,6 @@ let library_binding = function(name) {
   };
 };
 
-let add_externals = function(config, externals) {
-  config.externals = Object.assign(config.externals, externals);
-  return config;
-};
-
 const config = [
 
   // new targomo API

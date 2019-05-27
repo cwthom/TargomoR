@@ -9,3 +9,4 @@
 ^package.*\.json$
 ^webpack\.config\.js$
 ^inst/htmlwidgets/bindings$
+^README\.Rmd$
