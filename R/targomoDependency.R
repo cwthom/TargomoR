@@ -1,6 +1,10 @@
 #' Targomo Version
-targomoVersion <- function() {
-  return("0.5.3")
+targomoCoreVersion <- function() {
+  return("0.2.14")
+}
+
+targomoLeafletVersion <- function() {
+  return("0.0.3")
 }
 
 
@@ -8,11 +12,20 @@ targomoVersion <- function() {
 targomoDependency <- function( ...) {
   list(
     htmltools::htmlDependency(
-      name = "Targomo",
-      version = targomoVersion(),
-      src = system.file(file.path("htmlwidgets", "build", "targomo"),
+      name = "targomo-core",
+      version = targomoCoreVersion(),
+      src = system.file(file.path("htmlwidgets", "build", "targomo-core"),
                         package = "TargomoR"),
-      script = paste0("targomo", c("-prod.js", "-bindings.js")),
+      script = "targomo-core-prod.js",
+      all_files = TRUE,
+      ...
+    ),
+    htmltools::htmlDependency(
+      name = "targomo-leaflet",
+      version = targomoLeafletVersion(),
+      src = system.file(file.path("htmlwidgets", "build", "targomo-leaflet"),
+                        package = "TargomoR"),
+      script = paste0("targomo-leaflet", c("-prod.js", "-bindings.js")),
       all_files = TRUE,
       ...
     )

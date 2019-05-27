@@ -7,6 +7,12 @@ It is under development and should not yet be used.
 
 ## To Do
 
+### General
+
+* Make work with stabel Targomo libraries (not r360)
+* add tests
+* add better documentation
+
 ### Polygon Service
 
 * multiple sources

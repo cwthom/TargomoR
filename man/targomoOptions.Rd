@@ -4,7 +4,7 @@
 \alias{targomoOptions}
 \title{Set Targomo Options}
 \usage{
-targomoOptions(times = c(600, 1200, 1800), transport = "car",
+targomoOptions(travelTimes = c(600, 1200, 1800), travelType = "car",
   stroke = 10, invert = FALSE)
 }
 \description{

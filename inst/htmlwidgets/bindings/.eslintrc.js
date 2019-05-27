@@ -1,7 +1,10 @@
 module.exports = {
   "env": {
     "browser": true,
-    "es6": false
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
   },
   "extends": "eslint:recommended",
   "rules": {
@@ -22,7 +25,7 @@ module.exports = {
       "always"
     ],
     "no-unused-vars": [
-       "error",
+       "warn",
        {"args": "none"}
     ],
     "no-console": [

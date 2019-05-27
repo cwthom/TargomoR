@@ -15,15 +15,14 @@
   },
   "homepage": "https://github.com/cwthom/TargomoR#readme",
   "devDependencies": {
-    "eslint": "^5.12.0",
-    "eslint-loader": "^2.1.1",
+    "eslint": "^5.16.0",
+    "eslint-loader": "^2.1.2",
     "path": "^0.12.7",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
+    "webpack": "^4.32.2",
+    "webpack-cli": "^3.3.2"
   },
   "dependencies": {
-    "@targomo/core": "^0.2.7",
-    "@targomo/leaflet": "0.0.2",
-    "route360": "^0.5.3"
+    "@targomo/core": "^0.2.14",
+    "@targomo/leaflet": "^0.0.3"
   }
 }

@@ -14,7 +14,7 @@ const build_path = path.resolve(__dirname, "./inst/htmlwidgets/build");
 
 let library_prod = function(name, filename = name, library = undefined) {
   let foldername = filename;
-  filename = filename + "-prod"
+  filename = filename + "-prod";
   var config = {
 	mode: "production", //production run, minifies the file
 	entry: name, //entry point is file passed to function
@@ -27,7 +27,7 @@ let library_prod = function(name, filename = name, library = undefined) {
 	  filename: filename + ".js",
 	  path: build_path + "/" + foldername
 	}
-  }
+  };
   if (typeof library != 'undefined') {
     // save the library as a variable
     // https://webpack.js.org/configuration/output/#output-library
@@ -37,7 +37,7 @@ let library_prod = function(name, filename = name, library = undefined) {
     config.output.libraryTarget = "assign";
   }
   return config;
-}
+};
 
 let library_binding = function(name) {
   let filename = binding_path + name + "-bindings.js";
@@ -59,19 +59,21 @@ let library_binding = function(name) {
 	  filename: name + "-bindings.js",
 	  path: build_path + "/" + name
 	}
-  }
-}
+  };
+};
+
+let add_externals = function(config, externals) {
+  config.externals = Object.assign(config.externals, externals);
+  return config;
+};
 
 const config = [
-  
-  // unstable (new) targomo API - don't use yet
-  // library_prod("@targomo/core", "targomo-core"),
-  // library_prod("@targomo/leaflet", "targomo-leaflet"),
-  
-  // polygons
-  library_prod("route360", "targomo", "r360"),
-  library_binding("targomo")
-    
+
+  // new targomo API
+  library_prod("@targomo/core", "targomo-core", "tgm"),
+  library_prod("@targomo/leaflet", "targomo-leaflet", "tgm.leaflet"),
+  library_binding("targomo-leaflet")
+
 ];
 
-module.exports = config
+module.exports = config;

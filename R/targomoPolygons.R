@@ -3,32 +3,32 @@
 #' @export
 addTargomoPolygons = function(map,
                               api_key = Sys.getenv("TARGOMO_API_KEY"),
-                              lng = 0,
-                              lat = 51,
-                              options = targomoOptions()) {
+                              lat = 56, lng = -3,
+                              options = targomoOptions(),
+                              fitBounds = TRUE) {
 
   map$dependencies <- c(map$dependencies,
                         targomoDependency())
 
   leaflet::invokeMethod(map, leaflet::getMapData(map), 'addTargomoPolygons',
-                        api_key, lng, lat, options)
+                        api_key, lat, lng, options, fitBounds)
 
 }
 
 #' Set Targomo Options
 #'
 #' @export
-targomoOptions = function(times = c(600, 1200, 1800),
-                          transport = "car",
-                          stroke = 10,
-                          invert = FALSE) {
+targomoOptions = function(travelTimes = c(600, 1200, 1800),
+                          travelType = "bike",
+                          strokeWidth = 20,
+                          inverse = FALSE) {
 
   opts <- leaflet::filterNULL(
     list(
-      times = times,
-      transport = transport,
-      stroke = stroke,
-      invert = invert
+      traveTimes = travelTimes,
+      travelType = travelType,
+      strokeWidth = strokeWidth,
+      inverse = inverse
     )
   )
 
