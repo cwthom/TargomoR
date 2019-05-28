@@ -6,7 +6,7 @@
 \title{Add Targomo Polygons}
 \usage{
 addTargomoPolygons(map, api_key = Sys.getenv("TARGOMO_API_KEY"),
-  lat = 55.9, lng = -3.1, options = targomoPolygonOptions(),
+  lat = 55.9, lng = -3.1, options = targomoOptions(),
   fitBounds = TRUE)
 }
 \arguments{

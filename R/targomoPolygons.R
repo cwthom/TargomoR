@@ -15,7 +15,7 @@
 addTargomoPolygons = function(map,
                               api_key = Sys.getenv("TARGOMO_API_KEY"),
                               lat = 55.9, lng = -3.1,
-                              options = targomoPolygonOptions(),
+                              options = targomoOptions(),
                               fitBounds = TRUE) {
 
   map$dependencies <- c(map$dependencies,
@@ -28,8 +28,7 @@ addTargomoPolygons = function(map,
 
 #' Set Targomo Options
 #'
-#' This function sets the options to be passed to the API service when
-#' requesting polygons.
+#' This function sets the options to be passed to the API service.
 #'
 #' @param travelTimes A vector of times, in seconds - each time corresponds to a
 #'     different polygon. Your API key will determine how many you can add.
@@ -37,15 +36,15 @@ addTargomoPolygons = function(map,
 #' @param strokeWidth The weight of stroke used to draw the polygons.
 #' @param inverse Should the polygons be inverted?
 #'
-#' @name targomo-polygon-options
+#' @name targomo-options
 #'
 #' @export
-targomoPolygonOptions = function(travelTimes = c(600, 1200, 1800),
-                                 travelType = "bike",
-                                 strokeWidth = 20,
-                                 inverse = FALSE) {
+targomoOptions = function(travelTimes = c(600, 1200, 1800),
+                          travelType = "bike",
+                          strokeWidth = 20,
+                          inverse = FALSE) {
 
-  opts <- leaflet::filterNULL(
+  leaflet::filterNULL(
     list(
       traveTimes = travelTimes,
       travelType = travelType,
@@ -53,7 +52,5 @@ targomoPolygonOptions = function(travelTimes = c(600, 1200, 1800),
       inverse = inverse
     )
   )
-
-  return(opts)
 
 }

@@ -33,9 +33,10 @@ server <- function(input, output, session) {
     map <- basemap %>%
       addMarkers(lat = 55.9, lng = -3.1) %>%
       addTargomoPolygons(lat = 55.9, lng = -3.1,
-                         options = targomoPolygonOptions(travelType = input$transport,
-                                                         strokeWidth = input$stroke,
-                                                         inverse = input$invert))
+                         options = targomoOptions(travelType = input$transport,
+                                                  strokeWidth = input$stroke,
+                                                  inverse = input$invert,
+                                                  serializer = "geojson"))
     return(map)
   })
 
