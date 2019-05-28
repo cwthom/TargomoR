@@ -18,7 +18,8 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lat, lng, options, 
       inverse: options.inverse,
       edgeWeight: 'time',
       srid: 4326,
-      serializer: 'json'
+      serializer: 'json',
+      intersectionMode: options.intersectionMode
     };
 
     // define the polygon overlay
@@ -30,20 +31,32 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lat, lng, options, 
     );
     polygonOverlayLayer.addTo(map);
 
+    // if lat/lng not arrays then make them so
+    if (!Array.isArray(lat)) {
+      lat = [lat];
+    }
+
+    // if lat/lng not arrays then make them so
+    if (!Array.isArray(lng)) {
+      lng = [lng];
+    }
+
     // define the starting points
-    var sources = [{ id: 0, lat: lat, lng: lng }];
+    var sources = [];
+    for (var i = 0; i < lat.length; i++) {
+      sources.push({'id': i, 'lat': lat[i], 'lng': lng[i] });
+    }
 
     // get the polygons
     const polygons = await client.polygons.fetch(sources, options);
-
-    // calculate bounding box for polygons
-    const bounds = polygons.getMaxBounds();
 
     // add polygons to overlay
     polygonOverlayLayer.setData(polygons);
 
     // zoom to the polygon bounds
     if (fitBounds) {
+      // calculate bounding box for polygons
+      const bounds = polygons.getMaxBounds();
       map.fitBounds(new L.latLngBounds(bounds.northEast, bounds.southWest));
     }
 

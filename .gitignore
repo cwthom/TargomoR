@@ -4,3 +4,4 @@
 .Ruserdata
 .Renviron
 node_modules
+*.html

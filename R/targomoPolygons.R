@@ -42,14 +42,16 @@ addTargomoPolygons = function(map,
 targomoOptions = function(travelTimes = c(600, 1200, 1800),
                           travelType = "bike",
                           strokeWidth = 20,
-                          inverse = FALSE) {
+                          inverse = FALSE,
+                          intersectionMode = "union") {
 
   leaflet::filterNULL(
     list(
       traveTimes = travelTimes,
       travelType = travelType,
       strokeWidth = strokeWidth,
-      inverse = inverse
+      inverse = inverse,
+      intersectionMode = intersectionMode
     )
   )
 

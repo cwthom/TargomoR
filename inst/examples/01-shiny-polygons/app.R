@@ -4,7 +4,7 @@ library(TargomoR)
 
 ui <- fluidPage(
 
-  titlePanel("TargomoR Test"),
+  titlePanel("TargomoR Demo 01"),
 
   sidebarLayout(
 
@@ -15,9 +15,17 @@ ui <- fluidPage(
                               "Car" = "car",
                               "Public Transport" = "transit"),
                   selected = "bike"),
+      hr(),
       sliderInput("stroke", "Stroke Width",
                   min = 1, max = 20, value = 10, step = 1),
-      checkboxInput("invert", "Invert Polygons?")
+      hr(),
+      strong("Inverse"),
+      checkboxInput("invert", "Invert Polygons?"),
+      hr(),
+      selectInput("intersection", "Intersection Mode",
+                  choices = c("Union" = "union",
+                              "Intersection" = "intersection"),
+                  selected = "union")
 
     ),
     mainPanel(
@@ -30,13 +38,17 @@ server <- function(input, output, session) {
 
   basemap <- leaflet() %>% addProviderTiles("CartoDB.Positron")
 
+  lats <- c(55.9, 55.85)
+  lngs <- c(-3.1, -3.15)
+
   output$map <- renderLeaflet({
     map <- basemap %>%
-      addMarkers(lat = 55.9, lng = -3.1) %>%
-      addTargomoPolygons(lat = 55.9, lng = -3.1,
+      addMarkers(lat = lats, lng = lngs) %>%
+      addTargomoPolygons(lat = lats, lng = lngs,
                          options = targomoOptions(travelType = input$transport,
                                                   strokeWidth = input$stroke,
-                                                  inverse = input$invert)
+                                                  inverse = input$invert,
+                                                  intersectionMode = input$intersection)
       )
     return(map)
   })
