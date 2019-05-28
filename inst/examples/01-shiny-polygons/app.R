@@ -50,7 +50,7 @@ server <- function(input, output, session) {
                                                   strokeWidth = input$stroke,
                                                   inverse = input$invert,
                                                   intersectionMode = input$intersection),
-                         layerId = c(3, 4),
+                         layerId = "isochrone",
                          group = "Polygons"
       ) %>%
       addLayersControl(overlayGroups = c("Markers", "Polygons"),

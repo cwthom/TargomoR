@@ -1,60 +1,69 @@
-/* global LeafletWidget, L, tgm */
+/* global LeafletWidget, tgm */
 
-LeafletWidget.methods.addTargomoPolygons = function(api_key, region, lat, lng, options, layerId, group, fitBounds) {
+async function callPolygonService(api_key, region, sources, options) {
 
-  async function addTargomoPolygons() {
+  // create targomo client
+  let client = new tgm.TargomoClient(region, api_key);
 
-    // get the map
-    var map = this;
+  // define the polygon overlay
+  let layer = new tgm.leaflet.TgmLeafletPolygonOverlay({
+    strokeWidth: options.strokeWidth,
+    inverse: options.inverse
+  });
 
-    // create targomo client
-    const client = new tgm.TargomoClient(region, api_key);
+  // set other options
+  options = {
+    travelType: options.travelType,
+    travelEdgeWeights: options.travelTimes,
+    edgeWeight: 'time',
+    srid: 4326,
+    serializer: 'json',
+    intersectionMode: options.intersectionMode
+  };
 
-    // set extra options
-    options.edgeWeight = 'time';
-    options.srid = 4326;
-    options.serializer = 'json';
+  // get the polygons
+  let targomoData = await client.polygons.fetch(sources, options);
 
-    // define the polygon overlay
-    const polygonOverlayLayer = new tgm.leaflet.TgmLeafletPolygonOverlay(
-      {
-        strokeWidth: options.strokeWidth,
-        inverse: options.inverse
+  // set the data to the layer
+  layer.setData(targomoData);
+
+}
+
+LeafletWidget.methods.addTargomoPolygons = function(api_key, region, points, layerId, group, options, popup, popupOptions, label, labelOptions) {
+
+  (function() {
+
+    // encapsulate data for layer in a DataFrame
+    let df = new LeafletWidget.DataFrame()
+      .col('api_key', api_key)
+      .col('region', region)
+      .col('points', points)
+      .col('layerId', layerId)
+      .col('group', group)
+      .col('popup', popup)
+      .col('popupOptions', popupOptions)
+      .col('label', label)
+      .col('labelOptions', labelOptions)
+      .col('options', options);
+
+    // add the layers
+    LeafletWidget.methods.addGenericLayers(this, 'shape', df, function(df, i) {
+
+      let api_key = df.get(i, 'api_key');
+      let region  = df.get(i, 'region');
+      let points  = df.get(i, 'points');
+      let options = df.get(i, 'options');
+
+      let sources = [];
+      for (let j = 0; j < Object.keys(points).length; j++) {
+        let source = {'id': j, 'lat': points.lat[j], 'lng': points.lng[j]};
+        sources.push(source);
       }
-    );
-    map.layerManager.addLayer(polygonOverlayLayer, 'overlay', layerId, group);
 
-    // if lat/lng not arrays then make them so
-    if (!Array.isArray(lat)) {
-      lat = [lat];
-    }
+      return callPolygonService(api_key, region, sources, options);
 
-    // if lat/lng not arrays then make them so
-    if (!Array.isArray(lng)) {
-      lng = [lng];
-    }
+    });
 
-    // define the starting points
-    var sources = [];
-    for (var i = 0; i < lat.length; i++) {
-      sources.push({'id': i, 'lat': lat[i], 'lng': lng[i] });
-    }
-
-    // get the polygons
-    const polygons = await client.polygons.fetch(sources, options);
-
-    // add polygons to overlay
-    polygonOverlayLayer.setData(polygons);
-
-    // zoom to the polygon bounds
-    if (fitBounds) {
-      // calculate bounding box for polygons
-      const bounds = polygons.getMaxBounds();
-      map.fitBounds(new L.latLngBounds(bounds.northEast, bounds.southWest));
-    }
-
-  }
-
-  addTargomoPolygons.call(this);
+  }).call(this);
 
 };

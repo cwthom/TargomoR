@@ -6,8 +6,9 @@
 \usage{
 addTargomoPolygons(map, api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), lat = 55.9, lng = -3.1,
-  options = targomoOptions(), layerId = NULL, group = NULL,
-  fitBounds = TRUE)
+  layerId = NULL, group = NULL, options = targomoOptions(),
+  popup = NULL, popupOptions = NULL, label = NULL,
+  labelOptions = NULL, data = leaflet::getMapData(map))
 }
 \arguments{
 \item{map}{A leaflet map}
@@ -19,11 +20,11 @@ See here for the different regions: \url{https://targomo.com/developers/availabi
 
 \item{lat, lng}{Coordinates of the source of the polygons}
 
-\item{options}{See \code{\link{targomoOptions}}.}
-
 \item{layerId}{The leaflet map layerId for the resulting polygons.}
 
 \item{group}{The leaflet map group for the polygons.}
+
+\item{options}{See \code{\link{targomoOptions}}.}
 
 \item{fitBounds}{Should the map rezoom to fit the bounds of the polygons?}
 }

@@ -20,17 +20,23 @@ addTargomoPolygons = function(map,
                               api_key = Sys.getenv("TARGOMO_API_KEY"),
                               region = Sys.getenv("TARGOMO_REGION"),
                               lat = 55.9, lng = -3.1,
-                              options = targomoOptions(),
                               layerId = NULL,
                               group = NULL,
-                              fitBounds = TRUE) {
+                              options = targomoOptions(),
+                              popup = NULL,
+                              popupOptions = NULL,
+                              label = NULL,
+                              labelOptions = NULL,
+                              data = leaflet::getMapData(map)) {
 
   map$dependencies <- c(map$dependencies,
                         targomoDependency())
 
-  leaflet::invokeMethod(map, leaflet::getMapData(map), 'addTargomoPolygons',
-                        api_key, region, lat, lng, options, layerId, group,
-                        fitBounds)
+  points <- leaflet::derivePoints(data, lng = lng, lat = lat)
+
+  leaflet::invokeMethod(map, data, 'addTargomoPolygons',
+                        api_key, region, points, layerId, group, options,
+                        popup, popupOptions, label, labelOptions)
 
 }
 
@@ -68,3 +74,4 @@ targomoOptions = function(travelTimes = c(600, 1200, 1800),
   )
 
 }
+
