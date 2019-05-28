@@ -1,5 +1,6 @@
 library(shiny)
 library(leaflet)
+library(TargomoR)
 
 ui <- fluidPage(
 
@@ -35,8 +36,8 @@ server <- function(input, output, session) {
       addTargomoPolygons(lat = 55.9, lng = -3.1,
                          options = targomoOptions(travelType = input$transport,
                                                   strokeWidth = input$stroke,
-                                                  inverse = input$invert,
-                                                  serializer = "geojson"))
+                                                  inverse = input$invert)
+      )
     return(map)
   })
 
