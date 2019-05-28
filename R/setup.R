@@ -11,7 +11,6 @@
 #' @param region Your preferred Targomo default region
 #' @param overwrite Whether to overwrite an existing setting
 #'
-#' @name set-env-vars
 #' @export
 setTargomoVariables <- function(api_key = NULL, region = NULL, overwrite = FALSE) {
 
@@ -56,5 +55,3 @@ setTargomoVariables <- function(api_key = NULL, region = NULL, overwrite = FALSE
   return(invisible(api_key))
 
 }
-
-#' Check API
