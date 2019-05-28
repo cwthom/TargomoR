@@ -4,25 +4,33 @@
 #' the Targomo Polygon API to your leaflet map.
 #'
 #' @param map A leaflet map
-#' @param api_key Your Targomo API key - recommend to use the 'TARGOMO_API_KEY' environment variable
+#' @param api_key Your Targomo API key - defaults to the \code{TARGOMO_API_KEY} environment variable.
+#' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION} environment variable.
+#'   See here for the different regions: \url{https://targomo.com/developers/availability/}
 #' @param lat,lng Coordinates of the source of the polygons
-#' @param options See targomoOptions
+#' @param options See \code{\link{targomoOptions}}.
+#' @param layerId The leaflet map layerId for the resulting polygons.
+#' @param group The leaflet map group for the polygons.
 #' @param fitBounds Should the map rezoom to fit the bounds of the polygons?
 #'
-#' @name add-tgm-polygons
+#' @name addTargomoPolygons
 
 #' @export
 addTargomoPolygons = function(map,
                               api_key = Sys.getenv("TARGOMO_API_KEY"),
+                              region = Sys.getenv("TARGOMO_REGION"),
                               lat = 55.9, lng = -3.1,
                               options = targomoOptions(),
+                              layerId = NULL,
+                              group = NULL,
                               fitBounds = TRUE) {
 
   map$dependencies <- c(map$dependencies,
                         targomoDependency())
 
   leaflet::invokeMethod(map, leaflet::getMapData(map), 'addTargomoPolygons',
-                        api_key, lat, lng, options, fitBounds)
+                        api_key, region, lat, lng, options, layerId, group,
+                        fitBounds)
 
 }
 
@@ -38,7 +46,7 @@ addTargomoPolygons = function(map,
 #' @param intersectionMode Whether to calculate the union or intersection of multiple sources
 #' @param ... Further arguments to pass to the API - see \url{https://docs.targomo.com/core/#/Polygon_Service/post_westcentraleurope_v1_polygon}
 #'
-#' @name targomo-options
+#' @name targomoOptions
 #'
 #' @export
 targomoOptions = function(travelTimes = c(600, 1200, 1800),

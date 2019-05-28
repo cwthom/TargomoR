@@ -1,3 +1,11 @@
+# TargomoR 0.0.0.9003
+
+* created working plugin based off new API (not r360)
+* support for polygon requests
+* support for union/intersection/inversion/strokewidth etc
+* support for different regions across the world
+* ability to set env vars
+
 # TargomoR 0.0.0.9000
 
 * Created first working plugin:

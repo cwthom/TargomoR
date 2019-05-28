@@ -1,14 +1,14 @@
 /* global LeafletWidget, L, tgm */
 
-LeafletWidget.methods.addTargomoPolygons = function(api_key, lat, lng, options, fitBounds) {
+LeafletWidget.methods.addTargomoPolygons = function(api_key, region, lat, lng, options, layerId, group, fitBounds) {
 
-  async function addPolygons() {
+  async function addTargomoPolygons() {
 
     // get the map
     var map = this;
 
     // create targomo client
-    const client = new tgm.TargomoClient('britishisles', api_key);
+    const client = new tgm.TargomoClient(region, api_key);
 
     // set extra options
     options.edgeWeight = 'time';
@@ -22,7 +22,7 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lat, lng, options, 
         inverse: options.inverse
       }
     );
-    polygonOverlayLayer.addTo(map);
+    map.layerManager.addLayer(polygonOverlayLayer, 'overlay', layerId, group);
 
     // if lat/lng not arrays then make them so
     if (!Array.isArray(lat)) {
@@ -55,6 +55,6 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lat, lng, options, 
 
   }
 
-  addPolygons.call(this);
+  addTargomoPolygons.call(this);
 
 };

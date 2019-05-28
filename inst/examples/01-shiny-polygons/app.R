@@ -49,9 +49,12 @@ server <- function(input, output, session) {
                          options = targomoOptions(travelType = input$transport,
                                                   strokeWidth = input$stroke,
                                                   inverse = input$invert,
-                                                  intersectionMode = input$intersection)
+                                                  intersectionMode = input$intersection),
+                         layerId = c(3, 4),
+                         group = "Polygons"
       ) %>%
-      addLayersControl(overlayGroups = c("Markers"), position = "topleft",
+      addLayersControl(overlayGroups = c("Markers", "Polygons"),
+                       position = "topleft",
                        options = layersControlOptions(collapsed = FALSE))
     return(map)
   })

@@ -10,3 +10,4 @@
 ^webpack\.config\.js$
 ^inst/htmlwidgets/bindings$
 ^README\.Rmd$
+^\.travis\.yml$
