@@ -3,6 +3,7 @@
 export("%>%")
 export(addTargomoPolygons)
 export(polygon_demo)
+export(setTargomoAPIKey)
 export(targomoCoreVersion)
 export(targomoLeafletVersion)
 export(targomoOptions)
