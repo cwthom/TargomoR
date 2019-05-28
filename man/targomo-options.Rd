@@ -6,7 +6,7 @@
 \title{Set Targomo Options}
 \usage{
 targomoOptions(travelTimes = c(600, 1200, 1800), travelType = "bike",
-  strokeWidth = 20, inverse = FALSE, intersectionMode = "union")
+  strokeWidth = 20, inverse = FALSE, intersectionMode = "union", ...)
 }
 \arguments{
 \item{travelTimes}{A vector of times, in seconds - each time corresponds to a
@@ -17,6 +17,10 @@ different polygon. Your API key will determine how many you can add.}
 \item{strokeWidth}{The weight of stroke used to draw the polygons.}
 
 \item{inverse}{Should the polygons be inverted?}
+
+\item{intersectionMode}{Whether to calculate the union or intersection of multiple sources}
+
+\item{...}{Further arguments to pass to the API - see \url{https://docs.targomo.com/core/#/Polygon_Service/post_westcentraleurope_v1_polygon}}
 }
 \description{
 This function sets the options to be passed to the API service.

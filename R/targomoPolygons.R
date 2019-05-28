@@ -35,6 +35,8 @@ addTargomoPolygons = function(map,
 #' @param travelType What mode of transport to use - car, bike, walk or public transport.
 #' @param strokeWidth The weight of stroke used to draw the polygons.
 #' @param inverse Should the polygons be inverted?
+#' @param intersectionMode Whether to calculate the union or intersection of multiple sources
+#' @param ... Further arguments to pass to the API - see \url{https://docs.targomo.com/core/#/Polygon_Service/post_westcentraleurope_v1_polygon}
 #'
 #' @name targomo-options
 #'
@@ -43,7 +45,8 @@ targomoOptions = function(travelTimes = c(600, 1200, 1800),
                           travelType = "bike",
                           strokeWidth = 20,
                           inverse = FALSE,
-                          intersectionMode = "union") {
+                          intersectionMode = "union",
+                          ...) {
 
   leaflet::filterNULL(
     list(
@@ -51,7 +54,8 @@ targomoOptions = function(travelTimes = c(600, 1200, 1800),
       travelType = travelType,
       strokeWidth = strokeWidth,
       inverse = inverse,
-      intersectionMode = intersectionMode
+      intersectionMode = intersectionMode,
+      ...
     )
   )
 

@@ -30,12 +30,13 @@ It is under development and should not yet be used.
 
 - [ ] multiple sources
 - [ ] accept data.frame input for sources
-- [ ] boolean for adding marker?
-- [ ] union/intersection etc
+- [x] union/intersection etc
 - [ ] colour change
-- [ ] invert
-- [x] legend
+- [x] invert
+- [ ] legend
 - [ ] layerId, group etc
+- [ ] retrieve geojson into R as sf object?
+- [ ] other API options e.g. transitDate, uphill, bikeSpeed etc
 
 ### Route Service
 

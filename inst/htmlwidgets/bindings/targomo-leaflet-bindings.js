@@ -10,17 +10,10 @@ LeafletWidget.methods.addTargomoPolygons = function(api_key, lat, lng, options, 
     // create targomo client
     const client = new tgm.TargomoClient('britishisles', api_key);
 
-    // set options
-    options = {
-      travelType: options.travelType,
-      travelEdgeWeights: options.travelTimes,
-      strokeWidth: options.strokeWidth,
-      inverse: options.inverse,
-      edgeWeight: 'time',
-      srid: 4326,
-      serializer: 'json',
-      intersectionMode: options.intersectionMode
-    };
+    // set extra options
+    options.edgeWeight = 'time';
+    options.srid = 4326;
+    options.serializer = 'json';
 
     // define the polygon overlay
     const polygonOverlayLayer = new tgm.leaflet.TgmLeafletPolygonOverlay(
