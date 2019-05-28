@@ -6,7 +6,7 @@
 \title{Set Targomo Options}
 \usage{
 targomoOptions(travelTimes = c(600, 1200, 1800), travelType = "bike",
-  strokeWidth = 20, inverse = FALSE)
+  strokeWidth = 20, inverse = FALSE, intersectionMode = "union")
 }
 \arguments{
 \item{travelTimes}{A vector of times, in seconds - each time corresponds to a

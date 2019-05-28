@@ -17,7 +17,7 @@ ui <- fluidPage(
                   selected = "bike"),
       hr(),
       sliderInput("stroke", "Stroke Width",
-                  min = 1, max = 20, value = 10, step = 1),
+                  min = 0, max = 20, value = 10, step = 1),
       hr(),
       strong("Inverse"),
       checkboxInput("invert", "Invert Polygons?"),
@@ -36,20 +36,23 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
 
-  basemap <- leaflet() %>% addProviderTiles("CartoDB.Positron")
+  basemap <- leaflet(options = leaflet::leafletOptions(zoomSnap = 0)) %>%
+    addProviderTiles("CartoDB.Positron")
 
   lats <- c(55.9, 55.85)
   lngs <- c(-3.1, -3.15)
 
   output$map <- renderLeaflet({
     map <- basemap %>%
-      addMarkers(lat = lats, lng = lngs) %>%
+      addMarkers(lat = lats, lng = lngs, layerId = c(1, 2), group = "Markers") %>%
       addTargomoPolygons(lat = lats, lng = lngs,
                          options = targomoOptions(travelType = input$transport,
                                                   strokeWidth = input$stroke,
                                                   inverse = input$invert,
                                                   intersectionMode = input$intersection)
-      )
+      ) %>%
+      addLayersControl(overlayGroups = c("Markers"), position = "topleft",
+                       options = layersControlOptions(collapsed = FALSE))
     return(map)
   })
 
