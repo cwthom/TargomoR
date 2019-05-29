@@ -4,20 +4,60 @@
 \alias{targomoOptions}
 \title{Set Targomo Options}
 \usage{
-targomoOptions(travelTimes = c(600, 1200, 1800), travelType = "bike",
-  intersectionMode = "union", serializer = "geojson", srid = 4326,
-  simplify = 0, ...)
+targomoOptions(travelType = "bike", travelTimes = c(600, 1200, 1800),
+  intersectionMode = "union", carRushHour = FALSE, walkSpeed = 5,
+  walkUpHillAdjustment = 10, walkDownHillAdjustment = 0,
+  bikeSpeed = 15, bikeUpHillAdjustment = 20,
+  bikeDownHillAdjustment = -10, transitDate = NULL,
+  transitTime = NULL, transitDuration = NULL,
+  transitMaxWalkingTimeFromSource = NULL,
+  transitMaxWalkingTimeToTarget = NULL, transitEarliestArrival = FALSE,
+  transitMaxTransfers = NULL, edgeWeight = "time", elevation = FALSE,
+  serializer = "geojson", srid = 4326, minPolygonHoleSize = NULL,
+  buffer = NULL, simplify = NULL, quadrantSegments = NULL,
+  decimalPrecision = NULL)
 }
 \arguments{
+\item{travelType}{What mode of transport to use - car, bike, walk or public transport.}
+
 \item{travelTimes}{A vector of times, in seconds - each time corresponds to a
 different polygon. Your API key will determine how many you can add.}
 
-\item{travelType}{What mode of transport to use - car, bike, walk or public transport.}
+\item{intersectionMode}{Whether to calculate the union or intersection of multiple sources.}
 
-\item{intersectionMode}{Whether to calculate the union or intersection of multiple sources}
+\item{carRushHour}{Account for rush hour while driving.}
 
-\item{...}{Further arguments to pass to the API - see \url{https://docs.targomo.com/core/#/Polygon_Service/post_westcentraleurope_v1_polygon}}
+\item{walkSpeed, walkUpHillAdjustment, walkDownHillAdjustment}{Settings for walking travel type.}
+
+\item{bikeSpeed, bikeUpHillAdjustment, bikeDownHillAdjustment}{Settings for cycling travel type.}
+
+\item{transitDate}{The date for public transport calculations (YYYYMMDD).}
+
+\item{transitTime}{The time in seconds since midnight to begin transit.}
+
+\item{transitDuration}{The duration of the transit timeframe (s).}
+
+\item{transitMaxWalkingTimeFromSource, transitMaxWalkingTimeToTarget}{Settings
+for transit travel type.}
+
+\item{transitMaxTransfers, transitEarliestArrival}{Further transit settings.}
+
+\item{edgeWeight}{Should calculations be in "time" or "distance"?}
+
+\item{elevation}{Account for elevation?}
+
+\item{serializer}{Should be "geojson" or "json". See API for details.}
+
+\item{srid}{The spatial reference of the returned data.}
+
+\item{minPolygonHoleSize}{Minimum area of holes in returned polygons.}
+
+\item{simplify, buffer}{Parameters for manipulating the returned polygons.}
+
+\item{quadrantSegments, decimalPrecision}{Parameters for fine-tuning the returned polygons.}
 }
 \description{
 This function sets the options to be passed to the API service.
+For full details of available options see:
+\url{https://docs.targomo.com/core/#/Polygon_Service/post_westcentraleurope_v1_polygon}
 }

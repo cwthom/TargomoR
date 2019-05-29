@@ -9,18 +9,12 @@ ui <- fluidPage(
   sidebarLayout(
 
     sidebarPanel(
-      selectInput("transport", "Mode of Transport",
+      selectInput("travelType", "Mode of Transport",
                   choices = c("Walking" = "walk",
                               "Cycling" = "bike",
                               "Car" = "car",
                               "Public Transport" = "transit"),
                   selected = "bike"),
-      hr(),
-      sliderInput("stroke", "Stroke Width",
-                  min = 0, max = 20, value = 10, step = 1),
-      hr(),
-      strong("Inverse"),
-      checkboxInput("invert", "Invert Polygons?"),
       hr(),
       selectInput("intersection", "Intersection Mode",
                   choices = c("Union" = "union",
@@ -46,9 +40,7 @@ server <- function(input, output, session) {
     map <- basemap %>%
       addMarkers(lat = lats, lng = lngs, layerId = c(1, 2), group = "Markers") %>%
       addTargomoPolygons(lat = lats, lng = lngs,
-                         options = targomoOptions(travelType = input$transport,
-                                                  strokeWidth = input$stroke,
-                                                  inverse = input$invert,
+                         options = targomoOptions(travelType = input$travelType,
                                                   intersectionMode = input$intersection),
                          layerId = "isochrone",
                          group = "Polygons"
