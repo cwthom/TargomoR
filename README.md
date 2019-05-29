@@ -1,34 +1,35 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-TargomoR
-========
 
-The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R. It is under development and should not yet be used.
+# TargomoR
 
-**This package is being developed with the permission of TargomoR, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their website.**
+The goal of TargomoR is to provide an interface to the Targomo API for
+users of `leaflet` in R. It is under development and should not yet be
+used.
 
-To Do
------
+**This package is being developed with the permission of TargomoR, but
+is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please
+see their website.**
+
+## To Do
 
 ### General
 
--   \[ \] add tests
--   \[ \] add better documentation
+  - [ ] add tests
+  - [ ] add better documentation
 
 ### Polygon Service
 
--   \[ \] multiple sources
--   \[ \] accept data.frame input for sources
--   \[x\] union/intersection etc
--   \[ \] colour change
--   \[x\] invert
--   \[ \] legend
--   \[ \] layerId, group etc
--   \[ \] retrieve geojson into R as sf object?
--   \[ \] other API options e.g. transitDate, uphill, bikeSpeed etc
+  - [x] multiple sources
+  - [x] accept data.frame input for sources
+  - [x] union/intersection etc
+  - [x] colour change
+  - [x] layerId, group etc
+  - [x] retrieve geojson into R as sf object?
+  - [x] other API options e.g. transitDate, uphill, bikeSpeed etc
 
 ### Route Service
 
--   \[ \] make it work!
--   \[ \] drawing options
--   \[ \] source and target inputs (manual/data.frame)
+  - [ ] make it work\!
+  - [ ] drawing options
+  - [ ] source and target inputs (manual/data.frame)
