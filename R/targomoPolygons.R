@@ -4,8 +4,49 @@ targomo_api <- function() {
   return("https://api.targomo.com/")
 }
 
-#' TODO: add function to create a source object, so that it can be mapped over
-#' the rows of the output of leaflet::derivePoints.
+#' Create Request URL
+#'
+#' Function to create the request URL
+#'
+createRequestURL <- function(region, end_point) {
+  paste0(targomo_api(), region, "/v1/", end_point)
+}
+
+
+#' Create Sources
+#'
+#' Function to create the sources needed to query the Targomo API.
+#'
+createSources <- function(data, lat, lng, travelType) {
+
+  points <- leaflet::derivePoints(data, lng, lat)
+  points$id <- seq_along(points$lat)
+  sources <- vector(mode = "list", length = nrow(points))
+
+  tm <- list(c())
+  names(tm) <- travelType
+
+  for (i in points$id) {
+    pt <- points[i, ]
+    sources[[i]] <- list("id" = pt$id, "lat" = pt$lat, "lng" = pt$lng,
+                         "tm" = tm)
+  }
+
+  return(sources)
+
+}
+
+#' Create Request Body
+#'
+#' Function to create a request body using the sources and options given
+createRequestBody <- function(sources, options) {
+
+  options$sources <- sources
+  options <- leaflet::filterNULL(options[c("sources", "edgeWeight", "polygon")])
+
+  jsonlite::toJSON(options, auto_unbox = TRUE, pretty = TRUE)
+
+}
 
 #' Get Targomo Polygon GeoJSON data
 #'
@@ -19,27 +60,33 @@ targomo_api <- function() {
 #' @param ...
 #'
 #' @export
-getTargomoGeoJSON <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
-                              region = Sys.getenv("TARGOMO_REGION"),
-                              data = NULL, lat = NULL, lng = NULL,
-                              options = targomoOptions(),
-                              ...) {
+getTargomoPolygons <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
+                               region = Sys.getenv("TARGOMO_REGION"),
+                               data = NULL, lat = NULL, lng = NULL,
+                               options = targomoOptions(),
+                               ...) {
 
-  url <- paste0(targomo_api(), region, "/v1/polygon?key=", api_key)
-  auth <- httr::add_headers(key = api_key)
+  url <- createRequestURL(region, "polygon")
 
-  sources <- list("id" = seq_along(lat), "lat" = lat, "lng" = lng,
-                  "tm" = list("bike" = c()))
-  options$sources <- list(sources)
-  body <- jsonlite::toJSON(options, auto_unbox = TRUE, pretty = TRUE)
+  sources <- createSources(data, lat, lng, options$travelType)
 
-  resp <- httr::POST(url = url, body = body, httr::verbose(), encode = "json",
-                     httr::add_headers("Content-Type" = "application/json"))
+  body <- createRequestBody(sources, options)
 
-  return(resp)
+  resp <- httr::POST(url = url, query = list(key = api_key),
+                     body = body, encode = "json",
+                     httr::verbose())
+
+  payload <- httr::content(resp)
+
+  # TODO: add error trapping here
+
+  geojson <- jsonlite::toJSON(payload$data, auto_unbox = TRUE)
+
+  polygons <- geojsonsf::geojson_sf(geojson)
+
+  return(polygons)
 
 }
-
 
 
 #' Set Targomo Options
@@ -60,6 +107,7 @@ targomoOptions = function(travelTimes = c(600, 1200, 1800),
                           intersectionMode = "union",
                           serializer = "geojson",
                           srid = 4326,
+                          simplify = 0,
                           ...) {
 
   leaflet::filterNULL(
@@ -68,10 +116,10 @@ targomoOptions = function(travelTimes = c(600, 1200, 1800),
       polygon = list(
         values = travelTimes,
         intersectionMode = intersectionMode,
-        serializer = serializer
+        serializer = serializer,
+        srid = srid
       ),
       travelType = travelType,
-      srid = srid,
       ...
     )
   )

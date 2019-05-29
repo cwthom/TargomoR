@@ -11,7 +11,9 @@ Imports:
     magrittr,
     shiny,
     httr,
-    jsonlite
+    jsonlite,
+    geojsonsf,
+    sf
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
