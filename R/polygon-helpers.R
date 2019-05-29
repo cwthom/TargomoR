@@ -74,7 +74,7 @@ createPolygonOptions <- function(options) {
 #'
 createPolygonSources <- function(data, lat, lng, options) {
 
-  points <- leaflet::derivePoints(data, lng, lat)
+  points <- leaflet::derivePoints(data, lng, lat, is.null(lng), is.null(lat))
   points$id <- seq_along(points$lat)
   sources <- vector(mode = "list", length = nrow(points))
 
