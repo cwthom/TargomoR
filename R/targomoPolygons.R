@@ -7,7 +7,6 @@ getTargomoPolygons <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                                region = Sys.getenv("TARGOMO_REGION"),
                                data = NULL, lat = NULL, lng = NULL,
                                options = targomoOptions(),
-                               sf = TRUE,
                                verbose = FALSE,
                                progress = FALSE) {
 
@@ -18,7 +17,7 @@ getTargomoPolygons <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                              sources = sources, options = options,
                              verbose = verbose, progress = progress)
 
-  output <- processPolygonResponse(response, output = if (sf) "sf" else "geojson")
+  output <- processResponse(response, service = "polygon")
 
   return(output)
 
@@ -35,7 +34,6 @@ getTargomoPolygons <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
 #' @param data The data object from which arguments are derived.
 #' @param lng,lat Vectors/one-sided formulas of longitude and latitude.
 #' @param options A list of \code{\link{targomoOptions}} to call the API.
-#' @param sf Logical - return an sf object?
 #' @param verbose Logical - show the API call?
 #' @param progress Logical - show a progress bar for the API call?
 #' @param layerId The layer ID.
@@ -78,7 +76,7 @@ addTargomoPolygons <- function(map,
 
   polygons <- getTargomoPolygons(api_key = api_key, region = region,
                                  data = data, lat = lat, lng = lng,
-                                 options = options, sf = TRUE, ...)
+                                 options = options, ...)
 
   leaflet::addPolygons(map, data = polygons, layerId = layerId, group = group,
                        stroke = stroke, weight = weight, color = color,

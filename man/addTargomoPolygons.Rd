@@ -7,8 +7,8 @@
 \usage{
 getTargomoPolygons(api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), data = NULL, lat = NULL,
-  lng = NULL, options = targomoOptions(), sf = TRUE,
-  verbose = FALSE, progress = FALSE)
+  lng = NULL, options = targomoOptions(), verbose = FALSE,
+  progress = FALSE)
 
 addTargomoPolygons(map, api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), lng = NULL, lat = NULL,
@@ -30,8 +30,6 @@ addTargomoPolygons(map, api_key = Sys.getenv("TARGOMO_API_KEY"),
 \item{lng, lat}{Vectors/one-sided formulas of longitude and latitude.}
 
 \item{options}{A list of \code{\link{targomoOptions}} to call the API.}
-
-\item{sf}{Logical - return an sf object?}
 
 \item{verbose}{Logical - show the API call?}
 

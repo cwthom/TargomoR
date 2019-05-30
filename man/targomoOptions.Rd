@@ -12,10 +12,10 @@ targomoOptions(travelType = "bike", travelTimes = list(600, 1200,
   transitDate = NULL, transitTime = NULL, transitDuration = NULL,
   transitMaxWalkingTimeFromSource = NULL,
   transitMaxWalkingTimeToTarget = NULL, transitEarliestArrival = FALSE,
-  transitMaxTransfers = NULL, edgeWeight = "time", elevation = FALSE,
-  serializer = "geojson", srid = 4326, minPolygonHoleSize = NULL,
-  buffer = NULL, simplify = NULL, quadrantSegments = NULL,
-  decimalPrecision = NULL)
+  transitMaxTransfers = NULL, edgeWeight = "time",
+  maxEdgeWeight = 1800, elevation = FALSE, serializer = "geojson",
+  srid = 4326, minPolygonHoleSize = NULL, buffer = NULL,
+  simplify = NULL, quadrantSegments = NULL, decimalPrecision = NULL)
 }
 \arguments{
 \item{travelType}{What mode of transport to use - car, bike, walk or public transport.}

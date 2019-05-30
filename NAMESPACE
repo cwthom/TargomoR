@@ -3,6 +3,7 @@
 export("%>%")
 export(addTargomoPolygons)
 export(getTargomoPolygons)
+export(getTargomoRoutes)
 export(polygon_demo)
 export(setTargomoVariables)
 export(targomoOptions)

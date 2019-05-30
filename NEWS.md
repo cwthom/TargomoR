@@ -2,6 +2,8 @@
 
 * generalise functions to derive sources, targets, options etc
 * implied support for route and time services too
+* catch errors nicely
+* explicit support for routing
 
 # TargomoR 0.0.0.9004
 

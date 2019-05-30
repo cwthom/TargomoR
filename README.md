@@ -28,7 +28,7 @@ To Do
 ### Route Service
 
 -   \[x\] call the API
--   \[ \] turn resulting data into sf objects
+-   \[x\] turn resulting data into sf objects
 -   \[ \] drawing options
 -   \[x\] source and target inputs (manual/data.frame)
 
