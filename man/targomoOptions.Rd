@@ -4,12 +4,12 @@
 \alias{targomoOptions}
 \title{Set Targomo Options}
 \usage{
-targomoOptions(travelType = "bike", travelTimes = c(600, 1200, 1800),
-  intersectionMode = "union", carRushHour = FALSE, walkSpeed = 5,
-  walkUpHillAdjustment = 10, walkDownHillAdjustment = 0,
-  bikeSpeed = 15, bikeUpHillAdjustment = 20,
-  bikeDownHillAdjustment = -10, transitDate = NULL,
-  transitTime = NULL, transitDuration = NULL,
+targomoOptions(travelType = "bike", travelTimes = list(600, 1200,
+  1800), intersectionMode = "union", carRushHour = FALSE,
+  walkSpeed = 5, walkUpHillAdjustment = 10,
+  walkDownHillAdjustment = 0, bikeSpeed = 15,
+  bikeUpHillAdjustment = 20, bikeDownHillAdjustment = -10,
+  transitDate = NULL, transitTime = NULL, transitDuration = NULL,
   transitMaxWalkingTimeFromSource = NULL,
   transitMaxWalkingTimeToTarget = NULL, transitEarliestArrival = FALSE,
   transitMaxTransfers = NULL, edgeWeight = "time", elevation = FALSE,
@@ -20,7 +20,7 @@ targomoOptions(travelType = "bike", travelTimes = c(600, 1200, 1800),
 \arguments{
 \item{travelType}{What mode of transport to use - car, bike, walk or public transport.}
 
-\item{travelTimes}{A vector of times, in seconds - each time corresponds to a
+\item{travelTimes}{A list of times, in seconds - each time corresponds to a
 different polygon. Your API key will determine how many you can add.}
 
 \item{intersectionMode}{Whether to calculate the union or intersection of multiple sources.}

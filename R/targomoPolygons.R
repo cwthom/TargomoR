@@ -5,7 +5,7 @@
 #' For full details of available options see:
 #' \url{https://docs.targomo.com/core/#/Polygon_Service/post_westcentraleurope_v1_polygon}
 #'
-#' @param travelTimes A vector of times, in seconds - each time corresponds to a
+#' @param travelTimes A list of times, in seconds - each time corresponds to a
 #'     different polygon. Your API key will determine how many you can add.
 #' @param travelType What mode of transport to use - car, bike, walk or public transport.
 #' @param intersectionMode Whether to calculate the union or intersection of multiple sources.
@@ -30,7 +30,7 @@
 #'
 #' @export
 targomoOptions = function(travelType = "bike",
-                          travelTimes = c(600, 1200, 1800),
+                          travelTimes = list(600, 1200, 1800),
                           intersectionMode = "union",
                           carRushHour = FALSE,
                           walkSpeed = 5,
