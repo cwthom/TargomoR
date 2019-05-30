@@ -1,3 +1,9 @@
+# TargomoR 0.0.0.9004
+
+* use REST API to return geojson
+* support most polygon options
+* build `sf` objects with geojson
+
 # TargomoR 0.0.0.9003
 
 * created working plugin based off new API (not r360)

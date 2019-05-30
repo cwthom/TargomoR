@@ -28,15 +28,13 @@ It is under development and should not yet be used.
 
 ### Polygon Service
 
-- [ ] multiple sources
-- [ ] accept data.frame input for sources
+- [x] multiple sources
+- [x] accept data.frame input for sources
 - [x] union/intersection etc
-- [ ] colour change
-- [x] invert
-- [ ] legend
-- [ ] layerId, group etc
-- [ ] retrieve geojson into R as sf object?
-- [ ] other API options e.g. transitDate, uphill, bikeSpeed etc
+- [x] colour change
+- [x] layerId, group etc
+- [x] retrieve geojson into R as sf object?
+- [x] other API options e.g. transitDate, uphill, bikeSpeed etc
 
 ### Route Service
 

@@ -2,9 +2,8 @@
 
 export("%>%")
 export(addTargomoPolygons)
+export(getTargomoPolygons)
 export(polygon_demo)
 export(setTargomoVariables)
-export(targomoCoreVersion)
-export(targomoLeafletVersion)
 export(targomoOptions)
 importFrom(magrittr,"%>%")
