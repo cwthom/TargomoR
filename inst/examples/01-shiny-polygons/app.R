@@ -42,7 +42,6 @@ server <- function(input, output, session) {
       addTargomoPolygons(lat = lats, lng = lngs,
                          options = targomoOptions(travelType = input$travelType,
                                                   intersectionMode = input$intersection),
-                         layerId = "isochrone",
                          group = "Polygons"
       ) %>%
       addLayersControl(overlayGroups = c("Markers", "Polygons"),

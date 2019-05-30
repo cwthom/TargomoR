@@ -38,9 +38,20 @@ It is under development and should not yet be used.
 
 ### Route Service
 
-- [ ] make it work!
+- [x] call the API
+- [ ] turn resulting data into sf objects
 - [ ] drawing options
-- [ ] source and target inputs (manual/data.frame)
+- [x] source and target inputs (manual/data.frame)
 
+### Time Service
+
+- [x] call the API
+- [ ] process the resulting data into a data frame?
+- [ ] provide mapping functionality?
+
+### Multigraph Service
+
+- [ ] define options
+- [ ] call the API
 
 

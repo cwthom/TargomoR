@@ -1,3 +1,8 @@
+# TargomoR 0.0.0.9005
+
+* generalise functions to derive sources, targets, options etc
+* implied support for route and time services too
+
 # TargomoR 0.0.0.9004
 
 * use REST API to return geojson
