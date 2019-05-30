@@ -16,7 +16,7 @@ processPolygons(payload)
 
 processRoutes(payload)
 
-processTime(dataset)
+processTime(payload)
 }
 \arguments{
 \item{response}{A response object from \code{\link{callPolygonService}}.}

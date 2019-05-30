@@ -4,6 +4,7 @@
 * implied support for route and time services too
 * catch errors nicely
 * explicit support for routing
+* explicit support for times
 
 # TargomoR 0.0.0.9004
 

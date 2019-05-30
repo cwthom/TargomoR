@@ -71,12 +71,15 @@ processRoutes <- function(payload) {
     lines <- features[!is.na(features$length), ] %>% sf::st_zm(drop = TRUE)
     suppressWarnings(sf::st_crs(lines) <- sf::st_crs(3857))
     lines <- sf::st_transform(lines, crs = sf::st_crs(4326))
-
   })
 
 }
 
 #' @rdname processResponse
-processTime <- function(dataset) {
+processTime <- function(payload) {
 
+  sets <- payload$data
+  lapply(sets, function(set) {
+    as.data.frame(do.call(rbind, set$targets))
+  })
 }
