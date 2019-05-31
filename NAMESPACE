@@ -2,9 +2,12 @@
 
 export("%>%")
 export(addTargomoPolygons)
+export(addTargomoRoutes)
 export(getTargomoPolygons)
 export(getTargomoRoutes)
+export(polygonDrawOptions)
 export(polygon_demo)
+export(routeDrawOptions)
 export(setTargomoVariables)
 export(targomoOptions)
 importFrom(magrittr,"%>%")

@@ -11,7 +11,10 @@ leaflet() %>%
 
 leaflet() %>%
   addProviderTiles("CartoDB.Positron") %>%
-  addTargomoRoutes(source_data = data.frame(lat = 51.52, lng = -0.187),
-                   target_data = data.frame(lat = runif(2, 51.47, 51.57),
-                                            lng = runif(2, -0.21, -0.17)),
-                   options = targomoOptions(travelType = "transit"))
+  addTargomoRoutes(source_data = data.frame(lat = 51.5267, lng = -0.1925),
+                   target_data = data.frame(lat = 51.48, lng = -0.13),
+                   options = targomoOptions(travelType = c("transit"),
+                                            maxEdgeWeight = 3600,
+                                            transitTime = 8*60*60,
+                                            transitMaxTransfers = 0),
+                   drawOptions = routeDrawOptions(transitColour = "orange"))
