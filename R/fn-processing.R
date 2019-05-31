@@ -61,16 +61,39 @@ processPolygons <- function(payload) {
 }
 
 #' @rdname processResponse
+getRouteFeature <- function(route, feature) {
+  geojson <- jsonlite::toJSON(route, auto_unbox = TRUE)
+  features <- geojsonsf::geojson_sf(geojson)
+  features <- features[ , c("length", "travelTime", "travelType")]
+  suppressWarnings(sf::st_crs(features) <- sf::st_crs(3857))
+  features <- sf::st_transform(features, crs = sf::st_crs(4326)) %>%
+    sf::st_zm(drop = TRUE)
+  index <- if (feature == "POINT") {
+    is.na(features$travelType)
+  } else {
+    features$travelType %in% feature
+  }
+  features[index, ]
+}
+
+#' @rdname processResponse
 processRoutes <- function(payload) {
 
   errors <- payload$errors
   routes <- payload$data$routes
+
   lapply(routes, function(route) {
-    geojson <- jsonlite::toJSON(route, auto_unbox = TRUE)
-    features <- geojsonsf::geojson_sf(geojson)
-    lines <- features[!is.na(features$length), ] %>% sf::st_zm(drop = TRUE)
-    suppressWarnings(sf::st_crs(lines) <- sf::st_crs(3857))
-    lines <- sf::st_transform(lines, crs = sf::st_crs(4326))
+    list(points = getRouteFeature(route, "POINT"),
+         transit = getRouteFeature(route, "TRANSIT"),
+         walk = getRouteFeature(route, "WALK"),
+         bike = getRouteFeature(route, "BIKE"),
+         car  = getRouteFeature(route, "CAR"),
+         transfers = suppressWarnings({
+           getRouteFeature(route, "TRANSFER") %>%
+             sf::st_cast(to = "POINT") %>%
+             unique()
+         })
+    )
   })
 
 }

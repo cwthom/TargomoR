@@ -4,6 +4,7 @@
 \alias{processResponse}
 \alias{catchBadResponse}
 \alias{processPolygons}
+\alias{getRouteFeature}
 \alias{processRoutes}
 \alias{processTime}
 \title{Process API responses}
@@ -13,6 +14,8 @@ catchBadResponse(response)
 processResponse(response, service)
 
 processPolygons(payload)
+
+getRouteFeature(route, feature)
 
 processRoutes(payload)
 
