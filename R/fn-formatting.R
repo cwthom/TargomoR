@@ -52,3 +52,4 @@ formatEdgeWeight <- function(edgeWeight, type) {
   }
 
 }
+

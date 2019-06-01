@@ -38,7 +38,7 @@ are numeric (interpreted as seconds), or a string of the form \code{.h.m.s}. E.g
 
 \item{transitTime}{The time in seconds since midnight to begin transit.}
 
-\item{transitDuration}{The duration of the transit timeframe (s).}
+\item{transitDuration}{The duration of the transit timeframe (seconds or \code{.h.m.s} string).}
 
 \item{transitMaxWalkingTimeFromSource, transitMaxWalkingTimeToTarget}{Settings
 for transit travel type.}

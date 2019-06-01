@@ -89,41 +89,24 @@ addTargomoRoutes <- function(map,
 
   for (route in routes) {
     if (drawOptions$showMarkers) {
+
       map <- map %>% leaflet::addMarkers(data = route[["points"]], group = group)
+
     }
     if (options$travelType %in% c("car", "bike", "walk")) {
+
         map <- map %>%
-        leaflet::addPolylines(data = route[[options$travelType]],
-                              color = drawOpts$colour, weight = drawOpts$weight,
-                              dashArray = drawOpts$dashArray,
-                              label = "Click for more information",
-                              popup = ~paste0("<b>", travelType, "</b></br>",
-                                              "Journey time: ", travelTime, "s"),
-                              group = group)
+          drawRoute(route = route[[options$travelType]], drawOptions = drawOptions,
+                    type = options$travelType, group = group)
+
     } else if (options$travelType == "transit") {
+
       map <- map %>%
-        leaflet::addPolylines(data = route[["walk"]],
-                              color = drawOptions$walkColour,
-                              weight = drawOptions$walkWeight,
-                              dashArray = drawOptions$walkDashArray,
-                              label = "Click for more information",
-                              popup = ~paste0("<b>", travelType, "</b></br>",
-                                              "Journey time: ", travelTime, "s"),
-                              group = group) %>%
-        leaflet::addPolylines(data = route[["transit"]],
-                              color = drawOptions$transitColour,
-                              weight = drawOptions$transitWeight,
-                              dashArray = drawOptions$transitDashArray,
-                              label = "Click for more information",
-                              popup = ~paste0("<b>", ifelse(routeType == 1, "UNDERGROUND",
-                                                            ifelse(routeType == 2, "TRAIN",
-                                                                   ifelse(routeType == 3, "BUS",
-                                                                          "PUBLIC TRANSPORT"))),
-                                              "</b></br>",
-                                              "Start: ", startName, "</br>",
-                                              "End: ", endName, "</br>",
-                                              "Journey time: ", travelTime, "s"),
-                              group = group)
+        drawRoute(route = route$walk, drawOptions = drawOptions,
+                  type = "walk", group = group) %>%
+        drawRoute(route = route$transit, drawOptions = drawOptions,
+                  type = "transit", group = group)
+
       if (drawOptions$showTransfers) {
         map <- map %>%
           leaflet::addCircleMarkers(data = route$transfers,

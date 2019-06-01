@@ -15,7 +15,7 @@
 #' @param bikeSpeed,bikeUpHillAdjustment,bikeDownHillAdjustment Settings for cycling travel type.
 #' @param transitDate The date for public transport calculations (YYYYMMDD).
 #' @param transitTime The time in seconds since midnight to begin transit.
-#' @param transitDuration The duration of the transit timeframe (s).
+#' @param transitDuration The duration of the transit timeframe (seconds or \code{.h.m.s} string).
 #' @param transitMaxWalkingTimeFromSource,transitMaxWalkingTimeToTarget Settings
 #'   for transit travel type.
 #' @param transitMaxTransfers,transitEarliestArrival Further transit settings.
@@ -75,7 +75,7 @@ targomoOptions = function(travelType = "bike",
       bikeDownHillAdjustment = bikeDownHillAdjustment,
       transitDate = transitDate,
       transitTime = transitTime,
-      transitDuration = transitDuration,
+      transitDuration = formatEdgeWeight(transitDuration, type = edgeWeight),
       transitMaxWalkingTimeFromSource = transitMaxWalkingTimeFromSource,
       transitMaxWalkingTimeToTarget = transitMaxWalkingTimeToTarget,
       transitEarliestArrival = transitEarliestArrival,

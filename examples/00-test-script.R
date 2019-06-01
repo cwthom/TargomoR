@@ -11,9 +11,7 @@ leaflet() %>%
 leaflet() %>%
   addProviderTiles("CartoDB.Positron") %>%
   addTargomoRoutes(source_data = data.frame(lat = 51.5267, lng = -0.1925),
-                   target_data = data.frame(lat = 51.542, lng = -0.11),
-                   options = targomoOptions(travelType = c("transit", "car", "bike"),
+                   target_data = data.frame(lat = 51.512, lng = -0.11),
+                   options = targomoOptions(travelType = "transit",
                                             maxEdgeWeight = "1h"),
-                   drawOptions = routeDrawOptions(bikeDashArray = "5,10",
-                                                  showMarkers = TRUE),
-                   verbose = FALSE, progress = TRUE)
+                   verbose = FALSE, progress = FALSE)
