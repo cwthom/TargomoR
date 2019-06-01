@@ -3,6 +3,7 @@
 * full drawing options for routing
 * labelling and popups for routes
 * supplying multiple travel modes using recursion
+* formatting options for input times and distances
 
 # TargomoR 0.0.0.9005
 

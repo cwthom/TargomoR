@@ -21,8 +21,10 @@ targomoOptions(travelType = "bike", travelTimes = list(600, 1200,
 \arguments{
 \item{travelType}{What mode of transport to use - car, bike, walk or public transport.}
 
-\item{travelTimes}{A list of times, in seconds - each time corresponds to a
-different polygon. Your API key will determine how many you can add.}
+\item{travelTimes}{A list of times - each time corresponds to a
+different polygon. Your API key will determine how many you can add. Acceptable formats
+are numeric (interpreted as seconds), or a string of the form \code{.h.m.s}. E.g. for
+1 hour, "1h", 90 minutes = "1h30m" or "90m" etc.}
 
 \item{intersectionMode}{Whether to calculate the union or intersection of multiple sources.}
 
@@ -45,7 +47,9 @@ for transit travel type.}
 
 \item{edgeWeight}{Should calculations be in "time" or "distance"?}
 
-\item{maxEdgeWeight}{The max time or distance to search for routes/times in.}
+\item{maxEdgeWeight}{The max time or distance to search for routes/times in - acceptable
+formats are numeric (seconds or metres), or a string of the form \code{.h.m.s} for time,
+or \code{.km.m.ml} for distance, where ml represents miles (1609 metres).}
 
 \item{elevation}{Account for elevation?}
 

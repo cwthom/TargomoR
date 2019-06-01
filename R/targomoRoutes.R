@@ -66,13 +66,15 @@ addTargomoRoutes <- function(map,
                              verbose = FALSE, progress = FALSE) {
 
   if (length(options$travelType) > 1) {
-    message("Multiple travel types supplied - treating each in turn...")
+    message("Multiple (", length(options$travelType), ") travel types supplied - treating each in turn.\n",
+            "This will make ", length(options$travelType), " calls to the API.")
     for (tm in options$travelType) {
       options$travelType <- tm
       map <- addTargomoRoutes(map, source_data, source_lat, source_lng, target_data,
                               target_lat, target_lng, options, drawOptions, group,
                               api_key, region, verbose, progress)
     }
+    return(map)
   }
 
   routes <- getTargomoRoutes(api_key = api_key, region = region,
