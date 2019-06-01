@@ -3,9 +3,21 @@
 \name{draw}
 \alias{draw}
 \alias{drawRoute}
+\alias{drawWalk}
+\alias{drawBike}
+\alias{drawCar}
+\alias{drawTransit}
 \title{Draw Routes}
 \usage{
 drawRoute(map, route, drawOptions, type, ...)
+
+drawWalk(map, route, drawOptions, ...)
+
+drawBike(map, route, drawOptions, ...)
+
+drawCar(map, route, drawOptions, ...)
+
+drawTransit(map, route, drawOptions, ...)
 }
 \arguments{
 \item{map}{A leaflet map.}

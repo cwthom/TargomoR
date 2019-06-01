@@ -84,9 +84,6 @@ addTargomoRoutes <- function(map,
                              options = options,
                              verbose = verbose, progress = progress)
 
-  drawOpts <- drawOptions[paste0(options$travelType, c("Colour", "Weight", "DashArray"))]
-  names(drawOpts) <- c("colour", "weight", "dashArray")
-
   for (route in routes) {
     if (drawOptions$showMarkers) {
 
@@ -102,10 +99,8 @@ addTargomoRoutes <- function(map,
     } else if (options$travelType == "transit") {
 
       map <- map %>%
-        drawRoute(route = route$walk, drawOptions = drawOptions,
-                  type = "walk", group = group) %>%
-        drawRoute(route = route$transit, drawOptions = drawOptions,
-                  type = "transit", group = group)
+        drawWalk(route$walk, drawOptions, group = group) %>%
+        drawTransit(route$transit, drawOptions, group = group)
 
       if (drawOptions$showTransfers) {
         map <- map %>%

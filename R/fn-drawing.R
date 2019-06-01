@@ -11,6 +11,9 @@
 #'
 #' @name draw
 #'
+NULL
+
+#' @rdname draw
 drawRoute <- function(map, route, drawOptions, type, ...) {
 
   drawOpts <- drawOptions[paste0(type, c("Colour", "Weight", "DashArray"))]
@@ -26,6 +29,28 @@ drawRoute <- function(map, route, drawOptions, type, ...) {
                         ...)
 
 }
+
+#' @rdname draw
+drawWalk <- function(map, route, drawOptions, ...) {
+  drawRoute(map, route, drawOptions, "walk", ...)
+}
+
+#' @rdname draw
+drawBike <- function(map, route, drawOptions, ...) {
+  drawRoute(map, route, drawOptions, "bike", ...)
+}
+
+#' @rdname draw
+drawCar <- function(map, route, drawOptions, ...) {
+  drawRoute(map, route, drawOptions, "car", ...)
+}
+
+#' @rdname draw
+drawTransit <- function(map, route, drawOptions, ...) {
+  drawRoute(map, route, drawOptions, "transit", ...)
+}
+
+
 
 #' Create Route Popups
 #'
