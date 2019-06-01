@@ -65,6 +65,16 @@ addTargomoRoutes <- function(map,
                              region = Sys.getenv("TARGOMO_REGION"),
                              verbose = FALSE, progress = FALSE) {
 
+  if (length(options$travelType) > 1) {
+    message("Multiple travel types supplied - treating each in turn...")
+    for (tm in options$travelType) {
+      options$travelType <- tm
+      map <- addTargomoRoutes(map, source_data, source_lat, source_lng, target_data,
+                              target_lat, target_lng, options, drawOptions, group,
+                              api_key, region, verbose, progress)
+    }
+  }
+
   routes <- getTargomoRoutes(api_key = api_key, region = region,
                              source_data = source_data, source_lat = source_lat,
                              source_lng = source_lng, target_data = target_data,
@@ -84,6 +94,9 @@ addTargomoRoutes <- function(map,
         leaflet::addPolylines(data = route[[options$travelType]],
                               color = drawOpts$colour, weight = drawOpts$weight,
                               dashArray = drawOpts$dashArray,
+                              label = "Click for more information",
+                              popup = ~paste0("<b>", travelType, "</b></br>",
+                                              "Journey time: ", travelTime, "s"),
                               group = group)
     } else if (options$travelType == "transit") {
       map <- map %>%
@@ -91,11 +104,23 @@ addTargomoRoutes <- function(map,
                               color = drawOptions$walkColour,
                               weight = drawOptions$walkWeight,
                               dashArray = drawOptions$walkDashArray,
+                              label = "Click for more information",
+                              popup = ~paste0("<b>", travelType, "</b></br>",
+                                              "Journey time: ", travelTime, "s"),
                               group = group) %>%
         leaflet::addPolylines(data = route[["transit"]],
                               color = drawOptions$transitColour,
                               weight = drawOptions$transitWeight,
                               dashArray = drawOptions$transitDashArray,
+                              label = "Click for more information",
+                              popup = ~paste0("<b>", ifelse(routeType == 1, "UNDERGROUND",
+                                                            ifelse(routeType == 2, "TRAIN",
+                                                                   ifelse(routeType == 3, "BUS",
+                                                                          "PUBLIC TRANSPORT"))),
+                                              "</b></br>",
+                                              "Start: ", startName, "</br>",
+                                              "End: ", endName, "</br>",
+                                              "Journey time: ", travelTime, "s"),
                               group = group)
       if (drawOptions$showTransfers) {
         map <- map %>%

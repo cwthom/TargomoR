@@ -1,3 +1,9 @@
+# TargomoR 0.0.0.9006
+
+* full drawing options for routing
+* labelling and popups for routes
+* supplying multiple travel modes using recursion
+
 # TargomoR 0.0.0.9005
 
 * generalise functions to derive sources, targets, options etc

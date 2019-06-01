@@ -69,7 +69,6 @@ getRouteFeature <- function(route, feature) {
   geojson <- jsonlite::toJSON(route, auto_unbox = TRUE)
   features <- geojsonsf::geojson_sf(geojson)
 
-  features <- features[ , c("length", "travelTime", "travelType")]
   suppressWarnings(sf::st_crs(features) <- sf::st_crs(3857))
   features <- sf::st_transform(features, crs = sf::st_crs(4326)) %>%
     sf::st_zm(drop = TRUE)
@@ -81,6 +80,7 @@ getRouteFeature <- function(route, feature) {
   }
 
   features[index, ]
+
 }
 
 #' @rdname process
