@@ -1,7 +1,7 @@
 Package: TargomoR
 Type: Package
 Title: An Interface to the Targomo API
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 Authors@R: person("Chris", "Mason-Thom", email = "chrismasonthom@gmail.com", role=c("aut","cre"))
 Description: This package allows R users to exploit the Targomo REST API.
 License: GPL-3
