@@ -18,6 +18,7 @@
 #'   for transit travel type.
 #' @param transitMaxTransfers,transitEarliestArrival Further transit settings.
 #' @param edgeWeight Should calculations be in "time" or "distance"?
+#' @param maxEdgeWeight The max time or distance to search for routes/times in.
 #' @param elevation Account for elevation?
 #' @param serializer Should be "geojson" or "json". See API for details.
 #' @param srid The spatial reference of the returned data.
@@ -25,7 +26,7 @@
 #' @param simplify,buffer Parameters for manipulating the returned polygons.
 #' @param quadrantSegments,decimalPrecision Parameters for fine-tuning the returned polygons.
 #'
-#' @name targomoOptions
+#' @name options
 #'
 #' @export
 targomoOptions = function(travelType = "bike",

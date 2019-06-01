@@ -40,7 +40,7 @@ It is under development and should not yet be used.
 
 - [x] call the API
 - [x] turn resulting data into sf objects
-- [ ] drawing options
+- [x] drawing options
 - [x] source and target inputs (manual/data.frame)
 
 ### Time Service

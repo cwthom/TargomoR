@@ -7,9 +7,7 @@ Description: This package allows R users to exploit the Targomo REST API.
 License: GPL-3
 Imports: 
     leaflet,
-    htmltools,
     magrittr,
-    shiny,
     httr,
     jsonlite,
     geojsonsf,

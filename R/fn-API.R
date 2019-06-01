@@ -180,6 +180,7 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 #' @param verbose Display info on the API call?
 #' @param progress Display a progress bar?
 #'
+#' @export
 callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                            region = Sys.getenv("TARGOMO_REGION"),
                            service,

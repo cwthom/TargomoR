@@ -110,10 +110,10 @@ polygonDrawOptions <- function(stroke = TRUE,
       opacity = opacity,
       fill = fill,
       fillColor = fillColor,
-      fillOpacity = 0.2,
-      dashArray = NULL,
-      smoothFactor = 1,
-      noClip = FALSE
+      fillOpacity = fillOpacity,
+      dashArray = dashArray,
+      smoothFactor = smoothFactor,
+      noClip = noClip
     )
   )
 }

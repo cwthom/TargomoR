@@ -3,13 +3,16 @@
 #'
 #' Functions to turn a successful request into data - either polygons, routes or times.
 #'
-#' @param response A response object from \code{\link{callPolygonService}}.
+#' @param response A response object from \code{\link{callTargomoAPI}}.
 #' @param service The Targomo API service being called - polygon, route or time.
+#' @param payload The \code{httr::content} of the response.
+#' @param route A single element of the returned routes list.
+#' @param feature A route feature to extract (e.g. car sections, bike sections...)
 #'
-#' @name processResponse
+#' @name process
 NULL
 
-#' @rdname processResponse
+#' @rdname process
 catchBadResponse <- function(response) {
 
   status <- response$status_code
@@ -32,7 +35,7 @@ catchBadResponse <- function(response) {
 
 }
 
-#' @rdname processResponse
+#' @rdname process
 processResponse <- function(response, service) {
 
   response <- catchBadResponse(response)
@@ -50,7 +53,7 @@ processResponse <- function(response, service) {
 
 }
 
-#' @rdname processResponse
+#' @rdname process
 processPolygons <- function(payload) {
 
   geojson <- jsonlite::toJSON(payload$data, auto_unbox = TRUE)
@@ -60,29 +63,34 @@ processPolygons <- function(payload) {
 
 }
 
-#' @rdname processResponse
+#' @rdname process
 getRouteFeature <- function(route, feature) {
+
   geojson <- jsonlite::toJSON(route, auto_unbox = TRUE)
   features <- geojsonsf::geojson_sf(geojson)
+
   features <- features[ , c("length", "travelTime", "travelType")]
   suppressWarnings(sf::st_crs(features) <- sf::st_crs(3857))
   features <- sf::st_transform(features, crs = sf::st_crs(4326)) %>%
     sf::st_zm(drop = TRUE)
+
   index <- if (feature == "POINT") {
     is.na(features$travelType)
   } else {
     features$travelType %in% feature
   }
+
   features[index, ]
 }
 
-#' @rdname processResponse
+#' @rdname process
 processRoutes <- function(payload) {
 
   errors <- payload$errors
   routes <- payload$data$routes
 
   lapply(routes, function(route) {
+
     list(points = getRouteFeature(route, "POINT"),
          transit = getRouteFeature(route, "TRANSIT"),
          walk = getRouteFeature(route, "WALK"),
@@ -98,7 +106,7 @@ processRoutes <- function(payload) {
 
 }
 
-#' @rdname processResponse
+#' @rdname process
 processTime <- function(payload) {
 
   sets <- payload$data

@@ -77,7 +77,7 @@ addTargomoRoutes <- function(map,
 
   for (route in routes) {
     if (drawOptions$showMarkers) {
-      map <- map %>% addMarkers(data = route[["points"]], group = group)
+      map <- map %>% leaflet::addMarkers(data = route[["points"]], group = group)
     }
     if (options$travelType %in% c("car", "bike", "walk")) {
         map <- map %>%
