@@ -43,7 +43,11 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
                              sources = sources, targets = targets, options = options,
                              verbose = verbose, progress = progress)
 
-  output <- processResponse(response, service = "time")
+  output <- processResponse(response, service = "time") %>%
+    merge(data.frame(do.call(rbind, sources))[ , 1:3], by.x = "sourceId", by.y = "id") %>%
+    merge(data.frame(do.call(rbind, targets))[ , 1:3], by.x = "targetId", by.y = "id")
+
+
 
   return(output)
 

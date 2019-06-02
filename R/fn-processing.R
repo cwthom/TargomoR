@@ -109,8 +109,12 @@ processRoutes <- function(payload) {
 #' @rdname process
 processTime <- function(payload) {
 
-  sets <- payload$data
-  lapply(sets, function(set) {
-    as.data.frame(do.call(rbind, set$targets))
+  sets <- lapply(payload$data, function(set) {
+    set <- data.frame(set$id, matrix(unlist(set$targets), nrow=length(set$targets), byrow=T),
+                      stringsAsFactors = FALSE)
+    colnames(set) <- c("sourceId", "targetId", "travelTime")
+    set
   })
+  do.call(rbind, sets)
+
 }
