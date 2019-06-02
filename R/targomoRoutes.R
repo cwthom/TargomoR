@@ -15,9 +15,9 @@
 #' @param group The leaflet map group to add the routes to. One group is used for all
 #'   map elements being drawn per call to the API.
 #' @param api_key Your Targomo API key - defaults to the \code{TARGOMO_API_KEY}
-#'   ennvironment variable
+#'   ennvironment variable.
 #' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
-#'   environment variable
+#'   environment variable.
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #'

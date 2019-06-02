@@ -3,7 +3,7 @@
 
 #' Targomo API base URL
 #'
-targomo_api <- function() {
+targomoAPI <- function() {
   return("https://api.targomo.com/")
 }
 
@@ -15,7 +15,7 @@ targomo_api <- function() {
 #' @param end_point The API end_point.
 #'
 createRequestURL <- function(region, end_point) {
-  paste0(targomo_api(), region, "/v1/", end_point)
+  paste0(targomoAPI(), region, "/v1/", end_point)
 }
 
 
