@@ -2,33 +2,38 @@
 % Please edit documentation in R/fn-drawing.R
 \name{draw}
 \alias{draw}
-\alias{drawRoute}
+\alias{drawRouteSegment}
 \alias{drawWalk}
 \alias{drawBike}
 \alias{drawCar}
 \alias{drawTransit}
+\alias{drawRoutes}
 \title{Draw Routes}
 \usage{
-drawRoute(map, route, drawOptions, type, ...)
+drawRouteSegment(map, segment, drawOptions, type, ...)
 
-drawWalk(map, route, drawOptions, ...)
+drawWalk(map, segment, drawOptions, ...)
 
-drawBike(map, route, drawOptions, ...)
+drawBike(map, segment, drawOptions, ...)
 
-drawCar(map, route, drawOptions, ...)
+drawCar(map, segment, drawOptions, ...)
 
-drawTransit(map, route, drawOptions, ...)
+drawTransit(map, segment, drawOptions, ...)
+
+drawRoutes(map, routes, drawOptions = routeDrawOptions(), group = NULL)
 }
 \arguments{
 \item{map}{A leaflet map.}
 
-\item{route}{A route object to draw.}
+\item{segment}{A route segment object to draw.}
 
 \item{drawOptions}{Drawing options provided by \code{\link{routeDrawOptions}}.}
 
 \item{type}{What route type to draw.}
 
 \item{...}{Further arguments to pass to leaflet functions.}
+
+\item{routes}{A list of route segments provided by \code{\link{getTargomoRoutes}}.}
 }
 \description{
 Helper functions for drawing different routes.

@@ -35,6 +35,21 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
                              verbose = FALSE,
                              progress = FALSE) {
 
+  output <- list()
+
+  if (length(options$travelType) > 1) {
+    message("Multiple (", length(options$travelType), ") travel types supplied - treating each in turn.\n",
+            "This will make ", length(options$travelType), " calls to the API.")
+    for (tm in options$travelType) {
+      options$travelType <- tm
+      output[[tm]] <- getTargomoRoutes(source_data, source_lat, source_lng,
+                                       target_data, target_lat, target_lng,
+                                       options,  api_key, region,
+                                       verbose, progress)
+    }
+    return(output)
+  }
+
   options <- deriveOptions(options)
   sources <- deriveSources(source_data, source_lat, source_lng, options)
   targets <- deriveTargets(target_data, target_lat, target_lng)
@@ -65,18 +80,6 @@ addTargomoRoutes <- function(map,
                              region = Sys.getenv("TARGOMO_REGION"),
                              verbose = FALSE, progress = FALSE) {
 
-  if (length(options$travelType) > 1) {
-    message("Multiple (", length(options$travelType), ") travel types supplied - treating each in turn.\n",
-            "This will make ", length(options$travelType), " calls to the API.")
-    for (tm in options$travelType) {
-      options$travelType <- tm
-      map <- addTargomoRoutes(map, source_data, source_lat, source_lng, target_data,
-                              target_lat, target_lng, options, drawOptions, group,
-                              api_key, region, verbose, progress)
-    }
-    return(map)
-  }
-
   routes <- getTargomoRoutes(api_key = api_key, region = region,
                              source_data = source_data, source_lat = source_lat,
                              source_lng = source_lng, target_data = target_data,
@@ -84,35 +87,7 @@ addTargomoRoutes <- function(map,
                              options = options,
                              verbose = verbose, progress = progress)
 
-  for (route in routes) {
-    if (drawOptions$showMarkers) {
-
-      map <- map %>% leaflet::addMarkers(data = route[["points"]], group = group)
-
-    }
-    if (options$travelType %in% c("car", "bike", "walk")) {
-
-        map <- map %>%
-          drawRoute(route = route[[options$travelType]], drawOptions = drawOptions,
-                    type = options$travelType, group = group)
-
-    } else if (options$travelType == "transit") {
-
-      map <- map %>%
-        drawWalk(route$walk, drawOptions, group = group) %>%
-        drawTransit(route$transit, drawOptions, group = group)
-
-      if (drawOptions$showTransfers) {
-        map <- map %>%
-          leaflet::addCircleMarkers(data = route$transfers,
-                                    color = drawOptions$transferColour,
-                                    radius = drawOptions$transferRadius,
-                                    group = group)
-      }
-    }
-  }
-
-  return(map)
+  drawRoutes(map, routes, drawOptions, group)
 
 }
 

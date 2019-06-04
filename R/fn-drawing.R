@@ -4,7 +4,8 @@
 #' Helper functions for drawing different routes.
 #'
 #' @param map A leaflet map.
-#' @param route A route object to draw.
+#' @param routes A list of route segments provided by \code{\link{getTargomoRoutes}}.
+#' @param segment A route segment object to draw.
 #' @param drawOptions Drawing options provided by \code{\link{routeDrawOptions}}.
 #' @param type What route type to draw.
 #' @param ... Further arguments to pass to leaflet functions.
@@ -14,42 +15,83 @@
 NULL
 
 #' @rdname draw
-drawRoute <- function(map, route, drawOptions, type, ...) {
+drawRouteSegment <- function(map, segment, drawOptions, type, ...) {
 
   drawOpts <- drawOptions[paste0(type, c("Colour", "Weight", "DashArray"))]
   names(drawOpts) <- c("colour", "weight", "dashArray")
 
 
   leaflet::addPolylines(map = map,
-                        data = route,
+                        data = segment,
                         color = drawOpts$colour, weight = drawOpts$weight,
                         dashArray = drawOpts$dashArray,
                         label = "Click for more information",
-                        popup = createRoutePopup(route, transit = {type == "transit"}),
+                        popup = createRoutePopup(segment, transit = {type == "transit"}),
                         ...)
 
 }
 
 #' @rdname draw
-drawWalk <- function(map, route, drawOptions, ...) {
-  drawRoute(map, route, drawOptions, "walk", ...)
+drawWalk <- function(map, segment, drawOptions, ...) {
+  drawRouteSegment(map, segment, drawOptions, "walk", ...)
 }
 
 #' @rdname draw
-drawBike <- function(map, route, drawOptions, ...) {
-  drawRoute(map, route, drawOptions, "bike", ...)
+drawBike <- function(map, segment, drawOptions, ...) {
+  drawRouteSegment(map, segment, drawOptions, "bike", ...)
 }
 
 #' @rdname draw
-drawCar <- function(map, route, drawOptions, ...) {
-  drawRoute(map, route, drawOptions, "car", ...)
+drawCar <- function(map, segment, drawOptions, ...) {
+  drawRouteSegment(map, segment, drawOptions, "car", ...)
 }
 
 #' @rdname draw
-drawTransit <- function(map, route, drawOptions, ...) {
-  drawRoute(map, route, drawOptions, "transit", ...)
+drawTransit <- function(map, segment, drawOptions, ...) {
+  drawRouteSegment(map, segment, drawOptions, "transit", ...)
 }
 
+#' @rdname draw
+#' @export
+drawRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NULL) {
+
+  travelModes <- names(routes)
+
+  for (tm in travelModes) {
+    for (route in routes[[tm]]) {
+
+      if (drawOptions$showMarkers) {
+
+        map <- map %>%
+          leaflet::addMarkers(data = route[["points"]], group = group)
+
+      }
+      if (tm %in% c("car", "bike", "walk")) {
+
+        map <- map %>%
+          drawRouteSegment(segment = route[[tm]], drawOptions = drawOptions,
+                           type = tm, group = group)
+
+      } else if (tm == "transit") {
+
+        map <- map %>%
+          drawWalk(route$walk, drawOptions, group = group) %>%
+          drawTransit(route$transit, drawOptions, group = group)
+
+        if (drawOptions$showTransfers) {
+          map <- map %>%
+            leaflet::addCircleMarkers(data = route$transfers,
+                                      color = drawOptions$transferColour,
+                                      radius = drawOptions$transferRadius,
+                                      group = group)
+        }
+      }
+
+    }
+  }
+
+  return(map)
+}
 
 
 #' Create Route Popups

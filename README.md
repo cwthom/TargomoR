@@ -32,7 +32,7 @@ To Do
 -   \[x\] turn resulting data into sf objects
 -   \[x\] drawing options
 -   \[x\] source and target inputs (manual/data.frame)
--   \[ \] add easy option to draw the processed outputs of an API call
+-   \[x\] add easy option to draw the processed outputs of an API call
 
 ### Time Service
 

@@ -52,20 +52,24 @@ server <- function(input, output, session) {
   source_data <- data.frame(lat = 51.5267, lng = -0.1925)
   target_data <- data.frame(lat = 51.512, lng = -0.11)
 
+  routes <- reactive({
+
+    getTargomoRoutes(source_data = source_data, target_data = target_data,
+                     options = targomoOptions(travelType = input$travelType,
+                                              bikeSpeed = input$bikeSpeed,
+                                              walkSpeed = input$walkSpeed,
+                                              maxEdgeWeight = "1h"))
+  })
+
   output$map <- renderLeaflet({
     map <- basemap %>%
-      addTargomoRoutes(source_data = source_data, target_data = target_data,
-                       options = targomoOptions(travelType = input$travelType,
-                                                bikeSpeed = input$bikeSpeed,
-                                                walkSpeed = input$walkSpeed,
-                                                maxEdgeWeight = "1h"),
-                       drawOptions = routeDrawOptions(
-                         showTransfers = input$showTransfers,
-                         walkColour = input$walkColour,
-                         bikeColour = input$bikeColour,
-                         carColour = input$carColour,
-                         transitColour = input$transitColour),
-                       group = "Routes"
+      drawRoutes(routes = routes(),
+                 drawOptions = routeDrawOptions(showTransfers = input$showTransfers,
+                                                walkColour = input$walkColour,
+                                                bikeColour = input$bikeColour,
+                                                carColour = input$carColour,
+                                                transitColour = input$transitColour),
+                 group = "Routes"
       ) %>%
       addLayersControl(overlayGroups = c("Routes"),
                        position = "topleft",
