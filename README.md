@@ -37,8 +37,9 @@ To Do
 ### Time Service
 
 -   \[x\] call the API
--   \[ \] process the resulting data into a data frame?
--   \[ \] provide mapping functionality?
+-   \[x\] process the resulting data into a data frame?
+-   \[x\] provide mapping functionality?
+-   \[ \] generalise code a bit
 
 ### Multigraph Service
 

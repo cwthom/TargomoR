@@ -38,35 +38,44 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
                             verbose = FALSE,
                             progress = FALSE) {
 
-  if (length(options$travelType) > 1) {
-    output <- list()
-    message("Multiple (", length(options$travelType), ") travel types supplied - treating each in turn.\n",
-            "This will make ", length(options$travelType), " calls to the API.")
-    for (tm in options$travelType) {
-      options$travelType <- tm
-      output[[tm]] <- getTargomoTimes(source_data, source_lat, source_lng,
-                                      target_data, target_lat, target_lng,
-                                      source_id, target_id,
-                                      options,  api_key, region,
-                                      verbose, progress)
-    }
-    output <- do.call(rbind, output)
-    return(output)
+  output <- list()
+  tms <- options$travelType
+
+  s_points <- createPoints(source_data, source_lat, source_lng, source_id)
+  t_points <- createPoints(target_data, target_lat, target_lng, target_id)
+  targets <- deriveTargets(t_points)
+
+  if (length(tms) > 1) {
+
+    message("Multiple (", length(tms), ") travel types supplied - treating each in turn.\n",
+            "This will make ", length(tms), " calls to the API.")
   }
 
-  options <- deriveOptions(options)
-  sources <- deriveSources(source_data, source_lat, source_lng, source_id, options)
-  targets <- deriveTargets(target_data, target_lat, target_lng, target_id)
-  body <- createRequestBody("time", sources, targets, options)
+  for (tm in tms) {
 
-  response <- callTargomoAPI(api_key = api_key, region = region,
-                             service = "time", body = body,
-                             verbose = verbose, progress = progress)
+    options$travelType <- tm
+    tm_opts <- deriveOptions(options)
+    sources <- deriveSources(s_points, tm_opts)
 
-  output <- processResponse(response, service = "time")
-  output$travelType <- options$tm$tm
+    body <- createRequestBody("time", sources, targets, tm_opts)
 
-  output <- tibble::as_tibble(output)
+    response <- callTargomoAPI(api_key = api_key, region = region,
+                               service = "time", body = body,
+                               verbose = verbose, progress = progress)
+
+    tm_times <- processResponse(response, service = "time")
+    tm_times$travelType <- tm
+
+    output[[tm]] <- tm_times
+
+  }
+
+  output <- do.call(rbind, output) %>%
+    merge(t_points, by.x = "targetId", by.y = "id") %>%
+    tibble::as_tibble() %>%
+    sf::st_as_sf(coords = c("lng", "lat"), crs = sf::st_crs(4326))
+
+  output <- output[ , c("sourceId", "targetId", "travelType", "travelTime")]
 
   return(output)
 
@@ -95,19 +104,64 @@ addTargomoTimes <- function(map,
                            options = options,
                            verbose = verbose, progress = progress)
 
+  opts <- drawOptions
+
+  palette <- createTimePalette(palette = opts$palette,
+                               type = opts$type,
+                               maxTime = opts$maxTime,
+                               bins = opts$bins,
+                               reverse = opts$reverse)
+
+  leaflet::addCircleMarkers(map, data = times, fillColor = ~palette(travelTime),
+                            stroke = opts$stroke, weight = opts$weight,
+                            color = opts$color, opacity = opts$opacity,
+                            fillOpacity = opts$fillOpacity, group = group)
 
 }
 
-#' Options for Drawing Times on the Map
+
+#' #' Options for Drawing Times on the Map
 #'
-#' Function to return a list of the desired drawing options.
-#'
+#' @param palette A colour palette name e.g. "viridis"
+#' @param type Either "numeric" or "bin"
+#' @param maxTime The max time to allow for
+#' @param reverse Whether to reverse the colour palette.
+#' @param bins A number of bins or a vector of cut points (only used for the bin palette)
+#' @param radius The marker radius.
+#' @param stroke Whether to draw the marker border.
+#' @param weight Stroke width in pixels.
+#' @param color Stroke colour.
+#' @param opacity Stroke opacity.
+#' @param fill Whether to fill the polygons in with colour.
+#' @param fillOpacity The fill opacity.
 #'
 #' @export
-timeDrawOptions <- function() {
+timeDrawOptions <- function(palette = "viridis",
+                            type = "numeric",
+                            maxTime = 1800,
+                            reverse = FALSE,
+                            bins = c(600, 1200),
+                            radius = 10,
+                            stroke = TRUE,
+                            weight = 3,
+                            color = "black",
+                            opacity = 0.5,
+                            fill = TRUE,
+                            fillOpacity = 0.5) {
 
   leaflet::filterNULL(
-    list()
+    list(palette = palette,
+         type = type,
+         maxTime = maxTime,
+         reverse = reverse,
+         bins = bins,
+         radius = radius,
+         stroke = stroke,
+         weight = weight,
+         color = color,
+         opacity = opacity,
+         fill = fill,
+         fillOpacity = fillOpacity)
   )
 
 }

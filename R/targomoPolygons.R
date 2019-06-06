@@ -32,8 +32,10 @@ getTargomoPolygons <- function(data = NULL, lat = NULL, lng = NULL,
                                verbose = FALSE,
                                progress = FALSE) {
 
+  s_points <- createPoints(data, lat, lng, NULL)
+
   options <- deriveOptions(options)
-  sources <- deriveSources(data, lat, lng, NULL, options)
+  sources <- deriveSources(s_points, options)
   body <- createRequestBody("polygon", sources, NULL, options)
 
   response <- callTargomoAPI(api_key = api_key, region = region,

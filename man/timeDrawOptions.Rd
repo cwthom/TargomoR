@@ -2,10 +2,38 @@
 % Please edit documentation in R/targomoTimes.R
 \name{timeDrawOptions}
 \alias{timeDrawOptions}
-\title{Options for Drawing Times on the Map}
+\title{#' Options for Drawing Times on the Map}
 \usage{
-timeDrawOptions()
+timeDrawOptions(palette = "viridis", type = "numeric",
+  maxTime = 1800, reverse = FALSE, bins = c(600, 1200),
+  radius = 10, stroke = TRUE, weight = 3, color = "black",
+  opacity = 0.5, fill = TRUE, fillOpacity = 0.5)
+}
+\arguments{
+\item{palette}{A colour palette name e.g. "viridis"}
+
+\item{type}{Either "numeric" or "bin"}
+
+\item{maxTime}{The max time to allow for}
+
+\item{reverse}{Whether to reverse the colour palette.}
+
+\item{bins}{A number of bins or a vector of cut points (only used for the bin palette)}
+
+\item{radius}{The marker radius.}
+
+\item{stroke}{Whether to draw the marker border.}
+
+\item{weight}{Stroke width in pixels.}
+
+\item{color}{Stroke colour.}
+
+\item{opacity}{Stroke opacity.}
+
+\item{fill}{Whether to fill the polygons in with colour.}
+
+\item{fillOpacity}{The fill opacity.}
 }
 \description{
-Function to return a list of the desired drawing options.
+#' Options for Drawing Times on the Map
 }

@@ -2,7 +2,9 @@
 
 * add support for giving IDs to source/target points
 * deal more nicely with missing data
-* return times as tibble
+* return times as tibble (and sf)
+* better reuse of code when multiple travel types supplied
+* mapping options use circle markers for time service
 
 # TargomoR 0.0.0.9006
 

@@ -2,19 +2,18 @@
 % Please edit documentation in R/fn-API.R
 \name{deriveSources}
 \alias{deriveSources}
-\alias{deriveIds}
-\alias{deriveTargomoPoints}
+\alias{createIds}
+\alias{createPoints}
 \alias{deriveTargets}
 \title{Derive Sources/Targets}
 \usage{
-deriveIds(data = NULL, id = NULL)
+createIds(data = NULL, id = NULL)
 
-deriveTargomoPoints(data = NULL, lat = NULL, lng = NULL, id = NULL)
+createPoints(data = NULL, lat = NULL, lng = NULL, id = NULL)
 
-deriveSources(data = NULL, lat = NULL, lng = NULL, id = NULL,
-  options)
+deriveSources(points, options)
 
-deriveTargets(data = NULL, lat = NULL, lng = NULL, id = NULL)
+deriveTargets(points, id = NULL)
 }
 \arguments{
 \item{data}{The data object}

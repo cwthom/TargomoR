@@ -91,17 +91,18 @@ processRoutes <- function(payload) {
 
   lapply(routes, function(route) {
 
-    list(points = getRouteFeature(route, "POINT"),
-         transit = getRouteFeature(route, "TRANSIT"),
-         walk = getRouteFeature(route, "WALK"),
-         bike = getRouteFeature(route, "BIKE"),
-         car  = getRouteFeature(route, "CAR"),
-         transfers = suppressWarnings({
-           getRouteFeature(route, "TRANSFER") %>%
-             sf::st_cast(to = "POINT") %>%
-             unique()
-         })
+    x <- list(points = getRouteFeature(route, "POINT"),
+              transit = getRouteFeature(route, "TRANSIT"),
+              walk = getRouteFeature(route, "WALK"),
+              bike = getRouteFeature(route, "BIKE"),
+              car  = getRouteFeature(route, "CAR"),
+              transfers = suppressWarnings({
+                getRouteFeature(route, "TRANSFER") %>%
+                  sf::st_cast(to = "POINT") %>%
+                  unique()
+                })
     )
+    Filter(function(x) nrow(x) > 0, x)
   })
 
 }
@@ -110,9 +111,12 @@ processRoutes <- function(payload) {
 processTime <- function(payload) {
 
   sets <- lapply(payload$data, function(set) {
-    set <- data.frame(set$id, matrix(unlist(set$targets), nrow=length(set$targets), byrow=T),
+    set <- data.frame(set$id, matrix(unlist(set$targets),
+                                     nrow=length(set$targets),
+                                     byrow=T),
                       stringsAsFactors = FALSE)
     colnames(set) <- c("sourceId", "targetId", "travelTime")
+    set$travelTime <- as.integer(set$travelTime)
     set
   })
   do.call(rbind, sets)

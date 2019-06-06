@@ -9,6 +9,8 @@
 #' @param source_lat,source_lng Columns identifying the latitude
 #'   and longitude columns in your sourcedata, or numeric vectors of equal length.
 #' @param target_lat,target_lng As for \code{source_lat,source_lng} but for target data.
+#' @param source_id,target_id Formulas or vectors of IDs to give to your source and target points.
+#'   These will be used to match back to the input data if applicable.
 #' @param options A list of \code{\link{targomoOptions}} to send to the API.
 #' @param drawOptions A list of \code{\link{routeDrawOptions}} to determine how to show
 #'   the resulting routes on the map.
@@ -29,38 +31,39 @@ NULL
 #' @export
 getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng = NULL,
                              target_data = NULL, target_lat = NULL, target_lng = NULL,
+                             source_id = NULL, target_id = NULL,
                              options = targomoOptions(),
                              api_key = Sys.getenv("TARGOMO_API_KEY"),
                              region = Sys.getenv("TARGOMO_REGION"),
                              verbose = FALSE,
                              progress = FALSE) {
 
-  if (length(options$travelType) > 1) {
-    output <- list()
-    message("Multiple (", length(options$travelType), ") travel types supplied - treating each in turn.\n",
-            "This will make ", length(options$travelType), " calls to the API.")
-    for (tm in options$travelType) {
-      options$travelType <- tm
-      output[[tm]] <- getTargomoRoutes(source_data, source_lat, source_lng,
-                                       target_data, target_lat, target_lng,
-                                       options,  api_key, region,
-                                       verbose, progress)
-    }
-    return(output)
+  output <- list()
+  tms <- options$travelType
+
+  s_points <- createPoints(source_data, source_lat, source_lng, source_id)
+  t_points <- createPoints(target_data, target_lat, target_lng, target_id)
+  targets <- deriveTargets(t_points)
+
+  if (length(tms) > 1) {
+
+    message("Multiple (", length(tms), ") travel types supplied - treating each in turn.\n",
+            "This will make ", length(tms), " calls to the API.")
   }
 
-  options <- deriveOptions(options)
-  sources <- deriveSources(source_data, source_lat, source_lng, NULL, options)
-  targets <- deriveTargets(target_data, target_lat, target_lng, NULL)
-  body <- createRequestBody("route", sources, targets, options)
+  for (tm in tms) {
 
-  response <- callTargomoAPI(api_key = api_key, region = region,
-                             service = "route", body = body,
-                             verbose = verbose, progress = progress)
+    options$travelType <- tm
+    tm_opts <- deriveOptions(options)
+    sources <- deriveSources(s_points, tm_opts)
 
-  output <- processResponse(response, service = "route")
-  if (options$tm$tm != "transit") {
-    output <- lapply(output, function(route) route[c("points", options$tm$tm)])
+    body <- createRequestBody("route", sources, targets, tm_opts)
+
+    response <- callTargomoAPI(api_key = api_key, region = region,
+                               service = "route", body = body,
+                               verbose = verbose, progress = progress)
+
+    output[[tm]] <- processResponse(response, service = "route")
   }
 
   return(output)

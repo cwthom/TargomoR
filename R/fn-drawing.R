@@ -122,3 +122,33 @@ createRoutePopup <- function(data, transit = FALSE, startEnd = transit) {
                              "End: ", data$endName, "</br>"),
          "Journey time: ", data$travelTime, "s")
 }
+
+#' Create a Colour Palette for Time Service Results
+#'
+#' @param palette A colour palette e.g. "viridis", "Blues"
+#' @param type Either "numeric" or "bin"
+#' @param maxTime The maximum time value to consider
+#' @param bins Either a single number of bins, or a vector of cut points.
+#' @param reverse Whether to reverse the colour palette.
+#'
+createTimePalette <- function(palette, type, maxTime, bins, reverse) {
+
+  if (!(type %in% c("numeric", "bin"))) {
+    stop("Invalid 'type': ", deparse(type))
+  }
+
+  if (type == "numeric") {
+    leaflet::colorNumeric(palette = palette,
+                          domain = c(0, maxTime),
+                          na.color = NA,
+                          reverse = reverse)
+  } else if (type == "bin") {
+    leaflet::colorBin(palette = palette,
+                      domain = c(0, maxTime),
+                      bins = bins,
+                      na.color = NA,
+                      reverse = reverse)
+
+  }
+
+}

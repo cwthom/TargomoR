@@ -100,7 +100,7 @@ deriveOptions <- function(options) {
 NULL
 
 #' @rdname deriveSources
-deriveIds <- function(data = NULL, id = NULL) {
+createIds <- function(data = NULL, id = NULL) {
 
   if (is.null(data)) {
     if (is.null(id)) {
@@ -126,10 +126,10 @@ deriveIds <- function(data = NULL, id = NULL) {
 }
 
 #' @rdname deriveSources
-deriveTargomoPoints <- function(data = NULL, lat = NULL, lng = NULL, id = NULL) {
+createPoints <- function(data = NULL, lat = NULL, lng = NULL, id = NULL) {
 
   points <- leaflet::derivePoints(data, lng, lat, is.null(lng), is.null(lat))
-  ids <- deriveIds(data, id)
+  ids <- createIds(data, id)
   if (!is.null(ids)) {
     points$id <- ids
   } else {
@@ -142,11 +142,9 @@ deriveTargomoPoints <- function(data = NULL, lat = NULL, lng = NULL, id = NULL) 
 }
 
 #' @rdname deriveSources
-deriveSources <- function(data = NULL, lat = NULL, lng = NULL, id = NULL, options) {
+deriveSources <- function(points, options) {
 
-  points <- deriveTargomoPoints(data, lat, lng, id)
   tm <- options$tm[options$tm$tm]
-
   sources <- vector(mode = "list", length = nrow(points))
 
   for (i in seq_along(points$lat)) {
@@ -159,9 +157,7 @@ deriveSources <- function(data = NULL, lat = NULL, lng = NULL, id = NULL, option
 }
 
 #' @rdname deriveSources
-deriveTargets <- function(data = NULL, lat = NULL, lng = NULL, id = NULL) {
-
-  points <- deriveTargomoPoints(data, lat, lng, id)
+deriveTargets <- function(points, id = NULL) {
 
   targets <- vector(mode = "list", length = nrow(points))
 
@@ -236,5 +232,4 @@ callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
   return(response)
 
 }
-
 
