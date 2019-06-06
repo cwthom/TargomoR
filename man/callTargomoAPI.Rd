@@ -5,8 +5,8 @@
 \title{Call the Targomo API}
 \usage{
 callTargomoAPI(api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), service, sources,
-  targets = NULL, options, verbose = FALSE, progress = FALSE)
+  region = Sys.getenv("TARGOMO_REGION"), service, body,
+  verbose = FALSE, progress = FALSE)
 }
 \arguments{
 \item{api_key}{The Targomo API key.}
@@ -15,11 +15,7 @@ callTargomoAPI(api_key = Sys.getenv("TARGOMO_API_KEY"),
 
 \item{service}{The Targomo service - 'polygon', 'route', or 'time'.}
 
-\item{sources}{A processed sources object to pass to the API.}
-
-\item{targets}{A processed targets object (optional).}
-
-\item{options}{A processed options list.}
+\item{body}{A request body made with \code{\link{createRequestBody}}.}
 
 \item{verbose}{Display info on the API call?}
 

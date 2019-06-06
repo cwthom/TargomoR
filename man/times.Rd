@@ -8,16 +8,16 @@
 \usage{
 getTargomoTimes(source_data = NULL, source_lat = NULL,
   source_lng = NULL, target_data = NULL, target_lat = NULL,
-  target_lng = NULL, options = targomoOptions(),
-  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  target_lng = NULL, source_id = NULL, target_id = NULL,
+  options = targomoOptions(), api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), verbose = FALSE,
   progress = FALSE)
 
 addTargomoTimes(map, source_data = NULL, source_lat = NULL,
   source_lng = NULL, target_data = NULL, target_lat = NULL,
-  target_lng = NULL, options = targomoOptions(),
-  drawOptions = timeDrawOptions(), group = NULL,
-  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  target_lng = NULL, source_id = NULL, target_id = NULL,
+  options = targomoOptions(), drawOptions = timeDrawOptions(),
+  group = NULL, api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), verbose = FALSE,
   progress = FALSE)
 }
@@ -25,10 +25,13 @@ addTargomoTimes(map, source_data = NULL, source_lat = NULL,
 \item{source_data, target_data}{The source and target points for your travel times -
 supported types are data.frame matrix and objects from the sf and sp packages.}
 
-\item{source_lat, source_lng}{Columns identifying the latitude
+\item{source_lat, source_lng}{One-sided formulas identifying the latitude
 and longitude columns in your source data, or numeric vectors of equal length.}
 
 \item{target_lat, target_lng}{As for \code{source_lat,source_lng} but for target data.}
+
+\item{source_id, target_id}{Formulas or vectors of IDs to give to your source and target points.
+These will be used to match back to the input data if applicable.}
 
 \item{options}{A list of \code{\link{targomoOptions}} to send to the API.}
 

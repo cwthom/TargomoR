@@ -99,16 +99,58 @@ deriveOptions <- function(options) {
 NULL
 
 #' @rdname deriveSources
-deriveSources <- function(data, lat= NULL, lng = NULL, options) {
+deriveIds <- function(data = NULL, id = NULL) {
+
+  if (is.null(data)) {
+    if (is.null(id)) {
+      NULL
+    } else {
+      id
+    }
+  } else {
+    if (is.null(id)) {
+      seq_len(nrow(data))
+    } else if (inherits(id, "formula")) {
+      if (length(id) != 2L) {
+        stop("Unexpected 2-sided formula: ", deparse(id))
+      }
+      as.character(eval(id[[2]], data, environment(data)))
+    } else if (length(id) != nrow(data)) {
+      stop("'id' values different length to 'data'")
+    } else {
+      id
+    }
+  }
+
+}
+
+#' @rdname deriveSources
+deriveTargomoPoints <- function(data = NULL, lat = NULL, lng = NULL, id = NULL) {
 
   points <- leaflet::derivePoints(data, lng, lat, is.null(lng), is.null(lat))
-  points$id <- seq_along(points$lat)
+  ids <- deriveIds(data, id)
+  if (!is.null(ids)) {
+    points$id <- ids
+  } else {
+    points$id <- seq_along(points$lat)
+  }
+  points <- points[complete.cases(points), ]
+
+  points
+
+}
+
+#' @rdname deriveSources
+deriveSources <- function(data = NULL, lat = NULL, lng = NULL, id = NULL, options) {
+
+  points <- deriveTargomoPoints(data, lat, lng, id)
+  tm <- options$tm[options$tm$tm]
+
   sources <- vector(mode = "list", length = nrow(points))
 
-  for (i in points$id) {
+  for (i in seq_along(points$lat)) {
     pt <- points[i, ]
-    sources[[i]] <- list("id" = pt$id, "lat" = pt$lat, "lng" = pt$lng,
-                         "tm" = options$tm[options$tm$tm])
+    sources[[i]] <- list("id" = pt$id, "lat" = pt$lat, "lng" = pt$lng, "tm" = tm)
   }
 
   return(sources)
@@ -116,13 +158,13 @@ deriveSources <- function(data, lat= NULL, lng = NULL, options) {
 }
 
 #' @rdname deriveSources
-deriveTargets <- function(data, lat = NULL, lng = NULL) {
+deriveTargets <- function(data = NULL, lat = NULL, lng = NULL, id = NULL) {
 
-  points <- leaflet::derivePoints(data, lng, lat, is.null(lng), is.null(lat))
-  points$id <- seq_along(points$lat)
+  points <- deriveTargomoPoints(data, lat, lng, id)
+
   targets <- vector(mode = "list", length = nrow(points))
 
-  for (i in points$id) {
+  for (i in seq_along(points$lat)) {
     pt <- points[i, ]
     targets[[i]] <- list("id" = pt$id, "lat" = pt$lat, "lng" = pt$lng)
   }
@@ -174,20 +216,16 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 #' @param api_key The Targomo API key.
 #' @param region The Targomo region.
 #' @param service The Targomo service - 'polygon', 'route', or 'time'.
-#' @param sources A processed sources object to pass to the API.
-#' @param targets A processed targets object (optional).
-#' @param options A processed options list.
+#' @param body A request body made with \code{\link{createRequestBody}}.
 #' @param verbose Display info on the API call?
 #' @param progress Display a progress bar?
 #'
 callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                            region = Sys.getenv("TARGOMO_REGION"),
-                           service,
-                           sources, targets = NULL, options,
+                           service, body,
                            verbose = FALSE, progress = FALSE) {
 
   url <- createRequestURL(region, service)
-  body <- createRequestBody(service, sources, targets, options)
 
   response <- httr::POST(url = url, query = list(key = api_key),
                          body = body, encode = "json",

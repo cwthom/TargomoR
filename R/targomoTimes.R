@@ -6,9 +6,11 @@
 #' @param map A leaflet map
 #' @param source_data,target_data The source and target points for your travel times -
 #'   supported types are data.frame matrix and objects from the sf and sp packages.
-#' @param source_lat,source_lng Columns identifying the latitude
+#' @param source_lat,source_lng One-sided formulas identifying the latitude
 #'   and longitude columns in your source data, or numeric vectors of equal length.
 #' @param target_lat,target_lng As for \code{source_lat,source_lng} but for target data.
+#' @param source_id,target_id Formulas or vectors of IDs to give to your source and target points.
+#'   These will be used to match back to the input data if applicable.
 #' @param options A list of \code{\link{targomoOptions}} to send to the API.
 #' @param drawOptions A list of \code{\link{timeDrawOptions}} to determine how to show
 #'   the resulting times on the map.
@@ -29,6 +31,7 @@ NULL
 #' @export
 getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = NULL,
                             target_data = NULL, target_lat = NULL, target_lng = NULL,
+                            source_id = NULL, target_id = NULL,
                             options = targomoOptions(),
                             api_key = Sys.getenv("TARGOMO_API_KEY"),
                             region = Sys.getenv("TARGOMO_REGION"),
@@ -36,18 +39,15 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
                             progress = FALSE) {
 
   options <- deriveOptions(options)
-  sources <- deriveSources(source_data, source_lat, source_lng, options)
-  targets <- deriveTargets(target_data, target_lat, target_lng)
+  sources <- deriveSources(source_data, source_lat, source_lng, source_id, options)
+  targets <- deriveTargets(target_data, target_lat, target_lng, target_id)
+  body <- createRequestBody("time", sources, targets, options)
 
-  response <- callTargomoAPI(api_key = api_key, region = region, service = "time",
-                             sources = sources, targets = targets, options = options,
+  response <- callTargomoAPI(api_key = api_key, region = region,
+                             service = "time", body = body,
                              verbose = verbose, progress = progress)
 
-  output <- processResponse(response, service = "time") %>%
-    merge(data.frame(do.call(rbind, sources))[ , 1:3], by.x = "sourceId", by.y = "id") %>%
-    merge(data.frame(do.call(rbind, targets))[ , 1:3], by.x = "targetId", by.y = "id")
-
-
+  output <- processResponse(response, service = "time")
 
   return(output)
 
@@ -59,6 +59,7 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
 addTargomoTimes <- function(map,
                             source_data = NULL, source_lat = NULL, source_lng = NULL,
                             target_data = NULL, target_lat = NULL, target_lng = NULL,
+                            source_id = NULL, target_id = NULL,
                             options = targomoOptions(),
                             drawOptions = timeDrawOptions(),
                             group = NULL,
@@ -71,6 +72,7 @@ addTargomoTimes <- function(map,
                            source_data = source_data, source_lat = source_lat,
                            source_lng = source_lng, target_data = target_data,
                            target_lat = target_lat, target_lng = target_lng,
+                           source_id = source_id, target_id = target_id,
                            options = options,
                            verbose = verbose, progress = progress)
 

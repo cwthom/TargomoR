@@ -1,3 +1,8 @@
+# TargomoR 0.0.0.9007
+
+* add support for giving IDs to source/target points
+* deal more nicely with missing data
+
 # TargomoR 0.0.0.9006
 
 * full drawing options for routing

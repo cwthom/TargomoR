@@ -51,11 +51,12 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
   }
 
   options <- deriveOptions(options)
-  sources <- deriveSources(source_data, source_lat, source_lng, options)
-  targets <- deriveTargets(target_data, target_lat, target_lng)
+  sources <- deriveSources(source_data, source_lat, source_lng, NULL, options)
+  targets <- deriveTargets(target_data, target_lat, target_lng, NULL)
+  body <- createRequestBody("route", sources, targets, options)
 
-  response <- callTargomoAPI(api_key = api_key, region = region, service = "route",
-                             sources = sources, targets = targets, options = options,
+  response <- callTargomoAPI(api_key = api_key, region = region,
+                             service = "route", body = body,
                              verbose = verbose, progress = progress)
 
   output <- processResponse(response, service = "route")
