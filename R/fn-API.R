@@ -93,6 +93,7 @@ deriveOptions <- function(options) {
 #'
 #' @param data The data object
 #' @param lat,lng The lat/lng vectors or formulae to resolve
+#' @param id The id vector or formula to resolve
 #' @param options A processed options object (for sources).
 #'
 #' @name deriveSources
@@ -134,7 +135,7 @@ deriveTargomoPoints <- function(data = NULL, lat = NULL, lng = NULL, id = NULL) 
   } else {
     points$id <- seq_along(points$lat)
   }
-  points <- points[complete.cases(points), ]
+  points <- points[!is.na(points$lat) & !is.na(points$lng), ]
 
   points
 

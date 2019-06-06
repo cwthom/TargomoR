@@ -19,6 +19,8 @@ deriveTargets(data = NULL, lat = NULL, lng = NULL, id = NULL)
 \arguments{
 \item{data}{The data object}
 
+\item{id}{The id vector or formula to resolve}
+
 \item{lat, lng}{The lat/lng vectors or formulae to resolve}
 
 \item{options}{A processed options object (for sources).}

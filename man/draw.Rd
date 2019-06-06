@@ -10,17 +10,18 @@
 \alias{drawRoutes}
 \title{Draw Routes}
 \usage{
-drawRouteSegment(map, segment, drawOptions, type, ...)
+drawRouteSegment(map, segment, drawOptions, type, group, ...)
 
-drawWalk(map, segment, drawOptions, ...)
+drawWalk(map, segment, drawOptions, group, ...)
 
-drawBike(map, segment, drawOptions, ...)
+drawBike(map, segment, drawOptions, group, ...)
 
-drawCar(map, segment, drawOptions, ...)
+drawCar(map, segment, drawOptions, group, ...)
 
-drawTransit(map, segment, drawOptions, ...)
+drawTransit(map, segment, drawOptions, group, ...)
 
-drawRoutes(map, routes, drawOptions = routeDrawOptions(), group = NULL)
+drawRoutes(map, routes, drawOptions = routeDrawOptions(), group = NULL,
+  ...)
 }
 \arguments{
 \item{map}{A leaflet map.}
@@ -30,6 +31,8 @@ drawRoutes(map, routes, drawOptions = routeDrawOptions(), group = NULL)
 \item{drawOptions}{Drawing options provided by \code{\link{routeDrawOptions}}.}
 
 \item{type}{What route type to draw.}
+
+\item{group}{The leaflet map group to add the routes to.}
 
 \item{...}{Further arguments to pass to leaflet functions.}
 

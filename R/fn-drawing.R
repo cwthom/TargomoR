@@ -8,6 +8,7 @@
 #' @param segment A route segment object to draw.
 #' @param drawOptions Drawing options provided by \code{\link{routeDrawOptions}}.
 #' @param type What route type to draw.
+#' @param group The leaflet map group to add the routes to.
 #' @param ... Further arguments to pass to leaflet functions.
 #'
 #' @name draw
@@ -15,7 +16,7 @@
 NULL
 
 #' @rdname draw
-drawRouteSegment <- function(map, segment, drawOptions, type, ...) {
+drawRouteSegment <- function(map, segment, drawOptions, type, group, ...) {
 
   drawOpts <- drawOptions[paste0(type, c("Colour", "Weight", "DashArray"))]
   names(drawOpts) <- c("colour", "weight", "dashArray")
@@ -27,33 +28,34 @@ drawRouteSegment <- function(map, segment, drawOptions, type, ...) {
                         dashArray = drawOpts$dashArray,
                         label = "Click for more information",
                         popup = createRoutePopup(segment, transit = {type == "transit"}),
+                        group = group,
                         ...)
 
 }
 
 #' @rdname draw
-drawWalk <- function(map, segment, drawOptions, ...) {
-  drawRouteSegment(map, segment, drawOptions, "walk", ...)
+drawWalk <- function(map, segment, drawOptions, group, ...) {
+  drawRouteSegment(map, segment, drawOptions, "walk", group, ...)
 }
 
 #' @rdname draw
-drawBike <- function(map, segment, drawOptions, ...) {
-  drawRouteSegment(map, segment, drawOptions, "bike", ...)
+drawBike <- function(map, segment, drawOptions, group, ...) {
+  drawRouteSegment(map, segment, drawOptions, "bike", group, ...)
 }
 
 #' @rdname draw
-drawCar <- function(map, segment, drawOptions, ...) {
-  drawRouteSegment(map, segment, drawOptions, "car", ...)
+drawCar <- function(map, segment, drawOptions, group, ...) {
+  drawRouteSegment(map, segment, drawOptions, "car", group, ...)
 }
 
 #' @rdname draw
-drawTransit <- function(map, segment, drawOptions, ...) {
-  drawRouteSegment(map, segment, drawOptions, "transit", ...)
+drawTransit <- function(map, segment, drawOptions, group, ...) {
+  drawRouteSegment(map, segment, drawOptions, "transit", group, ...)
 }
 
 #' @rdname draw
 #' @export
-drawRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NULL) {
+drawRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NULL, ...) {
 
   travelModes <- names(routes)
 
@@ -70,13 +72,13 @@ drawRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NU
 
         map <- map %>%
           drawRouteSegment(segment = route[[tm]], drawOptions = drawOptions,
-                           type = tm, group = group)
+                           type = tm, group = group, ...)
 
       } else if (tm == "transit") {
 
         map <- map %>%
-          drawWalk(route$walk, drawOptions, group = group) %>%
-          drawTransit(route$transit, drawOptions, group = group)
+          drawWalk(route$walk, drawOptions, group = group, ...) %>%
+          drawTransit(route$transit, drawOptions, group = group, ...)
 
         if (drawOptions$showTransfers) {
           map <- map %>%

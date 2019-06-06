@@ -1,3 +1,4 @@
+^codecov\.yml$
 ^revdep$
 ^LICENSE\.md$
 ^.*\.Rproj$
