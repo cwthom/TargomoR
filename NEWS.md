@@ -2,6 +2,7 @@
 
 * add support for giving IDs to source/target points
 * deal more nicely with missing data
+* return times as tibble
 
 # TargomoR 0.0.0.9006
 

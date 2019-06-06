@@ -38,6 +38,22 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
                             verbose = FALSE,
                             progress = FALSE) {
 
+  if (length(options$travelType) > 1) {
+    output <- list()
+    message("Multiple (", length(options$travelType), ") travel types supplied - treating each in turn.\n",
+            "This will make ", length(options$travelType), " calls to the API.")
+    for (tm in options$travelType) {
+      options$travelType <- tm
+      output[[tm]] <- getTargomoTimes(source_data, source_lat, source_lng,
+                                      target_data, target_lat, target_lng,
+                                      source_id, target_id,
+                                      options,  api_key, region,
+                                      verbose, progress)
+    }
+    output <- do.call(rbind, output)
+    return(output)
+  }
+
   options <- deriveOptions(options)
   sources <- deriveSources(source_data, source_lat, source_lng, source_id, options)
   targets <- deriveTargets(target_data, target_lat, target_lng, target_id)
@@ -48,6 +64,9 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
                              verbose = verbose, progress = progress)
 
   output <- processResponse(response, service = "time")
+  output$travelType <- options$tm$tm
+
+  output <- tibble::as_tibble(output)
 
   return(output)
 

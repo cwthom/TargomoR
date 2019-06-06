@@ -19,7 +19,7 @@ l2 <- leaflet() %>%
                    verbose = FALSE, progress = FALSE)
 
 # manual testing
-options_list <- targomoOptions()
+options_list <- targomoOptions(travelType = "car")
 source_data <- data.frame(id = c("A", "B"),
                           lat = c(51.52, 51.53), lng = c(-0.20, -0.19))
 target_data <- data.frame(id = c("X", "Y", "Z"),
@@ -36,8 +36,13 @@ t_payload <- httr::content(t_response)
 
 processTime(t_payload)
 
-getTargomoTimes(source_data = source_data, target_data = target_data,
-                source_id = ~id, target_id = ~id)
+
+
+suppressWarnings({
+  getTargomoTimes(source_data = source_data, target_data = target_data,
+                  source_id = ~id, target_id = ~id,
+                  options = targomoOptions(travelType = c("car", "bike")))
+})
 
 
 

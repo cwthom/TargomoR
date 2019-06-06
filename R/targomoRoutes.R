@@ -35,9 +35,8 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
                              verbose = FALSE,
                              progress = FALSE) {
 
-  output <- list()
-
   if (length(options$travelType) > 1) {
+    output <- list()
     message("Multiple (", length(options$travelType), ") travel types supplied - treating each in turn.\n",
             "This will make ", length(options$travelType), " calls to the API.")
     for (tm in options$travelType) {
