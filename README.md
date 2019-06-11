@@ -10,6 +10,8 @@ The goal of TargomoR is to provide an interface to the Targomo API for users of 
 
 **This package is being developed with the permission of Targomo, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their [website](https://www.targomo.com/developers/).**
 
+**Please also be aware of the Targomo [Terms and Conditions](https://account.targomo.com/legal/terms).**
+
 Please see below for information on [installing](#installation) the package, setting up your [environment](#set-up-environment) correctly, and [using](#get-travel-time-data) the package.
 
 Installation
@@ -112,9 +114,9 @@ polygons
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
 #>   time      area                       geometry
-#> 1 1800 115463770 MULTIPOLYGON (((-0.2675 51....
-#> 2 1200  48835950 MULTIPOLYGON (((-0.2344 51....
-#> 3  600  10829611 MULTIPOLYGON (((-0.2151 51....
+#> 1 1800 115463770 MULTIPOLYGON (((-0.2684 51....
+#> 3 1200  48835950 MULTIPOLYGON (((-0.2344 51....
+#> 2  600  10829611 MULTIPOLYGON (((-0.2151 51....
 ```
 
 ### Routes

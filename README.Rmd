@@ -29,7 +29,10 @@ The goal of TargomoR is to provide an interface to the Targomo API for users of 
 
 **This package is being developed with the permission of Targomo, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their [website](https://www.targomo.com/developers/).**
 
+**Please also be aware of the Targomo [Terms and Conditions](https://account.targomo.com/legal/terms).**
+
 Please see below for information on [installing](#installation) the package, setting up your [environment](#set-up-environment) correctly, and [using](#get-travel-time-data) the package.
+
 
 ## Installation {#install}
 
