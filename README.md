@@ -3,6 +3,9 @@
 TargomoR
 ========
 
+<!-- Badges -->
+[![Build Status](https://travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR) [![Coverage status](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/github/cwthom/TargomoR?branch=master)
+
 The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R. It is under development and should not yet be use except for testing purposes.
 
 **This package is being developed with the permission of Targomo, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their [website](https://www.targomo.com/developers/).**
@@ -109,9 +112,9 @@ polygons
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
 #>   time      area                       geometry
-#> 1 1800 115520471 MULTIPOLYGON (((-0.2662 51....
-#> 3 1200  48835950 MULTIPOLYGON (((-0.2344 51....
-#> 2  600  10829611 MULTIPOLYGON (((-0.2151 51....
+#> 1 1800 115463770 MULTIPOLYGON (((-0.2675 51....
+#> 2 1200  48835950 MULTIPOLYGON (((-0.2344 51....
+#> 3  600  10829611 MULTIPOLYGON (((-0.2151 51....
 ```
 
 ### Routes
