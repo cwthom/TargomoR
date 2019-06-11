@@ -94,6 +94,7 @@ deriveOptions <- function(options) {
 #' @param data The data object
 #' @param lat,lng The lat/lng vectors or formulae to resolve
 #' @param id The id vector or formula to resolve
+#' @param points A processed data object (for sources/targets).
 #' @param options A processed options object (for sources).
 #'
 #' @name deriveSources

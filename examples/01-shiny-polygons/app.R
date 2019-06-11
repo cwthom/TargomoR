@@ -39,7 +39,7 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     map <- basemap %>%
       addMarkers(lat = lats, lng = lngs, layerId = c(1, 2), group = "Markers") %>%
-      addTargomoPolygons(lat = lats, lng = lngs,
+      addTargomoPolygons(source_lat = lats, source_lng = lngs,
                          options = targomoOptions(travelType = input$travelType,
                                                   intersectionMode = input$intersection),
                          group = "Polygons"

@@ -22,6 +22,8 @@ deriveTargets(points, id = NULL)
 
 \item{lat, lng}{The lat/lng vectors or formulae to resolve}
 
+\item{points}{A processed data object (for sources/targets).}
+
 \item{options}{A processed options object (for sources).}
 }
 \description{

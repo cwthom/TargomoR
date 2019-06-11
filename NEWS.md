@@ -1,3 +1,7 @@
+# TargomoR 0.0.1.9000
+
+* First testing release version :D
+
 # TargomoR 0.0.0.9007
 
 * add support for giving IDs to source/target points

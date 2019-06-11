@@ -38,16 +38,13 @@ l3 <- leaflet() %>%
 # manual testing
 source_data <- data.frame(id = "A", lat = 51.52, lng = -0.19)
 target_data <- data.frame(id = c("X", "Y", "Z"),
-                          lat = c(51.50, 51.515, 51.51), lng = c(-0.18, -0.185, -0.17))
+                          lat = c(51.50, 51.515, 51.51),
+                          lng = c(-0.18, -0.185, -0.17))
 
 getTargomoTimes(source_data = source_data, target_data = target_data,
                 source_lat = ~lat, source_lng = ~lng,
                 target_lat = ~lat, target_lng = ~lng,
                 source_id = ~id, target_id = ~id,
-                options = targomoOptions(travelType = c("bike")))
-
-l3 <-
-
-
+                options = targomoOptions(travelType = "bike"))
 
 

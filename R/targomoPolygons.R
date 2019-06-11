@@ -4,8 +4,8 @@
 #' as a workhorse function, and adds the polygons as an sf object.
 #'
 #' @param map A leaflet map.
-#' @param data The data object from which arguments are derived.
-#' @param lng,lat Vectors/one-sided formulas of longitude and latitude.
+#' @param source_data The data object from which source ppoints are derived.
+#' @param source_lng,source_lat Vectors/one-sided formulas of longitude and latitude.
 #' @param options A list of \code{\link{targomoOptions}} to call the API.
 #' @param drawOptions A list of \code{\link{polygonDrawOptions}} to determine how to show
 #'   the resulting polygons on the map.
@@ -25,14 +25,14 @@ NULL
 
 #' @rdname polygon
 #' @export
-getTargomoPolygons <- function(data = NULL, lat = NULL, lng = NULL,
+getTargomoPolygons <- function(source_data = NULL, source_lat = NULL, source_lng = NULL,
                                options = targomoOptions(),
                                api_key = Sys.getenv("TARGOMO_API_KEY"),
                                region = Sys.getenv("TARGOMO_REGION"),
                                verbose = FALSE,
                                progress = FALSE) {
 
-  s_points <- createPoints(data, lat, lng, NULL)
+  s_points <- createPoints(source_data, source_lat, source_lng, NULL)
 
   options <- deriveOptions(options)
   sources <- deriveSources(s_points, options)
@@ -51,7 +51,7 @@ getTargomoPolygons <- function(data = NULL, lat = NULL, lng = NULL,
 #' @rdname polygon
 #' @export
 addTargomoPolygons <- function(map,
-                               data = NULL, lng = NULL, lat = NULL,
+                               source_data = NULL, source_lng = NULL, source_lat = NULL,
                                options = targomoOptions(),
                                drawOptions = polygonDrawOptions(),
                                highlightOptions = NULL,
@@ -64,7 +64,8 @@ addTargomoPolygons <- function(map,
   opts <- drawOptions
 
   polygons <- getTargomoPolygons(api_key = api_key, region = region,
-                                 data = data, lat = lat, lng = lng,
+                                 source_data = source_data,
+                                 source_lat = source_lat, source_lng = source_lng,
                                  options = options,
                                  verbose = verbose, progress = progress)
 

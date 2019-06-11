@@ -6,22 +6,23 @@
 \alias{addTargomoPolygons}
 \title{Add Targomo Polygons to a Leaflet Map}
 \usage{
-getTargomoPolygons(data = NULL, lat = NULL, lng = NULL,
-  options = targomoOptions(), api_key = Sys.getenv("TARGOMO_API_KEY"),
+getTargomoPolygons(source_data = NULL, source_lat = NULL,
+  source_lng = NULL, options = targomoOptions(),
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), verbose = FALSE,
   progress = FALSE)
 
-addTargomoPolygons(map, data = NULL, lng = NULL, lat = NULL,
-  options = targomoOptions(), drawOptions = polygonDrawOptions(),
-  highlightOptions = NULL, group = NULL,
-  api_key = Sys.getenv("TARGOMO_API_KEY"),
+addTargomoPolygons(map, source_data = NULL, source_lng = NULL,
+  source_lat = NULL, options = targomoOptions(),
+  drawOptions = polygonDrawOptions(), highlightOptions = NULL,
+  group = NULL, api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), verbose = FALSE,
   progress = FALSE)
 }
 \arguments{
-\item{data}{The data object from which arguments are derived.}
+\item{source_data}{The data object from which source ppoints are derived.}
 
-\item{lng, lat}{Vectors/one-sided formulas of longitude and latitude.}
+\item{source_lng, source_lat}{Vectors/one-sided formulas of longitude and latitude.}
 
 \item{options}{A list of \code{\link{targomoOptions}} to call the API.}
 
