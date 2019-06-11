@@ -1,6 +1,7 @@
 ### TargomoR 0.0.1.9001
 
 * tidy up code
+* add in more tests
 
 # TargomoR 0.0.1.9000
 
