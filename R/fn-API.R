@@ -190,18 +190,13 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
     stop("No source data provided")
   }
 
-  core_opts <- c("edgeWeight", "maxEdgeWeight", "elevation", "sources", "targets")
-  if (service == "polygon") {
-    service_opts <- "polygon"
-  } else if (service == "route") {
-    service_opts <- "pathSerializer"
-  } else {
-    service_opts <- NULL
-  }
+  fields <- c("edgeWeight", "maxEdgeWeight", "elevation", "sources", "targets",
+              if (service == "polygon") "polygon" else NULL,
+              if (service == "route") "pathSerializer" else NULL)
 
   options$sources <- sources
   options$targets <- targets
-  options <- leaflet::filterNULL(options[c(core_opts, service_opts)])
+  options <- leaflet::filterNULL(options[fields])
 
   body <- jsonlite::toJSON(options, auto_unbox = TRUE, pretty = TRUE)
 
@@ -234,3 +229,13 @@ callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
 
 }
 
+#' Message if multiple Travel Modes supplied
+#'
+#' @param tms A vector of travel modes
+#'
+messageMultipleTravelModes <- function(tms) {
+  if (length(tms) > 1) {
+    message("Multiple (", length(tms), ") travel types supplied - treating each in turn.\n",
+            "This will make ", length(tms), " calls to the API.")
+  }
+}

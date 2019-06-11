@@ -46,7 +46,7 @@ processResponse <- function(response, service) {
   } else if (service == "route") {
     output <- processRoutes(payload)
   } else if (service == "time") {
-    output <- processTime(payload)
+    output <- processTimes(payload)
   }
 
   return(output)
@@ -108,7 +108,7 @@ processRoutes <- function(payload) {
 }
 
 #' @rdname process
-processTime <- function(payload) {
+processTimes <- function(payload) {
 
   sets <- lapply(payload$data, function(set) {
     set <- data.frame(set$id, matrix(unlist(set$targets),

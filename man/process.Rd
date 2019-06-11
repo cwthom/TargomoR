@@ -7,7 +7,7 @@
 \alias{processPolygons}
 \alias{getRouteFeature}
 \alias{processRoutes}
-\alias{processTime}
+\alias{processTimes}
 \title{Process API responses}
 \usage{
 catchBadResponse(response)
@@ -20,7 +20,7 @@ getRouteFeature(route, feature)
 
 processRoutes(payload)
 
-processTime(payload)
+processTimes(payload)
 }
 \arguments{
 \item{response}{A response object from \code{\link{callTargomoAPI}}.}
