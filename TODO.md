@@ -6,3 +6,5 @@
 * add more tests
 * options to format time output as "hms" etc?
 * Do something with the headers as well as the content of the response.
+* include ids in route response (done)
+* update Readme
