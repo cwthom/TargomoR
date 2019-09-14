@@ -79,7 +79,7 @@ test_that("API request creation works", {
   expect_is(p_output, "sf")
   expect_equal(dim(p_output), c(3, 3))
   expect_is(r_output, "list")
-  expect_is(r_output[[1]]$bike, "sf")
+  expect_is(r_output[[1]]$features, "sf")
   expect_equal(length(r_output), 3)
   expect_is(t_output, "data.frame")
   expect_equal(dim(t_output), c(3, 3))
