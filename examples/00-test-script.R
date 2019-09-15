@@ -15,7 +15,7 @@ l2 <- leaflet() %>%
                    target_data = data.frame(lat = 51.512, lng = -0.11),
                    options = targomoOptions(travelType = c("car", "transit", "bike"),
                                             maxEdgeWeight = "1h",
-                                            transitMaxTransfers = 0),
+                                            transitMaxTransfers = 1),
                    verbose = FALSE, progress = FALSE)
 
 # test times

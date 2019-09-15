@@ -75,6 +75,8 @@ For each service there are 2 core functions:
 
 The `add*` functions are provided as a convenience - feel free to create your own drawing functions to put the data onto a map!
 
+![Using the Targomo Route Service](man/figures/route-example.png)
+
 ## Inputs {#input}
 
 Each service requires basic inputs (alongside the API key and region):
@@ -126,7 +128,7 @@ polygons
 
 For the routing service, `getTargomoRoutes` returns a named nested list. The names are the travel modes given in the `travelType` option (specifying multiple modes will make multiple calls to the API).
 
-Within each travel mode is a list of the returned routes - one for each source/target combination where a route has been found. Each route is a list of Simple Feature Collecions, consiting of: 
+Within each travel mode is a list of the returned routes - one for each source/target combination where a route has been found. Each route is a data.frame, containing the source and target IDs, and a `features` data.frame of a simple feature collection (class 'sf'). This contains: 
 
 * points - the source and target points of the route, as POINT objects.
 * walk, bike, car, transit - the routes by each mode of transport (where requested) as LINESTRING objects.
@@ -146,10 +148,10 @@ routes <- getTargomoRoutes(source_data = source_data, target_data = target_data,
 str(routes, max.level = 3, give.attr = FALSE)
 ```
 
-The inner 'bike' option will look like:
+The `features` object for the first route will look like:
 
 ```{r get-route-inner}
-routes$bike[[1]]$bike
+routes$bike[[1]]$features
 ```
 
 ### Times {#output-time}
