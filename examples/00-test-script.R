@@ -27,6 +27,7 @@ l3 <- leaflet() %>%
                   options = targomoOptions(travelType = "car",
                                            maxEdgeWeight = "1h"),
                   drawOptions = timeDrawOptions(palette = "inferno",
+                                                legend = TRUE,
                                                 maxTime = 1800,
                                                 fillOpacity = 0.8,
                                                 reverse = TRUE,

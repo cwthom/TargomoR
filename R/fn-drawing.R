@@ -132,9 +132,9 @@ drawRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NU
 createRoutePopup <- function(data, transit = FALSE, startEnd = transit) {
 
   if (transit) {
-    header <- ifelse(data$routeType == 1, "Underground",
-                     ifelse(data$routeType == 2, "Train",
-                            ifelse(data$routeType == 3, "Bus",
+    header <- ifelse(data$routeType == 1, "UNDERGROUND",
+                     ifelse(data$routeType == 2, "TRAIN",
+                            ifelse(data$routeType == 3, "BUS",
                                    "PUBLIC TRANSPORT")))
     header <- paste(header, "-", data$routeShortName)
   } else {
