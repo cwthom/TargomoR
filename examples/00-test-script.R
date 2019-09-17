@@ -3,7 +3,7 @@ library(leaflet)
 # test polygon
 l1 <- leaflet() %>%
   addProviderTiles("CartoDB.Positron") %>%
-  addTargomoPolygons(lat = 51.5, lng = -0.18,
+  addTargomoPolygons(source_lat = 51.5, source_lng = -0.18,
                      options = targomoOptions(travelType = "transit")) %>%
   addMarkers(lat = 51.5, lng = -0.18)
 
