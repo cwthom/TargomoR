@@ -6,7 +6,7 @@
 \usage{
 timeDrawOptions(palette = "viridis", type = "numeric",
   maxTime = 1800, reverse = FALSE, bins = c(600, 1200),
-  legend = FALSE, legendOptions = timeLegendOptions(), radius = 10,
+  legend = TRUE, legendOptions = timeLegendOptions(), radius = 10,
   stroke = TRUE, weight = 3, color = "black", opacity = 0.5,
   fill = TRUE, fillOpacity = 0.5)
 }
