@@ -45,11 +45,7 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
   t_points <- createPoints(target_data, target_lat, target_lng, target_id)
   targets <- deriveTargets(t_points)
 
-  if (length(tms) > 1) {
-
-    message("Multiple (", length(tms), ") travel types supplied - treating each in turn.\n",
-            "This will make ", length(tms), " calls to the API.")
-  }
+  messageMultipleTravelModes(tms)
 
   for (tm in tms) {
 
@@ -112,21 +108,34 @@ addTargomoTimes <- function(map,
                                bins = opts$bins,
                                reverse = opts$reverse)
 
-  leaflet::addCircleMarkers(map, data = times, fillColor = ~palette(travelTime),
-                            stroke = opts$stroke, weight = opts$weight,
-                            color = opts$color, opacity = opts$opacity,
-                            fillOpacity = opts$fillOpacity, group = group)
+  map <- leaflet::addCircleMarkers(map, data = times, fillColor = ~palette(travelTime),
+                                   stroke = opts$stroke, weight = opts$weight,
+                                   color = opts$color, opacity = opts$opacity,
+                                   fillOpacity = opts$fillOpacity, group = group)
+
+  if (opts$legend) {
+
+    lopts <- opts$legendOptions
+    map <- leaflet::addLegend(map,  position = lopts$position, pal = palette,
+                              values = times$travelTime, title = lopts$title,
+                              layerId = lopts$layerId, group = group)
+
+  }
+
+  map
 
 }
 
 
-#' #' Options for Drawing Times on the Map
+#' Options for Drawing Times on the Map
 #'
 #' @param palette A colour palette name e.g. "viridis"
 #' @param type Either "numeric" or "bin"
 #' @param maxTime The max time to allow for
 #' @param reverse Whether to reverse the colour palette.
 #' @param bins A number of bins or a vector of cut points (only used for the bin palette)
+#' @param legend Whether to automatically add a legend.
+#' @param legendOptions A \code{timeLegendOptions} object.
 #' @param radius The marker radius.
 #' @param stroke Whether to draw the marker border.
 #' @param weight Stroke width in pixels.
@@ -141,6 +150,8 @@ timeDrawOptions <- function(palette = "viridis",
                             maxTime = 1800,
                             reverse = FALSE,
                             bins = c(600, 1200),
+                            legend = TRUE,
+                            legendOptions = timeLegendOptions(),
                             radius = 10,
                             stroke = TRUE,
                             weight = 3,
@@ -155,6 +166,8 @@ timeDrawOptions <- function(palette = "viridis",
          maxTime = maxTime,
          reverse = reverse,
          bins = bins,
+         legend = legend,
+         legendOptions = legendOptions,
          radius = radius,
          stroke = stroke,
          weight = weight,
@@ -162,6 +175,26 @@ timeDrawOptions <- function(palette = "viridis",
          opacity = opacity,
          fill = fill,
          fillOpacity = fillOpacity)
+  )
+
+}
+
+#' Time Legend Options
+#'
+#' @param position One of c("topright", "topleft", "bottomright", "bottomleft").
+#' @param title The legend title.
+#' @param layerId The legend layer ID.
+#'
+#' @export
+timeLegendOptions <- function(position = "topright",
+                              title = "Travel Times",
+                              layerId = NULL) {
+  leaflet::filterNULL(
+    list(
+      position = position,
+      title = title,
+      layerId = layerId
+    )
   )
 
 }

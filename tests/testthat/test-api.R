@@ -1,4 +1,4 @@
-context("test-api")
+context("test-api-request-creation")
 
 test_that("API request creation works", {
 
@@ -22,6 +22,16 @@ test_that("API request creation works", {
   p_body <- createRequestBody("polygon", sources, NULL, opts)
   r_body <- createRequestBody("route", sources, targets, opts)
   t_body <- createRequestBody("time", sources, targets, opts)
+
+  # call API
+  p_response <- callTargomoAPI(service = "polygon", body = p_body)
+  r_response <- callTargomoAPI(service = "route",   body = r_body)
+  t_response <- callTargomoAPI(service = "time",    body = t_body)
+
+  # process Response
+  p_output <- processPolygons(httr::content(p_response))
+  r_output <- processRoutes(httr::content(r_response))
+  t_output <- processTimes(httr::content(t_response))
 
   # test API request URL creation
   expect_equal(targomoAPI(), "https://api.targomo.com/")
@@ -59,6 +69,21 @@ test_that("API request creation works", {
                "No Targomo service specified")
   expect_error(createRequestBody("polygon", NULL, NULL, opts),
                "No source data provided")
+
+  # test calling API
+  expect_equal(p_response$status_code, 200)
+  expect_equal(r_response$status_code, 200)
+  expect_equal(t_response$status_code, 200)
+
+  # test processing API response
+  expect_is(p_output, "sf")
+  expect_equal(dim(p_output), c(3, 3))
+  expect_is(r_output, "list")
+  expect_is(r_output[[1]]$features, "sf")
+  expect_equal(length(r_output), 3)
+  expect_is(t_output, "data.frame")
+  expect_equal(dim(t_output), c(3, 3))
+  expect_equal(names(t_output), c("sourceId", "targetId", "travelTime"))
 
 
 })

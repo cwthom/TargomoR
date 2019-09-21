@@ -19,7 +19,7 @@ ui <- fluidPage(
       hr(),
       strong("Speeds"),
       sliderInput("bikeSpeed", "Bike", min = 5, max = 30, step = 5, value = 15, post = "kph"),
-      sliderInput("walkSpeed", "Bike", min = 1, max = 10, step = 1, value = 5, post = "kph"),
+      sliderInput("walkSpeed", "Walk", min = 1, max = 10, step = 1, value = 5, post = "kph"),
       hr(),
 
       strong("Colours"),
@@ -35,7 +35,7 @@ ui <- fluidPage(
       ),
       hr(),
       strong("Other"),
-      checkboxInput("showTransfers", "Show Transfers?")
+      checkboxInput("showTransfers", "Show Transfers?", value = TRUE)
 
     ),
     mainPanel(

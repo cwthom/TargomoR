@@ -3,7 +3,7 @@ library(leaflet)
 # test polygon
 l1 <- leaflet() %>%
   addProviderTiles("CartoDB.Positron") %>%
-  addTargomoPolygons(lat = 51.5, lng = -0.18,
+  addTargomoPolygons(source_lat = 51.5, source_lng = -0.18,
                      options = targomoOptions(travelType = "transit")) %>%
   addMarkers(lat = 51.5, lng = -0.18)
 
@@ -15,7 +15,7 @@ l2 <- leaflet() %>%
                    target_data = data.frame(lat = 51.512, lng = -0.11),
                    options = targomoOptions(travelType = c("car", "transit", "bike"),
                                             maxEdgeWeight = "1h",
-                                            transitMaxTransfers = 0),
+                                            transitMaxTransfers = 1),
                    verbose = FALSE, progress = FALSE)
 
 # test times
@@ -27,6 +27,7 @@ l3 <- leaflet() %>%
                   options = targomoOptions(travelType = "car",
                                            maxEdgeWeight = "1h"),
                   drawOptions = timeDrawOptions(palette = "inferno",
+                                                legend = TRUE,
                                                 maxTime = 1800,
                                                 fillOpacity = 0.8,
                                                 reverse = TRUE,

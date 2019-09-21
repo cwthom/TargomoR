@@ -5,9 +5,9 @@
 \alias{catchBadResponse}
 \alias{processResponse}
 \alias{processPolygons}
-\alias{getRouteFeature}
+\alias{getRouteFeatures}
 \alias{processRoutes}
-\alias{processTime}
+\alias{processTimes}
 \title{Process API responses}
 \usage{
 catchBadResponse(response)
@@ -16,11 +16,11 @@ processResponse(response, service)
 
 processPolygons(payload)
 
-getRouteFeature(route, feature)
+getRouteFeatures(route)
 
 processRoutes(payload)
 
-processTime(payload)
+processTimes(payload)
 }
 \arguments{
 \item{response}{A response object from \code{\link{callTargomoAPI}}.}
@@ -30,8 +30,6 @@ processTime(payload)
 \item{payload}{The \code{httr::content} of the response.}
 
 \item{route}{A single element of the returned routes list.}
-
-\item{feature}{A route feature to extract (e.g. car sections, bike sections...)}
 }
 \description{
 Functions to turn a successful request into data - either polygons, routes or times.

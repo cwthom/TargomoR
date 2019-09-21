@@ -2,12 +2,13 @@
 % Please edit documentation in R/targomoTimes.R
 \name{timeDrawOptions}
 \alias{timeDrawOptions}
-\title{#' Options for Drawing Times on the Map}
+\title{Options for Drawing Times on the Map}
 \usage{
 timeDrawOptions(palette = "viridis", type = "numeric",
   maxTime = 1800, reverse = FALSE, bins = c(600, 1200),
-  radius = 10, stroke = TRUE, weight = 3, color = "black",
-  opacity = 0.5, fill = TRUE, fillOpacity = 0.5)
+  legend = FALSE, legendOptions = timeLegendOptions(), radius = 10,
+  stroke = TRUE, weight = 3, color = "black", opacity = 0.5,
+  fill = TRUE, fillOpacity = 0.5)
 }
 \arguments{
 \item{palette}{A colour palette name e.g. "viridis"}
@@ -19,6 +20,10 @@ timeDrawOptions(palette = "viridis", type = "numeric",
 \item{reverse}{Whether to reverse the colour palette.}
 
 \item{bins}{A number of bins or a vector of cut points (only used for the bin palette)}
+
+\item{legend}{Whether to automatically add a legend.}
+
+\item{legendOptions}{A \code{timeLegendOptions} object.}
 
 \item{radius}{The marker radius.}
 
@@ -35,5 +40,5 @@ timeDrawOptions(palette = "viridis", type = "numeric",
 \item{fillOpacity}{The fill opacity.}
 }
 \description{
-#' Options for Drawing Times on the Map
+Options for Drawing Times on the Map
 }

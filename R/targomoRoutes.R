@@ -45,11 +45,7 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
   t_points <- createPoints(target_data, target_lat, target_lng, target_id)
   targets <- deriveTargets(t_points)
 
-  if (length(tms) > 1) {
-
-    message("Multiple (", length(tms), ") travel types supplied - treating each in turn.\n",
-            "This will make ", length(tms), " calls to the API.")
-  }
+  messageMultipleTravelModes(tms)
 
   for (tm in tms) {
 

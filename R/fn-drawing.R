@@ -62,31 +62,54 @@ drawRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NU
   for (tm in travelModes) {
     for (route in routes[[tm]]) {
 
+      features <- route$features
+
       if (drawOptions$showMarkers) {
 
+        src <- features[!is.na(features$sourceId), ]
+        trg <- features[!is.na(features$targetId), ]
+
         map <- map %>%
-          leaflet::addMarkers(data = route[["points"]], group = group)
+          leaflet::addMarkers(data = src, label = ~paste("Source:", sourceId),
+                              group = group) %>%
+          leaflet::addMarkers(data = trg, label = ~paste("Target:", targetId),
+                              group = group)
 
       }
+
       if (tm %in% c("car", "bike", "walk")) {
 
+        segment <- features[sf::st_is(features$geometry, "LINESTRING"), ]
+
         map <- map %>%
-          drawRouteSegment(segment = route[[tm]], drawOptions = drawOptions,
+          drawRouteSegment(segment = segment, drawOptions = drawOptions,
                            type = tm, group = group, ...)
 
-      } else if (tm == "transit") {
+      } else if (tm %in% "transit") {
+
+        segments <- features[sf::st_is(features$geometry, "LINESTRING"), ]
+        walk <- segments[is.na(features$isTransit), ]
+        transit <- segments[!is.na(features$isTransit), ]
 
         map <- map %>%
-          drawWalk(route$walk, drawOptions, group = group, ...) %>%
-          drawTransit(route$transit, drawOptions, group = group, ...)
+          drawWalk(segment = walk, drawOptions = drawOptions, group = group, ...) %>%
+          drawTransit(segment = transit, drawOptions = drawOptions, group = group, ...)
 
-        if (drawOptions$showTransfers) {
+      }
+
+      if (tm == "transit" && drawOptions$showTransfers) {
+
+          transfers <- suppressWarnings({
+            features[features$travelType == "TRANSFER", ] %>%
+              sf::st_cast(to = "POINT") %>%
+              unique()
+          })
+
           map <- map %>%
-            leaflet::addCircleMarkers(data = route$transfers,
+            leaflet::addCircleMarkers(data = transfers,
                                       color = drawOptions$transferColour,
                                       radius = drawOptions$transferRadius,
                                       group = group)
-        }
       }
 
     }
@@ -113,6 +136,7 @@ createRoutePopup <- function(data, transit = FALSE, startEnd = transit) {
                      ifelse(data$routeType == 2, "TRAIN",
                             ifelse(data$routeType == 3, "BUS",
                                    "PUBLIC TRANSPORT")))
+    header <- paste(header, "-", data$routeShortName)
   } else {
     header <- data$travelType
   }

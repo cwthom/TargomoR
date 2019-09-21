@@ -7,7 +7,6 @@
 #' @param service The Targomo API service being called - polygon, route or time.
 #' @param payload The \code{httr::content} of the response.
 #' @param route A single element of the returned routes list.
-#' @param feature A route feature to extract (e.g. car sections, bike sections...)
 #'
 #' @name process
 NULL
@@ -46,7 +45,7 @@ processResponse <- function(response, service) {
   } else if (service == "route") {
     output <- processRoutes(payload)
   } else if (service == "time") {
-    output <- processTime(payload)
+    output <- processTimes(payload)
   }
 
   return(output)
@@ -64,7 +63,7 @@ processPolygons <- function(payload) {
 }
 
 #' @rdname process
-getRouteFeature <- function(route, feature) {
+getRouteFeatures <- function(route) {
 
   geojson <- jsonlite::toJSON(route, auto_unbox = TRUE)
   features <- geojsonsf::geojson_sf(geojson)
@@ -73,13 +72,7 @@ getRouteFeature <- function(route, feature) {
   features <- sf::st_transform(features, crs = sf::st_crs(4326)) %>%
     sf::st_zm(drop = TRUE)
 
-  index <- if (feature == "POINT") {
-    is.na(features$travelType)
-  } else {
-    features$travelType %in% feature
-  }
-
-  features[index, ]
+  features
 
 }
 
@@ -91,24 +84,16 @@ processRoutes <- function(payload) {
 
   lapply(routes, function(route) {
 
-    x <- list(points = getRouteFeature(route, "POINT"),
-              transit = getRouteFeature(route, "TRANSIT"),
-              walk = getRouteFeature(route, "WALK"),
-              bike = getRouteFeature(route, "BIKE"),
-              car  = getRouteFeature(route, "CAR"),
-              transfers = suppressWarnings({
-                getRouteFeature(route, "TRANSFER") %>%
-                  sf::st_cast(to = "POINT") %>%
-                  unique()
-                })
-    )
-    Filter(function(x) nrow(x) > 0, x)
+    tibble::tibble(sourceId = route$sourceId,
+                   targetId = route$targetId,
+                   features = getRouteFeatures(route))
+
   })
 
 }
 
 #' @rdname process
-processTime <- function(payload) {
+processTimes <- function(payload) {
 
   sets <- lapply(payload$data, function(set) {
     set <- data.frame(set$id, matrix(unlist(set$targets),
