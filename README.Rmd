@@ -13,6 +13,7 @@ knitr::opts_chunk$set(
 )
 library(TargomoR)
 library(sf)
+library(leaflet)
 source_data <- data.frame(id = "A", lat = 51.52, lng = -0.19)
 target_data <- data.frame(id = c("X", "Y", "Z"),
                           lat = c(51.50, 51.515, 51.51), 
@@ -25,7 +26,7 @@ target_data <- data.frame(id = c("X", "Y", "Z"),
 [![Coverage status](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/github/cwthom/TargomoR?branch=master)
 
 
-The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R. It is under development and should not yet be use except for testing purposes.
+The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
 
 **This package is being developed with the permission of Targomo, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their [website](https://www.targomo.com/developers/).**
 
@@ -75,8 +76,6 @@ For each service there are 2 core functions:
 
 The `add*` functions are provided as a convenience - feel free to create your own drawing functions to put the data onto a map!
 
-![Using the Targomo Route Service](man/figures/route-example.png)
-
 ## Inputs {#input}
 
 Each service requires basic inputs (alongside the API key and region):
@@ -124,6 +123,10 @@ polygons <- getTargomoPolygons(source_data = source_data,
 polygons
 ```
 
+Using the `addTargomoPolygons` function we can add them directly to a leaflet map:
+
+![Using the Targomo Polygon Service](man/figures/polygon-example.png)
+
 ### Routes {#output-route}
 
 For the routing service, `getTargomoRoutes` returns a named nested list. The names are the travel modes given in the `travelType` option (specifying multiple modes will make multiple calls to the API).
@@ -154,6 +157,10 @@ The `features` object for the first route will look like:
 routes$bike[[1]]$features
 ```
 
+Using `addTargomoRoutes` we can draw these routes nicely on the map. For example:
+
+![Using the Targomo Route Service](man/figures/route-example.png)
+
 ### Times {#output-time}
 
 For the time service, `getTargomoTimes` returns a Simple Feature Collection of 4 fields. Each feature is a POINT (corresponding to the target point), and the fields are:
@@ -162,7 +169,7 @@ For the time service, `getTargomoTimes` returns a Simple Feature Collection of 4
 * travelType - the travel mode (can supply multiple as with routes)
 * travelTime - the time taken in seconds to get from the source to the target
 
-```{r get-time}
+```{r get-times}
 times <- getTargomoTimes(source_data = source_data, target_data = target_data,
                          source_lat = ~lat, source_lng = ~lng,
                          target_lat = ~lat, target_lng = ~lng,
@@ -170,6 +177,10 @@ times <- getTargomoTimes(source_data = source_data, target_data = target_data,
                          options = targomoOptions(travelType = "bike"))
 times
 ```
+
+We can add time data directly to the map with `addTargomoTimes`:
+
+![Using the Targomo Time Service](man/figures/time-example.png)
 
 
 ## Options {#options}
@@ -182,11 +193,11 @@ To change the options passed to the API, you use the `targomoOptions` function w
 
 ### Drawing Options {#options-draw}
 
-Each service has a drawing options function:
+Each service has a drawing options function to customise how the features appear on the map. These should be used with the `drawOptions` argument to `addTargomo{service}`:
 
-* Polygon - `polygonDrawOptions`
-* Route - `routeDrawOptions`
-* Time - `timeDrawOptions`
+* Polygon - `polygonDrawOptions()`
+* Route - `routeDrawOptions()`
+* Time - `timeDrawOptions()`
 
 These are also all documented in the manual pages (e.g. `?routeDrawOptions`).
 

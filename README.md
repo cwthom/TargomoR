@@ -11,8 +11,7 @@ Status](https://travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://travis
 status](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/github/cwthom/TargomoR?branch=master)
 
 The goal of TargomoR is to provide an interface to the Targomo API for
-users of `leaflet` in R. It is under development and should not yet be
-use except for testing purposes.
+users of `leaflet` in R.
 
 **This package is being developed with the permission of Targomo, but is
 NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see
@@ -83,8 +82,6 @@ For each service there are 2 core functions:
 The `add*` functions are provided as a convenience - feel free to create
 your own drawing functions to put the data onto a map\!
 
-![Using the Targomo Route Service](man/figures/route-example.png)
-
 ## Inputs
 
 Each service requires basic inputs (alongside the API key and region):
@@ -154,10 +151,15 @@ polygons
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
 #>   time     area                       geometry
-#> 1 1800 63557558 MULTIPOLYGON (((-0.2568 51....
+#> 1 1800 63573162 MULTIPOLYGON (((-0.2607 51....
 #> 3 1200 25447392 MULTIPOLYGON (((-0.2343 51....
 #> 2  600  5462596 MULTIPOLYGON (((-0.207 51.5...
 ```
+
+Using the `addTargomoPolygons` function we can add them directly to a
+leaflet map:
+
+![Using the Targomo Polygon Service](man/figures/polygon-example.png)
 
 ### Routes
 
@@ -228,6 +230,11 @@ routes$bike[[1]]$features
 #> 3       POINT (-0.1899996 51.52)       <NA> Source
 ```
 
+Using `addTargomoRoutes` we can draw these routes nicely on the map. For
+example:
+
+![Using the Targomo Route Service](man/figures/route-example.png)
+
 ### Times
 
 For the time service, `getTargomoTimes` returns a Simple Feature
@@ -263,6 +270,10 @@ times
 #> 3 A        Z        bike              668   (-0.17 51.51)
 ```
 
+We can add time data directly to the map with `addTargomoTimes`:
+
+![Using the Targomo Time Service](man/figures/time-example.png)
+
 ## Options
 
 There are 2 different types of options - core options to pass to the
@@ -277,11 +288,13 @@ the manual pages (use `?targomoOptions`).
 
 ### Drawing Options
 
-Each service has a drawing options function:
+Each service has a drawing options function to customise how the
+features appear on the map. These should be used with the `drawOptions`
+argument to `addTargomo{service}`:
 
-  - Polygon - `polygonDrawOptions`
-  - Route - `routeDrawOptions`
-  - Time - `timeDrawOptions`
+  - Polygon - `polygonDrawOptions()`
+  - Route - `routeDrawOptions()`
+  - Time - `timeDrawOptions()`
 
 These are also all documented in the manual pages
 (e.g. `?routeDrawOptions`).
