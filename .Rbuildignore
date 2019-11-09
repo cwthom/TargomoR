@@ -13,3 +13,5 @@
 ^inst/htmlwidgets/bindings$
 ^README\.Rmd$
 ^\.travis\.yml$
+^renv$
+^renv\.lock$
