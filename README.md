@@ -154,9 +154,9 @@ polygons
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
 #>   time     area                       geometry
-#> 2 1800 63557558 MULTIPOLYGON (((-0.2568 51....
-#> 3 1200 25447392 MULTIPOLYGON (((-0.2343 51....
-#> 1  600  5462596 MULTIPOLYGON (((-0.207 51.5...
+#> 2 1800 63604384 MULTIPOLYGON (((-0.2621 51....
+#> 1 1200 25447392 MULTIPOLYGON (((-0.2343 51....
+#> 3  600  5462596 MULTIPOLYGON (((-0.207 51.5...
 ```
 
 Using the `addTargomoPolygons` function we can add them directly to a
@@ -301,3 +301,9 @@ argument to `addTargomo{service}`:
 
 These are also all documented in the manual pages
 (e.g. `?routeDrawOptions`).
+
+## Contributing
+
+Please note that the ‘TargomoR’ project is released with a [Contributor
+Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
+you agree to abide by its terms.
