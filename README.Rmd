@@ -51,10 +51,14 @@ You'll also need to know what region of the world to use. For example if you're 
 
 You can pass these variables to each function manually if you like, but to avoid this, the functions will default to use the `TARGOMO_API_KEY` and `TARGOMO_REGION` environment variables respectively.
 
-To take advantage of this, you can set these variables in an .Renviron file. If you're in an RStudio project, use the following snippet to write the variables to the file.
+To take advantage of this, you can set these variables in an .Renviron file. Use the following snippet to write the variables to the file.
 
 ```{r env, eval=FALSE}
-setTargomoVariables(api_key = "<YOUR KEY>", region = "<YOUR REGION>")
+setTargomoVariables(api_key = "<YOUR KEY>", region = "<YOUR REGION>",
+                    global = FALSE)
+
+# global = TRUE  will write to .Renviron at Sys.getenv("HOME")
+# global = FALSE will write to .Renviron at getwd()
 ```
 
 Restart R for these variables to take effect.

@@ -51,11 +51,14 @@ to avoid this, the functions will default to use the `TARGOMO_API_KEY`
 and `TARGOMO_REGION` environment variables respectively.
 
 To take advantage of this, you can set these variables in an .Renviron
-file. If you’re in an RStudio project, use the following snippet to
-write the variables to the file.
+file. Use the following snippet to write the variables to the file.
 
 ``` r
-setTargomoVariables(api_key = "<YOUR KEY>", region = "<YOUR REGION>")
+setTargomoVariables(api_key = "<YOUR KEY>", region = "<YOUR REGION>",
+                    global = FALSE)
+
+# global = TRUE  will write to .Renviron at Sys.getenv("HOME")
+# global = FALSE will write to .Renviron at getwd()
 ```
 
 Restart R for these variables to take effect.
@@ -151,9 +154,9 @@ polygons
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
 #>   time     area                       geometry
-#> 1 1800 63573162 MULTIPOLYGON (((-0.2607 51....
+#> 2 1800 63557558 MULTIPOLYGON (((-0.2568 51....
 #> 3 1200 25447392 MULTIPOLYGON (((-0.2343 51....
-#> 2  600  5462596 MULTIPOLYGON (((-0.207 51.5...
+#> 1  600  5462596 MULTIPOLYGON (((-0.207 51.5...
 ```
 
 Using the `addTargomoPolygons` function we can add them directly to a

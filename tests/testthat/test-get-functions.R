@@ -34,7 +34,7 @@ test_that("get functions work", {
   expect_equal(sf::st_dimension(f), c(1, 0, 0))
 
   # test route popup
-  expect_equal(createRoutePopup(f[1, ]), "<b>BIKE</b></br>Journey time: 841s")
+  expect_match(createRoutePopup(f[1, ]), "^<b>BIKE</b></br>Journey time: \\d+s$")
 
   # test times
   t <- getTargomoTimes(source_data = source_data, target_data = target_data)

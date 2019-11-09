@@ -22,13 +22,7 @@ setTargomoVariables <- function(api_key = NULL, region = NULL, overwrite = FALSE
   if (global) {
     renv <- file.path(Sys.getenv("HOME"), ".Renviron")
   } else {
-    wd <- getwd()
-    proj <- any(grepl("\\.Rproj$", list.files(wd)))
-    if (!proj) {
-      stop("Make sure this directory is an RStudio project")
-    } else {
-      renv <- file.path(wd, ".Renviron")
-    }
+    renv <- file.path(getwd(), ".Renviron")
   }
 
   renv_exists <- file.exists(renv)
