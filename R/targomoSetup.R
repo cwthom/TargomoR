@@ -10,27 +10,36 @@
 #' @param api_key Your Targomo API key
 #' @param region Your preferred Targomo default region
 #' @param overwrite Whether to overwrite an existing setting
+#' @param global If TRUE, write to a global .Renviron in \code{Sys.getenv("HOME")}
 #'
 #' @export
-setTargomoVariables <- function(api_key = NULL, region = NULL, overwrite = FALSE) {
+setTargomoVariables <- function(api_key = NULL, region = NULL, overwrite = FALSE,
+                                global = FALSE) {
 
   if (is.null(api_key)) api_key <- Sys.getenv("TARGOMO_API_KEY")
   if (is.null(region))  region  <- Sys.getenv("TARGOMO_REGION")
 
-  proj <- any(grepl("\\.Rproj$", list.files(".")))
-  if (!proj) {
-    stop("Make sure this directory is an R project")
+  if (global) {
+    renv <- file.path(Sys.getenv("HOME"), ".Renviron")
+  } else {
+    wd <- getwd()
+    proj <- any(grepl("\\.Rproj$", list.files(wd)))
+    if (!proj) {
+      stop("Make sure this directory is an RStudio project")
+    } else {
+      renv <- file.path(wd, ".Renviron")
+    }
   }
 
-  renv <- file.exists(".Renviron")
+  renv_exists <- file.exists(renv)
 
-  if (!renv) {
-    message("Creating .Renviron file in project directory:\n",
-            normalizePath("."), "\n")
-    file.create(".Renviron")
+  if (!renv_exists) {
+    message("Creating .Renviron file at:\n",
+            renv, "\n")
+    file.create(renv)
   }
 
-  vars <- readLines(".Renviron")
+  vars <- readLines(renv)
   prior <- grepl("^TARGOMO_(API_KEY|REGION)=", vars)
 
   if (any(prior)) {
@@ -47,9 +56,9 @@ setTargomoVariables <- function(api_key = NULL, region = NULL, overwrite = FALSE
             paste0("TARGOMO_API_KEY=", api_key),
             paste0("TARGOMO_REGION=",  region))
 
-  writeLines(vars, ".Renviron")
+  writeLines(vars, renv)
   message("Writing TARGOMO_API_KEY and TARGOMO_REGION to .Renviron file:\n",
-          normalizePath(".Renviron"), "\n\n",
+          renv, "\n\n",
           "Restart R for these environment variables to take effect.")
 
   return(invisible(api_key))

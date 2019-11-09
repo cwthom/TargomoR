@@ -4,7 +4,8 @@
 \alias{setTargomoVariables}
 \title{Set Targomo Environment Variables}
 \usage{
-setTargomoVariables(api_key = NULL, region = NULL, overwrite = FALSE)
+setTargomoVariables(api_key = NULL, region = NULL, overwrite = FALSE,
+  global = FALSE)
 }
 \arguments{
 \item{api_key}{Your Targomo API key}
@@ -12,6 +13,8 @@ setTargomoVariables(api_key = NULL, region = NULL, overwrite = FALSE)
 \item{region}{Your preferred Targomo default region}
 
 \item{overwrite}{Whether to overwrite an existing setting}
+
+\item{global}{If TRUE, write to a global .Renviron in \code{Sys.getenv("HOME")}}
 }
 \description{
 This helper function allows you to set your API key in either a global or local
