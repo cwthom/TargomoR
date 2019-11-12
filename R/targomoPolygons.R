@@ -16,6 +16,7 @@
 #'   ennvironment variable
 #' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
 #'   environment variable
+#' @param config Config options to pass to \code{httr::POST} e.g. proxy settings
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #'
@@ -29,6 +30,7 @@ getTargomoPolygons <- function(source_data = NULL, source_lat = NULL, source_lng
                                options = targomoOptions(),
                                api_key = Sys.getenv("TARGOMO_API_KEY"),
                                region = Sys.getenv("TARGOMO_REGION"),
+                               config = list(),
                                verbose = FALSE,
                                progress = FALSE) {
 
@@ -40,6 +42,7 @@ getTargomoPolygons <- function(source_data = NULL, source_lat = NULL, source_lng
 
   response <- callTargomoAPI(api_key = api_key, region = region,
                              service = "polygon", body = body,
+                             config = config,
                              verbose = verbose, progress = progress)
 
   output <- processResponse(response, service = "polygon")
@@ -58,6 +61,7 @@ addTargomoPolygons <- function(map,
                                group = NULL,
                                api_key = Sys.getenv("TARGOMO_API_KEY"),
                                region = Sys.getenv("TARGOMO_REGION"),
+                               config = list(),
                                verbose = FALSE,
                                progress = FALSE) {
 
@@ -66,7 +70,7 @@ addTargomoPolygons <- function(map,
   polygons <- getTargomoPolygons(api_key = api_key, region = region,
                                  source_data = source_data,
                                  source_lat = source_lat, source_lng = source_lng,
-                                 options = options,
+                                 options = options, config = config,
                                  verbose = verbose, progress = progress)
 
   leaflet::addPolygons(map, data = polygons, group = group,
