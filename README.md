@@ -38,7 +38,7 @@ library(TargomoR)
 
 The functions in TargomoR all rely on having a Targomo API Key. To get
 yours, please [sign up with
-Targomo](https://targomo.com/developers/pricing/).
+Targomo](https://www.targomo.com/products/pricing/?package=free#api).
 
 You’ll also need to know what region of the world to use. For example if
 you’re looking for travel-time information in Germany, your region is
