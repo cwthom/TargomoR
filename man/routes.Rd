@@ -10,16 +10,16 @@ getTargomoRoutes(source_data = NULL, source_lat = NULL,
   source_lng = NULL, target_data = NULL, target_lat = NULL,
   target_lng = NULL, source_id = NULL, target_id = NULL,
   options = targomoOptions(), api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), verbose = FALSE,
-  progress = FALSE)
+  region = Sys.getenv("TARGOMO_REGION"), config = list(),
+  verbose = FALSE, progress = FALSE)
 
 addTargomoRoutes(map, source_data = NULL, source_lat = NULL,
   source_lng = NULL, target_data = NULL, target_lat = NULL,
   target_lng = NULL, options = targomoOptions(),
   drawOptions = routeDrawOptions(), group = NULL,
   api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), verbose = FALSE,
-  progress = FALSE)
+  region = Sys.getenv("TARGOMO_REGION"), config = list(),
+  verbose = FALSE, progress = FALSE)
 }
 \arguments{
 \item{source_data, target_data}{The source and target points for your routes -
@@ -40,6 +40,8 @@ ennvironment variable.}
 
 \item{region}{Your Targomo region - defaults to the \code{TARGOMO_REGION}
 environment variable.}
+
+\item{config}{Config options to pass to \code{httr::POST} e.g. proxy settings}
 
 \item{verbose}{Whether to print out information about the API call.}
 

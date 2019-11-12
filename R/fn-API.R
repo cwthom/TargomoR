@@ -210,17 +210,19 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 #' @param region The Targomo region.
 #' @param service The Targomo service - 'polygon', 'route', or 'time'.
 #' @param body A request body made with \code{\link{createRequestBody}}.
+#' @param config Config options to pass to \code{httr::POST} e.g. proxy settings
 #' @param verbose Display info on the API call?
 #' @param progress Display a progress bar?
 #'
 callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                            region = Sys.getenv("TARGOMO_REGION"),
-                           service, body,
+                           service, body, config = list(),
                            verbose = FALSE, progress = FALSE) {
 
   url <- createRequestURL(region, service)
 
-  response <- httr::POST(url = url, query = list(key = api_key),
+  response <- httr::POST(url = url, config = config,
+                         query = list(key = api_key),
                          body = body, encode = "json",
                          if (verbose) httr::verbose(),
                          if (progress) httr::progress())

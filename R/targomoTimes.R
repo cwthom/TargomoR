@@ -20,6 +20,7 @@
 #'   ennvironment variable.
 #' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
 #'   environment variable.
+#' @param config Config options to pass to \code{httr::POST} e.g. proxy settings
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #'
@@ -35,6 +36,7 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
                             options = targomoOptions(),
                             api_key = Sys.getenv("TARGOMO_API_KEY"),
                             region = Sys.getenv("TARGOMO_REGION"),
+                            config = list(),
                             verbose = FALSE,
                             progress = FALSE) {
 
@@ -57,6 +59,7 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
 
     response <- callTargomoAPI(api_key = api_key, region = region,
                                service = "time", body = body,
+                               config = config,
                                verbose = verbose, progress = progress)
 
     tm_times <- processResponse(response, service = "time")
@@ -89,6 +92,7 @@ addTargomoTimes <- function(map,
                             group = NULL,
                             api_key = Sys.getenv("TARGOMO_API_KEY"),
                             region = Sys.getenv("TARGOMO_REGION"),
+                            config = config,
                             verbose = FALSE, progress = FALSE) {
 
 
@@ -97,7 +101,7 @@ addTargomoTimes <- function(map,
                            source_lng = source_lng, target_data = target_data,
                            target_lat = target_lat, target_lng = target_lng,
                            source_id = source_id, target_id = target_id,
-                           options = options,
+                           options = options, config = config,
                            verbose = verbose, progress = progress)
 
   opts <- drawOptions
