@@ -1,3 +1,7 @@
+# TargomoR 0.1.1.9000
+
+* Add in `config` option for HTTP requests - allows for e.g. proxy settings using `httr::use_proxy()`
+
 ### TargomoR 0.0.1.9001
 
 * tidy up code
