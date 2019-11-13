@@ -11,6 +11,4 @@
 ^examples$
 ^README\.Rmd$
 ^\.travis\.yml$
-^renv$
-^renv\.lock$
 ^CODE_OF_CONDUCT\.md$
