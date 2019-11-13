@@ -1,6 +1,7 @@
 # TargomoR 0.1.1.9002
 
 * Add experimental support for Points of Interest service
+* Add function to retrieve the account capabilities
 
 # TargomoR 0.1.1.9001
 
