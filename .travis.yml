@@ -11,14 +11,13 @@ before_install:
 
 matrix:
   include:
-  - r: devel
-  - r: release
-    after_success:
-    - Rscript -e 'covr::codecov()'
-    before_cache: Rscript -e 'remotes::install_cran(c("pkgdown"))'
-    deploy:
-      provider: script
-      script: Rscript -e 'pkgdown::deploy_site_github(verbose = TRUE)'
-      skip_cleanup: true
-  - r: oldrel
 
+  - r: release
+  before_cache:
+  - Rscript -e 'remotes::install_cran("pkgdown")'
+  after_success:
+  - Rscript -e 'covr::code_cov()'
+  deploy:
+    provider: script
+    script: Rscript -e 'pkgdown::deploy_site_github()'
+    skip_cleanup: true
