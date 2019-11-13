@@ -1,5 +1,7 @@
 # TargomoR 0.1.1.9002
 
+* Add experimental support for Points of Interest service
+
 # TargomoR 0.1.1.9001
 
 * Add package startup message
