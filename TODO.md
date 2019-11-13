@@ -11,4 +11,4 @@
     + Copy structure from time/polygon service
 * Add function to retrieve API capabilities and return as a list
 * Add function to link to Basemap service
-
+* Make pkgdown site
