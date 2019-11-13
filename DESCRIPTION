@@ -1,7 +1,7 @@
 Package: TargomoR
 Type: Package
 Title: An Interface to the Targomo API
-Version: 0.1.1.9000
+Version: 0.1.1.9001
 Authors@R: person("Chris", "Mason-Thom", email = "chrismasonthom@gmail.com", role=c("aut","cre"))
 Description: This package allows R users to exploit the Targomo REST API. Currently it 
     supports the Polygon, Routing and Time services. The MultiGraph service is not supported.
