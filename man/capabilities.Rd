@@ -24,6 +24,8 @@ environment variable}
 \item{verbose}{Whether to print out information about the API call.}
 
 \item{progress}{Whether to show a progress bar of the API call.}
+
+\item{response}{The API response object}
 }
 \description{
 Function to return a list of the capabilities of the API Key. Currently this

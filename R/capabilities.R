@@ -9,6 +9,7 @@
 #' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
 #'   environment variable
 #' @param config Config options to pass to \code{httr::GET} e.g. proxy settings
+#' @param response The API response object
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #'
