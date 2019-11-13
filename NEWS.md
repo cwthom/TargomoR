@@ -1,7 +1,10 @@
+# TargomoR 0.1.1.9002
+
 # TargomoR 0.1.1.9001
 
 * Add package startup message
 * Add attribution function
+* Create pkgdown site
 
 # TargomoR 0.1.1.9000
 
