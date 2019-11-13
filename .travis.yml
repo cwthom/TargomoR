@@ -12,8 +12,6 @@ before_install:
 matrix:
   include:
 
-  - r: devel
-
   - r: release
     before_cache:
     - Rscript -e 'remotes::install_cran("pkgdown")'
@@ -23,5 +21,3 @@ matrix:
       provider: script
       script: Rscript -e 'pkgdown::deploy_site_github()'
       skip_cleanup: true
-
-  - r: oldrel
