@@ -1,5 +1,8 @@
 ---
 output: github_document
+params:
+  proxy_server: noproxy
+  proxy_port: 1234
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -18,21 +21,28 @@ source_data <- data.frame(id = "A", lat = 51.52, lng = -0.19)
 target_data <- data.frame(id = c("X", "Y", "Z"),
                           lat = c(51.50, 51.515, 51.51), 
                           lng = c(-0.18, -0.185, -0.17))
+if (params$proxy_server == "noproxy") {
+  config <- list()
+} else {
+  config <- httr::use_proxy(url = params$proxy_server, port = params$proxy_port)
+}
 ```
 # TargomoR
 
 <!-- Badges -->
-[![Build Status](https://travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR)
+[![Build Status](https://api.travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR)
 [![Coverage status](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/github/cwthom/TargomoR?branch=master)
 
 
 The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
 
+## Note
+
 **This package is being developed with the permission of Targomo, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their [website](https://www.targomo.com/developers/).**
 
 **Please also be aware of the Targomo [Terms and Conditions](https://account.targomo.com/legal/terms).**
 
-Please see below for information on [installing](#installation) the package, setting up your [environment](#set-up-environment) correctly, and [using](#get-travel-time-data) the package.
+See below for information on [installing](#installation) the package, setting up your [environment](#set-up-environment) correctly, and [using](#get-travel-time-data) the package.
 
 
 ## Installation {#install}
@@ -120,10 +130,18 @@ For the isochrone polygon service, `getTargomoPolygons` returns a Simple Feature
 
 Each feature is a POLYGON (or MULTIPOLYGON). There is one feature per time specified in the `travelTimes` argument of `targomoOptions` - see [options](#options) below.
 
-```{r get-polygon}
+```{r get-poygon-display, eval=FALSE}
 polygons <- getTargomoPolygons(source_data = source_data,
                                source_lat = ~lat, source_lng = ~lng,
                                options = targomoOptions(travelType = "bike"))
+polygons
+```
+
+```{r get-polygon, echo=FALSE}
+polygons <- getTargomoPolygons(source_data = source_data,
+                               source_lat = ~lat, source_lng = ~lng,
+                               options = targomoOptions(travelType = "bike"),
+                               config = config)
 polygons
 ```
 
@@ -145,12 +163,23 @@ Each SFC also contains fields giving the start and end names of the LINESTRINGs,
 
 For example, for three routes by bike, the output will look like:
 
-```{r get-route}
+```{r get-route-display, eval=FALSE}
 routes <- getTargomoRoutes(source_data = source_data, target_data = target_data,
                            source_lat = ~lat, source_lng = ~lng,
                            target_lat = ~lat, target_lng = ~lng,
                            source_id = ~id, target_id = ~id,
                            options = targomoOptions(travelType = "bike"))
+
+str(routes, max.level = 3, give.attr = FALSE)
+```
+
+```{r get-route, echo=FALSE}
+routes <- getTargomoRoutes(source_data = source_data, target_data = target_data,
+                           source_lat = ~lat, source_lng = ~lng,
+                           target_lat = ~lat, target_lng = ~lng,
+                           source_id = ~id, target_id = ~id,
+                           options = targomoOptions(travelType = "bike"),
+                           config = config)
 
 str(routes, max.level = 3, give.attr = FALSE)
 ```
@@ -173,12 +202,22 @@ For the time service, `getTargomoTimes` returns a Simple Feature Collection of 4
 * travelType - the travel mode (can supply multiple as with routes)
 * travelTime - the time taken in seconds to get from the source to the target
 
-```{r get-times}
+```{r get-times-display, eval=FALSE}
 times <- getTargomoTimes(source_data = source_data, target_data = target_data,
                          source_lat = ~lat, source_lng = ~lng,
                          target_lat = ~lat, target_lng = ~lng,
                          source_id = ~id, target_id = ~id,
                          options = targomoOptions(travelType = "bike"))
+times
+```
+
+```{r get-times, echo=FALSE}
+times <- getTargomoTimes(source_data = source_data, target_data = target_data,
+                         source_lat = ~lat, source_lng = ~lng,
+                         target_lat = ~lat, target_lng = ~lng,
+                         source_id = ~id, target_id = ~id,
+                         options = targomoOptions(travelType = "bike"),
+                         config = config)
 times
 ```
 
@@ -205,6 +244,14 @@ Each service has a drawing options function to customise how the features appear
 
 These are also all documented in the manual pages (e.g. `?routeDrawOptions`).
 
+## Attribution
+
+It's a condition of use of the Targomo services that you attribute the travel time data to them. Full details can be found on their [attributions page](https://targomo.com/developers/resources/attribution/). To help with this there are two functions in TargomoR:
+
+* `attributionLink` - just returns the URL of the attributions page
+* `addTargomoAttribution` - adds the attribution iframe to a leaflet control, for use with leaflet maps.
+
+It is your responsibility to make sure you comply with the attribution requirements appropriate to your plan.
 
 ## Contributing
 

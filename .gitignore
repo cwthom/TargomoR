@@ -5,3 +5,5 @@
 .Renviron
 node_modules
 *.html
+docs/
+inst/doc

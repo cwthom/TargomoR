@@ -1,10 +1,14 @@
 
 ## General To Do
 
-* move api_key and region inputs to end throughout?
-* Reuse code across the `getTargomo*` functions
-* add more tests
-* options to format time output as "hms" etc?
-* Do something with the headers as well as the content of the response.
-* release to CRAN?
-
+* Startup Message - DONE
+    + Look at the shinyjs one
+    + Remind people it's linking to a commercial service
+    + Point to where to go to get an API key
+    + Point to legal terms and conditions
+* Add function to provide attribution to Targomo (picture?) - DONE
+* Add function to link to POI service
+    + Copy structure from time/polygon service
+* Add function to retrieve API capabilities and return as a list
+* Add function to link to Basemap service
+* Make pkgdown site
