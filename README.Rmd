@@ -1,8 +1,5 @@
 ---
 output: github_document
-params:
-  proxy_server: noproxy
-  proxy_port: 1234
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -21,13 +18,10 @@ source_data <- data.frame(id = "A", lat = 51.52, lng = -0.19)
 target_data <- data.frame(id = c("X", "Y", "Z"),
                           lat = c(51.50, 51.515, 51.51), 
                           lng = c(-0.18, -0.185, -0.17))
-if (params$proxy_server == "noproxy") {
-  config <- list()
-} else {
-  config <- httr::use_proxy(url = params$proxy_server, port = params$proxy_port)
-}
+config <- list()
 ```
-# TargomoR
+
+# TargomoR <a href='https:/cwthom.github.io/TargomoR'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
 

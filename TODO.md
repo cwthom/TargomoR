@@ -8,5 +8,5 @@
 * Add function to link to Basemap service
 * Make pkgdown site - DONE
 * Write Vignettes
-* Make hexsticker!
+* Make hexsticker! - DONE
  
