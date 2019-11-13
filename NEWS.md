@@ -1,4 +1,9 @@
-# TargomoR 0.1.1.9000
+### TargomoR 0.1.1.9001
+
+* Add package startup message
+* Add attribution function
+
+### TargomoR 0.1.1.9000
 
 * Add in `config` option for HTTP requests - allows for e.g. proxy settings using `httr::use_proxy()`
 
@@ -7,7 +12,7 @@
 * tidy up code
 * add in more tests
 
-# TargomoR 0.0.1.9000
+### TargomoR 0.0.1.9000
 
 * First testing release version :D
 
