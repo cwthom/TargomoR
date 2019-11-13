@@ -3,9 +3,6 @@
 TargomoR
 ========
 
-<!-- Badges -->
-[![Build Status](https://travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://api.travis-ci.org/cwthom/TargomoR) [![Coverage status](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/github/cwthom/TargomoR?branch=master)
-
 The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
 
 Note
@@ -177,11 +174,11 @@ routes$bike[[1]]$features
 #> Simple feature collection with 3 features and 8 fields
 #> geometry type:  GEOMETRY
 #> dimension:      XY
-#> bbox:           xmin: -0.19 ymin: 51.5 xmax: -0.1784 ymax: 51.52
+#> bbox:           xmin: -0.19 ymin: 51.5 xmax: -0.18 ymax: 51.52
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
 #>   endName sourceId length targetId startName travelTime
-#> 1  target     <NA>   2669     <NA>    source        841
+#> 1  target     <NA>   2586     <NA>    source        624
 #> 2    <NA>     <NA>     NA        X      <NA>         NA
 #> 3    <NA>        A     NA     <NA>      <NA>         NA
 #>                         geometry travelType   name

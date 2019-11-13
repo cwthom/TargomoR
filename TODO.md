@@ -12,4 +12,8 @@
 * Add function to retrieve API capabilities and return as a list
 * Add function to link to Basemap service
 * Make pkgdown site - DONE
+* Write Vignettes
+    + Create them and integrate with pkgdown - DONE
+    + Write content
+* Make hexsticker!
  

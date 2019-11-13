@@ -29,11 +29,6 @@ if (params$proxy_server == "noproxy") {
 ```
 # TargomoR
 
-<!-- Badges -->
-[![Build Status](https://api.travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR)
-[![Coverage status](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/github/cwthom/TargomoR?branch=master)
-
-
 The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
 
 ## Note
@@ -79,9 +74,7 @@ You're now ready to use Targomo to get travel-time and routing data. There are t
 
 * [Isochrone Polygons](https://targomo.com/developers/intro/services/polygon/)
 * [Routing](https://targomo.com/developers/intro/services/routing/)
-* [Reachability](https://targomo.com/developers/intro/services/reachability/)
-
-The reachability service is referred to here as the time service.
+* [Time](https://targomo.com/developers/intro/services/reachability/)
 
 For each service there are 2 core functions:
 
