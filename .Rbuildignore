@@ -1,3 +1,5 @@
+^docs$
+^_pkgdown\.yml$
 ^codecov\.yml$
 ^revdep$
 ^LICENSE\.md$
@@ -6,11 +8,7 @@
 ^.Rhistory$
 ^.Renviron$
 ^TODO.md$
-^node_modules$
 ^examples$
-^package.*\.json$
-^webpack\.config\.js$
-^inst/htmlwidgets/bindings$
 ^README\.Rmd$
 ^\.travis\.yml$
 ^renv$
