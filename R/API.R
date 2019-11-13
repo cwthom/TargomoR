@@ -48,6 +48,8 @@ deriveOptions <- function(options) {
     )
   )
 
+  opts$osmTypes <- options$osmTypes
+
   opts$tm <- leaflet::filterNULL(
     list(
       tm = options$travelType,
@@ -179,8 +181,14 @@ deriveTargets <- function(points, id = NULL) {
 #' @param sources A processed sources object to pass to the API.
 #' @param targets A processed targets object (optional).
 #' @param options A processed options list.
+#' @param api_key Your Targomo API key - defaults to the \code{TARGOMO_API_KEY}
+#'   ennvironment variable
+#' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
+#'   environment variable
 #'
-createRequestBody <- function(service, sources = NULL, targets = NULL, options) {
+createRequestBody <- function(service, sources = NULL, targets = NULL, options,
+                              api_key = Sys.getenv("TARGOMO_API_KEY"),
+                              region = Sys.getenv("TARGOMO_REGION")) {
 
   if (is.null(service)) {
     stop("No Targomo service specified")
@@ -192,10 +200,17 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 
   fields <- c("edgeWeight", "maxEdgeWeight", "elevation", "sources", "targets",
               if (service == "polygon") "polygon" else NULL,
-              if (service == "route") "pathSerializer" else NULL)
+              if (service == "route") "pathSerializer" else NULL,
+              if (service == "poi") c("osmTypes", "serviceUrl", "serviceKey") else NULL)
 
   options$sources <- sources
   options$targets <- targets
+
+  if (service == "poi") {
+    options$serviceUrl <- paste0(targomoAPI(), region, "/")
+    options$serviceKey <- api_key
+  }
+
   options <- leaflet::filterNULL(options[fields])
 
   body <- jsonlite::toJSON(options, auto_unbox = TRUE, pretty = TRUE)
@@ -219,10 +234,17 @@ callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                            service, body, config = list(),
                            verbose = FALSE, progress = FALSE) {
 
-  url <- createRequestURL(region, service)
+
+  if (service == "poi") {
+    url <- paste0(targomoAPI(), "pointofinterest/reachability")
+    query <- NULL
+  } else {
+    url <- createRequestURL(region, service)
+    query <- list(key = api_key)
+  }
 
   response <- httr::POST(url = url, config = config,
-                         query = list(key = api_key),
+                         query = query,
                          body = body, encode = "json",
                          if (verbose) httr::verbose(),
                          if (progress) httr::progress())

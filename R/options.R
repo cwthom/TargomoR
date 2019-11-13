@@ -29,6 +29,7 @@
 #' @param minPolygonHoleSize Minimum area of holes in returned polygons.
 #' @param simplify,buffer Parameters for manipulating the returned polygons.
 #' @param quadrantSegments,decimalPrecision Parameters for fine-tuning the returned polygons.
+#' @param osmTypes A vector of key/value pairs of OSM types for the Points of Interest service. E.g. "amenity=bar"
 #'
 #' @name options
 #'
@@ -59,7 +60,8 @@ targomoOptions = function(travelType = "bike",
                           buffer = NULL,
                           simplify = NULL,
                           quadrantSegments = NULL,
-                          decimalPrecision = NULL) {
+                          decimalPrecision = NULL,
+                          osmTypes = NULL) {
 
   leaflet::filterNULL(
     list(
@@ -89,7 +91,8 @@ targomoOptions = function(travelType = "bike",
       buffer = buffer,
       simplify = simplify,
       quadrantSegments = quadrantSegments,
-      decimalPrecision = decimalPrecision
+      decimalPrecision = decimalPrecision,
+      osmTypes = translatePOIs(osmTypes)
     )
   )
 

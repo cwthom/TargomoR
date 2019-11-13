@@ -46,6 +46,8 @@ processResponse <- function(response, service) {
     output <- processRoutes(payload)
   } else if (service == "time") {
     output <- processTimes(payload)
+  } else if (service == "poi") {
+    output <- processPOIs(payload)
   }
 
   return(output)
@@ -106,5 +108,12 @@ processTimes <- function(payload) {
     set
   })
   do.call(rbind, sets)
+
+}
+
+#' @rdname process
+processPOIs <- function(payload) {
+
+  payload
 
 }

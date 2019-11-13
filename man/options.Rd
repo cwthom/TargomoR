@@ -16,7 +16,8 @@ targomoOptions(travelType = "bike", travelTimes = list(600, 1200,
   transitMaxTransfers = NULL, edgeWeight = "time",
   maxEdgeWeight = 1800, elevation = FALSE, serializer = "geojson",
   srid = 4326, minPolygonHoleSize = NULL, buffer = NULL,
-  simplify = NULL, quadrantSegments = NULL, decimalPrecision = NULL)
+  simplify = NULL, quadrantSegments = NULL, decimalPrecision = NULL,
+  osmTypes = NULL)
 }
 \arguments{
 \item{travelType}{What mode of transport to use - car, bike, walk or public transport.}
@@ -62,6 +63,8 @@ or \code{.km.m.ml} for distance, where ml represents miles (1609 metres).}
 \item{simplify, buffer}{Parameters for manipulating the returned polygons.}
 
 \item{quadrantSegments, decimalPrecision}{Parameters for fine-tuning the returned polygons.}
+
+\item{osmTypes}{A vector of key/value pairs of OSM types for the Points of Interest service. E.g. "amenity=bar"}
 }
 \description{
 This function sets the options to be passed to the API service.

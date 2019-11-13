@@ -4,7 +4,9 @@
 \alias{createRequestBody}
 \title{Create Request Body}
 \usage{
-createRequestBody(service, sources = NULL, targets = NULL, options)
+createRequestBody(service, sources = NULL, targets = NULL, options,
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  region = Sys.getenv("TARGOMO_REGION"))
 }
 \arguments{
 \item{service}{The Targomo Service to create a body for - 'polygon', 'time', 'route'.}
@@ -14,6 +16,12 @@ createRequestBody(service, sources = NULL, targets = NULL, options)
 \item{targets}{A processed targets object (optional).}
 
 \item{options}{A processed options list.}
+
+\item{api_key}{Your Targomo API key - defaults to the \code{TARGOMO_API_KEY}
+ennvironment variable}
+
+\item{region}{Your Targomo region - defaults to the \code{TARGOMO_REGION}
+environment variable}
 }
 \description{
 Function to create a request body using the sources and options given.

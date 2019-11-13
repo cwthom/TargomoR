@@ -8,6 +8,7 @@
 \alias{getRouteFeatures}
 \alias{processRoutes}
 \alias{processTimes}
+\alias{processPOIs}
 \title{Process API responses}
 \usage{
 catchBadResponse(response)
@@ -21,6 +22,8 @@ getRouteFeatures(route)
 processRoutes(payload)
 
 processTimes(payload)
+
+processPOIs(payload)
 }
 \arguments{
 \item{response}{A response object from \code{\link{callTargomoAPI}}.}
