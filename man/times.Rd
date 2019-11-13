@@ -18,7 +18,7 @@ addTargomoTimes(map, source_data = NULL, source_lat = NULL,
   target_lng = NULL, source_id = NULL, target_id = NULL,
   options = targomoOptions(), drawOptions = timeDrawOptions(),
   group = NULL, api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = config,
+  region = Sys.getenv("TARGOMO_REGION"), config = list(),
   verbose = FALSE, progress = FALSE)
 }
 \arguments{

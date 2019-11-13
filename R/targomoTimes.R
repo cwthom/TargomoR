@@ -92,7 +92,7 @@ addTargomoTimes <- function(map,
                             group = NULL,
                             api_key = Sys.getenv("TARGOMO_API_KEY"),
                             region = Sys.getenv("TARGOMO_REGION"),
-                            config = config,
+                            config = list(),
                             verbose = FALSE, progress = FALSE) {
 
 
