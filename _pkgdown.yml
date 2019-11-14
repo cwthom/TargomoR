@@ -66,6 +66,17 @@ reference:
   - attributionLink
   - attributionFreeIframe
   - attributionOtherIframe
+- title: "Basemaps"
+  desc: "Functions for requesting basemaps from Targomo"
+  contents:
+  - targomoMapStyles
+  - getTargomoMapURL
+  - addTargomoTiles
+- title: "Capabilities"
+  desc: "Functions for requesting the API Key Capabilities"
+  contents:
+  - getTargomoCapabilities
+  - processCapabilities
 - title: "Miscellaneous"
   desc: "Other functions"
   contents:
