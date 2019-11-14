@@ -89,8 +89,7 @@
   <div class="contents col-md-9">
 <div id="targomor" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#targomor" class="anchor"></a>TargomoR <a href="https:/cwthom.github.io/TargomoR"><img src="reference/figures/logo.png" align="right" height="139"></a>
-</h1></div>
+<a href="#targomor" class="anchor"></a>TargomoR</h1></div>
 <p>The goal of TargomoR is to provide an interface to the Targomo API for users of <code>leaflet</code> in R.</p>
 <div id="note" class="section level2">
 <h2 class="hasAnchor">
@@ -192,13 +191,13 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">#&gt; Simple feature collection with 3 features and 2 fields</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; bbox:           xmin: -0.2775 ymin: 51.477 xmax: -0.1221 ymax: 51.5611</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; bbox:           xmin: -0.2856 ymin: 51.46 xmax: -0.0912 ymax: 51.58</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; epsg (SRID):    4326</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;   time     area                       geometry</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 2 1800 63557558 MULTIPOLYGON (((-0.2568 51....</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 1 1200 25447392 MULTIPOLYGON (((-0.2343 51....</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 3  600  5462596 MULTIPOLYGON (((-0.207 51.5...</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;   time      area                       geometry</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 2 1800 115468566 MULTIPOLYGON (((-0.2675 51....</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 1 1200  48835950 MULTIPOLYGON (((-0.2344 51....</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 3  600  10829611 MULTIPOLYGON (((-0.2151 51....</span></a></code></pre></div>
 <p>Using the <code>addTargomoPolygons</code> function we can add them directly to a leaflet map:</p>
 <p><img src="reference/figures/polygon-example.png" alt="Using the Targomo Polygon Service"></p>
 </div>
@@ -240,17 +239,17 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; Simple feature collection with 3 features and 8 fields</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; geometry type:  GEOMETRY</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; bbox:           xmin: -0.1899996 ymin: 51.50001 xmax: -0.1783915 ymax: 51.52</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; bbox:           xmin: -0.19 ymin: 51.5 xmax: -0.18 ymax: 51.52</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; epsg (SRID):    4326</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   endName sourceId   length targetId startName travelTime</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 1  target     &lt;NA&gt; 2668.967     &lt;NA&gt;    source        841</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 2    &lt;NA&gt;     &lt;NA&gt;       NA        X      &lt;NA&gt;         NA</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 3    &lt;NA&gt;        A       NA     &lt;NA&gt;      &lt;NA&gt;         NA</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   endName sourceId length targetId startName travelTime</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 1  target     &lt;NA&gt;   2586     &lt;NA&gt;    source        624</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 2    &lt;NA&gt;     &lt;NA&gt;     NA        X      &lt;NA&gt;         NA</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 3    &lt;NA&gt;        A     NA     &lt;NA&gt;      &lt;NA&gt;         NA</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;                         geometry travelType   name</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; 1 LINESTRING (-0.1800094 51.5...       BIKE   &lt;NA&gt;</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; 2    POINT (-0.1800094 51.50003)       &lt;NA&gt; Target</span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 3       POINT (-0.1899996 51.52)       &lt;NA&gt; Source</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt; 1 LINESTRING (-0.18 51.5, -0....       BIKE   &lt;NA&gt;</span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt; 2             POINT (-0.18 51.5)       &lt;NA&gt; Target</span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt; 3            POINT (-0.19 51.52)       &lt;NA&gt; Source</span></a></code></pre></div>
 <p>Using <code>addTargomoRoutes</code> we can draw these routes nicely on the map. For example:</p>
 <p><img src="reference/figures/route-example.png" alt="Using the Targomo Route Service"></p>
 </div>
@@ -263,7 +262,7 @@
 <li>travelType - the travel mode (can supply multiple as with routes)</li>
 <li>travelTime - the time taken in seconds to get from the source to the target</li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">times &lt;-<span class="st"> </span><span class="kw"><a href="reference/times.html">getTargomoTimes</a></span>(<span class="dt">source_data =</span> source_data, <span class="dt">target_data =</span> target_data,</a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">times &lt;-<span class="st"> </span><span class="kw"><a href="reference/times.html">getTargomoTimes</a></span>(<span class="dt">source_data =</span> source_data, <span class="dt">target_data =</span> target_data,</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">                         <span class="dt">source_lat =</span> <span class="op">~</span>lat, <span class="dt">source_lng =</span> <span class="op">~</span>lng,</a>
 <a class="sourceLine" id="cb9-3" data-line-number="3">                         <span class="dt">target_lat =</span> <span class="op">~</span>lat, <span class="dt">target_lng =</span> <span class="op">~</span>lng,</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4">                         <span class="dt">source_id =</span> <span class="op">~</span>id, <span class="dt">target_id =</span> <span class="op">~</span>id,</a>
@@ -272,15 +271,15 @@
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">#&gt; Simple feature collection with 3 features and 4 fields</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; geometry type:  POINT</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; bbox:           xmin: -0.185 ymin: 51.5 xmax: -0.17 ymax: 51.515</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; bbox:           xmin: -0.185 ymin: 51.5 xmax: -0.17 ymax: 51.52</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; epsg (SRID):    4326</span></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs</span></a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; # A tibble: 3 x 5</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt;   sourceId targetId travelType travelTime        geometry</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;           &lt;int&gt;     &lt;POINT [°]&gt;</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 1 A        X        bike              841    (-0.18 51.5)</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 2 A        Y        bike              268 (-0.185 51.515)</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 3 A        Z        bike              668   (-0.17 51.51)</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt;   sourceId targetId travelType travelTime       geometry</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;           &lt;int&gt;    &lt;POINT [°]&gt;</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 1 A        X        bike              624   (-0.18 51.5)</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 2 A        Y        bike              183 (-0.185 51.52)</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 3 A        Z        bike              460  (-0.17 51.51)</span></a></code></pre></div>
 <p>We can add time data directly to the map with <code>addTargomoTimes</code>:</p>
 <p><img src="reference/figures/time-example.png" alt="Using the Targomo Time Service"></p>
 </div>
@@ -306,7 +305,7 @@
 <li>Time - <code><a href="reference/timeDrawOptions.html">timeDrawOptions()</a></code>
 </li>
 </ul>
-<p>These are also all documented in the manual pages (e.g. <code><a href="reference/routeDrawOptions.html">?routeDrawOptions</a></code>).</p>
+<p>These are also all documented in the manual pages (e.g. <code><a href="reference/routeDrawOptions.html">?routeDrawOptions</a></code>).</p>
 </div>
 </div>
 <div id="attribution" class="section level2">
