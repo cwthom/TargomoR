@@ -21,7 +21,7 @@ target_data <- data.frame(id = c("X", "Y", "Z"),
 config <- list()
 ```
 
-# TargomoR <a href='https:/cwthom.github.io/TargomoR'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# TargomoR
 
 The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
 
