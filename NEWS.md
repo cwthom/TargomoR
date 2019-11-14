@@ -1,3 +1,7 @@
+# TargomoR 0.1.1.9003
+
+* Add support for basemap service
+
 # TargomoR 0.1.1.9002
 
 * Add experimental support for Points of Interest service
