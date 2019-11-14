@@ -1,10 +1,11 @@
 Package: TargomoR
 Type: Package
-Title: An Interface to the Targomo API
+Title: An R Interface to the Targomo API
 Version: 0.1.1.9003
 Authors@R: person("Chris", "Mason-Thom", email = "chrismasonthom@gmail.com", role=c("aut","cre"))
 Description: This package allows R users to exploit the Targomo REST API. Currently it 
-    supports the Polygon, Routing and Time services. The MultiGraph service is not supported.
+    supports the Polygon, Routing and Time services, as well as access to Targomo basemaps.
+    The MultiGraph service is not supported.
 License: GPL-3
 URL: https://cwthom.github.io/TargomoR
 BugReports: https://github.com/cwthom/TargomoR/issues

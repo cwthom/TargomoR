@@ -3,7 +3,7 @@
 TargomoR
 ========
 
-The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
+An R interface to the Targomo API.
 
 Note
 ----
@@ -114,13 +114,13 @@ polygons
     #> Simple feature collection with 3 features and 2 fields
     #> geometry type:  MULTIPOLYGON
     #> dimension:      XY
-    #> bbox:           xmin: -0.2856 ymin: 51.46 xmax: -0.0912 ymax: 51.58
+    #> bbox:           xmin: -0.2775 ymin: 51.48 xmax: -0.1221 ymax: 51.56
     #> epsg (SRID):    4326
     #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
-    #>   time      area                       geometry
-    #> 2 1800 115468566 MULTIPOLYGON (((-0.2675 51....
-    #> 1 1200  48835950 MULTIPOLYGON (((-0.2344 51....
-    #> 3  600  10829611 MULTIPOLYGON (((-0.2151 51....
+    #>   time     area                       geometry
+    #> 3 1800 63573162 MULTIPOLYGON (((-0.2607 51....
+    #> 2 1200 25447392 MULTIPOLYGON (((-0.2343 51....
+    #> 1  600  5462596 MULTIPOLYGON (((-0.207 51.5...
 
 Using the `addTargomoPolygons` function we can add them directly to a leaflet map:
 
@@ -172,11 +172,11 @@ routes$bike[[1]]$features
 #> Simple feature collection with 3 features and 8 fields
 #> geometry type:  GEOMETRY
 #> dimension:      XY
-#> bbox:           xmin: -0.19 ymin: 51.5 xmax: -0.18 ymax: 51.52
+#> bbox:           xmin: -0.19 ymin: 51.5 xmax: -0.1784 ymax: 51.52
 #> epsg (SRID):    4326
 #> proj4string:    +proj=longlat +datum=WGS84 +no_defs
 #>   endName sourceId length targetId startName travelTime
-#> 1  target     <NA>   2586     <NA>    source        624
+#> 1  target     <NA>   2669     <NA>    source        841
 #> 2    <NA>     <NA>     NA        X      <NA>         NA
 #> 3    <NA>        A     NA     <NA>      <NA>         NA
 #>                         geometry travelType   name
@@ -215,9 +215,9 @@ times
     #> # A tibble: 3 x 5
     #>   sourceId targetId travelType travelTime       geometry
     #>   <chr>    <chr>    <chr>           <int>    <POINT [°]>
-    #> 1 A        X        bike              624   (-0.18 51.5)
-    #> 2 A        Y        bike              183 (-0.185 51.52)
-    #> 3 A        Z        bike              460  (-0.17 51.51)
+    #> 1 A        X        bike              841   (-0.18 51.5)
+    #> 2 A        Y        bike              268 (-0.185 51.52)
+    #> 3 A        Z        bike              668  (-0.17 51.51)
 
 We can add time data directly to the map with `addTargomoTimes`:
 

@@ -23,7 +23,7 @@ config <- list()
 
 # TargomoR
 
-The goal of TargomoR is to provide an interface to the Targomo API for users of `leaflet` in R.
+An R interface to the Targomo API.
 
 ## Note
 
