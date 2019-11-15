@@ -10,8 +10,78 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%"
 )
+library(leaflet)
+library(TargomoR)
 ```
 
-## Under Development
+TODO: Introduction
+
+## Getting the Data
+
+For the isochrone polygon service, `getTargomoPolygons` returns a Simple Feature Collection of 2 fields. The fields are:
+
+* time - the time in seconds of each isochrone
+* area - the area in square metres of the isochrone
+
+Each feature is a POLYGON (or MULTIPOLYGON). There is one feature per time specified in the `travelTimes` argument of `targomoOptions` - see the vignette on [Options](https://cwthom.github.io/TargomoR/articles/Options.html) for more information.
+
+```{r get-polygon}
+# set some source data
+source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
+
+# query the API
+polygons <- getTargomoPolygons(source_data = source,
+                               source_lat = ~lat, source_lng = ~lng,
+                               options = targomoOptions(travelType = "transit"))
+```
+
+## Integration with Leaflet
+
+If we want to integrate this into a leaflet map, you can either:
+
+* use the `polygons` object derived above, and add it to a map with `leaflet::addPolygons()`, or;
+* combine the call to the API and the drawing options in one with `addTargomoPolygons`
+
+The latter option looks like:
+
+```{r polygon-example, eval=FALSE}
+leaflet() %>% 
+  addTargomoTiles() %>% 
+  addTargomoPolygons(source_data = source,
+                     source_lat = ~lat, source_lng = ~lng,
+                     options = targomoOptions(travelType = "transit"))
+```
+
+## Drawing Options
+
+Using `addTargomoPolygons` you can customise the way the polygons appear on the map with a call to `polygonDrawOptions`. The options available are:
+
+| **Option**   | **Default**                      | **Meaning**                                        |
+| ------------ | -------------------------------- | -------------------------------------------------- |
+| stroke       | `TRUE`                           | Should the polygons have a border?                 |
+| weight       | `5`                              | The border stroke-weight                           |
+| color        | `list("red", "orange", "green")` | The border color                                   |
+| opacity      | `0.5`                            | The border opacity                                 |
+| fill         | `TRUE`                           | Should the interior of the polygons be filled?     |
+| fillColor    | `color`                          | The interior fill color (defaults to border color) |
+| fillOpacity  | `0.2`                            | The fill opacity                                   |
+| dashArray    | `NULL`                           | The border dash pattern                            |
+| smoothFactor | `1`                              | How much to simplify the polylines                 |
+| noClip       | `FALSE`                          | Disable polyline clipping?                         |
+
+For example, if we wish to re-create the map above, but with opaque polygons in shades of blue, we can do:
+
+```{r polygon-example-2, eval=FALSE}
+leaflet() %>% 
+  addTargomoTiles() %>% 
+  addTargomoPolygons(source_data = source,
+                     options = targomoOptions(travelType = "transit"),
+                     drawOptions = polygonDrawOptions(
+                       color = "black",
+                       fillColor = c("blue", "dodgerblue", "skyblue"),
+                       fillOpacity = 1
+                     ))
+```

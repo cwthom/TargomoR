@@ -14,10 +14,10 @@ getTargomoRoutes(source_data = NULL, source_lat = NULL,
   verbose = FALSE, progress = FALSE)
 
 addTargomoRoutes(map, source_data = NULL, source_lat = NULL,
-  source_lng = NULL, target_data = NULL, target_lat = NULL,
-  target_lng = NULL, options = targomoOptions(),
-  drawOptions = routeDrawOptions(), group = NULL,
-  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  source_lng = NULL, source_id = NULL, target_data = NULL,
+  target_lat = NULL, target_lng = NULL, target_id = NULL,
+  options = targomoOptions(), drawOptions = routeDrawOptions(),
+  group = NULL, api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), config = list(),
   verbose = FALSE, progress = FALSE)
 }

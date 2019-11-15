@@ -3,7 +3,7 @@
 
 * Add function to link to POI service - DONE (awaiting clarification)
 * Make hexsticker! - DONE (awaiting permission)
-* Plan out vignettes
+* Plan out vignettes - DONE
 * Write vignettes
 * Tidy up example apps
 * Publish example apps to shinyapps.io

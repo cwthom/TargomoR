@@ -73,8 +73,8 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
 #' @rdname routes
 #' @export
 addTargomoRoutes <- function(map,
-                             source_data = NULL, source_lat = NULL, source_lng = NULL,
-                             target_data = NULL, target_lat = NULL, target_lng = NULL,
+                             source_data = NULL, source_lat = NULL, source_lng = NULL, source_id = NULL,
+                             target_data = NULL, target_lat = NULL, target_lng = NULL, target_id = NULL,
                              options = targomoOptions(),
                              drawOptions = routeDrawOptions(),
                              group = NULL,
@@ -85,8 +85,9 @@ addTargomoRoutes <- function(map,
 
   routes <- getTargomoRoutes(api_key = api_key, region = region,
                              source_data = source_data, source_lat = source_lat,
-                             source_lng = source_lng, target_data = target_data,
-                             target_lat = target_lat, target_lng = target_lng,
+                             source_lng = source_lng, source_id = source_id,
+                             target_data = target_data, target_lat = target_lat,
+                             target_lng = target_lng, target_id = target_id,
                              options = options, config = config,
                              verbose = verbose, progress = progress)
 

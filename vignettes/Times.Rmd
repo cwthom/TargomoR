@@ -10,8 +10,41 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%"
 )
+library(leaflet)
+library(TargomoR)
 ```
 
-## Under Development
+TODO: Introduction
+
+## Getting the Data
+
+For the time service, `getTargomoTimes` returns a Simple Feature Collection of 4 fields. Each feature is a POINT (corresponding to the target point), and the fields are:
+
+* sourceId, targetId - given IDs for the points, or inferred numeric IDs if none supplied
+* travelType - the travel mode (can supply multiple as with routes)
+* travelTime - the time taken in seconds to get from the source to the target
+
+```{r get-times, echo=FALSE}
+# set source and target data (TODO: Add multiple (random) targets)
+source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
+target <- data.frame(id = "Tower Bridge", 
+                     lat = 51.5055,
+                     lng = -0.0754)
+
+# query the API
+times <- getTargomoTimes(source_data = source, target_data = target,
+                         source_lat = ~lat, source_lng = ~lng,
+                         target_lat = ~lat, target_lng = ~lng,
+                         source_id = ~id, target_id = ~id,
+                         options = targomoOptions(travelType = "car"))
+
+# examine the output
+times
+```
+
+## Integration with Leaflet
+
+TODO: Add leaflet example

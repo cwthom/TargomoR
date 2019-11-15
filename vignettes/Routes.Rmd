@@ -10,8 +10,93 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%"
 )
+library(leaflet)
+library(TargomoR)
 ```
 
-## Under Development
+TODO: Introduction
+
+## Getting the Data
+
+For the routing service, `getTargomoRoutes` returns a named nested list. The names are the travel modes given in the `travelType` option (specifying multiple modes will make multiple calls to the API).
+
+Within each travel mode is a list of the returned routes - one for each source/target combination where a route has been found. Each route is a data.frame, containing the source and target IDs, and a `features` data.frame of a simple feature collection (class 'sf'). This contains: 
+
+* points - the source and target points of the route, as POINT objects.
+* walk, bike, car, transit - the routes by each mode of transport (where requested) as LINESTRING objects.
+* transfers - points where public transport changes (e.g. change bus) as POINT objects.
+
+Each SFC also contains fields giving the start and end names of the LINESTRINGs, the length of time the section takes and the distance in metres. 
+
+For example, for two routes by bike, the output will look like:
+
+```{r get-route}
+# set source and target data
+source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
+target <- data.frame(id = c("Tower Bridge", "Covent Garden"),
+                     lat = c(51.5055, 51.5117),
+                     lng = c(-0.0754, -0.1246))
+
+# query the API
+routes <- getTargomoRoutes(source_data = source, target_data = target,
+                           source_lat = ~lat, source_lng = ~lng,
+                           target_lat = ~lat, target_lng = ~lng,
+                           source_id = ~id, target_id = ~id,
+                           options = targomoOptions(travelType = "bike"))
+
+# examine the structure
+str(routes, max.level = 3, give.attr = FALSE)
+```
+
+The `features` object for the first route will look like:
+
+```{r get-route-inner}
+routes$bike[[1]]$features
+```
+
+## Integration with Leaflet
+
+The `TargomoR` package lets you easily visualise your route data. You can either:
+
+* draw an existing routes object with `drawRoutes`, or;
+* combine the API call and drawing with `addTargomoRoutes`, or;
+* write your own drawing function using `leaflet::addPolylines`
+
+In this example, we use `addTargomoRoutes` to show the cycling routes above.
+
+```{r route-example}
+leaflet() %>% 
+  addTargomoTiles() %>% 
+  addTargomoRoutes(source_data = source, source_id = ~id,
+                   target_data = target, target_id = ~id,
+                   options = targomoOptions(travelType = "bike"))
+```
+
+## Drawing Options
+
+Using `addTargomoRoutes` or `drawRoutes` you can customise the way the routes appear on the map with a call to `routeDrawOptions`. The options available are:
+
+| **Option**        | **Default**                      | **Meaning**                                                |
+| ----------------- | -------------------------------- | ---------------------------------------------------------- |
+| showMarkers       | `TRUE`                           | Should the source/target points be marked?                 |
+| showTransfers     | `TRUE`                           | Should the public transport changes be marked?             |
+| {travel}Color     | car = `"blue"`, bike = `"orange"`, walk = `"green"`, transit = `"red"` | The route line color |
+| {travel}Weight    | `5` for all travel types         | The route line width                                       |
+| {travel}DashArray | walk = `"1,10"`, other = `NULL`  | The route dash pattern                                     |
+| transferColor     | `"blue"`                         | The color for transfer circle markers                      |
+| transferRadius    | `10`                             | The radius for transfer circle markers                     |
+
+Changing these, we could for instance make the map above but with purple dotted lines (and here we'll use `drawRoutes`):
+
+```{r route-example-2}
+leaflet() %>% 
+  addTargomoTiles() %>% 
+  drawRoutes(routes = routes, 
+             drawOptions = routeDrawOptions(
+               bikeColour = "purple",
+               bikeDashArray = "10,15"
+             ))
+```
