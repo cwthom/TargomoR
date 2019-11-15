@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>An Interface to the Targomo API • TargomoR</title>
+<title>An R Interface to the Targomo API • TargomoR</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
@@ -16,9 +16,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="An Interface to the Targomo API">
+<script src="pkgdown.js"></script><meta property="og:title" content="An R Interface to the Targomo API">
 <meta property="og:description" content="This package allows R users to exploit the Targomo REST API. Currently it 
-    supports the Polygon, Routing and Time services. The MultiGraph service is not supported.">
+    supports the Polygon, Routing and Time services, as well as access to Targomo basemaps.
+    The MultiGraph service is not supported.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -51,6 +52,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/TargomoR.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -61,6 +65,12 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/Basemaps.html">Basemaps</a>
+    </li>
+    <li>
+      <a href="articles/Options.html">Options</a>
+    </li>
+    <li>
       <a href="articles/Polygons.html">Polygons</a>
     </li>
     <li>
@@ -90,7 +100,7 @@
 <div id="targomor" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#targomor" class="anchor"></a>TargomoR</h1></div>
-<p>The goal of TargomoR is to provide an interface to the Targomo API for users of <code>leaflet</code> in R.</p>
+<p>An R interface to the Targomo API.</p>
 <div id="note" class="section level2">
 <h2 class="hasAnchor">
 <a href="#note" class="anchor"></a>Note</h2>
@@ -191,13 +201,13 @@
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">#&gt; Simple feature collection with 3 features and 2 fields</span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt; geometry type:  MULTIPOLYGON</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; bbox:           xmin: -0.2856 ymin: 51.46 xmax: -0.0912 ymax: 51.58</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; bbox:           xmin: -0.2775 ymin: 51.48 xmax: -0.1221 ymax: 51.56</span></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; epsg (SRID):    4326</span></a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;   time      area                       geometry</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 2 1800 115468566 MULTIPOLYGON (((-0.2675 51....</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 1 1200  48835950 MULTIPOLYGON (((-0.2344 51....</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 3  600  10829611 MULTIPOLYGON (((-0.2151 51....</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;   time     area                       geometry</span></a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 3 1800 63573162 MULTIPOLYGON (((-0.2607 51....</span></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 2 1200 25447392 MULTIPOLYGON (((-0.2343 51....</span></a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 1  600  5462596 MULTIPOLYGON (((-0.207 51.5...</span></a></code></pre></div>
 <p>Using the <code>addTargomoPolygons</code> function we can add them directly to a leaflet map:</p>
 <p><img src="reference/figures/polygon-example.png" alt="Using the Targomo Polygon Service"></p>
 </div>
@@ -239,11 +249,11 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; Simple feature collection with 3 features and 8 fields</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt; geometry type:  GEOMETRY</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; dimension:      XY</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; bbox:           xmin: -0.19 ymin: 51.5 xmax: -0.18 ymax: 51.52</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; bbox:           xmin: -0.19 ymin: 51.5 xmax: -0.1784 ymax: 51.52</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; epsg (SRID):    4326</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;   endName sourceId length targetId startName travelTime</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 1  target     &lt;NA&gt;   2586     &lt;NA&gt;    source        624</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 1  target     &lt;NA&gt;   2669     &lt;NA&gt;    source        841</span></a>
 <a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 2    &lt;NA&gt;     &lt;NA&gt;     NA        X      &lt;NA&gt;         NA</span></a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 3    &lt;NA&gt;        A     NA     &lt;NA&gt;      &lt;NA&gt;         NA</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;                         geometry travelType   name</span></a>
@@ -277,9 +287,9 @@
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; # A tibble: 3 x 5</span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt;   sourceId targetId travelType travelTime       geometry</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;           &lt;int&gt;    &lt;POINT [°]&gt;</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 1 A        X        bike              624   (-0.18 51.5)</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 2 A        Y        bike              183 (-0.185 51.52)</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 3 A        Z        bike              460  (-0.17 51.51)</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 1 A        X        bike              841   (-0.18 51.5)</span></a>
+<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 2 A        Y        bike              268 (-0.185 51.52)</span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 3 A        Z        bike              668  (-0.17 51.51)</span></a></code></pre></div>
 <p>We can add time data directly to the map with <code>addTargomoTimes</code>:</p>
 <p><img src="reference/figures/time-example.png" alt="Using the Targomo Time Service"></p>
 </div>

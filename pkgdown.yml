@@ -2,8 +2,11 @@ pandoc: '2.2'
 pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
+  Basemaps: Basemaps.html
+  Options: Options.html
   Polygons: Polygons.html
   Routes: Routes.html
+  TargomoR: TargomoR.html
   Times: Times.html
 urls:
   reference: https://cwthom.github.io/TargomoR//reference
