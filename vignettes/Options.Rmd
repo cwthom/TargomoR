@@ -1,0 +1,49 @@
+---
+title: "Options"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Options}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Options 
+
+The core list of options to pass to the API is summarised in the table below:
+
+| **Option** | **Default Value** | **Explanation** |
+| ---------- | ----------------- | --------------- |
+| travelType | `"bike"` | The chosen travel type - car, walk, bike or transit (or multiple, for routes) |
+| travelTimes | `list(600, 1200, 1800)` | For polygons, the travel times to return (in seconds) |
+| intersectionMode | `"union"` | For polygons, the calculation to apply for multiple sources (union or intersection) |
+| carRushHour | `FALSE` | Whether to account for rush-hour congestion for the car travelType |
+| walkSpeed | `5` | The default walking speed, in km per hour |
+| walkUpHillAdjustment | `10` | The percentage increase in walking time if uphill |
+| walkDownHillAdjustment | `0` | The percentage increase in walking time if downhill |
+| bikeSpeed | `15` | The default bike speed in km per hour |
+| bikeUpHillAdjustment | `20` | The percentage increase in cycling time if uphill |
+| bikeDownHillAdjustment | `-10` | The percentage in increase in cycling time if downhill |
+| transitDate | `NULL` | The date (YYYYMMDD) on which public transport is calculated (NULL defaults to most recent possible) |
+| transitTime | `NULL` | The time in seconds from midnight at which public transport is calculated (NULL defaults to now) |
+| transitDuration | `NULL` | The time window in which public transport is calculated (s  or `.h.m.s`) |
+| transitMaxWalkingTimeFromSource | `NULL` | Max seconds walking from source to bus/train etc |
+| transitMaxWalkingTimeToTarget | `NULL` | Max seconds walking from bus/train etc to target |
+| transitEarliestArrival | `FALSE` | Whether to calculate public transport routes based on earliest arrival (or shortest duration) |
+| transitMaxTransfers | `NULL` | Maximum number of changes on public transport (NULL = no limit) |
+| edgeWeight | `"time"` | Whether to calculate based on travel time or distance |
+| maxEdgeWeight | `1800` | Maximum time/distance to consider (in seconds/metres or `.h.m.s`) |
+| elevation | `FALSE` | Account for terrain elevation? |
+| serializer | `"geojson"` | The data serializer to use - geojson or json |
+| srid | `4326` | The SRID of the returned data (currently only 4326 supported) |
+| minPolygonHoleSize | `NULL` | Minimum area of holes in polygons |
+| buffer | `NULL` | Parameters for manipulating the returned polygons |
+| simplify | `NULL` | Parameters for manipulating the returned polygons |
+| quadrantSegments | `NULL` | Parameters for manipulating the returned polygons |
+| decimalPrecision | `NULL` | Parameters for manipulating the returned polygons |

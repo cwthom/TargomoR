@@ -6,51 +6,33 @@ template:
     bootswatch: cerulean
 
 reference:
+
 - title: "Setup"
   desc: "Functions for setting up your environment"
   contents:
   - setTargomoVariables
-- title: "Talking to the API"
-  desc: "Functions for connecting to the Targomo API and processing the response"
-  contents:
-  - createRequestURL
-  - createRequestBody
-  - createIds
-  - createPoints
-  - deriveSources
-  - deriveTargets
-  - targomoAPI
-  - callTargomoAPI
-  - processResponse
-  - catchBadResponse
-  - processPolygons
-  - processRoutes
-  - processTimes
-  - getRouteFeatures
+
 - title: "Setting Options"
   desc: "Functions for setting API options"
   contents:
   - targomoOptions
   - deriveOptions
+
 - title: "Polygons"
   desc: "Functions for using the Targomo Polygon Service"
   contents:
   - getTargomoPolygons
   - addTargomoPolygons
   - polygonDrawOptions
+
 - title: "Routes"
   desc: "Functions for using the Targomo Route Service"
   contents:
   - getTargomoRoutes
   - addTargomoRoutes
   - routeDrawOptions
-  - drawRouteSegment
-  - drawWalk
-  - drawBike
-  - drawCar
-  - drawTransit
   - drawRoutes
-  - createRoutePopup
+
 - title: "Times"
   desc: "Functions for using the Targomo Time Service"
   contents:
@@ -58,27 +40,28 @@ reference:
   - addTargomoTimes
   - timeDrawOptions
   - timeLegendOptions
-  - createTimePalette
+
 - title: "Attributions"
   desc: "Functions to help with attributing to Targomo"
   contents:
   - addTargomoAttribution
   - attributionLink
-  - attributionFreeIframe
-  - attributionOtherIframe
+
 - title: "Basemaps"
   desc: "Functions for requesting basemaps from Targomo"
   contents:
   - targomoMapStyles
   - getTargomoMapURL
   - addTargomoTiles
+
 - title: "Capabilities"
   desc: "Functions for requesting the API Key Capabilities"
   contents:
   - getTargomoCapabilities
-  - processCapabilities
-- title: "Miscellaneous"
-  desc: "Other functions"
-  contents:
-  - formatEdgeWeight
-  - messageMultipleTravelModes
+
+vignettes:
+  menu:
+  - Introduction   : [TargomoR]
+  - Basemaps       : [Basemaps]
+  - Services       : [Polygons, Routes, Times]
+  - Options        : [Options]

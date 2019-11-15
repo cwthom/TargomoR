@@ -1,0 +1,17 @@
+---
+title: "Basemaps"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Basemaps}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Under Development

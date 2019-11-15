@@ -1,0 +1,66 @@
+---
+title: "Introduction to TargomoR"
+author: "Chris Mason-Thom"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to TargomoR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "100%"
+)
+library(TargomoR)
+```
+
+The `TargomoR` package is designed to be an R interface to the [Targomo](https://www.targomo.com/) travel time service, through their [REST API](https://docs.targomo.com/core/). The goal is to make it easy for R users to access the data, so they can spend more time doing analysis and less time wrestling with API documentation.
+
+The functions in `TargomoR` are designed to integrate with those of `leaflet` - functions for adding features and tiles to a `leaflet` map for example all take the form `addTargomo*`, and can be piped together using `%>%`. 
+
+Underlying the functions to talk to the API is the `httr::POST` function. Each request is composed by translating your data and options into a suitable JSON request, `POST`ing it to the API, and processing the JSON response into an `sf` object.
+
+## Services Available
+
+Targomo provides a range of travel-time services as end-points from their API. Currently supported services are detailed in the table below. Please see the linked articles for more information on each service.
+
+| **Service**                                                          | **Key Functions**                              | 
+| -------------------------------------------------------------------- | ---------------------------------------------- |
+| [Basemaps](https://cwthom.github.io/TargomoR/articles/Basemaps.html) | `addTargomoTiles()`, `targomoMapStyles()`      |
+| [Polygons](https://cwthom.github.io/TargomoR/articles/Polygons.html) | `addTargomoPolygons()`, `polygonDrawOptions()` |
+| [Routes](https://cwthom.github.io/TargomoR/articles/Routes.html)     | `addTargomoRoutes()`, `routeDrawOptions()`     |
+| [Times](https://cwthom.github.io/TargomoR/articles/Times.html)       | `addTargomoTimes()`, `timeDrawOptions()`       |
+| [Options for All Services](https://cwthom.github.io/TargomoR/articles/Options.html) | `targomoOptions()`              |
+
+As well as the `addTargomo*` functions there are also corresponding `getTargomo*` functions which return the data from the API as a usable R object. This is particularly useful if you're conducting further analysis with the data, rather than immediately visualising it.
+
+## Example
+
+The following code snippet shows how easy it is to add detailed routing data to a `leaflet` map, in just a few function calls.
+
+```{r example}
+# load packages
+library(leaflet)
+library(TargomoR)
+
+# set source and target data
+source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
+target <- data.frame(id = "Tower Bridge", lat = 51.5055, lng = -0.0754)
+
+# create map and add a basemap and routes
+leaflet() %>% 
+  addTargomoTiles(style = "basic") %>% 
+  addTargomoRoutes(source_data = source,
+                   target_data = target,
+                   options = targomoOptions(
+                     travelType = "transit",
+                     transitMaxTransfers = 1
+                   )) %>% 
+  addTargomoAttribution(position = "bottomleft")
+```
+
+Check out the detailed [articles](https://cwthom.github.io/TargomoR/articles) for more information.
