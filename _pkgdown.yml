@@ -16,7 +16,6 @@ reference:
   desc: "Functions for setting API options"
   contents:
   - targomoOptions
-  - deriveOptions
 
 - title: "Polygons"
   desc: "Functions for using the Targomo Polygon Service"
@@ -59,9 +58,26 @@ reference:
   contents:
   - getTargomoCapabilities
 
-vignettes:
-  menu:
-  - Introduction   : [TargomoR]
-  - Basemaps       : [Basemaps]
-  - Services       : [Polygons, Routes, Times]
-  - Options        : [Options]
+navbar:
+  left:
+  - text: Get Started
+    href: articles/TargomoR.html
+  - text: Articles
+    menu:
+    - text: Basemaps
+      href: articles/Basemaps.html
+    - text: Polygons
+      href: articles/Polygons.html
+    - text: Routes
+      href: articles/Routes.html
+    - text: Times
+      href: articles/Times.html
+    - text: Options
+      href: articles/Options.html
+  - text: Reference
+    href: reference/index.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/cwthom/TargomoR
