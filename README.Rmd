@@ -23,10 +23,6 @@ config <- list()
 
 # TargomoR
 
-An R interface to the Targomo API.
-
-## Note
-
 **This package is being developed with the permission of Targomo, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their [website](https://www.targomo.com/developers/).**
 
 **Please also be aware of the Targomo [Terms and Conditions](https://account.targomo.com/legal/terms).**

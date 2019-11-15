@@ -31,16 +31,16 @@ Targomo provides a range of travel-time services as end-points from their API. C
 | **Service**                                                          | **Key Functions**                              | 
 | -------------------------------------------------------------------- | ---------------------------------------------- |
 | [Basemaps](https://cwthom.github.io/TargomoR/articles/Basemaps.html) | `addTargomoTiles()`, `targomoMapStyles()`      |
-| [Polygons](https://cwthom.github.io/TargomoR/articles/Polygons.html) | `addTargomoPolygons()`, `polygonDrawOptions()` |
-| [Routes](https://cwthom.github.io/TargomoR/articles/Routes.html)     | `addTargomoRoutes()`, `routeDrawOptions()`     |
-| [Times](https://cwthom.github.io/TargomoR/articles/Times.html)       | `addTargomoTimes()`, `timeDrawOptions()`       |
+| [Polygons](https://cwthom.github.io/TargomoR/articles/Polygons.html) | `getTargomoPolygons()`, `addTargomoPolygons()`, `polygonDrawOptions()` |
+| [Routes](https://cwthom.github.io/TargomoR/articles/Routes.html)     | `getTargomoRoutes()`, `addTargomoRoutes()`, `routeDrawOptions()`     |
+| [Times](https://cwthom.github.io/TargomoR/articles/Times.html)       | `getTargomoTimes()`, `addTargomoTimes()`, `timeDrawOptions()`       |
 | [Options for All Services](https://cwthom.github.io/TargomoR/articles/Options.html) | `targomoOptions()`              |
 
 As well as the `addTargomo*` functions there are also corresponding `getTargomo*` functions which return the data from the API as a usable R object. This is particularly useful if you're conducting further analysis with the data, rather than immediately visualising it.
 
 ## Example
 
-The following code snippet shows how easy it is to add detailed routing data to a `leaflet` map, in just a few function calls.
+The following code snippet shows how easy it is to add detailed routing data to a `leaflet` map, in just a few function calls. Try clicking the red public transport lines for more information about the route!
 
 ```{r example}
 # load packages
