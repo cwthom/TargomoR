@@ -107,9 +107,113 @@
 
     
     
-<div id="under-development" class="section level2">
+<p>TODO: Introduction</p>
+<div id="getting-the-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#under-development" class="anchor"></a>Under Development</h2>
+<a href="#getting-the-data" class="anchor"></a>Getting the Data</h2>
+<p>For the isochrone polygon service, <code>getTargomoPolygons</code> returns a Simple Feature Collection of 2 fields. The fields are:</p>
+<ul>
+<li>time - the time in seconds of each isochrone</li>
+<li>area - the area in square metres of the isochrone</li>
+</ul>
+<p>Each feature is a POLYGON (or MULTIPOLYGON). There is one feature per time specified in the <code>travelTimes</code> argument of <code>targomoOptions</code> - see the vignette on <a href="https://cwthom.github.io/TargomoR/articles/Options.html">Options</a> for more information.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># set some source data</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">source &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">id =</span> <span class="st">"Big Ben"</span>, <span class="dt">lat =</span> <span class="fl">51.5007</span>, <span class="dt">lng =</span> <span class="fl">-0.1246</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># query the API</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">polygons &lt;-<span class="st"> </span><span class="kw"><a href="../reference/polygon.html">getTargomoPolygons</a></span>(<span class="dt">source_data =</span> source,</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">                               <span class="dt">source_lat =</span> <span class="op">~</span>lat, <span class="dt">source_lng =</span> <span class="op">~</span>lng,</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">                               <span class="dt">options =</span> <span class="kw"><a href="../reference/options.html">targomoOptions</a></span>(<span class="dt">travelType =</span> <span class="st">"transit"</span>))</a></code></pre></div>
+</div>
+<div id="integration-with-leaflet" class="section level2">
+<h2 class="hasAnchor">
+<a href="#integration-with-leaflet" class="anchor"></a>Integration with Leaflet</h2>
+<p>If we want to integrate this into a leaflet map, you can either:</p>
+<ul>
+<li>use the <code>polygons</code> object derived above, and add it to a map with <code><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html">leaflet::addPolygons()</a></code>, or;</li>
+<li>combine the call to the API and the drawing options in one with <code>addTargomoPolygons</code>
+</li>
+</ul>
+<p>The latter option looks like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/basemaps.html">addTargomoTiles</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/polygon.html">addTargomoPolygons</a></span>(<span class="dt">source_data =</span> source,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">                     <span class="dt">source_lat =</span> <span class="op">~</span>lat, <span class="dt">source_lng =</span> <span class="op">~</span>lng,</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">                     <span class="dt">options =</span> <span class="kw"><a href="../reference/options.html">targomoOptions</a></span>(<span class="dt">travelType =</span> <span class="st">"transit"</span>))</a></code></pre></div>
+</div>
+<div id="drawing-options" class="section level2">
+<h2 class="hasAnchor">
+<a href="#drawing-options" class="anchor"></a>Drawing Options</h2>
+<p>Using <code>addTargomoPolygons</code> you can customise the way the polygons appear on the map with a call to <code>polygonDrawOptions</code>. The options available are:</p>
+<table class="table">
+<thead><tr class="header">
+<th><strong>Option</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Meaning</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>stroke</td>
+<td><code>TRUE</code></td>
+<td>Should the polygons have a border?</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td><code>5</code></td>
+<td>The border stroke-weight</td>
+</tr>
+<tr class="odd">
+<td>color</td>
+<td><code><a href="https://rdrr.io/r/base/list.html">list("red", "orange", "green")</a></code></td>
+<td>The border color</td>
+</tr>
+<tr class="even">
+<td>opacity</td>
+<td><code>0.5</code></td>
+<td>The border opacity</td>
+</tr>
+<tr class="odd">
+<td>fill</td>
+<td><code>TRUE</code></td>
+<td>Should the interior of the polygons be filled?</td>
+</tr>
+<tr class="even">
+<td>fillColor</td>
+<td><code>color</code></td>
+<td>The interior fill color (defaults to border color)</td>
+</tr>
+<tr class="odd">
+<td>fillOpacity</td>
+<td><code>0.2</code></td>
+<td>The fill opacity</td>
+</tr>
+<tr class="even">
+<td>dashArray</td>
+<td><code>NULL</code></td>
+<td>The border dash pattern</td>
+</tr>
+<tr class="odd">
+<td>smoothFactor</td>
+<td><code>1</code></td>
+<td>How much to simplify the polylines</td>
+</tr>
+<tr class="even">
+<td>noClip</td>
+<td><code>FALSE</code></td>
+<td>Disable polyline clipping?</td>
+</tr>
+</tbody>
+</table>
+<p>For example, if we wish to re-create the map above, but with opaque polygons in shades of blue, we can do:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/basemaps.html">addTargomoTiles</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/polygon.html">addTargomoPolygons</a></span>(<span class="dt">source_data =</span> source,</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">                     <span class="dt">options =</span> <span class="kw"><a href="../reference/options.html">targomoOptions</a></span>(<span class="dt">travelType =</span> <span class="st">"transit"</span>),</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">                     <span class="dt">drawOptions =</span> <span class="kw"><a href="../reference/polygonDrawOptions.html">polygonDrawOptions</a></span>(</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">                       <span class="dt">color =</span> <span class="st">"black"</span>,</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">                       <span class="dt">fillColor =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"blue"</span>, <span class="st">"dodgerblue"</span>, <span class="st">"skyblue"</span>),</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                       <span class="dt">fillOpacity =</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                     ))</a></code></pre></div>
 </div>
   </div>
 
@@ -119,7 +223,9 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#under-development">Under Development</a></li>
+<li><a href="#getting-the-data">Getting the Data</a></li>
+      <li><a href="#integration-with-leaflet">Integration with Leaflet</a></li>
+      <li><a href="#drawing-options">Drawing Options</a></li>
       </ul>
 </div>
       </div>

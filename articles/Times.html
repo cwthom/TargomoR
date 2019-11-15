@@ -107,9 +107,31 @@
 
     
     
-<div id="under-development" class="section level2">
+<p>TODO: Introduction</p>
+<div id="getting-the-data" class="section level2">
 <h2 class="hasAnchor">
-<a href="#under-development" class="anchor"></a>Under Development</h2>
+<a href="#getting-the-data" class="anchor"></a>Getting the Data</h2>
+<p>For the time service, <code>getTargomoTimes</code> returns a Simple Feature Collection of 4 fields. Each feature is a POINT (corresponding to the target point), and the fields are:</p>
+<ul>
+<li>sourceId, targetId - given IDs for the points, or inferred numeric IDs if none supplied</li>
+<li>travelType - the travel mode (can supply multiple as with routes)</li>
+<li>travelTime - the time taken in seconds to get from the source to the target</li>
+</ul>
+<pre><code>#&gt; Simple feature collection with 1 feature and 4 fields
+#&gt; geometry type:  POINT
+#&gt; dimension:      XY
+#&gt; bbox:           xmin: -0.0754 ymin: 51.5055 xmax: -0.0754 ymax: 51.5055
+#&gt; epsg (SRID):    4326
+#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs
+#&gt; # A tibble: 1 x 5
+#&gt;   sourceId targetId     travelType travelTime          geometry
+#&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;           &lt;int&gt;       &lt;POINT [°]&gt;
+#&gt; 1 Big Ben  Tower Bridge car               719 (-0.0754 51.5055)</code></pre>
+</div>
+<div id="integration-with-leaflet" class="section level2">
+<h2 class="hasAnchor">
+<a href="#integration-with-leaflet" class="anchor"></a>Integration with Leaflet</h2>
+<p>TODO: Add leaflet example</p>
 </div>
   </div>
 
@@ -119,7 +141,8 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#under-development">Under Development</a></li>
+<li><a href="#getting-the-data">Getting the Data</a></li>
+      <li><a href="#integration-with-leaflet">Integration with Leaflet</a></li>
       </ul>
 </div>
       </div>
