@@ -10,8 +10,41 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  out.width = "100%"
 )
+library(leaflet)
+library(TargomoR)
 ```
 
-## Under Development
+There are a range of map tiles available through Targomo. They can be added directly to a leaflet map through the `addTargomoTiles()` function, which wraps around `leaflet::addTiles()`. Adding these also requires an API key, which is picked up as usual from your `TARGOMO_API_KEY` environment variable (see `setTargomoVariables()` for information).
+
+## Available Basemaps
+
+The full list of available basemap styles is:
+
+```{r map-styles, echo=FALSE}
+cat(paste0(targomoMapStyles(), collapse = "\n"))
+```
+
+These should be used with `addTargomoTiles()`, as in:
+
+```{r not-run, eval=FALSE}
+leaflet() %>% addTargomoTiles(style = "darkblue-nolabels", api_key = ...)
+```
+
+## Demonstration
+
+To see each basemap, change the layer visible on the map below:
+
+```{r basemap-demo, echo=FALSE}
+l <- leaflet()
+for (style in targomoMapStyles()) {
+  l <- l %>% addTargomoTiles(style = style, group = style)
+}
+l %>% addLayersControl(baseGroups = targomoMapStyles(),
+                       position = "topright",
+                       options = layersControlOptions(collapsed = FALSE)) %>% 
+  setView(lat = 51.5, lng = -0.1, zoom = 14)
+```
+
