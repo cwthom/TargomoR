@@ -134,14 +134,16 @@
 <li><a href="https://targomo.com/developers/intro/services/routing/">Routing</a></li>
 <li><a href="https://targomo.com/developers/intro/services/reachability/">Time</a></li>
 </ul>
-<p>For each service there are 2 core functions:</p>
+<p>For each service there are 3 core functions:</p>
 <ul>
 <li>
 <code>getTargomo{service}</code> - returns an <code>sf</code> object containing the requested data.</li>
 <li>
-<code>addTargomo{service}</code> - adds the polygons/routes/times to a <code>leaflet</code> map.</li>
+<code>drawTargomo{service}</code> - draws the resultant object on a <code>leaflet</code> map.</li>
+<li>
+<code>addTargomo{service}</code> - combines <code>get</code>-ting and <code>draw</code>-ing into a single call.</li>
 </ul>
-<p>The <code>add*</code> functions are provided as a convenience - feel free to create your own drawing functions to put the data onto a map!</p>
+<p>The <code>draw*</code> and <code>add*</code> functions are provided as a convenience - feel free to create your own drawing functions to put the data onto a map!</p>
 <p>There is also support for adding basemaps through <code><a href="reference/basemaps.html">addTargomoTiles()</a></code>. See the vignette on <a href="https://cwthom.github.io/TargomoR/articles/Basemaps.html">basemaps</a> for more information.</p>
 </div>
 <div id="attribution" class="section level2">
