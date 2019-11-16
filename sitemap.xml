@@ -4,6 +4,9 @@
     <loc>https://cwthom.github.io/TargomoR//index.html</loc>
   </url>
   <url>
+    <loc>https://cwthom.github.io/TargomoR//reference/addTimeLegend.html</loc>
+  </url>
+  <url>
     <loc>https://cwthom.github.io/TargomoR//reference/attribution.html</loc>
   </url>
   <url>
@@ -22,6 +25,9 @@
     <loc>https://cwthom.github.io/TargomoR//reference/createRequestURL.html</loc>
   </url>
   <url>
+    <loc>https://cwthom.github.io/TargomoR//reference/createRoutePopup.html</loc>
+  </url>
+  <url>
     <loc>https://cwthom.github.io/TargomoR//reference/createTimePalette.html</loc>
   </url>
   <url>
@@ -31,10 +37,16 @@
     <loc>https://cwthom.github.io/TargomoR//reference/deriveSources.html</loc>
   </url>
   <url>
-    <loc>https://cwthom.github.io/TargomoR//reference/draw.html</loc>
+    <loc>https://cwthom.github.io/TargomoR//reference/drawTargomoRoutes.html</loc>
   </url>
   <url>
     <loc>https://cwthom.github.io/TargomoR//reference/formatting.html</loc>
+  </url>
+  <url>
+    <loc>https://cwthom.github.io/TargomoR//reference/getTargomoPolygons.html</loc>
+  </url>
+  <url>
+    <loc>https://cwthom.github.io/TargomoR//reference/getTargomoTimes.html</loc>
   </url>
   <url>
     <loc>https://cwthom.github.io/TargomoR//reference/messageMultipleTravelModes.html</loc>
@@ -46,16 +58,10 @@
     <loc>https://cwthom.github.io/TargomoR//reference/pipe.html</loc>
   </url>
   <url>
-    <loc>https://cwthom.github.io/TargomoR//reference/polygon.html</loc>
-  </url>
-  <url>
     <loc>https://cwthom.github.io/TargomoR//reference/polygonDrawOptions.html</loc>
   </url>
   <url>
     <loc>https://cwthom.github.io/TargomoR//reference/process.html</loc>
-  </url>
-  <url>
-    <loc>https://cwthom.github.io/TargomoR//reference/route-popup.html</loc>
   </url>
   <url>
     <loc>https://cwthom.github.io/TargomoR//reference/routeDrawOptions.html</loc>
@@ -74,9 +80,6 @@
   </url>
   <url>
     <loc>https://cwthom.github.io/TargomoR//reference/timeLegendOptions.html</loc>
-  </url>
-  <url>
-    <loc>https://cwthom.github.io/TargomoR//reference/times.html</loc>
   </url>
   <url>
     <loc>https://cwthom.github.io/TargomoR//articles/Basemaps.html</loc>
