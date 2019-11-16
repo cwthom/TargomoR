@@ -58,6 +58,7 @@ processPolygons <- function(payload) {
   geojson <- jsonlite::toJSON(payload$data, auto_unbox = TRUE)
   polygons <- geojsonsf::geojson_sf(geojson)
   polygons <- polygons[order(-polygons$time), ]
+  polygons <- sf::st_sf(polygons, crs = sf::st_crs(4326)) # not sure why this is 100% necessary, but seems to be...
   return(polygons)
 
 }

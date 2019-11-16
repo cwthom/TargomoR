@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 )
 library(leaflet)
 library(TargomoR)
+
 ```
 
 TODO: Introduction
@@ -35,24 +36,28 @@ source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
 # query the API
 polygons <- getTargomoPolygons(source_data = source,
                                source_lat = ~lat, source_lng = ~lng,
-                               options = targomoOptions(travelType = "transit"))
+                               options = targomoOptions(travelType = "bike"))
 ```
 
 ## Integration with Leaflet
 
 If we want to integrate this into a leaflet map, you can either:
 
-* use the `polygons` object derived above, and add it to a map with `leaflet::addPolygons()`, or;
-* combine the call to the API and the drawing options in one with `addTargomoPolygons`
+* draw an existing polygons object with `drawTargomoPolygons`, or;
+* combine the API call and drawing with `addTargomoPolygons`, or;
+* write your own drawing function using `leaflet::addPolygons`
 
-The latter option looks like:
+The second option looks like:
 
-```{r polygon-example, eval=FALSE}
+```{r polygon-example, message=TRUE, warning=TRUE}
+# set some source data
+source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
+
+# combine the API call and drawing using `addTargomoPolygons`
 leaflet() %>% 
   addTargomoTiles() %>% 
   addTargomoPolygons(source_data = source,
-                     source_lat = ~lat, source_lng = ~lng,
-                     options = targomoOptions(travelType = "transit"))
+                     options = targomoOptions(travelType = "bike"))
 ```
 
 ## Drawing Options
@@ -72,15 +77,14 @@ Using `addTargomoPolygons` you can customise the way the polygons appear on the 
 | smoothFactor | `1`                              | How much to simplify the polylines                 |
 | noClip       | `FALSE`                          | Disable polyline clipping?                         |
 
-For example, if we wish to re-create the map above, but with opaque polygons in shades of blue, we can do:
+For example, if we wish to re-create the map above, but with opaque polygons in shades of blue with thin black outlines, we can do the following (this time using `drawTargomoPolygons`):
 
-```{r polygon-example-2, eval=FALSE}
+```{r polygon-example-2}
 leaflet() %>% 
   addTargomoTiles() %>% 
-  addTargomoPolygons(source_data = source,
-                     options = targomoOptions(travelType = "transit"),
-                     drawOptions = polygonDrawOptions(
-                       color = "black",
+  drawTargomoPolygons(polygons = polygons,
+                      drawOptions = polygonDrawOptions(
+                       weight = 1, color = "black", opacity = 1,
                        fillColor = c("blue", "dodgerblue", "skyblue"),
                        fillOpacity = 1
                      ))

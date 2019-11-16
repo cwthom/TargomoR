@@ -21,6 +21,7 @@ reference:
   desc: "Functions for using the Targomo Polygon Service"
   contents:
   - getTargomoPolygons
+  - drawTargomoPolygons
   - addTargomoPolygons
   - polygonDrawOptions
 
@@ -28,14 +29,15 @@ reference:
   desc: "Functions for using the Targomo Route Service"
   contents:
   - getTargomoRoutes
+  - drawTargomoRoutes
   - addTargomoRoutes
   - routeDrawOptions
-  - drawRoutes
 
 - title: "Times"
   desc: "Functions for using the Targomo Time Service"
   contents:
   - getTargomoTimes
+  - drawTargomoTimes
   - addTargomoTimes
   - timeDrawOptions
   - timeLegendOptions

@@ -1,6 +1,7 @@
 
 ## General To Do
 
+* Formalise Get --> Draw --> Add structure on routes, times and polygons
 * Add function to link to POI service - DONE (awaiting clarification)
 * Make hexsticker! - DONE (awaiting permission)
 * Plan out vignettes - DONE

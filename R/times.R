@@ -12,10 +12,12 @@
 #' @param source_id,target_id Formulas or vectors of IDs to give to your source and target points.
 #'   These will be used to match back to the input data if applicable.
 #' @param options A list of \code{\link{targomoOptions}} to send to the API.
+#' @param times A times dataset returned by \code{getTargomoTimes}
 #' @param drawOptions A list of \code{\link{timeDrawOptions}} to determine how to show
 #'   the resulting times on the map.
 #' @param group The leaflet map group to add the times to. One group is used for all
 #'   map elements being drawn per call to the API.
+#' @param ... Further arguments to pass to \code{\link[leaflet]{addCircleMarkers}}
 #' @param api_key Your Targomo API key - defaults to the \code{TARGOMO_API_KEY}
 #'   ennvironment variable.
 #' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
@@ -24,11 +26,11 @@
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #'
-#' @name times
+#' @name getTargomoTimes
 #'
 NULL
 
-#' @rdname times
+#' @rdname getTargomoTimes
 #' @export
 getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = NULL,
                             target_data = NULL, target_lat = NULL, target_lng = NULL,
@@ -80,8 +82,38 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
 
 }
 
+#' @rdname getTargomoTimes
+#' @export
+drawTargomoTimes <- function(map, times,
+                             drawOptions = timeDrawOptions(),
+                             group = NULL,
+                             ...) {
 
-#' @rdname times
+  opts <- drawOptions
+
+  palette <- createTimePalette(palette = opts$palette,
+                               type = opts$type,
+                               maxTime = opts$maxTime,
+                               bins = opts$bins,
+                               reverse = opts$reverse)
+
+  map <- leaflet::addCircleMarkers(map, data = times, fillColor = ~palette(travelTime),
+                                   stroke = opts$stroke, weight = opts$weight,
+                                   color = opts$color, opacity = opts$opacity,
+                                   fillOpacity = opts$fillOpacity, group = group,
+                                   ...)
+
+  if (opts$legend) {
+    map <- addTimeLegend(map, palette, times$travelTime,
+                         opts$legendOptions, group)
+  }
+
+  map
+
+}
+
+
+#' @rdname getTargomoTimes
 #' @export
 addTargomoTimes <- function(map,
                             source_data = NULL, source_lat = NULL, source_lng = NULL,
@@ -90,6 +122,7 @@ addTargomoTimes <- function(map,
                             options = targomoOptions(),
                             drawOptions = timeDrawOptions(),
                             group = NULL,
+                            ...,
                             api_key = Sys.getenv("TARGOMO_API_KEY"),
                             region = Sys.getenv("TARGOMO_REGION"),
                             config = list(),
@@ -104,29 +137,15 @@ addTargomoTimes <- function(map,
                            options = options, config = config,
                            verbose = verbose, progress = progress)
 
-  opts <- drawOptions
+  map <- drawTargomoTimes(
+    map = map,
+    times = times,
+    drawOptions = drawOptions,
+    group = group,
+    ...
+  )
 
-  palette <- createTimePalette(palette = opts$palette,
-                               type = opts$type,
-                               maxTime = opts$maxTime,
-                               bins = opts$bins,
-                               reverse = opts$reverse)
-
-  map <- leaflet::addCircleMarkers(map, data = times, fillColor = ~palette(travelTime),
-                                   stroke = opts$stroke, weight = opts$weight,
-                                   color = opts$color, opacity = opts$opacity,
-                                   fillOpacity = opts$fillOpacity, group = group)
-
-  if (opts$legend) {
-
-    lopts <- opts$legendOptions
-    map <- leaflet::addLegend(map,  position = lopts$position, pal = palette,
-                              values = times$travelTime, title = lopts$title,
-                              layerId = lopts$layerId, group = group)
-
-  }
-
-  map
+  return(map)
 
 }
 
@@ -200,5 +219,51 @@ timeLegendOptions <- function(position = "topright",
       layerId = layerId
     )
   )
+
+}
+
+#' Create a Colour Palette for Time Service Results
+#'
+#' @param palette A colour palette e.g. "viridis", "Blues"
+#' @param type Either "numeric" or "bin"
+#' @param maxTime The maximum time value to consider
+#' @param bins Either a single number of bins, or a vector of cut points.
+#' @param reverse Whether to reverse the colour palette.
+#'
+createTimePalette <- function(palette, type, maxTime, bins, reverse) {
+
+  if (!(type %in% c("numeric", "bin"))) {
+    stop("Invalid 'type': ", deparse(type))
+  }
+
+  if (type == "numeric") {
+    leaflet::colorNumeric(palette = palette,
+                          domain = c(0, maxTime),
+                          na.color = NA,
+                          reverse = reverse)
+  } else if (type == "bin") {
+    leaflet::colorBin(palette = palette,
+                      domain = c(0, maxTime),
+                      bins = bins,
+                      na.color = NA,
+                      reverse = reverse)
+
+  }
+
+}
+
+#' Add Time Legend to Map
+#'
+#' @param map A leaflet map
+#' @param palette A colour palette (from \code{\link{createTimePalette}})
+#' @param values Values to use (travel times)
+#' @param options A set of \code{\link{timeLegendOptions}}
+#' @param group The layer group to add the legend to
+#'
+addTimeLegend <- function(map, palette, values, options, group) {
+
+  leaflet::addLegend(map, position = options$position, pal = palette,
+                     values = values, title = options$title,
+                     layerId = options$layerId, group = group)
 
 }

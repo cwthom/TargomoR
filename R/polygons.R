@@ -1,17 +1,18 @@
 #' Add Targomo Polygons to a Leaflet Map
 #'
-#' Function for adding targomo polygons to a leaflet map - uses \link[leaflet]{addPolygons}
-#' as a workhorse function, and adds the polygons as an sf object.
+#' Functions for retrieving isochrone polygons from the Targomo API and adding
+#' drawing them on a \code{leaflet} map.
 #'
 #' @param map A leaflet map.
 #' @param source_data The data object from which source ppoints are derived.
 #' @param source_lng,source_lat Vectors/one-sided formulas of longitude and latitude.
 #' @param options A list of \code{\link{targomoOptions}} to call the API.
+#' @param polygons A polygons dataset returned by \code{getTargomoPolygons}, for drawing
 #' @param drawOptions A list of \code{\link{polygonDrawOptions}} to determine how to show
 #'   the resulting polygons on the map.
-#' @param highlightOptions A list of \code{\link[leaflet]{highlightOptions}}.
 #' @param group The leaflet map group to add the polygons to. A single group is used
 #'   for all the polygons added by one API call.
+#' @param ... Further arguments to pass to \code{\link[leaflet]{addPolygons}}
 #' @param api_key Your Targomo API key - defaults to the \code{TARGOMO_API_KEY}
 #'   ennvironment variable
 #' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
@@ -20,11 +21,11 @@
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #'
-#' @name polygon
+#' @name getTargomoPolygons
 #'
 NULL
 
-#' @rdname polygon
+#' @rdname getTargomoPolygons
 #' @export
 getTargomoPolygons <- function(source_data = NULL, source_lat = NULL, source_lng = NULL,
                                options = targomoOptions(),
@@ -51,21 +52,38 @@ getTargomoPolygons <- function(source_data = NULL, source_lat = NULL, source_lng
 
 }
 
-#' @rdname polygon
+#' @rdname getTargomoPolygons
+#' @export
+drawTargomoPolygons <- function(map, polygons,
+                                drawOptions = polygonDrawOptions(),
+                                group = NULL,
+                                ...) {
+
+  opts <- drawOptions
+
+  leaflet::addPolygons(map, data = polygons, group = group,
+                       stroke = opts$stroke, weight = opts$weight,
+                       color = opts$color, opacity = opts$opacity,
+                       fill = opts$fill, fillColor = opts$fillColor,
+                       fillOpacity = opts$fillOpacity, dashArray = opts$dashArray,
+                       smoothFactor = opts$smoothFactor, noClip = opts$noClip,
+                       ...)
+
+}
+
+#' @rdname getTargomoPolygons
 #' @export
 addTargomoPolygons <- function(map,
                                source_data = NULL, source_lng = NULL, source_lat = NULL,
                                options = targomoOptions(),
                                drawOptions = polygonDrawOptions(),
-                               highlightOptions = NULL,
                                group = NULL,
+                               ...,
                                api_key = Sys.getenv("TARGOMO_API_KEY"),
                                region = Sys.getenv("TARGOMO_REGION"),
                                config = list(),
                                verbose = FALSE,
                                progress = FALSE) {
-
-  opts <- drawOptions
 
   polygons <- getTargomoPolygons(api_key = api_key, region = region,
                                  source_data = source_data,
@@ -73,14 +91,18 @@ addTargomoPolygons <- function(map,
                                  options = options, config = config,
                                  verbose = verbose, progress = progress)
 
-  leaflet::addPolygons(map, data = polygons, group = group,
-                       stroke = opts$stroke, weight = opts$weight,
-                       color = opts$color, opacity = opts$opacity,
-                       fill = opts$fill, fillColor = opts$fillColor,
-                       fillOpacity = opts$fillOpacity, dashArray = opts$dashArray,
-                       smoothFactor = opts$smoothFactor, noClip = opts$noClip)
+  map <- drawTargomoPolygons(
+    map = map,
+    polygons = polygons,
+    drawOptions = drawOptions,
+    group = group,
+    ...
+  )
+
+  return(map)
 
 }
+
 
 #' Options for Drawing Polygons on the Map
 #'

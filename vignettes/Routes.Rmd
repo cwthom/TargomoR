@@ -61,7 +61,7 @@ routes$bike[[1]]$features
 
 The `TargomoR` package lets you easily visualise your route data. You can either:
 
-* draw an existing routes object with `drawRoutes`, or;
+* draw an existing routes object with `drawTargomoRoutes`, or;
 * combine the API call and drawing with `addTargomoRoutes`, or;
 * write your own drawing function using `leaflet::addPolylines`
 
@@ -89,14 +89,14 @@ Using `addTargomoRoutes` or `drawRoutes` you can customise the way the routes ap
 | transferColor     | `"blue"`                         | The color for transfer circle markers                      |
 | transferRadius    | `10`                             | The radius for transfer circle markers                     |
 
-Changing these, we could for instance make the map above but with purple dotted lines (and here we'll use `drawRoutes`):
+Changing these, we could for instance make the map above but with purple dotted lines (and here we'll use `drawTargomoRoutes`):
 
 ```{r route-example-2}
 leaflet() %>% 
   addTargomoTiles() %>% 
-  drawRoutes(routes = routes, 
-             drawOptions = routeDrawOptions(
-               bikeColour = "purple",
-               bikeDashArray = "10,15"
-             ))
+  drawTargomoRoutes(routes = routes, 
+                    drawOptions = routeDrawOptions(
+                      bikeColour = "purple",
+                      bikeDashArray = "10,15"
+                    ))
 ```

@@ -1,3 +1,11 @@
+# 0.1.2.9000
+
+## Features
+
+* Common interface of `get`, `draw`, `add` for all 3 main services
+* improved `pkgdown` site
+* more support for `...` arguments to drawing functions
+
 # TargomoR 0.1.1.9003
 
 * Add support for basemap service
