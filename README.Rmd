@@ -66,12 +66,13 @@ You're now ready to use Targomo to get travel-time and routing data. There are t
 * [Routing](https://targomo.com/developers/intro/services/routing/)
 * [Time](https://targomo.com/developers/intro/services/reachability/)
 
-For each service there are 2 core functions:
+For each service there are 3 core functions:
 
 * `getTargomo{service}` - returns an `sf` object containing the requested data.
-* `addTargomo{service}` - adds the polygons/routes/times to a `leaflet` map.
+* `drawTargomo{service}` - draws the resultant object on a `leaflet` map.
+* `addTargomo{service}` - combines `get`-ting and `draw`-ing into a single call.
 
-The `add*` functions are provided as a convenience - feel free to create your own drawing functions to put the data onto a map!
+The `draw*` and `add*` functions are provided as a convenience - feel free to create your own drawing functions to put the data onto a map!
 
 There is also support for adding basemaps through `addTargomoTiles()`. See the vignette on [basemaps](https://cwthom.github.io/TargomoR/articles/Basemaps.html) for more information.
 
