@@ -5,7 +5,7 @@
 #' the Targomo API require an API key, and use the \code{TARGOMO_API_KEY} environment
 #' variable by default. Similarly you can set your default region.
 #'
-#' For available regions, see here: \url{https://targomo.com/developers/availability/}
+#' For available regions, see here: \url{https://targomo.com/developers/resources/availability/}
 #'
 #' @param api_key Your Targomo API key
 #' @param region Your preferred Targomo default region

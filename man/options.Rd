@@ -66,5 +66,5 @@ or \code{.km.m.ml} for distance, where ml represents miles (1609 metres).}
 \description{
 This function sets the options to be passed to the API service.
 For full details of available options see:
-\url{https://docs.targomo.com/core/#/Polygon_Service/post_westcentraleurope_v1_polygon}
+\url{https://docs.targomo.com/core/}
 }

@@ -23,5 +23,5 @@ the Targomo API require an API key, and use the \code{TARGOMO_API_KEY} environme
 variable by default. Similarly you can set your default region.
 }
 \details{
-For available regions, see here: \url{https://targomo.com/developers/availability/}
+For available regions, see here: \url{https://targomo.com/developers/resources/availability/}
 }
