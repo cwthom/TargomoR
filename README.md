@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# TargomoR
+# TargomoR <a href='https:/cwthom.github.io/TargomoR'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 **This package is being developed with the permission of Targomo, but is
 NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see
@@ -100,3 +100,10 @@ requirements appropriate to your plan.
 Please note that the ‘TargomoR’ project is released with a [Contributor
 Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
 you agree to abide by its terms.
+
+-----
+
+#### Icon
+
+Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from
+[www.flaticon.com](%22https://www.flaticon.com/%22).

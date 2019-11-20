@@ -4,15 +4,16 @@
 library(hexSticker)
 
 # create sticker
-sticker(subplot = "man/figures/targomo-logo.jpg",
+sticker(subplot = "man/figures/panel.png",
         package = "TargomoR",
-        p_size = 18,
-        p_x = 1, p_y = 1.3,
-        p_color = "#3f7f81",
+        p_family = "caveat",
+        p_size = 24,
+        p_x = 1, p_y = 1.4,
+        p_color = "#2e1a03",
         s_x = 1, s_y = 0.8,
-        h_color = "#3f7f81",
+        h_color = "#2e1a03",
         h_fill  = "#eaf7f7",
         url = "https://github.com/cwthom/TargomoR",
         u_size = 4,
-        u_color = "#3f7f81",
+        u_color = "#2e1a03",
         filename = "man/figures/logo.png")
