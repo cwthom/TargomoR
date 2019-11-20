@@ -15,6 +15,11 @@ test_that("drawing functions behave themselves", {
   td <- timeDrawOptions()
   lg <- timeLegendOptions()
 
+  # get polygons, routes and times
+  p <- getTargomoPolygons(source_data = source_data)
+  r <- getTargomoRoutes(source_data = source_data, target_data = target_data)
+  t <- getTargomoTimes(source_data = source_data, target_data = target_data)
+
 
   # test draw options lists
   expect_is(rd, "list")
@@ -33,11 +38,9 @@ test_that("drawing functions behave themselves", {
   expect_true(td$stroke)
 
   # test adding data to map
-  expect_is(addTargomoPolygons(l, source_data), c("leaflet", "htmlwidget"))
-  expect_is(addTargomoRoutes(l, source_data = source_data, target_data = target_data),
-            c("leaflet", "htmlwidget"))
-  expect_is(addTargomoTimes(l, source_data = source_data, target_data = target_data),
-            c("leaflet", "htmlwidget"))
+  expect_is(drawTargomoPolygons(l, p, pd), c("leaflet", "htmlwidget"))
+  expect_is(drawTargomoRoutes(l, r, rd), c("leaflet", "htmlwidget"))
+  expect_is(drawTargomoTimes(l, t, td), c("leaflet", "htmlwidget"))
 
 
 
