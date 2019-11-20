@@ -10,7 +10,7 @@ getTargomoPolygons(source_data = NULL, source_lat = NULL,
   source_lng = NULL, options = targomoOptions(),
   api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE)
+  verbose = FALSE, progress = FALSE, timeout = NULL)
 
 drawTargomoPolygons(map, polygons, drawOptions = polygonDrawOptions(),
   group = NULL, ...)
@@ -20,7 +20,7 @@ addTargomoPolygons(map, source_data = NULL, source_lng = NULL,
   drawOptions = polygonDrawOptions(), group = NULL, ...,
   api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE)
+  verbose = FALSE, progress = FALSE, timeout = NULL)
 }
 \arguments{
 \item{source_data}{The data object from which source ppoints are derived.}
@@ -40,6 +40,8 @@ environment variable}
 \item{verbose}{Whether to print out information about the API call.}
 
 \item{progress}{Whether to show a progress bar of the API call.}
+
+\item{timeout}{Timeout in seconds (leave NULL for no timeout/curl default).}
 
 \item{map}{A leaflet map.}
 

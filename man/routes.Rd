@@ -11,7 +11,7 @@ getTargomoRoutes(source_data = NULL, source_lat = NULL,
   target_lng = NULL, source_id = NULL, target_id = NULL,
   options = targomoOptions(), api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE)
+  verbose = FALSE, progress = FALSE, timeout = NULL)
 
 addTargomoRoutes(map, source_data = NULL, source_lat = NULL,
   source_lng = NULL, source_id = NULL, target_data = NULL,
@@ -19,7 +19,7 @@ addTargomoRoutes(map, source_data = NULL, source_lat = NULL,
   options = targomoOptions(), drawOptions = routeDrawOptions(),
   group = NULL, api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE)
+  verbose = FALSE, progress = FALSE, timeout = NULL)
 }
 \arguments{
 \item{source_data, target_data}{The source and target points for your routes -
@@ -46,6 +46,8 @@ environment variable.}
 \item{verbose}{Whether to print out information about the API call.}
 
 \item{progress}{Whether to show a progress bar of the API call.}
+
+\item{timeout}{Timeout in seconds (leave NULL for no timeout/curl default).}
 
 \item{map}{A leaflet map}
 

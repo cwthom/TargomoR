@@ -6,7 +6,8 @@
 \usage{
 callTargomoAPI(api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), service, body,
-  config = list(), verbose = FALSE, progress = FALSE)
+  config = list(), verbose = FALSE, progress = FALSE,
+  timeout = NULL)
 }
 \arguments{
 \item{api_key}{The Targomo API key.}
@@ -22,6 +23,8 @@ callTargomoAPI(api_key = Sys.getenv("TARGOMO_API_KEY"),
 \item{verbose}{Display info on the API call?}
 
 \item{progress}{Display a progress bar?}
+
+\item{timeout}{Timeout in seconds (leave NULL for no timeout/curl default).}
 }
 \description{
 Call the Targomo API

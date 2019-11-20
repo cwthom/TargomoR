@@ -23,6 +23,7 @@
 #' @param config Config options to pass to \code{httr::POST} e.g. proxy settings
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
+#' @param timeout Timeout in seconds (leave NULL for no timeout/curl default).
 #'
 #' @name routes
 #'
@@ -38,7 +39,8 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
                              region = Sys.getenv("TARGOMO_REGION"),
                              config = list(),
                              verbose = FALSE,
-                             progress = FALSE) {
+                             progress = FALSE,
+                             timeout = NULL) {
 
   output <- list()
   tms <- options$travelType
@@ -60,7 +62,8 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
     response <- callTargomoAPI(api_key = api_key, region = region,
                                service = "route", body = body,
                                config = config,
-                               verbose = verbose, progress = progress)
+                               verbose = verbose, progress = progress,
+                               timeout = timeout)
 
     output[[tm]] <- processResponse(response, service = "route")
   }
@@ -81,7 +84,8 @@ addTargomoRoutes <- function(map,
                              api_key = Sys.getenv("TARGOMO_API_KEY"),
                              region = Sys.getenv("TARGOMO_REGION"),
                              config = list(),
-                             verbose = FALSE, progress = FALSE) {
+                             verbose = FALSE, progress = FALSE,
+                             timeout = NULL) {
 
   routes <- getTargomoRoutes(api_key = api_key, region = region,
                              source_data = source_data, source_lat = source_lat,
@@ -89,7 +93,8 @@ addTargomoRoutes <- function(map,
                              target_data = target_data, target_lat = target_lat,
                              target_lng = target_lng, target_id = target_id,
                              options = options, config = config,
-                             verbose = verbose, progress = progress)
+                             verbose = verbose, progress = progress,
+                             timeout = timeout)
 
   map <- drawTargomoRoutes(
     map = map,

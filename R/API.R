@@ -213,11 +213,13 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 #' @param config Config options to pass to \code{httr::POST} e.g. proxy settings
 #' @param verbose Display info on the API call?
 #' @param progress Display a progress bar?
+#' @param timeout Timeout in seconds (leave NULL for no timeout/curl default).
 #'
 callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                            region = Sys.getenv("TARGOMO_REGION"),
                            service, body, config = list(),
-                           verbose = FALSE, progress = FALSE) {
+                           verbose = FALSE, progress = FALSE,
+                           timeout = NULL) {
 
   url <- createRequestURL(region, service)
 
@@ -225,7 +227,8 @@ callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                          query = list(key = api_key),
                          body = body, encode = "json",
                          if (verbose) httr::verbose(),
-                         if (progress) httr::progress())
+                         if (progress) httr::progress(),
+                         if (!is.null(timeout)) httr::timeout(timeout))
 
   return(response)
 
