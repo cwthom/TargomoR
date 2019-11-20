@@ -44,6 +44,7 @@
 
 <meta property="og:title" content="Call the Targomo API — callTargomoAPI" />
 <meta property="og:description" content="Call the Targomo API" />
+<meta property="og:image" content="https://cwthom.github.io/TargomoR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -147,7 +148,8 @@
 
     <pre class="usage"><span class='fu'>callTargomoAPI</span>(<span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
   <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>), <span class='no'>service</span>, <span class='no'>body</span>,
-  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,6 +181,10 @@
     <tr>
       <th>progress</th>
       <td><p>Display a progress bar?</p></td>
+    </tr>
+    <tr>
+      <th>timeout</th>
+      <td><p>Timeout in seconds (leave NULL for no timeout/curl default).</p></td>
     </tr>
     </table>
 

@@ -45,6 +45,7 @@
 <meta property="og:title" content="Add Targomo Polygons to a Leaflet Map — getTargomoPolygons" />
 <meta property="og:description" content="Functions for retrieving isochrone polygons from the Targomo API and adding
 drawing them on a leaflet map." />
+<meta property="og:image" content="https://cwthom.github.io/TargomoR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -151,7 +152,7 @@ drawing them on a <code>leaflet</code> map.</p>
   <span class='kw'>source_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='options.html'>targomoOptions</a></span>(),
   <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
   <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>), <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
 <span class='fu'>drawTargomoPolygons</span>(<span class='no'>map</span>, <span class='no'>polygons</span>, <span class='kw'>drawOptions</span> <span class='kw'>=</span> <span class='fu'><a href='polygonDrawOptions.html'>polygonDrawOptions</a></span>(),
   <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
@@ -161,7 +162,7 @@ drawing them on a <code>leaflet</code> map.</p>
   <span class='kw'>drawOptions</span> <span class='kw'>=</span> <span class='fu'><a href='polygonDrawOptions.html'>polygonDrawOptions</a></span>(), <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>,
   <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
   <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>), <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,6 +200,10 @@ environment variable</p></td>
     <tr>
       <th>progress</th>
       <td><p>Whether to show a progress bar of the API call.</p></td>
+    </tr>
+    <tr>
+      <th>timeout</th>
+      <td><p>Timeout in seconds (leave NULL for no timeout/curl default).</p></td>
     </tr>
     <tr>
       <th>map</th>
