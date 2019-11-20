@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -95,7 +95,10 @@
 
       
 
-      </header><div class="row">
+      </header><script src="Times_files/htmlwidgets-1.5.1/htmlwidgets.js"></script><script src="Times_files/jquery-1.12.4/jquery.min.js"></script><link href="Times_files/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="Times_files/leaflet-1.3.1/leaflet.js"></script><link href="Times_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="Times_files/Proj4Leaflet-1.0.1/proj4-compressed.js"></script><script src="Times_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="Times_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="Times_files/leaflet-binding-2.0.3/leaflet.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Times</h1>
@@ -108,31 +111,210 @@
 
     
     
-<p>TODO: Introduction</p>
+<p>One of the most powerful features of Targomo is the ability to quickly get A-to-B travel times for a multitude of source/target combinations. These make for great ‘heatmap’ visuals, or can be used for further analysis and aggregation.</p>
 <div id="getting-the-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#getting-the-data" class="anchor"></a>Getting the Data</h2>
-<p>For the time service, <code>getTargomoTimes</code> returns a Simple Feature Collection of 4 fields. Each feature is a POINT (corresponding to the target point), and the fields are:</p>
+<p>For the time service, <code><a href="../reference/getTargomoTimes.html">getTargomoTimes()</a></code> returns a Simple Feature Collection of 4 fields. Each feature is a POINT (corresponding to the target point), and the fields are:</p>
 <ul>
-<li>sourceId, targetId - given IDs for the points, or inferred numeric IDs if none supplied</li>
-<li>travelType - the travel mode (can supply multiple as with routes)</li>
-<li>travelTime - the time taken in seconds to get from the source to the target</li>
+<li>
+<code>sourceId</code>, <code>targetId</code> - given IDs for the points, or inferred numeric IDs if none supplied</li>
+<li>
+<code>travelType</code> - the travel mode (can supply multiple as with routes)</li>
+<li>
+<code>travelTime</code> - the time taken in seconds to get from the source to the target</li>
 </ul>
-<pre><code>#&gt; Simple feature collection with 1 feature and 4 fields
-#&gt; geometry type:  POINT
-#&gt; dimension:      XY
-#&gt; bbox:           xmin: -0.0754 ymin: 51.5055 xmax: -0.0754 ymax: 51.5055
-#&gt; epsg (SRID):    4326
-#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs
-#&gt; # A tibble: 1 x 5
-#&gt;   sourceId targetId     travelType travelTime          geometry
-#&gt;   &lt;chr&gt;    &lt;chr&gt;        &lt;chr&gt;           &lt;int&gt;       &lt;POINT [°]&gt;
-#&gt; 1 Big Ben  Tower Bridge car               711 (-0.0754 51.5055)</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># load package</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(TargomoR)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># set source and target data</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">source &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">id =</span> <span class="st">"Big Ben"</span>, <span class="dt">lat =</span> <span class="fl">51.5007</span>, <span class="dt">lng =</span> <span class="fl">-0.1246</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">target &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">id =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Tower Bridge"</span>, <span class="st">"Covent Garden"</span>),</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">                     <span class="dt">lat =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">51.5055</span>, <span class="fl">51.5117</span>),</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">                     <span class="dt">lng =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="op">-</span><span class="fl">0.0754</span>, <span class="fl">-0.1246</span>))</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co"># query the API</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">times &lt;-<span class="st"> </span><span class="kw"><a href="../reference/getTargomoTimes.html">getTargomoTimes</a></span>(<span class="dt">source_data =</span> source, <span class="dt">target_data =</span> target,</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">                         <span class="dt">source_lat =</span> <span class="op">~</span>lat, <span class="dt">source_lng =</span> <span class="op">~</span>lng,</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">                         <span class="dt">target_lat =</span> <span class="op">~</span>lat, <span class="dt">target_lng =</span> <span class="op">~</span>lng,</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">                         <span class="dt">source_id =</span> <span class="op">~</span>id, <span class="dt">target_id =</span> <span class="op">~</span>id,</a>
+<a class="sourceLine" id="cb1-15" data-line-number="15">                         <span class="dt">options =</span> <span class="kw"><a href="../reference/options.html">targomoOptions</a></span>(<span class="dt">travelType =</span> <span class="st">"car"</span>))</a>
+<a class="sourceLine" id="cb1-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb1-17" data-line-number="17"><span class="co"># examine the output</span></a>
+<a class="sourceLine" id="cb1-18" data-line-number="18">times</a>
+<a class="sourceLine" id="cb1-19" data-line-number="19"><span class="co">#&gt; Simple feature collection with 2 features and 4 fields</span></a>
+<a class="sourceLine" id="cb1-20" data-line-number="20"><span class="co">#&gt; geometry type:  POINT</span></a>
+<a class="sourceLine" id="cb1-21" data-line-number="21"><span class="co">#&gt; dimension:      XY</span></a>
+<a class="sourceLine" id="cb1-22" data-line-number="22"><span class="co">#&gt; bbox:           xmin: -0.1246 ymin: 51.5055 xmax: -0.0754 ymax: 51.5117</span></a>
+<a class="sourceLine" id="cb1-23" data-line-number="23"><span class="co">#&gt; epsg (SRID):    4326</span></a>
+<a class="sourceLine" id="cb1-24" data-line-number="24"><span class="co">#&gt; proj4string:    +proj=longlat +datum=WGS84 +no_defs</span></a>
+<a class="sourceLine" id="cb1-25" data-line-number="25"><span class="co">#&gt; # A tibble: 2 x 5</span></a>
+<a class="sourceLine" id="cb1-26" data-line-number="26"><span class="co">#&gt;   sourceId targetId      travelType travelTime          geometry</span></a>
+<a class="sourceLine" id="cb1-27" data-line-number="27"><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;           &lt;int&gt;       &lt;POINT [°]&gt;</span></a>
+<a class="sourceLine" id="cb1-28" data-line-number="28"><span class="co">#&gt; 1 Big Ben  Covent Garden car               282 (-0.1246 51.5117)</span></a>
+<a class="sourceLine" id="cb1-29" data-line-number="29"><span class="co">#&gt; 2 Big Ben  Tower Bridge  car               711 (-0.0754 51.5055)</span></a></code></pre></div>
 </div>
 <div id="integration-with-leaflet" class="section level2">
 <h2 class="hasAnchor">
 <a href="#integration-with-leaflet" class="anchor"></a>Integration with Leaflet</h2>
-<p>TODO: Add leaflet example</p>
+<p>As with the polygon and route services, there are three ways to add time data to a map:</p>
+<ul>
+<li>use <code><a href="../reference/getTargomoTimes.html">drawTargomoTimes()</a></code> to send your times dataset to the map</li>
+<li>use <code><a href="../reference/getTargomoTimes.html">addTargomoTimes()</a></code> to combine the API call and drawing in one</li>
+<li>write your own drawing function using <code><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html">leaflet::addMarkers</a></code> or <code><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html">leaflet::addCircleMarkers</a></code>
+</li>
+</ul>
+<p>In the example below, we’ll generate some random points and use <code><a href="../reference/getTargomoTimes.html">addTargomoTimes()</a></code> to combine requesting the data and adding it to the map:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># get random target data (source data = Big Ben as before)</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">targets &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">                      <span class="dt">lat =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="fl">51.45</span>, <span class="dt">max =</span> <span class="fl">51.55</span>),</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">                      <span class="dt">lng =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="dv">100</span>, <span class="dt">min =</span> <span class="fl">-0.17</span>, <span class="dt">max =</span> <span class="fl">-0.07</span>))</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="../reference/basemaps.html">addTargomoTiles</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/getTargomoTimes.html">addTargomoTimes</a></span>(<span class="dt">source_data =</span> source, <span class="dt">source_id =</span> <span class="op">~</span>id,</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">                  <span class="dt">target_data =</span> targets, <span class="dt">target_id =</span> <span class="op">~</span>id,</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">                  <span class="dt">options =</span> <span class="kw"><a href="../reference/options.html">targomoOptions</a></span>(<span class="dt">travelType =</span> <span class="st">"bike"</span>))</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12"><span class="co">#&gt; Assuming "lng" and "lat" are longitude and latitude, respectively</span></a>
+<a class="sourceLine" id="cb2-13" data-line-number="13"><span class="co">#&gt; Assuming "lng" and "lat" are longitude and latitude, respectively</span></a></code></pre></div>
+<div id="htmlwidget-b1281feb772b33c47468" style="width:100%;height:432.632880098888px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b1281feb772b33c47468">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://maps.targomo.com/styles/klokantech-basic-gl-style/rendered/{z}/{x}/{y}.png?key=059G8CQ6A8NLETP6EJSOC7T28",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"<a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors<\/a>\n                   <a href='http://openmaptiles.org/' target='_blank'>&copy; OpenMapTiles<\/a>\n                   <a href='https://targomo.com/developers/resources/attribution/' target='_blank'>&copy; Targomo<\/a>"}]},{"method":"addCircleMarkers","args":[[51.5255503924564,51.4628187332302,51.5182968516834,51.4849086998263,51.5234893576475,51.4958519734908,51.491376797948,51.4909387192456,51.5304303321289,51.5004514756613,51.5260322784306,51.5177687660325,51.5148477129173,51.5270526911365,51.5232325737132,51.5017775704851,51.5201574990293,51.4642262229696,51.5241694960045,51.506535312091,51.5131358741317,51.5283961206209,51.488231447502,51.4862829016987,51.472694131243,51.5368677585851,51.5071960298577,51.5096623098012,51.4692935221363,51.5343675889773,51.4792718759039,51.4688145837747,51.5072904076427,51.5233068460133,51.4982711162185,51.5014697359176,51.4882803478977,51.484160145116,51.4925735481549,51.5266775316792,51.4688686601352,51.5166429177159,51.4887684915913,51.4732362526469,51.5051177849062,51.5280130539788,51.4939809043659,51.4883589593694,51.4987270764308,51.4855038801907,51.5122803596314,51.4687586182961,51.4756737645715,51.4992539140861,51.5101761474041,51.4982132751262,51.5006850162521,51.4738461008063,51.5216486484976,51.5109334738692,51.5201901426539,51.4641305547208,51.4678944689687,51.5132149647223,51.4983029926196],[-0.0788871704414487,-0.135877342107706,-0.106576022813097,-0.108768535689451,-0.147916391636245,-0.106786497430876,-0.0749851007759571,-0.11554056506604,-0.150463051167317,-0.084008112391457,-0.0801530947256833,-0.143829653812572,-0.0780304128816351,-0.0830100634647533,-0.147370410203002,-0.116560940216295,-0.0719748288672417,-0.123143765055574,-0.0749741943832487,-0.123698212443851,-0.145942770414986,-0.153914234209806,-0.126178726186045,-0.079270946495235,-0.141821883553639,-0.127163777970709,-0.145892732711509,-0.121392149366438,-0.117255180845968,-0.116176931145601,-0.135375173324719,-0.104750076988712,-0.111246397187933,-0.146480692182668,-0.113562026903965,-0.103579900604673,-0.112807168071158,-0.135380814741366,-0.142185089346021,-0.14074232136365,-0.113907748907805,-0.108902377267368,-0.119153593648225,-0.133690098957159,-0.11888815516606,-0.150584784317762,-0.0941713863331825,-0.153449159911834,-0.131346993804909,-0.163228625599295,-0.1386931257369,-0.139850539253093,-0.147545236749575,-0.111626424109563,-0.0993781260959804,-0.0967811628291383,-0.152560775708407,-0.139256712310016,-0.0934995687846094,-0.169043603148311,-0.0814355754107237,-0.125746064893901,-0.120919463578612,-0.112921915464103,-0.12520251924172],10,null,null,{"interactive":true,"className":"","stroke":true,"color":"black","weight":3,"opacity":0.5,"fill":true,"fillColor":["#F0E51D","#F6E620","#1F948C","#1F998A","#62CB5F","#306A8E","#85D44B","#2C738E","#BFDF25","#38B977","#EAE51A","#28AE80","#87D549","#E5E419","#5DC962","#433D84","#F6E620","#E1E418","#F3E61E","#463480","#22A785","#D0E11C","#2C718E","#88D548","#B5DE2B","#F3E61E","#23898E","#34608D","#A7DB35","#BEDF26","#33B67A","#D4E21A","#31688E","#64CB5E","#404588","#2E6E8E","#26828E","#1F9E89","#297B8E","#88D548","#B7DE2A","#25858E","#287C8E","#55C667","#375A8C","#ADDC30","#1F9E89","#29AF7F","#443C84","#5BC863","#228C8D","#B8DE29","#A4DB36","#3D4D8A","#22A785","#23898E","#24868E","#8DD645","#48C16E","#8CD646","#86D549","#EBE51B","#BBDE27","#31678E","#46317E"],"fillOpacity":0.5},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#46317E , #3E4A89 9.86283474853037%, #31688E 22.9261920313521%, #26828E 35.9895493141737%, #1F9E89 49.0529065969954%, #35B779 62.1162638798171%, #6DCD59 75.1796211626388%, #B4DE2C 88.2429784454605%, #F6E620 "],"labels":["400","600","800","1,000","1,200","1,400","1,600"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"topright","type":"numeric","title":"Travel Times","extra":{"p_1":0.0986283474853037,"p_n":0.882429784454605},"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.4628187332302,51.5368677585851],"lng":[-0.169043603148311,-0.0719748288672417]}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div id="drawing-options" class="section level2">
+<h2 class="hasAnchor">
+<a href="#drawing-options" class="anchor"></a>Drawing Options</h2>
+<p>Using <code><a href="../reference/getTargomoTimes.html">addTargomoTimes()</a></code> or <code><a href="../reference/getTargomoTimes.html">drawTargomoTimes()</a></code> you can customise the way the routes appear on the map with a call to <code><a href="../reference/timeDrawOptions.html">timeDrawOptions()</a></code> and <code><a href="../reference/timeLegendOptions.html">timeLegendOptions()</a></code>. The options available are:</p>
+<p><strong>timeDrawOptions</strong></p>
+<table class="table">
+<colgroup>
+<col width="15%">
+<col width="29%">
+<col width="54%">
+</colgroup>
+<thead><tr class="header">
+<th><strong>Option</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Meaning</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>palette</td>
+<td><code>"viridis"</code></td>
+<td>A colour palette name e.g. “Blues”, “viridis”</td>
+</tr>
+<tr class="even">
+<td>type</td>
+<td><code>"numeric"</code></td>
+<td>“numeric” or “bin” - continuous or discrete groupings</td>
+</tr>
+<tr class="odd">
+<td>maxTime</td>
+<td><code>1800</code></td>
+<td>Maximum time to allow for (in seconds)</td>
+</tr>
+<tr class="even">
+<td>reverse</td>
+<td><code>FALSE</code></td>
+<td>Reverse the colour palette?</td>
+</tr>
+<tr class="odd">
+<td>bins</td>
+<td><code><a href="https://rdrr.io/r/base/c.html">c(600, 1800)</a></code></td>
+<td>A number of bins or vector of cut points (only for “bin” type)</td>
+</tr>
+<tr class="even">
+<td>legend</td>
+<td><code>TRUE</code></td>
+<td>Add a legend to the map</td>
+</tr>
+<tr class="odd">
+<td>legendOptions</td>
+<td><code><a href="../reference/timeLegendOptions.html">timeLegendOptions()</a></code></td>
+<td>A list of legend options - see below</td>
+</tr>
+<tr class="even">
+<td>radius</td>
+<td><code>10</code></td>
+<td>Radius of the circle markers used</td>
+</tr>
+<tr class="odd">
+<td>stroke</td>
+<td><code>TRUE</code></td>
+<td>Whether to draw the marker border</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td><code>3</code></td>
+<td>Stroke weight in pixels</td>
+</tr>
+<tr class="odd">
+<td>color</td>
+<td><code>"black"</code></td>
+<td>Stroke colour</td>
+</tr>
+<tr class="even">
+<td>opacity</td>
+<td><code>0.5</code></td>
+<td>Stroke opacity</td>
+</tr>
+<tr class="odd">
+<td>fill</td>
+<td><code>TRUE</code></td>
+<td>Fill the markers with colour (from palette)?</td>
+</tr>
+<tr class="even">
+<td>fillOpacity</td>
+<td><code>0.5</code></td>
+<td>Fill opacity</td>
+</tr>
+</tbody>
+</table>
+<p><strong>timeLegendOptions</strong></p>
+<table class="table">
+<thead><tr class="header">
+<th><strong>Option</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Meaning</strong></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>position</td>
+<td><code>"topright"</code></td>
+<td>Legend position on map</td>
+</tr>
+<tr class="even">
+<td>title</td>
+<td><code>"Travel Times"</code></td>
+<td>Legend title</td>
+</tr>
+<tr class="odd">
+<td>layerId</td>
+<td><code>NULL</code></td>
+<td>Leaflet layer id for legend</td>
+</tr>
+</tbody>
+</table>
+<p>Changing some of these options, we could re-draw the above map with smaller markers, using the <code>inferno</code> palette and white borders, with a different legend title and discrete bins:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">leaflet</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/basemaps.html">addTargomoTiles</a></span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/getTargomoTimes.html">addTargomoTimes</a></span>(<span class="dt">source_data =</span> source, <span class="dt">target_data =</span> targets,</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">                  <span class="dt">options =</span> <span class="kw"><a href="../reference/options.html">targomoOptions</a></span>(<span class="dt">travelType =</span> <span class="st">"bike"</span>),</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">                  <span class="dt">drawOptions =</span> <span class="kw"><a href="../reference/timeDrawOptions.html">timeDrawOptions</a></span>(</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">                    <span class="dt">palette =</span> <span class="st">"inferno"</span>,</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">                    <span class="dt">type =</span> <span class="st">"bin"</span>, <span class="dt">bins =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">300</span>, <span class="dv">600</span>, <span class="dv">900</span>, <span class="dv">1200</span>, <span class="dv">1800</span>),</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">                    <span class="dt">color =</span> <span class="st">"white"</span>, <span class="dt">radius =</span> <span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">                    <span class="dt">opacity =</span> <span class="dv">1</span>, <span class="dt">fillOpacity =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">                    <span class="dt">legendOptions =</span> <span class="kw"><a href="../reference/timeLegendOptions.html">timeLegendOptions</a></span>(</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">                      <span class="dt">position =</span> <span class="st">"bottomleft"</span>,</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">                      <span class="dt">title =</span> <span class="st">"Cycling Times"</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">                    )</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">                  )</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">  )</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co">#&gt; Assuming "lng" and "lat" are longitude and latitude, respectively</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; Assuming "lng" and "lat" are longitude and latitude, respectively</span></a></code></pre></div>
+<div id="htmlwidget-3601f17753bda0775389" style="width:100%;height:432.632880098888px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3601f17753bda0775389">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://maps.targomo.com/styles/klokantech-basic-gl-style/rendered/{z}/{x}/{y}.png?key=059G8CQ6A8NLETP6EJSOC7T28",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"<a href='https://www.openstreetmap.org/copyright' target='_blank'>&copy; OpenStreetMap contributors<\/a>\n                   <a href='http://openmaptiles.org/' target='_blank'>&copy; OpenMapTiles<\/a>\n                   <a href='https://targomo.com/developers/resources/attribution/' target='_blank'>&copy; Targomo<\/a>"}]},{"method":"addCircleMarkers","args":[[51.5255503924564,51.4628187332302,51.5182968516834,51.4849086998263,51.5234893576475,51.4958519734908,51.491376797948,51.4909387192456,51.5304303321289,51.5004514756613,51.5260322784306,51.5177687660325,51.5148477129173,51.5270526911365,51.5232325737132,51.5017775704851,51.5201574990293,51.4642262229696,51.5241694960045,51.506535312091,51.5131358741317,51.5283961206209,51.488231447502,51.4862829016987,51.472694131243,51.5368677585851,51.5071960298577,51.5096623098012,51.4692935221363,51.5343675889773,51.4792718759039,51.4688145837747,51.5072904076427,51.5233068460133,51.4982711162185,51.5014697359176,51.4882803478977,51.484160145116,51.4925735481549,51.5266775316792,51.4688686601352,51.5166429177159,51.4887684915913,51.4732362526469,51.5051177849062,51.5280130539788,51.4939809043659,51.4883589593694,51.4987270764308,51.4855038801907,51.5122803596314,51.4687586182961,51.4756737645715,51.4992539140861,51.5101761474041,51.4982132751262,51.5006850162521,51.4738461008063,51.5216486484976,51.5109334738692,51.5201901426539,51.4641305547208,51.4678944689687,51.5132149647223,51.4983029926196],[-0.0788871704414487,-0.135877342107706,-0.106576022813097,-0.108768535689451,-0.147916391636245,-0.106786497430876,-0.0749851007759571,-0.11554056506604,-0.150463051167317,-0.084008112391457,-0.0801530947256833,-0.143829653812572,-0.0780304128816351,-0.0830100634647533,-0.147370410203002,-0.116560940216295,-0.0719748288672417,-0.123143765055574,-0.0749741943832487,-0.123698212443851,-0.145942770414986,-0.153914234209806,-0.126178726186045,-0.079270946495235,-0.141821883553639,-0.127163777970709,-0.145892732711509,-0.121392149366438,-0.117255180845968,-0.116176931145601,-0.135375173324719,-0.104750076988712,-0.111246397187933,-0.146480692182668,-0.113562026903965,-0.103579900604673,-0.112807168071158,-0.135380814741366,-0.142185089346021,-0.14074232136365,-0.113907748907805,-0.108902377267368,-0.119153593648225,-0.133690098957159,-0.11888815516606,-0.150584784317762,-0.0941713863331825,-0.153449159911834,-0.131346993804909,-0.163228625599295,-0.1386931257369,-0.139850539253093,-0.147545236749575,-0.111626424109563,-0.0993781260959804,-0.0967811628291383,-0.152560775708407,-0.139256712310016,-0.0934995687846094,-0.169043603148311,-0.0814355754107237,-0.125746064893901,-0.120919463578612,-0.112921915464103,-0.12520251924172],5,null,null,{"interactive":true,"className":"","stroke":true,"color":"white","weight":3,"opacity":1,"fill":true,"fillColor":["#FCFFA4","#FCFFA4","#F98D0A","#F98D0A","#FCFFA4","#BB3655","#FCFFA4","#BB3655","#FCFFA4","#FCFFA4","#FCFFA4","#F98D0A","#FCFFA4","#FCFFA4","#FCFFA4","#57106E","#FCFFA4","#FCFFA4","#FCFFA4","#000004","#F98D0A","#FCFFA4","#BB3655","#FCFFA4","#FCFFA4","#FCFFA4","#BB3655","#57106E","#FCFFA4","#FCFFA4","#F98D0A","#FCFFA4","#BB3655","#FCFFA4","#57106E","#BB3655","#BB3655","#F98D0A","#BB3655","#FCFFA4","#FCFFA4","#BB3655","#BB3655","#FCFFA4","#57106E","#FCFFA4","#F98D0A","#F98D0A","#57106E","#FCFFA4","#BB3655","#FCFFA4","#FCFFA4","#57106E","#F98D0A","#BB3655","#BB3655","#FCFFA4","#FCFFA4","#FCFFA4","#FCFFA4","#FCFFA4","#FCFFA4","#57106E","#000004"],"fillOpacity":1},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]},{"method":"addLegend","args":[{"colors":["#000004","#57106E","#BB3655","#F98D0A","#FCFFA4"],"labels":["0 &ndash; 300","300 &ndash; 600","600 &ndash; 900","900 &ndash; 1,200","1,200 &ndash; 1,800"],"na_color":null,"na_label":"NA","opacity":0.5,"position":"bottomleft","type":"bin","title":"Cycling Times","extra":null,"layerId":null,"className":"info legend","group":null}]}],"limits":{"lat":[51.4628187332302,51.5368677585851],"lng":[-0.169043603148311,-0.0719748288672417]}},"evals":[],"jsHooks":[]}</script>
 </div>
   </div>
 
@@ -144,6 +326,7 @@
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#getting-the-data">Getting the Data</a></li>
       <li><a href="#integration-with-leaflet">Integration with Leaflet</a></li>
+      <li><a href="#drawing-options">Drawing Options</a></li>
       </ul>
 </div>
       </div>
