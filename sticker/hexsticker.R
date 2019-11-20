@@ -3,6 +3,13 @@
 # hexSticker package
 library(hexSticker)
 
+# get google fonts (http://www.google.com/fonts)
+library(showtext)
+font_add_google("Caveat", "caveat")
+
+# Automatically use showtext to render text for future devices
+showtext_auto()
+
 # create sticker
 sticker(subplot = "man/figures/panel.png",
         package = "TargomoR",

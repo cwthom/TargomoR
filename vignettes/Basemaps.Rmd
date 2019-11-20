@@ -21,7 +21,7 @@ There are a range of map tiles available through Targomo. They can be added dire
 
 ## Available Basemaps
 
-The full list of available basemap styles is:
+The full list of available basemap styles is given by `targomoMapStyles()`:
 
 ```{r map-styles, echo=FALSE}
 cat(paste0(targomoMapStyles(), collapse = "\n"))

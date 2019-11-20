@@ -45,3 +45,87 @@ The core list of options to pass to the API is summarised in the table below:
 | simplify | `NULL` | Parameters for manipulating the returned polygons |
 | quadrantSegments | `NULL` | Parameters for manipulating the returned polygons |
 | decimalPrecision | `NULL` | Parameters for manipulating the returned polygons |
+
+## Debugging
+
+Sometimes, things go wrong! With all the `TargomoR` services, there are several extra arguments which may help you:
+
+### verbose
+
+To each of `getTargomo*` and `addTargomo*`, you can add `verbose = TRUE` - this will print out the full API request to the console so you can check what's going on. Example output is below:
+
+```
+-> POST /britishisles/v1/time?key=<TARGOMO_API_KEY> HTTP/1.1
+-> Host: api.targomo.com
+-> User-Agent: libcurl/7.64.1 r-curl/4.2 httr/1.4.1
+-> Accept-Encoding: deflate, gzip
+-> Accept: application/json, text/xml, application/xml, */*
+-> Content-Length: 448
+-> 
+>> {
+>>   "edgeWeight": "time",
+>>   "maxEdgeWeight": 1800,
+>>   "elevation": false,
+>>   "sources": [
+>>     {
+>>       "id": 1,
+>>       "lat": 51.5007,
+>>       "lng": -0.1246,
+>>       "tm": {
+>>         "bike": {
+>>           "speed": 15,
+>>           "uphill": 20,
+>>           "downhill": -10
+>>         }
+>>       }
+>>     }
+>>   ],
+>>   "targets": [
+>>     {
+>>       "id": 1,
+>>       "lat": 51.5055,
+>>       "lng": -0.0754
+>>     },
+>>     {
+>>       "id": 2,
+>>       "lat": 51.5117,
+>>       "lng": -0.1246
+>>     }
+>>   ]
+>> }
+
+<- HTTP/1.1 200 
+<- Date: Wed, 20 Nov 2019 22:59:11 GMT
+<- Content-Type: application/json
+<- Content-Length: 109
+<- Connection: keep-alive
+<- Access-Control-Allow-Origin: *
+<- Access-Control-Allow-Headers: origin, content-type, accept, authorization, x-requested-with
+<- Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS, HEAD
+<- Content-Encoding: gzip
+<- Server: Targomo | service.targomo.com
+<- Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
+<- X-Frame-Options: DENY
+```
+
+### progress
+
+For long-running requests you can add a progress bar with `progress = TRUE`:
+
+```
+|==========================                           | 50%
+```
+
+### config
+
+If you need to set extra config settings for using `httr`, do so with the `config` argument. A common use case might be if you're behind a proxy server - in this case you would do (for example):
+
+```{r eval=FALSE}
+getTargomoTimes(source_data = sources, target_data = targets,
+                config = httr::use_proxy(url = "your.proxy.domain", port = 1234))
+```
+
+### timeout
+
+If you've got long requests that need more time and are deploying your code in an environment with a default curl timeout (often 10 seconds), try using `timeout = n`, where n is the number of seconds to wait before giving up. Internally this is passed to `httr::timeout`.
+

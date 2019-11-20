@@ -2,10 +2,9 @@
 ## To Do
 
 - [x] Formalise Get --> Draw --> Add structure on routes, times and polygons
-- [ ] Add functions to link to POI service
 - [x] Make hexsticker
 - [x] Plan out vignettes
-- [ ] Write all vignettes
+- [x] Write all vignettes
 - [ ] Add tests for remaining code (up to 100%)
 - [ ] Test locations in different regions around the world
 - [ ] Add documentation for Capabilities service

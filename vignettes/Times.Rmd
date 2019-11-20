@@ -17,22 +17,25 @@ library(leaflet)
 library(TargomoR)
 ```
 
-TODO: Introduction
+One of the most powerful features of Targomo is the ability to quickly get A-to-B travel times for a multitude of source/target combinations. These make for great 'heatmap' visuals, or can be used for further analysis and aggregation.
 
 ## Getting the Data
 
-For the time service, `getTargomoTimes` returns a Simple Feature Collection of 4 fields. Each feature is a POINT (corresponding to the target point), and the fields are:
+For the time service, `getTargomoTimes()` returns a Simple Feature Collection of 4 fields. Each feature is a POINT (corresponding to the target point), and the fields are:
 
-* sourceId, targetId - given IDs for the points, or inferred numeric IDs if none supplied
-* travelType - the travel mode (can supply multiple as with routes)
-* travelTime - the time taken in seconds to get from the source to the target
+* `sourceId`, `targetId` - given IDs for the points, or inferred numeric IDs if none supplied
+* `travelType` - the travel mode (can supply multiple as with routes)
+* `travelTime` - the time taken in seconds to get from the source to the target
 
-```{r get-times, echo=FALSE}
-# set source and target data (TODO: Add multiple (random) targets)
+```{r get-times, echo=TRUE}
+# load package
+library(TargomoR)
+
+# set source and target data
 source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
-target <- data.frame(id = "Tower Bridge", 
-                     lat = 51.5055,
-                     lng = -0.0754)
+target <- data.frame(id = c("Tower Bridge", "Covent Garden"),
+                     lat = c(51.5055, 51.5117),
+                     lng = c(-0.0754, -0.1246))
 
 # query the API
 times <- getTargomoTimes(source_data = source, target_data = target,
@@ -47,4 +50,80 @@ times
 
 ## Integration with Leaflet
 
-TODO: Add leaflet example
+As with the polygon and route services, there are three ways to add time data to a map:
+
+* use `drawTargomoTimes()` to send your times dataset to the map
+* use `addTargomoTimes()` to combine the API call and drawing in one
+* write your own drawing function using `leaflet::addMarkers` or `leaflet::addCircleMarkers`
+
+In the example below, we'll generate some random points and use `addTargomoTimes()` to combine requesting the data and adding it to the map:
+
+```{r time-example}
+
+# get random target data (source data = Big Ben as before)
+targets <- data.frame(id = 1:100,
+                      lat = runif(100, min = 51.45, max = 51.55),
+                      lng = runif(100, min = -0.17, max = -0.07))
+
+leaflet() %>% 
+  addTargomoTiles() %>% 
+  addTargomoTimes(source_data = source, source_id = ~id,
+                  target_data = targets, target_id = ~id,
+                  options = targomoOptions(travelType = "bike"))
+```
+
+## Drawing Options
+
+Using `addTargomoTimes()` or `drawTargomoTimes()` you can customise the way the routes appear on the map with a call to `timeDrawOptions()` and `timeLegendOptions()`. The options available are:
+
+**timeDrawOptions**
+
+| **Option**        | **Default**                      | **Meaning**                                                |
+| ----------------- | -------------------------------- | ---------------------------------------------------------- |
+| palette           | `"viridis"`                      | A colour palette name e.g. "Blues", "viridis"              |
+| type              | `"numeric"`                      | "numeric" or "bin" - continuous or discrete groupings      |
+| maxTime           | `1800`                           | Maximum time to allow for (in seconds)                     |
+| reverse           | `FALSE`                          | Reverse the colour palette?                                |
+| bins              | `c(600, 1800)`                   | A number of bins or vector of cut points (only for "bin" type) |
+| legend            | `TRUE`                           | Add a legend to the map                                    |
+| legendOptions     | `timeLegendOptions()`            | A list of legend options - see below                       |
+| radius            | `10`                             | Radius of the circle markers used                          |
+| stroke            | `TRUE`                           | Whether to draw the marker border                          |
+| weight            | `3`                              | Stroke weight in pixels                                    |
+| color             | `"black"`                        | Stroke colour                                              |
+| opacity           | `0.5`                            | Stroke opacity                                             |
+| fill              | `TRUE`                           | Fill the markers with colour (from palette)?               |
+| fillOpacity       | `0.5`                            | Fill opacity                                               |
+
+**timeLegendOptions**
+
+| **Option**        | **Default**                      | **Meaning**                 |
+| ----------------- | -------------------------------- | --------------------------- |
+| position          | `"topright"`                     | Legend position on map      |
+| title             | `"Travel Times"`                 | Legend title                |
+| layerId           | `NULL`                           | Leaflet layer id for legend |
+
+Changing some of these options, we could re-draw the above map with smaller markers, using the `inferno` palette and white borders, with a different legend title and discrete bins:
+
+```{r time-example-2}
+leaflet() %>% 
+  addTargomoTiles() %>% 
+  addTargomoTimes(source_data = source, target_data = targets,
+                  options = targomoOptions(travelType = "bike"),
+                  drawOptions = timeDrawOptions(
+                    palette = "inferno",
+                    type = "bin", bins = c(0, 300, 600, 900, 1200, 1800),
+                    color = "white", radius = 5,
+                    opacity = 1, fillOpacity = 1,
+                    legendOptions = timeLegendOptions(
+                      position = "bottomleft",
+                      title = "Cycling Times"
+                    )
+                  )
+  )
+```
+                
+                  
+
+
+

@@ -18,16 +18,16 @@ library(TargomoR)
 
 ```
 
-TODO: Introduction
+Isochrone polygons are a great way of visualising complex travel-time datasets in a powerful way - what does "half an hour away" really look like? With `TargomoR` you can add them straight into a `leaflet` map, or get the data in a convenient form for analysis such as testing intersections with known boundaries (i.e. is any part of this region within half an hour of that point?).
 
 ## Getting the Data
 
-For the isochrone polygon service, `getTargomoPolygons` returns a Simple Feature Collection of 2 fields. The fields are:
+For the isochrone polygon service, `getTargomoPolygons()` returns a Simple Feature Collection of 2 fields. The fields are:
 
 * time - the time in seconds of each isochrone
 * area - the area in square metres of the isochrone
 
-Each feature is a POLYGON (or MULTIPOLYGON). There is one feature per time specified in the `travelTimes` argument of `targomoOptions` - see the vignette on [Options](https://cwthom.github.io/TargomoR/articles/Options.html) for more information.
+Each feature is a POLYGON (or MULTIPOLYGON). There is one feature per time specified in the `travelTimes` argument of `targomoOptions()` - see the vignette on [Options](https://cwthom.github.io/TargomoR/articles/Options.html) for more information.
 
 ```{r get-polygon}
 # set some source data
@@ -37,14 +37,17 @@ source <- data.frame(id = "Big Ben", lat = 51.5007, lng = -0.1246)
 polygons <- getTargomoPolygons(source_data = source,
                                source_lat = ~lat, source_lng = ~lng,
                                options = targomoOptions(travelType = "bike"))
+
+# inspect the output
+polygons
 ```
 
 ## Integration with Leaflet
 
 If we want to integrate this into a leaflet map, you can either:
 
-* draw an existing polygons object with `drawTargomoPolygons`, or;
-* combine the API call and drawing with `addTargomoPolygons`, or;
+* draw an existing polygons object with `drawTargomoPolygons()`, or;
+* combine the API call and drawing with `addTargomoPolygons()`, or;
 * write your own drawing function using `leaflet::addPolygons`
 
 The second option looks like:
@@ -62,7 +65,7 @@ leaflet() %>%
 
 ## Drawing Options
 
-Using `addTargomoPolygons` you can customise the way the polygons appear on the map with a call to `polygonDrawOptions`. The options available are:
+Using `addTargomoPolygons()` you can customise the way the polygons appear on the map with a call to `polygonDrawOptions()`. The options available are:
 
 | **Option**   | **Default**                      | **Meaning**                                        |
 | ------------ | -------------------------------- | -------------------------------------------------- |
@@ -77,7 +80,7 @@ Using `addTargomoPolygons` you can customise the way the polygons appear on the 
 | smoothFactor | `1`                              | How much to simplify the polylines                 |
 | noClip       | `FALSE`                          | Disable polyline clipping?                         |
 
-For example, if we wish to re-create the map above, but with opaque polygons in shades of blue with thin black outlines, we can do the following (this time using `drawTargomoPolygons`):
+For example, if we wish to re-create the map above, but with opaque polygons in shades of blue with thin black outlines, we can do the following (this time using `drawTargomoPolygons()`):
 
 ```{r polygon-example-2}
 leaflet() %>% 

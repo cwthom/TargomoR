@@ -104,6 +104,7 @@ drawTargomoTimes <- function(map, times,
                                    stroke = opts$stroke, weight = opts$weight,
                                    color = opts$color, opacity = opts$opacity,
                                    fillOpacity = opts$fillOpacity, group = group,
+                                   radius = opts$radius,
                                    ...)
 
   if (opts$legend) {

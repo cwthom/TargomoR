@@ -3,7 +3,7 @@ url: https://cwthom.github.io/TargomoR/
 
 template:
   params:
-    bootswatch: cerulean
+    bootswatch: flatly
 
 reference:
 

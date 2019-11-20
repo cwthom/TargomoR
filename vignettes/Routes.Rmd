@@ -17,11 +17,11 @@ library(leaflet)
 library(TargomoR)
 ```
 
-TODO: Introduction
+With `TargomoR` you can access routing data all over the world in a convenient, nested structure, letting you focus on the start and end points. Visualising a route can add the finishing touch to a map or shiny application!
 
 ## Getting the Data
 
-For the routing service, `getTargomoRoutes` returns a named nested list. The names are the travel modes given in the `travelType` option (specifying multiple modes will make multiple calls to the API).
+For the routing service, `getTargomoRoutes()` returns a named nested list. The names are the travel modes given in the `travelType` option (specifying multiple modes will make multiple calls to the API).
 
 Within each travel mode is a list of the returned routes - one for each source/target combination where a route has been found. Each route is a data.frame, containing the source and target IDs, and a `features` data.frame of a simple feature collection (class 'sf'). This contains: 
 
@@ -61,11 +61,11 @@ routes$bike[[1]]$features
 
 The `TargomoR` package lets you easily visualise your route data. You can either:
 
-* draw an existing routes object with `drawTargomoRoutes`, or;
-* combine the API call and drawing with `addTargomoRoutes`, or;
+* draw an existing routes object with `drawTargomoRoutes()`, or;
+* combine the API call and drawing with `addTargomoRoutes()`, or;
 * write your own drawing function using `leaflet::addPolylines`
 
-In this example, we use `addTargomoRoutes` to show the cycling routes above.
+In this example, we use `addTargomoRoutes()` to show the cycling routes above.
 
 ```{r route-example}
 leaflet() %>% 
@@ -77,7 +77,7 @@ leaflet() %>%
 
 ## Drawing Options
 
-Using `addTargomoRoutes` or `drawRoutes` you can customise the way the routes appear on the map with a call to `routeDrawOptions`. The options available are:
+Using `addTargomoRoutes()` or `drawTargomoRoutes()` you can customise the way the routes appear on the map with a call to `routeDrawOptions()`. The options available are:
 
 | **Option**        | **Default**                      | **Meaning**                                                |
 | ----------------- | -------------------------------- | ---------------------------------------------------------- |
@@ -89,7 +89,7 @@ Using `addTargomoRoutes` or `drawRoutes` you can customise the way the routes ap
 | transferColor     | `"blue"`                         | The color for transfer circle markers                      |
 | transferRadius    | `10`                             | The radius for transfer circle markers                     |
 
-Changing these, we could for instance make the map above but with purple dotted lines (and here we'll use `drawTargomoRoutes`):
+Changing these, we could for instance make the map above but with purple dotted lines (and here we'll use `drawTargomoRoutes()`):
 
 ```{r route-example-2}
 leaflet() %>% 
