@@ -1,4 +1,10 @@
-# 0.1.2.9000
+# TargomoR 0.1.2.9001
+
+* Support for timeout option to `httr::POST`
+* better testing
+* new logo
+
+# TargomoR 0.1.2.9000
 
 ## Features
 

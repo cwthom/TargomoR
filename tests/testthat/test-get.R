@@ -1,4 +1,4 @@
-test_that("get functions work", {
+test_that("getting functions behave themselves", {
 
   # create source and target data
   source_data <- data.frame(id = "A", lat = 51.52, lng = -0.19)
