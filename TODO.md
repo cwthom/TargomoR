@@ -13,7 +13,8 @@
 - [ ] Add examples to documentation
 - [ ] Tidy up example apps (move to inst/ ?)
 - [ ] Publish example apps to shinyapps.io
-- [ ] Make sure all functions in vignettes are linked to documentation
+- [x] Make sure all functions in vignettes are linked to documentation
+- [ ] Tidy up NEWS.md ahead of release
 - [ ] Include warning about basemaps?
 - [ ] Add badges into Readme
 - [ ] Release to CRAN
