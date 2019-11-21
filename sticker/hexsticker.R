@@ -23,4 +23,7 @@ sticker(subplot = "man/figures/panel.png",
         url = "https://github.com/cwthom/TargomoR",
         u_size = 4,
         u_color = "#2e1a03",
-        filename = "man/figures/logo.png")
+        filename = "man/figures/sticker.png")
+
+# set as logo
+usethis::use_logo(img = "man/figures/sticker.png")
