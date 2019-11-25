@@ -25,7 +25,7 @@ targomoMapStyles <- function() {
 getTargomoMapURL <- function(style = "basic", api_key = NULL) {
 
   if (!(style %in% targomoMapStyles())) {
-    stop("Invalid Map Style - check `targomoMapStyles()`")
+    stop("Invalid Map Style - check targomoMapStyles()")
   }
 
   core <- "https://maps.targomo.com/styles/"
