@@ -62,6 +62,8 @@ The `draw*` and `add*` functions are provided as a convenience - feel free to cr
 
 There is also support for adding basemaps through `addTargomoTiles()`. See the vignette on [basemaps](https://cwthom.github.io/TargomoR/articles/Basemaps.html) for more information.
 
+You can also check the capabilities of your Targomo account with `getTargomoCapabilities()`.
+
 Attribution
 -----------
 

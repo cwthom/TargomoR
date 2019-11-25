@@ -82,6 +82,8 @@ The `draw*` and `add*` functions are provided as a convenience - feel free to cr
 
 There is also support for adding basemaps through `addTargomoTiles()`. See the vignette on [basemaps](https://cwthom.github.io/TargomoR/articles/Basemaps.html) for more information.
 
+You can also check the capabilities of your Targomo account with `getTargomoCapabilities()`.
+
 ## Attribution
 
 It's a condition of use of the Targomo services that you attribute the travel time data to them. Full details can be found on their [attributions page](https://targomo.com/developers/resources/attribution/). To help with this there are two functions in `TargomoR`:

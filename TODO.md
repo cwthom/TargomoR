@@ -7,12 +7,11 @@
 - [x] Write all vignettes
 - [ ] Add tests for remaining code (up to 100%)
 - [ ] Test locations in different regions around the world
-- [ ] Add documentation for Capabilities service
-- [ ] Improve output for capabilities service
+- [x] Add documentation for Capabilities service
+- [x] Improve output for capabilities service
 - [ ] Improve formatting of times (e.g. not just seconds)
 - [ ] Add examples to documentation
-- [ ] Tidy up example apps (move to inst/ ?)
-- [ ] Publish example apps to shinyapps.io
+- [ ] Remove example apps
 - [x] Make sure all functions in vignettes are linked to documentation
 - [ ] Tidy up NEWS.md ahead of release
 - [ ] Include warning about basemaps?
