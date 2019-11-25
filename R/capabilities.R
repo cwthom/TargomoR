@@ -54,26 +54,15 @@ processCapabilities <- function(response) {
 }
 
 
-#' @rdname capabilities
-print.tgm_capabilities <- function(caps) {
+#' Helper functions for tidying up capabilities response
+#'
+#' @param caps A capabilities list from \code{\link{getTargomoCapabilities}}
+#' @param general,transit,speeds The parts of the list
+#'
+#' @name tidy-capabilities
+NULL
 
-  # print out version
-  vn <- caps$general$version
-  cat(paste0("Targomo Config Version: ", vn, "\n"))
-
-  # print out transit and default speeds
-  cat("\nTransit capabilities:\n=========================================\n")
-  print(caps$transit)
-  cat("=========================================\n")
-
-  cat("\nDefault speeds:\n=========================================\n")
-  print(caps$speeds$defaults)
-  cat("=========================================\n")
-
-  invisible(caps)
-}
-
-#' @rdname capabilities
+#' @rdname tidy-capabilities
 tidyGeneral <- function(general) {
 
   # unlist where possible
@@ -82,7 +71,7 @@ tidyGeneral <- function(general) {
   general
 }
 
-#' @rdname capabilities
+#' @rdname tidy-capabilities
 tidyTransit <- function(transit) {
 
   # tidy up transit properties
@@ -95,7 +84,7 @@ tidyTransit <- function(transit) {
   transit
 }
 
-#' @rdname capabilities
+#' @rdname tidy-capabilities
 tidySpeeds <- function(speeds) {
 
   # tidy up osm classes
@@ -118,3 +107,21 @@ tidySpeeds <- function(speeds) {
   speeds
 }
 
+#' @rdname tidy-capabilities
+print.tgm_capabilities <- function(caps) {
+
+  # print out version
+  vn <- caps$general$version
+  cat(paste0("Targomo Config Version: ", vn, "\n"))
+
+  # print out transit and default speeds
+  cat("\nTransit capabilities:\n=========================================\n")
+  print(caps$transit)
+  cat("=========================================\n")
+
+  cat("\nDefault speeds:\n=========================================\n")
+  print(caps$speeds$defaults)
+  cat("=========================================\n")
+
+  invisible(caps)
+}

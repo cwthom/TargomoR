@@ -4,10 +4,6 @@
 \alias{capabilities}
 \alias{getTargomoCapabilities}
 \alias{processCapabilities}
-\alias{print.tgm_capabilities}
-\alias{tidyGeneral}
-\alias{tidyTransit}
-\alias{tidySpeeds}
 \title{Get Account Capabilities}
 \usage{
 getTargomoCapabilities(api_key = Sys.getenv("TARGOMO_API_KEY"),
@@ -15,14 +11,6 @@ getTargomoCapabilities(api_key = Sys.getenv("TARGOMO_API_KEY"),
   verbose = FALSE, progress = FALSE)
 
 processCapabilities(response)
-
-\method{print}{tgm_capabilities}(caps)
-
-tidyGeneral(general)
-
-tidyTransit(transit)
-
-tidySpeeds(speeds)
 }
 \arguments{
 \item{api_key}{Your Targomo API key - defaults to the \code{TARGOMO_API_KEY}
