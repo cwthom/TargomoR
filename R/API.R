@@ -4,7 +4,7 @@
 #' Targomo API base URL
 #'
 targomoAPI <- function() {
-  return("https://api.targomo.com/")
+  "https://api.targomo.com/"
 }
 
 #' Create Request URL
@@ -82,7 +82,7 @@ deriveOptions <- function(options) {
 
   opts <- leaflet::filterNULL(opts)
 
-  return(opts)
+  opts
 
 }
 
@@ -153,12 +153,12 @@ deriveSources <- function(points, options) {
     sources[[i]] <- list("id" = pt$id, "lat" = pt$lat, "lng" = pt$lng, "tm" = tm)
   }
 
-  return(sources)
+  sources
 
 }
 
 #' @rdname deriveSources
-deriveTargets <- function(points, id = NULL) {
+deriveTargets <- function(points) {
 
   targets <- vector(mode = "list", length = nrow(points))
 
@@ -167,7 +167,7 @@ deriveTargets <- function(points, id = NULL) {
     targets[[i]] <- list("id" = pt$id, "lat" = pt$lat, "lng" = pt$lng)
   }
 
-  return(targets)
+  targets
 
 }
 
@@ -200,7 +200,7 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 
   body <- jsonlite::toJSON(options, auto_unbox = TRUE, pretty = TRUE)
 
-  return(body)
+  body
 
 }
 
@@ -230,7 +230,7 @@ callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                          if (progress) httr::progress(),
                          if (!is.null(timeout)) httr::timeout(timeout))
 
-  return(response)
+  response
 
 }
 

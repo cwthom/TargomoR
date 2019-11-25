@@ -13,7 +13,7 @@ createPoints(data = NULL, lat = NULL, lng = NULL, id = NULL)
 
 deriveSources(points, options)
 
-deriveTargets(points, id = NULL)
+deriveTargets(points)
 }
 \arguments{
 \item{data}{The data object}
