@@ -34,7 +34,7 @@ getTargomoCapabilities <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
 
   output <- processCapabilities(response)
 
-  return(output)
+  output
 
 }
 
