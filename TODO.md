@@ -10,7 +10,7 @@
 - [x] Fix route drawing when only walking is available (for transit)
 - [x] Add documentation for Capabilities service
 - [x] Improve output for capabilities service
-- [ ] Improve formatting of times (e.g. not just seconds)
+- [x] Improve formatting of times (e.g. not just seconds)
 - [ ] Add examples to documentation
 - [x] Remove example apps
 - [x] Make sure all functions in vignettes are linked to documentation

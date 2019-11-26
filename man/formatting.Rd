@@ -3,9 +3,12 @@
 \name{formatting}
 \alias{formatting}
 \alias{formatEdgeWeight}
+\alias{prettyEdgeWeight}
 \title{Format Requests and Responses}
 \usage{
 formatEdgeWeight(edgeWeight, type)
+
+prettyEdgeWeight(edgeWeight, type)
 }
 \arguments{
 \item{edgeWeight}{A time or distance, in numeric or string form.}

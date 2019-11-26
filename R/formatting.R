@@ -52,3 +52,47 @@ formatEdgeWeight <- function(edgeWeight, type) {
 
 }
 
+#' @rdname formatting
+prettyEdgeWeight <- function(edgeWeight, type) {
+
+  if (!(type %in% c("time", "distance"))) {
+    stop("'type' must be 'time' or 'distance', not '", type, "'")
+  }
+
+  if (type == "time") {
+    rgx <- "^ *([0-9]+h)? *([0-9]+m)? *([0-9]+s)? *$"
+  } else if (type == "distance") {
+    rgx <- "^ *([0-9]+km)? *([0-9]+m)? *([0-9]+ml)? *$"
+  } else {
+    stop("'type' must be 'time' or 'distance', not '", type, "'")
+  }
+
+  if (is.character(edgeWeight)) {
+    if (!grepl(rgx, edgeWeight)) {
+      stop("Invalid ", type, " string specified: ", edgeWeight)
+    } else {
+      return(edgeWeight)
+    }
+  } else if (is.numeric(edgeWeight)) {
+    if (type == "time") {
+      string <- paste0(
+        ifelse(edgeWeight >= 3600, paste0(edgeWeight%/%3600, "hr "), ""),
+        ifelse(edgeWeight%%3600 >= 60, paste0(edgeWeight%%3600%/%60, "min "), ""),
+        ifelse(edgeWeight%%60 > 0, paste0(edgeWeight%%60, "s"), "")
+      )
+      if (edgeWeight == 0) string <- "0s"
+    } else {
+      string <- paste0(
+        ifelse(edgeWeight >= 1000, paste0(edgeWeight%/%1000, "km "), ""),
+        ifelse(edgeWeight%%1000 > 0, paste0(edgeWeight%%1000, "m"), "")
+      )
+      if (edgeWeight == 0) string <- "0m"
+    }
+    string <- trimws(string)
+    return(string)
+  } else {
+    stop("Invalid edgeweight class: ", class(edgeWeight))
+  }
+
+}
+
