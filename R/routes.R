@@ -315,7 +315,7 @@ createRoutePopup <- function(data, transit = FALSE, startEnd = transit) {
   paste0("<b>", header, "</b></br>",
          if(startEnd) paste0("Start: ", data$startName, "</br>",
                              "End: ", data$endName, "</br>"),
-         "Journey time: ", prettyEdgeWeight(data$travelTime, "time"))
+         "Journey time: ", sapply(data$travelTime, prettyEdgeWeight, type = "time"))
 }
 
 

@@ -2,11 +2,11 @@
 % Please edit documentation in R/formatting.R
 \name{formatting}
 \alias{formatting}
-\alias{formatEdgeWeight}
+\alias{numericEdgeWeight}
 \alias{prettyEdgeWeight}
 \title{Format Requests and Responses}
 \usage{
-formatEdgeWeight(edgeWeight, type)
+numericEdgeWeight(edgeWeight, type)
 
 prettyEdgeWeight(edgeWeight, type)
 }

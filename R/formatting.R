@@ -11,7 +11,7 @@
 NULL
 
 #' @rdname formatting
-formatEdgeWeight <- function(edgeWeight, type) {
+numericEdgeWeight <- function(edgeWeight, type) {
 
   if (type == "time") {
     rgx <- "^ *([0-9]+h)? *([0-9]+m)? *([0-9]+s)? *$"

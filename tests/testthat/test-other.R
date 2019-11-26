@@ -65,19 +65,19 @@ test_that("Printing capabilities works correctly", {
 test_that("Formatting works for edgeweights", {
 
   expect_time <- function(string, time) {
-    expect_equal(formatEdgeWeight(string, "time"), time)
+    expect_equal(numericEdgeWeight(string, "time"), time)
   }
 
   expect_distance <- function(string, distance) {
-    expect_equal(formatEdgeWeight(string, "distance"), distance)
+    expect_equal(numericEdgeWeight(string, "distance"), distance)
   }
 
   # errors
-  expect_error(formatEdgeWeight(500, type = "blah"),
+  expect_error(numericEdgeWeight(500, type = "blah"),
                "'type' must be 'time' or 'distance', not 'blah'")
-  expect_error(formatEdgeWeight("1a", "time"),
+  expect_error(numericEdgeWeight("1a", "time"),
                "Invalid time string specified: 1a")
-  expect_error(formatEdgeWeight("2b", "distance"),
+  expect_error(numericEdgeWeight("2b", "distance"),
                "Invalid distance string specified: 2b")
 
   # times
@@ -92,5 +92,39 @@ test_that("Formatting works for edgeweights", {
   expect_distance("2km", 2000)
   expect_distance("450m", 450)
   expect_distance("1km100m", 1100)
+
+})
+
+test_that("Pretty formatting for edgeweights works", {
+
+  expect_time <- function(value, time) {
+    expect_equal(prettyEdgeWeight(value, "time"), time)
+  }
+
+  expect_distance <- function(value, distance) {
+    expect_equal(prettyEdgeWeight(value, "distance"), distance)
+  }
+
+  # errors
+  expect_error(numericEdgeWeight(500, type = "blah"),
+               "'type' must be 'time' or 'distance', not 'blah'")
+  expect_error(prettyEdgeWeight("a", "time"), "Invalid time string specified: a")
+  expect_error(prettyEdgeWeight("b", "distance"), "Invalid distance string specified: b")
+  expect_error(prettyEdgeWeight(factor("a"), "time"), "Invalid edgeweight class: factor")
+
+  # correct times
+  expect_time("1h 30m", "1h 30m")
+  expect_time(3600, "1hr")
+  expect_time(1800, "30min")
+  expect_time(54, "54s")
+  expect_time(5454, "1hr 30min 54s")
+  expect_time(0, "0s")
+
+  # correct distances
+  expect_distance("1km 500m", "1km 500m")
+  expect_distance(1000, "1km")
+  expect_distance(500, "500m")
+  expect_distance(1500, "1km 500m")
+  expect_distance(0, "0m")
 
 })
