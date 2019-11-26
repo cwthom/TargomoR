@@ -7,7 +7,7 @@
 - [x] Write all vignettes
 - [ ] Add tests for remaining code (up to 100%)
 - [x] Test locations in different regions around the world
-- [ ] Fix route drawing when only walking is available (for transit)
+- [x] Fix route drawing when only walking is available (for transit)
 - [x] Add documentation for Capabilities service
 - [x] Improve output for capabilities service
 - [ ] Improve formatting of times (e.g. not just seconds)

@@ -4,7 +4,7 @@ TargomoR <a href='https://cwthom.github.io/TargomoR'><img src='man/figures/logo.
 ======================================================================================================================
 
 <!-- badges: start -->
-[![CRAN status](https://r-pkg.org/badges/version/TargomoR)](https://CRAN.R-project.org/package=TargomoR) [![Travis-CI Build Status](https://travis-ci.org/cwthom/TagomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR) [![codecov](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/gh/cwthom/TargomoR) <!-- badges: end -->
+[![CRAN status](https://r-pkg.org/badges/version/TargomoR)](https://CRAN.R-project.org/package=TargomoR) [![Travis-CI Build Status](https://travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR) [![codecov](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/gh/cwthom/TargomoR) <!-- badges: end -->
 
 **This package is being developed with the permission of Targomo, but is NOT AN OFFICIAL PRODUCT. For more information about Targomo, please see their [website](https://www.targomo.com/developers/).**
 

@@ -25,7 +25,7 @@ config <- list()
 
 <!-- badges: start -->
 [![CRAN status](https://r-pkg.org/badges/version/TargomoR)](https://CRAN.R-project.org/package=TargomoR)
-[![Travis-CI Build Status](https://travis-ci.org/cwthom/TagomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR)
+[![Travis-CI Build Status](https://travis-ci.org/cwthom/TargomoR.svg?branch=master)](https://travis-ci.org/cwthom/TargomoR)
 [![codecov](https://codecov.io/gh/cwthom/TargomoR/branch/master/graph/badge.svg)](https://codecov.io/gh/cwthom/TargomoR)
 <!-- badges: end -->
 
