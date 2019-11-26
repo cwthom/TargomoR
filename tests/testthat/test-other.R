@@ -49,8 +49,9 @@ test_that("Capabilities service works", {
 
 test_that("Printing capabilities works correctly", {
 
-  # skip on CRAN
+  # skip on CRAN and travis
   skip_on_cran()
+  skip_on_travis()
 
   # get capabilities
   caps <- getTargomoCapabilities()
