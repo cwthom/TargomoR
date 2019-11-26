@@ -12,11 +12,11 @@
 - [x] Improve output for capabilities service
 - [ ] Improve formatting of times (e.g. not just seconds)
 - [ ] Add examples to documentation
-- [ ] Remove example apps
+- [x] Remove example apps
 - [x] Make sure all functions in vignettes are linked to documentation
 - [ ] Tidy up NEWS.md ahead of release
 - [ ] Include warning about basemaps?
-- [ ] Add badges into Readme
+- [x] Add badges into Readme
 - [ ] Release to CRAN
 - [ ] Publicise (with Targomo)
 
