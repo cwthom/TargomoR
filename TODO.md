@@ -5,7 +5,7 @@
 - [x] Make hexsticker
 - [x] Plan out vignettes
 - [x] Write all vignettes
-- [ ] Add tests for remaining code (up to 100%)
+- [x] Add tests for remaining code (up to 100%)
 - [x] Test locations in different regions around the world
 - [x] Fix route drawing when only walking is available (for transit)
 - [x] Add documentation for Capabilities service
@@ -17,6 +17,7 @@
 - [ ] Tidy up NEWS.md ahead of release
 - [ ] Include warning about basemaps?
 - [x] Add badges into Readme
+- [ ] Check winbuilder
 - [ ] Release to CRAN
 - [ ] Publicise (with Targomo)
 
