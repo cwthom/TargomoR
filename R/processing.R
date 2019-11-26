@@ -18,19 +18,15 @@ catchBadResponse <- function(response) {
 
   if (status %in% c(401, 403, 404)) {
     stop(httr::content(response))
-    return(invisible(NULL))
   } else if (status == 400) {
     stop(status, " - Bad Request. Check your settings and try again.")
-    return(invisible(NULL))
   } else if (grepl("^5", status)) {
     stop(status, " - Server-side error.")
-    return(invisible(NULL))
   } else if (status != 200) {
     stop(status, " - unknown error.")
-    return(invisible(NULL))
-  } else {
-    return(response)
   }
+
+  response
 
 }
 

@@ -19,7 +19,6 @@ formatEdgeWeight <- function(edgeWeight, type) {
     rgx <- "^ *([0-9]+km)? *([0-9]+m)? *([0-9]+ml)? *$"
   } else {
     stop("'type' must be 'time' or 'distance', not '", type, "'")
-    return(invisible(NULL))
   }
 
   if (is.numeric(edgeWeight)) {

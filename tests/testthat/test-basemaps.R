@@ -38,5 +38,6 @@ test_that("Map attributions work", {
   expect_equal(la2$x$calls[[1]]$method, "addControl")
   expect_equal(la1$x$calls[[1]]$args[[1]], attributionFreeIframe())
   expect_equal(la2$x$calls[[1]]$args[[1]], attributionOtherIframe())
+  expect_equal(attributionLink(), "https://targomo.com/developers/resources/attribution/")
 
 })

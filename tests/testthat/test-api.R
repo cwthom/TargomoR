@@ -55,7 +55,8 @@ test_that("Point creation works on different types of data", {
 
   # sf expectations
   expect_silent(createPoints(s2, id = ~id))
-  expect_is(createPoints(s2, id = ~id), "data.frame")
+  expect_is(createPoints(s2), "data.frame")
+  expect_equal(createPoints(s2)$id, 1)
   expect_equal(createPoints(s2), data.frame(lng = 0, lat = 51, id = 1))
 
   # vector expectations
@@ -63,6 +64,22 @@ test_that("Point creation works on different types of data", {
   expect_is(createPoints(NULL, lat = 51, lng = 0, id = "A"), "data.frame")
   expect_equal(createPoints(NULL, lat = 51, lng = 0, id = "A"),
                data.frame(lng = 0, lat = 51, id = "A", stringsAsFactors = FALSE))
+
+})
+
+test_that("ID creation works with different data types", {
+
+  df <- data.frame(letters, stringsAsFactors = FALSE)
+
+  expect_null(createIds())
+  expect_equal(createIds(id = letters), letters)
+  expect_equal(createIds(data = df), 1:26)
+  expect_equal(createIds(data = df, id = ~letters), letters)
+  expect_equal(createIds(data = df, id = 2:27), 2:27)
+  expect_error(createIds(data = df, id = 1),
+               "'id' values different length to 'data'")
+  expect_error(createIds(data = df, id = x ~ y),
+               "Unexpected 2-sided formula: x ~ y")
 
 })
 

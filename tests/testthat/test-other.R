@@ -1,6 +1,36 @@
 context("Miscellaneous")
 library(TargomoR)
 
+test_that("Setup function works", {
+
+  # skip on CRAN and Travis
+  skip_on_cran()
+  skip_on_travis()
+
+  # if .Renviron file exists, delete it
+  if (file.exists(".Renviron")) {
+    unlink(".Renviron")
+  }
+
+  expect_equal(setTargomoVariables(), Sys.getenv("TARGOMO_API_KEY"))
+  expect_message(
+    setTargomoVariables(overwrite = TRUE),
+    "Writing TARGOMO_API_KEY and TARGOMO_REGION to .Renviron file:\n"
+  )
+
+  expect_null(setTargomoVariables())
+  expect_message(
+    setTargomoVariables(),
+    "Pre-existing TargomoR variables in .Renviron.\nSet overwrite = TRUE to alter them."
+  )
+
+  # remove .Renviron
+  if (file.exists(".Renviron")) {
+    unlink(".Renviron")
+  }
+
+})
+
 test_that("Capabilities service works", {
 
   # skip on CRAN
@@ -10,10 +40,24 @@ test_that("Capabilities service works", {
   caps <- getTargomoCapabilities()
 
   # expectations
-  expect_is(caps, "list")
+  expect_is(caps, c("tgm_capabilities", "list"))
   expect_length(caps, 3)
   expect_named(caps)
   expect_equal(names(caps), c("general", "transit", "speeds"))
+
+})
+
+test_that("Printing capabilities works correctly", {
+
+  # skip on CRAN
+  skip_on_cran()
+
+  # get capabilities
+  caps <- getTargomoCapabilities()
+
+  verify_output(test_path("print-capabilities.txt"), {
+    print.tgm_capabilities(caps)
+  })
 
 })
 
