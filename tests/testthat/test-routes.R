@@ -2,7 +2,7 @@ context("Route Service")
 library(TargomoR)
 
 # set options to use
-opts <- targomoOptions(travelType = c("walk", "bike"))
+opts <- targomoOptions(travelType = c("walk", "bike", "car", "transit"))
 
 # set source/target data
 s1 <- data.frame(lat = 51.50, lng = -0.12, id = "A")
@@ -18,8 +18,8 @@ test_that("GET function works correctly", {
 
   # expectations
   expect_is(routes, c("list"))
-  expect_length(routes, 2)
-  expect_equal(names(routes), c("walk", "bike"))
+  expect_length(routes, 4)
+  expect_equal(names(routes), c("walk", "bike", "car", "transit"))
   expect_equal(dim(routes$walk[[1]]), c(3, 3))
   expect_equal(names(routes$walk[[1]]), c("sourceId", "targetId", "features"))
   expect_is(routes$bike[[1]]$features$geometry, c("sfc_GEOMETRY", "sfc"))
