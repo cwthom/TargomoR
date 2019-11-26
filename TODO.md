@@ -15,9 +15,10 @@
 - [x] Remove example apps
 - [x] Make sure all functions in vignettes are linked to documentation
 - [ ] Tidy up NEWS.md ahead of release
-- [ ] Include warning about basemaps?
 - [x] Add badges into Readme
-- [ ] Check winbuilder
+- [x] Check winbuilder
+- [x] Check RHub
+- [x] .Rbuildignore vignettes
 - [ ] Release to CRAN
 - [ ] Publicise (with Targomo)
 
