@@ -233,6 +233,7 @@ drawTargomoRoutes <- function(map, routes, drawOptions = routeDrawOptions(), gro
     for (route in routes[[tm]]) {
 
       features <- route$features
+      segments <- features[sf::st_is(features$geometry, "LINESTRING"), ]
 
       if (drawOptions$showMarkers) {
 
@@ -240,26 +241,27 @@ drawTargomoRoutes <- function(map, routes, drawOptions = routeDrawOptions(), gro
         trg <- features[!is.na(features$targetId), ]
 
         map <- map %>%
-          leaflet::addMarkers(data = src, label = ~paste("Source:", sourceId),
-                              group = group) %>%
-          leaflet::addMarkers(data = trg, label = ~paste("Target:", targetId),
-                              group = group)
+          leaflet::addMarkers(data = src, label = ~paste("Source:", sourceId), group = group) %>%
+          leaflet::addMarkers(data = trg, label = ~paste("Target:", targetId), group = group)
 
       }
 
-      if (tm %in% c("car", "bike", "walk")) {
+      if (tm == "car") {
 
-        segment <- features[sf::st_is(features$geometry, "LINESTRING"), ]
+        map <- drawCar(map, segments, drawOptions, group, ...)
 
-        map <- map %>%
-          drawRouteSegment(segment = segment, drawOptions = drawOptions,
-                           type = tm, group = group, ...)
+      } else if (tm == "bike"){
+
+        map <- drawBike(map, segments, drawOptions, group, ...)
+
+      } else if (tm == "walk"){
+
+        map <- drawWalk(map, segments, drawOptions, group, ...)
 
       } else if (tm %in% "transit") {
 
-        segments <- features[sf::st_is(features$geometry, "LINESTRING"), ]
-        walk <- segments[is.na(features$isTransit), ]
-        transit <- segments[!is.na(features$isTransit), ]
+        walk     <- segments[segments$travelType == "WALK", ]
+        transit  <- segments[segments$travelType == "TRANSIT", ]
 
         map <- map %>%
           drawWalk(segment = walk, drawOptions = drawOptions, group = group, ...) %>%
@@ -267,7 +269,8 @@ drawTargomoRoutes <- function(map, routes, drawOptions = routeDrawOptions(), gro
 
       }
 
-      if (tm == "transit" && drawOptions$showTransfers) {
+      if (tm == "transit" && drawOptions$showTransfers &&
+          any(features$travelType == "TRANSFER", na.rm = TRUE)) {
 
           transfers <- suppressWarnings({
             features[features$travelType == "TRANSFER", ] %>%
