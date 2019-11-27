@@ -14,7 +14,7 @@
 - [ ] Add examples to documentation
 - [x] Remove example apps
 - [x] Make sure all functions in vignettes are linked to documentation
-- [ ] Tidy up NEWS.md ahead of release
+- [x] Tidy up NEWS.md ahead of release
 - [x] Add badges into Readme
 - [x] Check winbuilder
 - [x] Check RHub

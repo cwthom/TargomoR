@@ -88,10 +88,16 @@ test_that("Route popup creation works", {
 
   # get routes
   routes <- getTargomoRoutes(source_data = s1, target_data = t1, options = opts)
+  w_features <- routes$walk[[1]]$features
+  w_segment <- w_features[sf::st_is(w_features, "LINESTRING"), ]
+  t_features <- routes$transit[[1]]$features
+  t_segment <- t_features[sf::st_is(t_features, "LINESTRING"), ]
 
   # expectations
-  expect_match(createRoutePopup(routes$walk[[1]]$features)[1],
-               "<b>WALK</b></br>Journey time: \\d+s")
+  expect_match(createRoutePopup(w_segment),
+               "<b>WALK</b></br>Journey time: [\\d+min ]?[\\d+s]?")
+  expect_true(all(grepl("<b>[A-Z]+</b></br>Journey time: [\\d+min ]?[\\d+s]?",
+                        createRoutePopup(t_segment))))
 
 
 })
