@@ -26,6 +26,9 @@ callTargomoAPI(api_key = Sys.getenv("TARGOMO_API_KEY"),
 
 \item{timeout}{Timeout in seconds (leave NULL for no timeout/curl default).}
 }
+\value{
+A httr response object with the API response (whether successful or not).
+}
 \description{
-Call the Targomo API
+Function to wrap aroung \code{httr::POST}, sending the request body to the API.
 }

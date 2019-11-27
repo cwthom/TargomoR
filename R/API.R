@@ -14,6 +14,8 @@ targomoAPI <- function() {
 #' @param region The Targomo region.
 #' @param end_point The API end_point.
 #'
+#' @return Character string, the URL of the chosen endpoint
+#'
 createRequestURL <- function(region, end_point) {
   paste0(targomoAPI(), region, "/v1/", end_point)
 }
@@ -24,6 +26,8 @@ createRequestURL <- function(region, end_point) {
 #' Function to create options in a nested list structure suitable to be turned into JSON.
 #'
 #' @param options The output of \code{\link{targomoOptions}}.
+#'
+#' @return List of options correctly structured for converting to JSON and passing to the API
 #'
 deriveOptions <- function(options) {
 
@@ -96,6 +100,8 @@ deriveOptions <- function(options) {
 #' @param id The id vector or formula to resolve
 #' @param points A processed data object (for sources/targets).
 #' @param options A processed options object (for sources).
+#'
+#' @return A data.frame of sources/targets, with IDs attached.
 #'
 #' @name deriveSources
 NULL
@@ -180,6 +186,8 @@ deriveTargets <- function(points) {
 #' @param targets A processed targets object (optional).
 #' @param options A processed options list.
 #'
+#' @return A JSON request body to be POST-ed to the API
+#'
 createRequestBody <- function(service, sources = NULL, targets = NULL, options) {
 
   if (is.null(service)) {
@@ -206,6 +214,8 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 
 #' Call the Targomo API
 #'
+#' Function to wrap aroung \code{httr::POST}, sending the request body to the API.
+#'
 #' @param api_key The Targomo API key.
 #' @param region The Targomo region.
 #' @param service The Targomo service - 'polygon', 'route', or 'time'.
@@ -214,6 +224,8 @@ createRequestBody <- function(service, sources = NULL, targets = NULL, options) 
 #' @param verbose Display info on the API call?
 #' @param progress Display a progress bar?
 #' @param timeout Timeout in seconds (leave NULL for no timeout/curl default).
+#'
+#' @return A httr response object with the API response (whether successful or not).
 #'
 callTargomoAPI <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                            region = Sys.getenv("TARGOMO_REGION"),

@@ -23,6 +23,9 @@ addTargomoAttribution(map, free_plan = TRUE, ...)
 
 \item{...}{Further arguments to pass to \code{leaflet::addControl} e.g. position}
 }
+\value{
+A link or iframe to the attributions page.
+}
 \description{
 Functions providing link to Targomo Attributions page, depending on plan.
 }

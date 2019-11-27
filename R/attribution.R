@@ -6,6 +6,9 @@
 #' @param map A leaflet map
 #' @param free_plan Logical - is the Targomo plan you're using free or paid?
 #' @param ... Further arguments to pass to \code{leaflet::addControl} e.g. position
+#'
+#' @return A link or iframe to the attributions page.
+#'
 #' @name attribution
 NULL
 

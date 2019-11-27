@@ -15,6 +15,9 @@ createRequestBody(service, sources = NULL, targets = NULL, options)
 
 \item{options}{A processed options list.}
 }
+\value{
+A JSON request body to be POST-ed to the API
+}
 \description{
 Function to create a request body using the sources and options given.
 }
