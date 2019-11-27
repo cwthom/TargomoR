@@ -140,139 +140,59 @@
       
     </div>
 
-    <div id="targomor-0-1-2-9001" class="section level1">
+    <div id="targomor-0-2-0" class="section level1">
 <h1 class="page-header">
-<a href="#targomor-0-1-2-9001" class="anchor"></a>TargomoR 0.1.2.9001</h1>
+<a href="#targomor-0-2-0" class="anchor"></a>TargomoR 0.2.0</h1>
+<p>This is the first release of TargomoR, which wraps the Targomo REST API for R users. It provides an interface familiar to users of leaflet.</p>
+<div id="major-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-features" class="anchor"></a>Major Features</h2>
 <ul>
-<li>Support for timeout option to <code><a href="https://httr.r-lib.org/reference/POST.html">httr::POST</a></code>
-</li>
-<li>better testing</li>
-<li>new logo</li>
+<li>Support for three core services: isochrone polygons, routes, times</li>
+<li>
+<code>getTargomo*()</code> to retrieve data from the API, and return as an <code>sf</code> object (or list of such objects, in the case of routes)</li>
+<li>
+<code><a href="../reference/options.html">targomoOptions()</a></code> provides support for all main API settings, including variable travel times, rush hour modelling, modes of transport, up/downhill speed penalties and public transport time frames</li>
+<li>
+<code>config</code> argument to <code>getTargomo*()</code> allows for setting of proxy server and other configuration changes necessary for using package httr</li>
+<li>
+<code>timeout</code> argument to <code>getTargomo*()</code> allows for extending request timeout</li>
+<li>
+<code>verbose</code> and <code>progress</code> arguments for debugging</li>
+<li>
+<code>drawTargomo*()</code> to add the data to a leaflet map, using customisable drawing methods</li>
+<li>
+<code>*DrawOptions()</code> function allow for easy customisation of visuals, including changing colors, weights, opacities</li>
+<li>
+<code>addTargomo*()</code> to combine the API call and drawing, for use with <code><a href="../reference/pipe.html">%&gt;%</a></code> onto leaflet maps</li>
+<li>Pick up API key and region from environment variables TARGOMO_API_KEY and TARGOMO_REGION by default</li>
+<li>
+<code><a href="../reference/setTargomoVariables.html">setTargomoVariables()</a></code> to write these environment variables, either locally or globally, to an .Renviron file</li>
+<li>
+<code><a href="../reference/basemaps.html">addTargomoTiles()</a></code> to add Targomo basemaps to a leaflet map</li>
+<li>
+<code><a href="../reference/capabilities.html">getTargomoCapabilities()</a></code> returns list of default and min/max settings for API key and region (with custom print method for nicer viewing)</li>
+<li>
+<code><a href="../reference/attribution.html">addTargomoAttribution()</a></code> adds an iframe to a leaflet map, adding an attribution (required by <a href="https://targomo.com/developers/resources/attribution/">Targomo terms of use</a>)</li>
 </ul>
 </div>
-    <div id="targomor-0-1-2-9000" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-1-2-9000" class="anchor"></a>TargomoR 0.1.2.9000</h1>
+<div id="unsupported-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#unsupported-features" class="anchor"></a>Unsupported Features</h2>
 <ul>
-<li>Common interface of <code>get</code>, <code>draw</code>, <code>add</code> for all 3 main services</li>
-<li>improved <code>pkgdown</code> site</li>
-<li>more support for <code>...</code> arguments to drawing functions</li>
+<li>The Multigraph and Points of Interest services are not currently supported. Nor are the advanced services like fleet planning.</li>
+<li>There is currently no facility to set custom speeds for each OSM edge class - the REST API does support this</li>
+<li>All location and route data is must be supplied in CRS 4326, and is returned in the same. There is no intrinsic support for changing CRS, although you may do so after the fact of course.</li>
+<li>There is no way to query the requests remaining in a monthly period from the API key - this is not currently provided by Targomo.</li>
 </ul>
 </div>
-    <div id="targomor-0-1-1-9003" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-1-1-9003" class="anchor"></a>TargomoR 0.1.1.9003</h1>
+<div id="more-information" class="section level2">
+<h2 class="hasAnchor">
+<a href="#more-information" class="anchor"></a>More Information</h2>
 <ul>
-<li>Add support for basemap service</li>
+<li>Much more information can be found on the <a href="https://cwthom.github.io/TargomoR">TargomoR pkgdown site</a>.</li>
 </ul>
 </div>
-    <div id="targomor-0-1-1-9002" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-1-1-9002" class="anchor"></a>TargomoR 0.1.1.9002</h1>
-<ul>
-<li>Add experimental support for Points of Interest service</li>
-<li>Add function to retrieve the account capabilities</li>
-</ul>
-</div>
-    <div id="targomor-0-1-1-9001" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-1-1-9001" class="anchor"></a>TargomoR 0.1.1.9001</h1>
-<ul>
-<li>Add package startup message</li>
-<li>Add attribution function</li>
-<li>Create pkgdown site</li>
-</ul>
-</div>
-    <div id="targomor-0-1-1-9000" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-1-1-9000" class="anchor"></a>TargomoR 0.1.1.9000</h1>
-<ul>
-<li>Add in <code>config</code> option for HTTP requests - allows for e.g. proxy settings using <code><a href="https://httr.r-lib.org/reference/use_proxy.html">httr::use_proxy()</a></code>
-</li>
-</ul>
-</div>
-    <div id="targomor-0-0-1-9001" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-1-9001" class="anchor"></a>TargomoR 0.0.1.9001</h1>
-<ul>
-<li>tidy up code</li>
-<li>add in more tests</li>
-</ul>
-</div>
-    <div id="targomor-0-0-1-9000" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-1-9000" class="anchor"></a>TargomoR 0.0.1.9000</h1>
-<ul>
-<li>First testing release version :D</li>
-</ul>
-</div>
-    <div id="targomor-0-0-0-9007" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-0-9007" class="anchor"></a>TargomoR 0.0.0.9007</h1>
-<ul>
-<li>add support for giving IDs to source/target points</li>
-<li>deal more nicely with missing data</li>
-<li>return times as tibble (and sf)</li>
-<li>better reuse of code when multiple travel types supplied</li>
-<li>mapping options use circle markers for time service</li>
-</ul>
-</div>
-    <div id="targomor-0-0-0-9006" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-0-9006" class="anchor"></a>TargomoR 0.0.0.9006</h1>
-<ul>
-<li>full drawing options for routing</li>
-<li>labelling and popups for routes</li>
-<li>supplying multiple travel modes using recursion</li>
-<li>formatting options for input times and distances</li>
-<li>wrap line-drawing functions</li>
-</ul>
-</div>
-    <div id="targomor-0-0-0-9005" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-0-9005" class="anchor"></a>TargomoR 0.0.0.9005</h1>
-<ul>
-<li>generalise functions to derive sources, targets, options etc</li>
-<li>implied support for route and time services too</li>
-<li>catch errors nicely</li>
-<li>explicit support for routing</li>
-<li>explicit support for times</li>
-</ul>
-</div>
-    <div id="targomor-0-0-0-9004" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-0-9004" class="anchor"></a>TargomoR 0.0.0.9004</h1>
-<ul>
-<li>use REST API to return geojson</li>
-<li>support most polygon options</li>
-<li>build <code>sf</code> objects with geojson</li>
-</ul>
-</div>
-    <div id="targomor-0-0-0-9003" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-0-9003" class="anchor"></a>TargomoR 0.0.0.9003</h1>
-<ul>
-<li>created working plugin based off new API (not r360)</li>
-<li>support for polygon requests</li>
-<li>support for union/intersection/inversion/strokewidth etc</li>
-<li>support for different regions across the world</li>
-<li>ability to set env vars</li>
-</ul>
-</div>
-    <div id="targomor-0-0-0-9000" class="section level1">
-<h1 class="page-header">
-<a href="#targomor-0-0-0-9000" class="anchor"></a>TargomoR 0.0.0.9000</h1>
-<ul>
-<li>Created first working plugin:
-<ul>
-<li>Put API key in .Renviron file, not committed</li>
-</ul>
-</li>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>used webpack to bundle js files (including prod)</li>
-<li>using stable r360 api for now</li>
-<li>created working r360 polygon bindings</li>
-</ul>
 </div>
   </div>
 
@@ -280,20 +200,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#targomor-0-1-2-9001">0.1.2.9001</a></li>
-        <li><a href="#targomor-0-1-2-9000">0.1.2.9000</a></li>
-        <li><a href="#targomor-0-1-1-9003">0.1.1.9003</a></li>
-        <li><a href="#targomor-0-1-1-9002">0.1.1.9002</a></li>
-        <li><a href="#targomor-0-1-1-9001">0.1.1.9001</a></li>
-        <li><a href="#targomor-0-1-1-9000">0.1.1.9000</a></li>
-        <li><a href="#targomor-0-0-1-9001">0.0.1.9001</a></li>
-        <li><a href="#targomor-0-0-1-9000">0.0.1.9000</a></li>
-        <li><a href="#targomor-0-0-0-9007">0.0.0.9007</a></li>
-        <li><a href="#targomor-0-0-0-9006">0.0.0.9006</a></li>
-        <li><a href="#targomor-0-0-0-9005">0.0.0.9005</a></li>
-        <li><a href="#targomor-0-0-0-9004">0.0.0.9004</a></li>
-        <li><a href="#targomor-0-0-0-9003">0.0.0.9003</a></li>
-        <li><a href="#targomor-0-0-0-9000">0.0.0.9000</a></li>
+        <li><a href="#targomor-0-2-0">0.2.0</a></li>
       </ul>
     </div>
   </div>
