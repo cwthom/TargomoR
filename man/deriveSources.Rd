@@ -26,6 +26,9 @@ deriveTargets(points)
 
 \item{options}{A processed options object (for sources).}
 }
+\value{
+A data.frame of sources/targets, with IDs attached.
+}
 \description{
 Function to create the sources needed to query the Targomo API.
 }

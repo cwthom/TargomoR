@@ -11,6 +11,9 @@ createRequestURL(region, end_point)
 
 \item{end_point}{The API end_point.}
 }
+\value{
+Character string, the URL of the chosen endpoint
+}
 \description{
 Function to create the request URL.
 }

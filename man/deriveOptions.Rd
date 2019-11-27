@@ -9,6 +9,9 @@ deriveOptions(options)
 \arguments{
 \item{options}{The output of \code{\link{targomoOptions}}.}
 }
+\value{
+List of options correctly structured for converting to JSON and passing to the API
+}
 \description{
 Function to create options in a nested list structure suitable to be turned into JSON.
 }
