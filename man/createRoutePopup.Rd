@@ -13,6 +13,9 @@ createRoutePopup(data, transit = FALSE, startEnd = transit)
 
 \item{startEnd}{Whether to show information on the start and end points.}
 }
+\value{
+A HTML string for the route segment popup
+}
 \description{
 Function for constructing popups on routes.
 }

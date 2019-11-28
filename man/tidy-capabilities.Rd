@@ -5,7 +5,6 @@
 \alias{tidyGeneral}
 \alias{tidyTransit}
 \alias{tidySpeeds}
-\alias{print.tgm_capabilities}
 \title{Helper functions for tidying up capabilities response}
 \usage{
 tidyGeneral(general)
@@ -13,14 +12,13 @@ tidyGeneral(general)
 tidyTransit(transit)
 
 tidySpeeds(speeds)
-
-\method{print}{tgm_capabilities}(caps)
 }
 \arguments{
 \item{general, transit, speeds}{The parts of the list}
-
-\item{caps}{A capabilities list from \code{\link{getTargomoCapabilities}}}
+}
+\value{
+Lists of capabilities (data.frames or vectors)
 }
 \description{
-Helper functions for tidying up capabilities response
+These functions tidy up the raw capabilities lists.
 }

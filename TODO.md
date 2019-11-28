@@ -11,7 +11,7 @@
 - [x] Add documentation for Capabilities service
 - [x] Improve output for capabilities service
 - [x] Improve formatting of times (e.g. not just seconds)
-- [ ] Add examples to documentation
+- [x] Add examples to documentation
 - [x] Remove example apps
 - [x] Make sure all functions in vignettes are linked to documentation
 - [x] Tidy up NEWS.md ahead of release

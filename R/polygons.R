@@ -22,6 +22,26 @@
 #' @param progress Whether to show a progress bar of the API call.
 #' @param timeout Timeout in seconds (leave NULL for no timeout/curl default).
 #'
+#' @return For `get*`, an object of class "sf" containing the polygons. For `draw*` and `add*`,
+#'   the leaflet map returned with the polygons drawn on.
+#'
+#' @examples
+#' \donttest{
+#' # load leaflet package
+#' library(leaflet)
+#' l <- leaflet()
+#'
+#' # get the polygons
+#' p <- getTargomoPolygons(source_lat = 51.5007, source_lng = -0.1246,
+#'                         options = targomoOptions(travelType = "bike"))
+#'
+#' # draw them on the map
+#' l %>% drawTargomoPolygons(polygons = p, group = "BigBenBike")
+#'
+#' # note could combine get... and draw... into one with add...
+#'
+#' }
+#'
 #' @name getTargomoPolygons
 #'
 NULL
@@ -124,6 +144,12 @@ addTargomoPolygons <- function(map,
 #' @param dashArray A string to define the stroke dash pattern.
 #' @param smoothFactor How much to simplify polylines on each zoom level.
 #' @param noClip Whether to disable polyline clipping.
+#'
+#' @return A list of options governing how the polygons appear on the map
+#'
+#' @examples
+#' # show the list
+#' polygonDrawOptions()
 #'
 #' @export
 polygonDrawOptions <- function(stroke = TRUE,

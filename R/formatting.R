@@ -1,20 +1,31 @@
 
-#' Format Requests and Responses
+#' Format Edgeweights (times and distances)
 #'
-#' Functions to make the interface easier and more intuitive to use.
+#' Functions to make the interface easier and more intuitive to use - they convert
+#' numeric edgeweights (e.g. 900) to character strings (e.g. "15min"), and vice versa.
 #'
 #' @param edgeWeight A time or distance, in numeric or string form.
 #' @param type Either 'time' or 'distance'.
+#'
+#' @return Either a numeric or formatted edgeweight
+#'
+#' @examples
+#' numericEdgeWeight("1hr 30m", "time") # 5400
+#' numericEdgeWeight("1ml", "distance") # 1609
+#'
+#' prettyEdgeWeight(1245, "time") # 30min 45s
+#' prettyEdgeWeight(1245, "distance") # 1km 245m
 #'
 #' @name formatting
 #'
 NULL
 
 #' @rdname formatting
+#' @export
 numericEdgeWeight <- function(edgeWeight, type) {
 
   if (type == "time") {
-    rgx <- "^ *([0-9]+h)? *([0-9]+m)? *([0-9]+s)? *$"
+    rgx <- "^ *([0-9]+hr?)? *([0-9]+m[in]?)? *([0-9]+s)? *$"
   } else if (type == "distance") {
     rgx <- "^ *([0-9]+km)? *([0-9]+m)? *([0-9]+ml)? *$"
   } else {
@@ -53,6 +64,7 @@ numericEdgeWeight <- function(edgeWeight, type) {
 }
 
 #' @rdname formatting
+#' @export
 prettyEdgeWeight <- function(edgeWeight, type) {
 
   if (!(type %in% c("time", "distance"))) {

@@ -14,6 +14,8 @@
 #' @param options A list of \code{\link{targomoOptions}} to send to the API.
 #' @param drawOptions A list of \code{\link{routeDrawOptions}} to determine how to show
 #'   the resulting routes on the map.
+#' @param routes A list of route segments provided by \code{\link{getTargomoRoutes}}.
+#' @param ... Further arguments to pass to \code{\link[leaflet]{addPolylines}}
 #' @param group The leaflet map group to add the routes to. One group is used for all
 #'   map elements being drawn per call to the API.
 #' @param api_key Your Targomo API key - defaults to the \code{TARGOMO_API_KEY}
@@ -24,6 +26,29 @@
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #' @param timeout Timeout in seconds (leave NULL for no timeout/curl default).
+#'
+#' @return For `get*`, a list of objects of class "sf" containing the routes For `draw*` and `add*`,
+#'   the leaflet map returned with the routes drawn on.
+#'
+#' @examples
+#' \donttest{
+#' # load leaflet package
+#' library(leaflet)
+#' l <- leaflet()
+#'
+#' # get route from Big Ben to Tower Bridge
+#' r <- getTargomoRoutes(source_lat = 51.5007, source_lng = -0.1246,
+#'                       target_lat = 51.5055, target_lng = -0.0754,
+#'                       options = targomoOptions(travelType = c("bike", "transit")))
+#'
+#' # draw the routes on the map
+#' l %>% drawTargomoRoutes(routes = r)
+#'
+#' # note, could combine get.. and draw... into one with add...
+#'
+#' }
+#'
+#' @seealso \code{\link{draw-routes}}
 #'
 #' @name routes
 #'
@@ -70,6 +95,74 @@ getTargomoRoutes <- function(source_data = NULL, source_lat = NULL, source_lng =
 
   return(output)
 
+}
+
+#' @rdname routes
+#' @export
+drawTargomoRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NULL, ...) {
+
+  travelModes <- names(routes)
+
+  for (tm in travelModes) {
+    for (route in routes[[tm]]) {
+
+      features <- route$features
+      segments <- features[sf::st_is(features$geometry, "LINESTRING"), ]
+
+      if (drawOptions$showMarkers) {
+
+        src <- features[!is.na(features$sourceId), ]
+        trg <- features[!is.na(features$targetId), ]
+
+        map <- map %>%
+          leaflet::addMarkers(data = src, label = ~paste("Source:", sourceId), group = group) %>%
+          leaflet::addMarkers(data = trg, label = ~paste("Target:", targetId), group = group)
+
+      }
+
+      if (tm == "car") {
+
+        map <- drawCar(map, segments, drawOptions, group, ...)
+
+      } else if (tm == "bike"){
+
+        map <- drawBike(map, segments, drawOptions, group, ...)
+
+      } else if (tm == "walk"){
+
+        map <- drawWalk(map, segments, drawOptions, group, ...)
+
+      } else if (tm %in% "transit") {
+
+        walk     <- segments[segments$travelType == "WALK", ]
+        transit  <- segments[segments$travelType == "TRANSIT", ]
+
+        map <- map %>%
+          drawWalk(segment = walk, drawOptions = drawOptions, group = group, ...) %>%
+          drawTransit(segment = transit, drawOptions = drawOptions, group = group, ...)
+
+      }
+
+      if (tm == "transit" && drawOptions$showTransfers &&
+          any(features$travelType == "TRANSFER", na.rm = TRUE)) {
+
+        transfers <- suppressWarnings({
+          features[features$travelType == "TRANSFER", ] %>%
+            sf::st_cast(to = "POINT") %>%
+            unique()
+        })
+
+        map <- map %>%
+          leaflet::addCircleMarkers(data = transfers,
+                                    color = drawOptions$transferColour,
+                                    radius = drawOptions$transferRadius,
+                                    group = group)
+      }
+
+    }
+  }
+
+  return(map)
 }
 
 
@@ -121,6 +214,12 @@ addTargomoRoutes <- function(map,
 #' @param transferColour Set the colour of transfer markers.
 #' @param transferRadius Set the size of transfer markers.
 #'
+#' @return A list of options governing how the routes are drawn on the map.
+#'
+#' @examples
+#' # show the list
+#' routeDrawOptions()
+#'
 #' @export
 routeDrawOptions <- function(showMarkers = TRUE,
                              showTransfers = TRUE,
@@ -166,18 +265,19 @@ routeDrawOptions <- function(showMarkers = TRUE,
 #' Helper functions for drawing different routes.
 #'
 #' @param map A leaflet map.
-#' @param routes A list of route segments provided by \code{\link{getTargomoRoutes}}.
 #' @param segment A route segment object to draw.
 #' @param drawOptions Drawing options provided by \code{\link{routeDrawOptions}}.
 #' @param type What route type to draw.
 #' @param group The leaflet map group to add the routes to.
 #' @param ... Further arguments to pass to leaflet functions.
 #'
-#' @name drawTargomoRoutes
+#' @return The map with the route segment/markers drawn on
+#'
+#' @name draw-routes
 #'
 NULL
 
-#' @rdname drawTargomoRoutes
+#' @rdname draw-routes
 drawRouteSegment <- function(map, segment, drawOptions, type, group, ...) {
 
   drawOpts <- drawOptions[paste0(type, c("Colour", "Weight", "DashArray"))]
@@ -200,95 +300,27 @@ drawRouteSegment <- function(map, segment, drawOptions, type, group, ...) {
 
 }
 
-#' @rdname drawTargomoRoutes
+#' @rdname draw-routes
 drawWalk <- function(map, segment, drawOptions, group, ...) {
   map <- drawRouteSegment(map, segment, drawOptions, "walk", group, ...)
   map
 }
 
-#' @rdname drawTargomoRoutes
+#' @rdname draw-routes
 drawBike <- function(map, segment, drawOptions, group, ...) {
   map <- drawRouteSegment(map, segment, drawOptions, "bike", group, ...)
   map
 }
 
-#' @rdname drawTargomoRoutes
+#' @rdname draw-routes
 drawCar <- function(map, segment, drawOptions, group, ...) {
   drawRouteSegment(map, segment, drawOptions, "car", group, ...)
 }
 
-#' @rdname drawTargomoRoutes
+#' @rdname draw-routes
 drawTransit <- function(map, segment, drawOptions, group, ...) {
   map <- drawRouteSegment(map, segment, drawOptions, "transit", group, ...)
   map
-}
-
-#' @rdname drawTargomoRoutes
-#' @export
-drawTargomoRoutes <- function(map, routes, drawOptions = routeDrawOptions(), group = NULL, ...) {
-
-  travelModes <- names(routes)
-
-  for (tm in travelModes) {
-    for (route in routes[[tm]]) {
-
-      features <- route$features
-      segments <- features[sf::st_is(features$geometry, "LINESTRING"), ]
-
-      if (drawOptions$showMarkers) {
-
-        src <- features[!is.na(features$sourceId), ]
-        trg <- features[!is.na(features$targetId), ]
-
-        map <- map %>%
-          leaflet::addMarkers(data = src, label = ~paste("Source:", sourceId), group = group) %>%
-          leaflet::addMarkers(data = trg, label = ~paste("Target:", targetId), group = group)
-
-      }
-
-      if (tm == "car") {
-
-        map <- drawCar(map, segments, drawOptions, group, ...)
-
-      } else if (tm == "bike"){
-
-        map <- drawBike(map, segments, drawOptions, group, ...)
-
-      } else if (tm == "walk"){
-
-        map <- drawWalk(map, segments, drawOptions, group, ...)
-
-      } else if (tm %in% "transit") {
-
-        walk     <- segments[segments$travelType == "WALK", ]
-        transit  <- segments[segments$travelType == "TRANSIT", ]
-
-        map <- map %>%
-          drawWalk(segment = walk, drawOptions = drawOptions, group = group, ...) %>%
-          drawTransit(segment = transit, drawOptions = drawOptions, group = group, ...)
-
-      }
-
-      if (tm == "transit" && drawOptions$showTransfers &&
-          any(features$travelType == "TRANSFER", na.rm = TRUE)) {
-
-          transfers <- suppressWarnings({
-            features[features$travelType == "TRANSFER", ] %>%
-              sf::st_cast(to = "POINT") %>%
-              unique()
-          })
-
-          map <- map %>%
-            leaflet::addCircleMarkers(data = transfers,
-                                      color = drawOptions$transferColour,
-                                      radius = drawOptions$transferRadius,
-                                      group = group)
-      }
-
-    }
-  }
-
-  return(map)
 }
 
 
@@ -299,6 +331,8 @@ drawTargomoRoutes <- function(map, routes, drawOptions = routeDrawOptions(), gro
 #' @param data The route data from which to create the popup.
 #' @param transit Whether this is a transit route.
 #' @param startEnd Whether to show information on the start and end points.
+#'
+#' @return A HTML string for the route segment popup
 #'
 createRoutePopup <- function(data, transit = FALSE, startEnd = transit) {
 

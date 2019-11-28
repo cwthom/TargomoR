@@ -3,6 +3,7 @@
 \name{routes}
 \alias{routes}
 \alias{getTargomoRoutes}
+\alias{drawTargomoRoutes}
 \alias{addTargomoRoutes}
 \title{Add Targomo Routes to a Leaflet Map}
 \usage{
@@ -12,6 +13,9 @@ getTargomoRoutes(source_data = NULL, source_lat = NULL,
   options = targomoOptions(), api_key = Sys.getenv("TARGOMO_API_KEY"),
   region = Sys.getenv("TARGOMO_REGION"), config = list(),
   verbose = FALSE, progress = FALSE, timeout = NULL)
+
+drawTargomoRoutes(map, routes, drawOptions = routeDrawOptions(),
+  group = NULL, ...)
 
 addTargomoRoutes(map, source_data = NULL, source_lat = NULL,
   source_lng = NULL, source_id = NULL, target_data = NULL,
@@ -51,13 +55,43 @@ environment variable.}
 
 \item{map}{A leaflet map}
 
+\item{routes}{A list of route segments provided by \code{\link{getTargomoRoutes}}.}
+
 \item{drawOptions}{A list of \code{\link{routeDrawOptions}} to determine how to show
 the resulting routes on the map.}
 
 \item{group}{The leaflet map group to add the routes to. One group is used for all
 map elements being drawn per call to the API.}
+
+\item{...}{Further arguments to pass to \code{\link[leaflet]{addPolylines}}}
+}
+\value{
+For `get*`, a list of objects of class "sf" containing the routes For `draw*` and `add*`,
+  the leaflet map returned with the routes drawn on.
 }
 \description{
 This function takes source and target data, together with options for the API and
 drawing options, and returns the map with the requested routes.
+}
+\examples{
+\donttest{
+# load leaflet package
+library(leaflet)
+l <- leaflet()
+
+# get route from Big Ben to Tower Bridge
+r <- getTargomoRoutes(source_lat = 51.5007, source_lng = -0.1246,
+                      target_lat = 51.5055, target_lng = -0.0754,
+                      options = targomoOptions(travelType = c("bike", "transit")))
+
+# draw the routes on the map
+l \%>\% drawTargomoRoutes(routes = r)
+
+# note, could combine get.. and draw... into one with add...
+
+}
+
+}
+\seealso{
+\code{\link{draw-routes}}
 }

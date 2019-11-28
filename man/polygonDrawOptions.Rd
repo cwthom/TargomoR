@@ -30,7 +30,15 @@ polygonDrawOptions(stroke = TRUE, weight = 5, color = c("red",
 
 \item{noClip}{Whether to disable polyline clipping.}
 }
+\value{
+A list of options governing how the polygons appear on the map
+}
 \description{
 Function to return a list of the desired drawing options - you can set all the usual
 parameters of a call to \code{\link[leaflet]{addPolygons}}.
+}
+\examples{
+# show the list
+polygonDrawOptions()
+
 }

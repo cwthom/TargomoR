@@ -30,6 +30,12 @@
 #' @param simplify,buffer Parameters for manipulating the returned polygons.
 #' @param quadrantSegments,decimalPrecision Parameters for fine-tuning the returned polygons.
 #'
+#' @return A (filtered, no NULLs) list of options to pass to the API
+#'
+#' @examples
+#' targomoOptions(travelType = "transit")
+#' targomoOptions(travelTimes = list("15m", "30m", "45m", "1h"), maxEdgeWeight = "1h")
+#'
 #' @name options
 #'
 #' @export

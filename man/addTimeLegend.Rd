@@ -17,6 +17,9 @@ addTimeLegend(map, palette, values, options, group)
 
 \item{group}{The layer group to add the legend to}
 }
+\value{
+The leaflet map with the time legend in a control
+}
 \description{
 Add Time Legend to Map
 }

@@ -55,7 +55,29 @@ for all the polygons added by one API call.}
 
 \item{...}{Further arguments to pass to \code{\link[leaflet]{addPolygons}}}
 }
+\value{
+For `get*`, an object of class "sf" containing the polygons. For `draw*` and `add*`,
+  the leaflet map returned with the polygons drawn on.
+}
 \description{
 Functions for retrieving isochrone polygons from the Targomo API and adding
 drawing them on a \code{leaflet} map.
+}
+\examples{
+\donttest{
+# load leaflet package
+library(leaflet)
+l <- leaflet()
+
+# get the polygons
+p <- getTargomoPolygons(source_lat = 51.5007, source_lng = -0.1246,
+                        options = targomoOptions(travelType = "bike"))
+
+# draw them on the map
+l \%>\% drawTargomoPolygons(polygons = p, group = "BigBenBike")
+
+# note could combine get... and draw... into one with add...
+
+}
+
 }

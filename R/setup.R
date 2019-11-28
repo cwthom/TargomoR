@@ -12,6 +12,14 @@
 #' @param overwrite Whether to overwrite an existing setting
 #' @param global If TRUE, write to a global .Renviron in \code{Sys.getenv("HOME")}
 #'
+#' @return Invisibly, the API key - this function is called for its side effects
+#'
+#' @examples
+#' \dontrun{
+#' # write to a global file at Sys.getenv("HOME")
+#' setTargomoVariables(api_key = "YOUR_SECRET_KEY", region = "asia", overwrite = TRUE, global = TRUE)
+#' }
+#'
 #' @export
 setTargomoVariables <- function(api_key = NULL, region = NULL, overwrite = FALSE,
                                 global = FALSE) {

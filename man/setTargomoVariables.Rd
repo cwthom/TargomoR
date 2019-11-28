@@ -16,6 +16,9 @@ setTargomoVariables(api_key = NULL, region = NULL, overwrite = FALSE,
 
 \item{global}{If TRUE, write to a global .Renviron in \code{Sys.getenv("HOME")}}
 }
+\value{
+Invisibly, the API key - this function is called for its side effects
+}
 \description{
 This helper function allows you to set your API key in either a global or local
 .Renviron file, for ease of use. All of the \code{TargomoR} functions which call
@@ -24,4 +27,11 @@ variable by default. Similarly you can set your default region.
 }
 \details{
 For available regions, see here: \url{https://targomo.com/developers/resources/availability/}
+}
+\examples{
+\dontrun{
+# write to a global file at Sys.getenv("HOME")
+setTargomoVariables(api_key = "YOUR_SECRET_KEY", region = "asia", overwrite = TRUE, global = TRUE)
+}
+
 }
