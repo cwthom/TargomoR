@@ -1,8 +1,7 @@
 #' Set Targomo Options
 #'
 #' This function sets the options to be passed to the API service.
-#' For full details of available options see:
-#' \url{https://docs.targomo.com/core/}
+#' For full details of available options see https://docs.targomo.com/core/
 #'
 #' @param travelTimes A list of times - each time corresponds to a
 #'   different polygon. Your API key will determine how many you can add. Acceptable formats

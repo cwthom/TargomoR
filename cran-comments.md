@@ -1,3 +1,10 @@
+## Resubmission - TargomoR 0.2.0
+
+In this version I have fixed the NOTEs by:
+
+- removing the `\url` tag from man/options.Rd
+- fixing the broken CODE_OF_CONDUCT.md URI to a published webpage
+
 # TargomoR 0.2.0
 
 This is the first release to CRAN of the package.

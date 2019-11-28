@@ -68,8 +68,7 @@ A (filtered, no NULLs) list of options to pass to the API
 }
 \description{
 This function sets the options to be passed to the API service.
-For full details of available options see:
-\url{https://docs.targomo.com/core/}
+For full details of available options see https://docs.targomo.com/core/
 }
 \examples{
 targomoOptions(travelType = "transit")
