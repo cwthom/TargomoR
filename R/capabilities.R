@@ -9,15 +9,22 @@
 #' @param region Your Targomo region - defaults to the \code{TARGOMO_REGION}
 #'   environment variable
 #' @param config Config options to pass to \code{httr::GET} e.g. proxy settings
-#' @param response The API response object
 #' @param verbose Whether to print out information about the API call.
 #' @param progress Whether to show a progress bar of the API call.
 #'
-#' @name capabilities
+#' @return A list of the capabilities of the given API key, in the given region
 #'
-NULL
-
-#' @rdname capabilities
+#' @examples
+#' \donttest{
+#' caps <- getTargomoCapabilities()
+#'
+#' # print default
+#' print.default(caps)
+#'
+#' # print using bespoke method
+#' print(caps)
+#' }
+#'
 #' @export
 getTargomoCapabilities <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
                                    region = Sys.getenv("TARGOMO_REGION"),
@@ -38,7 +45,14 @@ getTargomoCapabilities <- function(api_key = Sys.getenv("TARGOMO_API_KEY"),
 
 }
 
-#' @rdname capabilities
+#' Process Capabilities
+#'
+#' This function takes the raw JSON list of capabilities and converts then into a formatted list.
+#'
+#' @param response The API response object
+#'
+#' @return The formatted list, of class 'tgm_capabilitites'
+#'
 processCapabilities <- function(response) {
 
   response <- catchBadResponse(response)
@@ -56,8 +70,11 @@ processCapabilities <- function(response) {
 
 #' Helper functions for tidying up capabilities response
 #'
-#' @param caps A capabilities list from \code{\link{getTargomoCapabilities}}
+#' These functions tidy up the raw capabilities lists.
+#'
 #' @param general,transit,speeds The parts of the list
+#'
+#' @return Lists of capabilities (data.frames or vectors)
 #'
 #' @name tidy-capabilities
 NULL
@@ -107,7 +124,14 @@ tidySpeeds <- function(speeds) {
   speeds
 }
 
-#' @rdname tidy-capabilities
+#' Print Method for Capabilities
+#'
+#' A custom print method to make the capabilities list appear nicely in the console.
+#'
+#' @param caps A list, output of \code{\link{getTargomoCapabilities}}
+#'
+#' @return The list, invisibly
+#'
 print.tgm_capabilities <- function(caps) {
 
   # print out version

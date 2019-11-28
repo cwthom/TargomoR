@@ -26,8 +26,16 @@ routeDrawOptions(showMarkers = TRUE, showTransfers = TRUE,
 
 \item{transferRadius}{Set the size of transfer markers.}
 }
+\value{
+A list of options governing how the routes are drawn on the map.
+}
 \description{
 Function to return a list of the desired drawing options - you can set colours,
 line weights and dash styles for each transport type, whether to show the source
 and target markers, and whether to show transfers between different modes of transport.
+}
+\examples{
+# show the list
+routeDrawOptions()
+
 }

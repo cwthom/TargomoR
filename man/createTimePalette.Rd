@@ -17,6 +17,9 @@ createTimePalette(palette, type, maxTime, bins, reverse)
 
 \item{reverse}{Whether to reverse the colour palette.}
 }
+\value{
+A colour palette function for use with the time legend and markers
+}
 \description{
 Create a Colour Palette for Time Service Results
 }

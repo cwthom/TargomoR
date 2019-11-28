@@ -9,6 +9,18 @@
 #'
 #' @return A link or iframe to the attributions page.
 #'
+#' @examples
+#' \donttest{
+#' # load leaflet package
+#' library(leaflet)
+#'
+#' # add an attribution iframe to a map
+#' leaflet() %>%
+#'   addTargomoAttribution(free_plan = FALSE)
+#' }
+#' # return the attribution link
+#' attributionLink()
+#'
 #' @name attribution
 NULL
 

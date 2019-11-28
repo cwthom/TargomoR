@@ -4,7 +4,7 @@
 \alias{formatting}
 \alias{numericEdgeWeight}
 \alias{prettyEdgeWeight}
-\title{Format Requests and Responses}
+\title{Format Edgeweights (times and distances)}
 \usage{
 numericEdgeWeight(edgeWeight, type)
 
@@ -15,6 +15,18 @@ prettyEdgeWeight(edgeWeight, type)
 
 \item{type}{Either 'time' or 'distance'.}
 }
+\value{
+Either a numeric or formatted edgeweight
+}
 \description{
-Functions to make the interface easier and more intuitive to use.
+Functions to make the interface easier and more intuitive to use - they convert
+numeric edgeweights (e.g. 900) to character strings (e.g. "15min"), and vice versa.
+}
+\examples{
+numericEdgeWeight("1hr 30m", "time") # 5400
+numericEdgeWeight("1ml", "distance") # 1609
+
+prettyEdgeWeight(1245, "time") # 30min 45s
+prettyEdgeWeight(1245, "distance") # 1km 245m
+
 }

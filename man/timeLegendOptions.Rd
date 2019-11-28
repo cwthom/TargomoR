@@ -14,6 +14,14 @@ timeLegendOptions(position = "topright", title = "Travel Times",
 
 \item{layerId}{The legend layer ID.}
 }
+\value{
+A list of options governing how the time legend appears on the map
+}
 \description{
 Time Legend Options
+}
+\examples{
+# show the list
+timeLegendOptions()
+
 }

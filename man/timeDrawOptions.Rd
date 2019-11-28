@@ -39,6 +39,14 @@ timeDrawOptions(palette = "viridis", type = "numeric",
 
 \item{fillOpacity}{The fill opacity.}
 }
+\value{
+A list of options governing how time markers are drawn on the map
+}
 \description{
 Options for Drawing Times on the Map
+}
+\examples{
+# show the list
+timeDrawOptions()
+
 }

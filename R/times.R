@@ -27,11 +27,34 @@
 #' @param progress Whether to show a progress bar of the API call.
 #' @param timeout Timeout in seconds (leave NULL for no timeout/curl default).
 #'
-#' @name getTargomoTimes
+#' @return For `get*`, an object of class "sf" containing the times. For `draw*` and `add*`,
+#'   the leaflet map returned with the times drawn on as circle markers.
+#'
+#' @examples
+#' \donttest{
+#' # load leaflet package
+#' library(leaflet)
+#' l <- leaflet()
+#'
+#' # create a source point (Big Ben) and some random targets
+#' s <- data.frame(lat = 51.5007, lng = -0.1246, id = "BigBen")
+#' t <- data.frame(lat = runif(min = 51.495, max = 51.5055, n = 100),
+#'                 lng = runif(min = -0.175, max = -0.075, n = 100))
+#'
+#' # get the times
+#' times <- getTargomoTimes(source_data = s, target_data = t,
+#'                          options = targomoOptions(travelType = "car"))
+#'
+#' # draw them on the map
+#' l %>% drawTargomoTimes(times = times)
+#'
+#' }
+#'
+#' @name times
 #'
 NULL
 
-#' @rdname getTargomoTimes
+#' @rdname times
 #' @export
 getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = NULL,
                             target_data = NULL, target_lat = NULL, target_lng = NULL,
@@ -85,7 +108,7 @@ getTargomoTimes <- function(source_data = NULL, source_lat = NULL, source_lng = 
 
 }
 
-#' @rdname getTargomoTimes
+#' @rdname times
 #' @export
 drawTargomoTimes <- function(map, times,
                              drawOptions = timeDrawOptions(),
@@ -117,7 +140,7 @@ drawTargomoTimes <- function(map, times,
 }
 
 
-#' @rdname getTargomoTimes
+#' @rdname times
 #' @export
 addTargomoTimes <- function(map,
                             source_data = NULL, source_lat = NULL, source_lng = NULL,
@@ -173,6 +196,12 @@ addTargomoTimes <- function(map,
 #' @param fill Whether to fill the polygons in with colour.
 #' @param fillOpacity The fill opacity.
 #'
+#' @return A list of options governing how time markers are drawn on the map
+#'
+#' @examples
+#' # show the list
+#' timeDrawOptions()
+#'
 #' @export
 timeDrawOptions <- function(palette = "viridis",
                             type = "numeric",
@@ -214,6 +243,12 @@ timeDrawOptions <- function(palette = "viridis",
 #' @param title The legend title.
 #' @param layerId The legend layer ID.
 #'
+#' @return A list of options governing how the time legend appears on the map
+#'
+#' @examples
+#' # show the list
+#' timeLegendOptions()
+#'
 #' @export
 timeLegendOptions <- function(position = "topright",
                               title = "Travel Times",
@@ -235,6 +270,8 @@ timeLegendOptions <- function(position = "topright",
 #' @param maxTime The maximum time value to consider
 #' @param bins Either a single number of bins, or a vector of cut points.
 #' @param reverse Whether to reverse the colour palette.
+#'
+#' @return A colour palette function for use with the time legend and markers
 #'
 createTimePalette <- function(palette, type, maxTime, bins, reverse) {
 
@@ -265,6 +302,8 @@ createTimePalette <- function(palette, type, maxTime, bins, reverse) {
 #' @param values Values to use (travel times)
 #' @param options A set of \code{\link{timeLegendOptions}}
 #' @param group The layer group to add the legend to
+#'
+#' @return The leaflet map with the time legend in a control
 #'
 addTimeLegend <- function(map, palette, values, options, group) {
 

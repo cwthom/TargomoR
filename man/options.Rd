@@ -63,8 +63,16 @@ or \code{.km.m.ml} for distance, where ml represents miles (1609 metres).}
 
 \item{quadrantSegments, decimalPrecision}{Parameters for fine-tuning the returned polygons.}
 }
+\value{
+A (filtered, no NULLs) list of options to pass to the API
+}
 \description{
 This function sets the options to be passed to the API service.
 For full details of available options see:
 \url{https://docs.targomo.com/core/}
+}
+\examples{
+targomoOptions(travelType = "transit")
+targomoOptions(travelTimes = list("15m", "30m", "45m", "1h"), maxEdgeWeight = "1h")
+
 }
