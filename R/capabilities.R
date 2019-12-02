@@ -14,6 +14,8 @@
 #'
 #' @return A list of the capabilities of the given API key, in the given region
 #'
+#' @name capabilities
+#'
 #' @examples
 #' \donttest{
 #' caps <- getTargomoCapabilities()
@@ -126,26 +128,26 @@ tidySpeeds <- function(speeds) {
 
 #' Print Method for Capabilities
 #'
-#' A custom print method to make the capabilities list appear nicely in the console.
+#' @param x A list, output of \code{\link{getTargomoCapabilities}}
+#' @param ... Further arguments to \code{\link[base]{print}}
 #'
-#' @param caps A list, output of \code{\link{getTargomoCapabilities}}
+#' @rdname capabilities
 #'
-#' @return The list, invisibly
-#'
-print.tgm_capabilities <- function(caps) {
+#' @export
+print.tgm_capabilities <- function(x, ...) {
 
   # print out version
-  vn <- caps$general$version
+  vn <- x$general$version
   cat(paste0("Targomo Config Version: ", vn, "\n"))
 
   # print out transit and default speeds
   cat("\nTransit capabilities:\n=========================================\n")
-  print(caps$transit)
+  print(x$transit, ...)
   cat("=========================================\n")
 
   cat("\nDefault speeds:\n=========================================\n")
-  print(caps$speeds$defaults)
+  print(x$speeds$defaults, ...)
   cat("=========================================\n")
 
-  invisible(caps)
+  invisible(x)
 }
