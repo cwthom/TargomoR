@@ -1,11 +1,12 @@
 Package: TargomoR
 Type: Package
-Title: An R Interface to the Targomo API
+Title: Interface to the 'Targomo' API
 Version: 0.2.0
 Authors@R: person("Chris", "Mason-Thom", email = "chrismasonthom@gmail.com", role=c("aut","cre"))
-Description: An R interface to the Targomo REST API. Currently supports the Polygon,
-    Routing and Time services, as well as access to Targomo basemaps. The MultiGraph 
-    service is not supported.
+Description: Functions to provide an intuitive interface for retrieving travel time data from the
+    'Targomo' API (see <https://targomo.com/developers/> for details). Provides support for retrieving
+    isochrone polygons, travel routes, times and distances. Also includes functions for easily adding
+    the data to 'leaflet' maps, and functions for using the 'Targomo' map tiles.
 License: GPL-3
 URL: https://cwthom.github.io/TargomoR
 BugReports: https://github.com/cwthom/TargomoR/issues

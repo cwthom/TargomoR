@@ -19,6 +19,7 @@
 - [x] Check winbuilder
 - [x] Check RHub
 - [x] .Rbuildignore vignettes
+- [ ] Fix CRAN comments
 - [ ] Release to CRAN
 - [ ] Publicise (with Targomo)
 
