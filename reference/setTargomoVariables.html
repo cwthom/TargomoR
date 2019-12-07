@@ -80,7 +80,7 @@ variable by default. Similarly you can set your default region." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TargomoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -176,16 +176,26 @@ variable by default. Similarly you can set your default region.</p>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Invisibly, the API key - this function is called for its side effects</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>For available regions, see here: <a href='https://targomo.com/developers/resources/availability/'>https://targomo.com/developers/resources/availability/</a></p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># write to a global file at Sys.getenv("HOME")</span>
+<span class='fu'>setTargomoVariables</span>(<span class='kw'>api_key</span> <span class='kw'>=</span> <span class='st'>"YOUR_SECRET_KEY"</span>, <span class='kw'>region</span> <span class='kw'>=</span> <span class='st'>"asia"</span>, <span class='kw'>overwrite</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>global</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

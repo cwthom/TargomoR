@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Derive Sources/Targets — deriveSources • TargomoR</title>
+<title>Draw Routes — draw-routes • TargomoR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Derive Sources/Targets — deriveSources" />
-<meta property="og:description" content="Function to create the sources needed to query the Targomo API." />
+<meta property="og:title" content="Draw Routes — draw-routes" />
+<meta property="og:description" content="Helper functions for drawing different routes." />
 <meta property="og:image" content="https://cwthom.github.io/TargomoR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -137,51 +137,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Derive Sources/Targets</h1>
+    <h1>Draw Routes</h1>
     
-    <div class="hidden name"><code>deriveSources.Rd</code></div>
+    <div class="hidden name"><code>draw-routes.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to create the sources needed to query the Targomo API.</p>
+    <p>Helper functions for drawing different routes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createIds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>drawRouteSegment</span>(<span class='no'>map</span>, <span class='no'>segment</span>, <span class='no'>drawOptions</span>, <span class='no'>type</span>, <span class='no'>group</span>, <span class='no'>...</span>)
 
-<span class='fu'>createPoints</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>drawWalk</span>(<span class='no'>map</span>, <span class='no'>segment</span>, <span class='no'>drawOptions</span>, <span class='no'>group</span>, <span class='no'>...</span>)
 
-<span class='fu'>deriveSources</span>(<span class='no'>points</span>, <span class='no'>options</span>)
+<span class='fu'>drawBike</span>(<span class='no'>map</span>, <span class='no'>segment</span>, <span class='no'>drawOptions</span>, <span class='no'>group</span>, <span class='no'>...</span>)
 
-<span class='fu'>deriveTargets</span>(<span class='no'>points</span>)</pre>
+<span class='fu'>drawCar</span>(<span class='no'>map</span>, <span class='no'>segment</span>, <span class='no'>drawOptions</span>, <span class='no'>group</span>, <span class='no'>...</span>)
+
+<span class='fu'>drawTransit</span>(<span class='no'>map</span>, <span class='no'>segment</span>, <span class='no'>drawOptions</span>, <span class='no'>group</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>The data object</p></td>
+      <th>map</th>
+      <td><p>A leaflet map.</p></td>
     </tr>
     <tr>
-      <th>id</th>
-      <td><p>The id vector or formula to resolve</p></td>
+      <th>segment</th>
+      <td><p>A route segment object to draw.</p></td>
     </tr>
     <tr>
-      <th>lat, lng</th>
-      <td><p>The lat/lng vectors or formulae to resolve</p></td>
+      <th>drawOptions</th>
+      <td><p>Drawing options provided by <code><a href='routeDrawOptions.html'>routeDrawOptions</a></code>.</p></td>
     </tr>
     <tr>
-      <th>points</th>
-      <td><p>A processed data object (for sources/targets).</p></td>
+      <th>type</th>
+      <td><p>What route type to draw.</p></td>
     </tr>
     <tr>
-      <th>options</th>
-      <td><p>A processed options object (for sources).</p></td>
+      <th>group</th>
+      <td><p>The leaflet map group to add the routes to.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments to pass to leaflet functions.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame of sources/targets, with IDs attached.</p>
+    <p>The map with the route segment/markers drawn on</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

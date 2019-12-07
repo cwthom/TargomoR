@@ -78,7 +78,7 @@ drawing options, and returns the map with the requested routes." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TargomoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -155,6 +155,9 @@ drawing options, and returns the map with the requested routes.</p>
   <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>), <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
 
+<span class='fu'>drawTargomoRoutes</span>(<span class='no'>map</span>, <span class='no'>routes</span>, <span class='kw'>drawOptions</span> <span class='kw'>=</span> <span class='fu'><a href='routeDrawOptions.html'>routeDrawOptions</a></span>(),
+  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+
 <span class='fu'>addTargomoRoutes</span>(<span class='no'>map</span>, <span class='kw'>source_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>source_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>source_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>source_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>target_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -220,6 +223,10 @@ environment variable.</p></td>
       <td><p>A leaflet map</p></td>
     </tr>
     <tr>
+      <th>routes</th>
+      <td><p>A list of route segments provided by <code>getTargomoRoutes</code>.</p></td>
+    </tr>
+    <tr>
       <th>drawOptions</th>
       <td><p>A list of <code><a href='routeDrawOptions.html'>routeDrawOptions</a></code> to determine how to show
 the resulting routes on the map.</p></td>
@@ -229,14 +236,45 @@ the resulting routes on the map.</p></td>
       <td><p>The leaflet map group to add the routes to. One group is used for all
 map elements being drawn per call to the API.</p></td>
     </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments to pass to <code><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>addPolylines</a></code></p></td>
+    </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>For `get*`, a list of objects of class "sf" containing the routes For `draw*` and `add*`,
+  the leaflet map returned with the routes drawn on.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='draw-routes.html'>draw-routes</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'># load leaflet package</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>leaflet</span>)
+<span class='no'>l</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span>()
+
+<span class='co'># get route from Big Ben to Tower Bridge</span>
+<span class='no'>r</span> <span class='kw'>&lt;-</span> <span class='fu'>getTargomoRoutes</span>(<span class='kw'>source_lat</span> <span class='kw'>=</span> <span class='fl'>51.5007</span>, <span class='kw'>source_lng</span> <span class='kw'>=</span> -<span class='fl'>0.1246</span>,
+                      <span class='kw'>target_lat</span> <span class='kw'>=</span> <span class='fl'>51.5055</span>, <span class='kw'>target_lng</span> <span class='kw'>=</span> -<span class='fl'>0.0754</span>,
+                      <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='options.html'>targomoOptions</a></span>(<span class='kw'>travelType</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bike"</span>, <span class='st'>"transit"</span>)))</div><div class='output co'>#&gt; <span class='message'>Multiple (2) travel types supplied - treating each in turn.</span>
+#&gt; <span class='message'>This will make 2 calls to the API.</span></div><div class='input'>
+<span class='co'># draw the routes on the map</span>
+<span class='no'>l</span> <span class='kw'>%&gt;%</span> <span class='fu'>drawTargomoRoutes</span>(<span class='kw'>routes</span> <span class='kw'>=</span> <span class='no'>r</span>)
+
+<span class='co'># note, could combine get.. and draw... into one with add...</span>
+
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

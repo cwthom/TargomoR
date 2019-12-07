@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Derive Sources/Targets — deriveSources • TargomoR</title>
+<title>Add Targomo Basemaps to a Leaflet Map — tiles • TargomoR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Derive Sources/Targets — deriveSources" />
-<meta property="og:description" content="Function to create the sources needed to query the Targomo API." />
+<meta property="og:title" content="Add Targomo Basemaps to a Leaflet Map — tiles" />
+<meta property="og:description" content="This function wraps round leaflet::addTiles to provide access to the Targomo basemaps." />
 <meta property="og:image" content="https://cwthom.github.io/TargomoR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -137,58 +137,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Derive Sources/Targets</h1>
+    <h1>Add Targomo Basemaps to a Leaflet Map</h1>
     
-    <div class="hidden name"><code>deriveSources.Rd</code></div>
+    <div class="hidden name"><code>tiles.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to create the sources needed to query the Targomo API.</p>
+    <p>This function wraps round <code><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>leaflet::addTiles</a></code> to provide access to the Targomo basemaps.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createIds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>addTargomoTiles</span>(<span class='no'>map</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"basic"</span>,
+  <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>), <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
 
-<span class='fu'>createPoints</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>deriveSources</span>(<span class='no'>points</span>, <span class='no'>options</span>)
-
-<span class='fu'>deriveTargets</span>(<span class='no'>points</span>)</pre>
+<span class='fu'>targomoMapStyles</span>()</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>The data object</p></td>
+      <th>map</th>
+      <td><p>A leaflet map</p></td>
     </tr>
     <tr>
-      <th>id</th>
-      <td><p>The id vector or formula to resolve</p></td>
+      <th>style</th>
+      <td><p>A valid Targomo Map Style - see <code>targomoMapStyles()</code></p></td>
     </tr>
     <tr>
-      <th>lat, lng</th>
-      <td><p>The lat/lng vectors or formulae to resolve</p></td>
+      <th>api_key</th>
+      <td><p>Your Targomo API key - defaults to the <code>TARGOMO_API_KEY</code>
+ennvironment variable</p></td>
     </tr>
     <tr>
-      <th>points</th>
-      <td><p>A processed data object (for sources/targets).</p></td>
+      <th>layerId</th>
+      <td><p>The layer id to pass to <code><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>leaflet::addTiles</a></code></p></td>
     </tr>
     <tr>
-      <th>options</th>
-      <td><p>A processed options object (for sources).</p></td>
+      <th>group</th>
+      <td><p>The layer group to pass to <code><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>leaflet::addTiles</a></code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further options to pass to <code><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>leaflet::addTiles</a></code> e.g. options</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame of sources/targets, with IDs attached.</p>
+    <p>The leaflet map with the requested map tiles</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'># load leaflet package</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>leaflet</span>)
+
+<span class='co'># add basic style to map</span>
+<span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>addTargomoTiles</span>(<span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"basic"</span>)
+
+<span class='co'># add dark blue style to map (without labels)</span>
+<span class='fu'><a href='https://rdrr.io/pkg/leaflet/man/leaflet.html'>leaflet</a></span>() <span class='kw'>%&gt;%</span> <span class='fu'>addTargomoTiles</span>(<span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"darkblue-nolabels"</span>)
+<span class='co'># }</span>
+<span class='co'># list Targomo Map Styles</span>
+<span class='fu'>targomoMapStyles</span>()</div><div class='output co'>#&gt;  [1] "basic"             "bright"            "dark"             
+#&gt;  [4] "dark-nolabels"     "darkblue"          "darkblue-nolabels"
+#&gt;  [7] "gray"              "gray-nolabels"     "light"            
+#&gt; [10] "light-nolabels"    "lightblue"         "toner"            </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

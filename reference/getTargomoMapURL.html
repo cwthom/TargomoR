@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Derive Sources/Targets — deriveSources • TargomoR</title>
+<title>Targomo Map Tiles URL — getTargomoMapURL • TargomoR</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,8 @@
 
 
 
-<meta property="og:title" content="Derive Sources/Targets — deriveSources" />
-<meta property="og:description" content="Function to create the sources needed to query the Targomo API." />
+<meta property="og:title" content="Targomo Map Tiles URL — getTargomoMapURL" />
+<meta property="og:description" content="Targomo Map Tiles URL" />
 <meta property="og:image" content="https://cwthom.github.io/TargomoR/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -137,58 +137,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Derive Sources/Targets</h1>
+    <h1>Targomo Map Tiles URL</h1>
     
-    <div class="hidden name"><code>deriveSources.Rd</code></div>
+    <div class="hidden name"><code>getTargomoMapURL.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to create the sources needed to query the Targomo API.</p>
+    <p>Targomo Map Tiles URL</p>
     </div>
 
-    <pre class="usage"><span class='fu'>createIds</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>createPoints</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>deriveSources</span>(<span class='no'>points</span>, <span class='no'>options</span>)
-
-<span class='fu'>deriveTargets</span>(<span class='no'>points</span>)</pre>
+    <pre class="usage"><span class='fu'>getTargomoMapURL</span>(<span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"basic"</span>,
+  <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>The data object</p></td>
+      <th>style</th>
+      <td><p>A valid Targomo Map Style - see <code><a href='tiles.html'>targomoMapStyles()</a></code></p></td>
     </tr>
     <tr>
-      <th>id</th>
-      <td><p>The id vector or formula to resolve</p></td>
-    </tr>
-    <tr>
-      <th>lat, lng</th>
-      <td><p>The lat/lng vectors or formulae to resolve</p></td>
-    </tr>
-    <tr>
-      <th>points</th>
-      <td><p>A processed data object (for sources/targets).</p></td>
-    </tr>
-    <tr>
-      <th>options</th>
-      <td><p>A processed options object (for sources).</p></td>
+      <th>api_key</th>
+      <td><p>Your Targomo API key - defaults to the <code>TARGOMO_API_KEY</code>
+ennvironment variable</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data.frame of sources/targets, with IDs attached.</p>
+    <p>The URL of the requested map tile</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>getTargomoMapURL</span>(<span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"toner"</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; [1] "https://maps.targomo.com/styles/toner-gl-style/rendered/{z}/{x}/{y}.png?key="</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

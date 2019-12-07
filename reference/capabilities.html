@@ -78,7 +78,7 @@ to print out the main results nicely in the console." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">TargomoR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.2.9002</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -152,7 +152,8 @@ to print out the main results nicely in the console.</p>
   <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>), <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'>processCapabilities</span>(<span class='no'>response</span>)</pre>
+<span class='co'># S3 method for tgm_capabilities</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,17 +181,150 @@ environment variable</p></td>
       <td><p>Whether to show a progress bar of the API call.</p></td>
     </tr>
     <tr>
-      <th>response</th>
-      <td><p>The API response object</p></td>
+      <th>x</th>
+      <td><p>A list, output of <code>getTargomoCapabilities</code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Further arguments to <code><a href='https://rdrr.io/r/base/print.html'>print</a></code></p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A list of the capabilities of the given API key, in the given region</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='no'>caps</span> <span class='kw'>&lt;-</span> <span class='fu'>getTargomoCapabilities</span>()
+
+<span class='co'># print default</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.default.html'>print.default</a></span>(<span class='no'>caps</span>)</div><div class='output co'>#&gt; $general
+#&gt; $general$`default-max-routing-length`
+#&gt; [1] 60000
+#&gt; 
+#&gt; $general$`default-max-routing-time`
+#&gt; [1] 1800
+#&gt; 
+#&gt; $general$pathSerializer
+#&gt; [1] "compact" "geojson"
+#&gt; 
+#&gt; $general$edgeWeights
+#&gt; [1] "time"     "distance"
+#&gt; 
+#&gt; $general$`min-polygon-hole-size`
+#&gt; [1] 1e+08
+#&gt; 
+#&gt; $general$`edge-classes`
+#&gt;  [1] 11 12 13 14 15 16 21 22 31 32 41 42 51 63 62 71 72 81 91 92
+#&gt; 
+#&gt; $general$`reverse-routing`
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $general$polygonSerializer
+#&gt; [1] "json"    "geojson"
+#&gt; 
+#&gt; $general$`enable-bikes-on`
+#&gt; NULL
+#&gt; 
+#&gt; $general$congestion
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $general$version
+#&gt; [1] "targomo-config b2b2e5d"
+#&gt; 
+#&gt; 
+#&gt; $transit
+#&gt;                         property    value
+#&gt; 1                     min-time-s        0
+#&gt; 2              min-transfer-time      180
+#&gt; 3  changing-transit-penalty-time      180
+#&gt; 4                       min-date 20190320
+#&gt; 5  entering-transit-penalty-time       90
+#&gt; 6                      available        1
+#&gt; 7   leaving-transit-penalty-time       90
+#&gt; 8                     max-time-s 10000000
+#&gt; 9         default-frame-duration    10800
+#&gt; 10                      max-date 20190905
+#&gt; 11         default-transfer-time      180
+#&gt; 
+#&gt; $speeds
+#&gt; $speeds$defaults
+#&gt;                        property value
+#&gt; 1 default-bike-downhill-penalty   -10
+#&gt; 2            default-bike-speed    15
+#&gt; 3   default-bike-uphill-penalty    20
+#&gt; 4 default-walk-downhill-penalty     0
+#&gt; 5            default-walk-speed     5
+#&gt; 6   default-walk-uphill-penalty    10
+#&gt; 
+#&gt; $speeds$`osm-classes`
+#&gt;    class factor speed
+#&gt; 1     33      1    30
+#&gt; 2     99      1     5
+#&gt; 3     11      1   120
+#&gt; 4     22      1    30
+#&gt; 5     12      1    30
+#&gt; 6     13      1    90
+#&gt; 7     14      1    30
+#&gt; 8     15      1    70
+#&gt; 9     16      1    30
+#&gt; 10     1      1    10
+#&gt; 11    91      1     5
+#&gt; 12    81      1    15
+#&gt; 13    92      1     5
+#&gt; 14    71      1    10
+#&gt; 15    72      1    10
+#&gt; 16    51      1     5
+#&gt; 17    62      1     5
+#&gt; 18    41      1    30
+#&gt; 19    63      1     7
+#&gt; 20    42      1    30
+#&gt; 21    31      1    40
+#&gt; 22    32      1    40
+#&gt; 23    21      1    60
+#&gt; 
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "tgm_capabilities" "list"            </div><div class='input'>
+<span class='co'># print using bespoke method</span>
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='no'>caps</span>)</div><div class='output co'>#&gt; Targomo Config Version: targomo-config b2b2e5d
+#&gt; 
+#&gt; Transit capabilities:
+#&gt; =========================================
+#&gt;                         property    value
+#&gt; 1                     min-time-s        0
+#&gt; 2              min-transfer-time      180
+#&gt; 3  changing-transit-penalty-time      180
+#&gt; 4                       min-date 20190320
+#&gt; 5  entering-transit-penalty-time       90
+#&gt; 6                      available        1
+#&gt; 7   leaving-transit-penalty-time       90
+#&gt; 8                     max-time-s 10000000
+#&gt; 9         default-frame-duration    10800
+#&gt; 10                      max-date 20190905
+#&gt; 11         default-transfer-time      180
+#&gt; =========================================
+#&gt; 
+#&gt; Default speeds:
+#&gt; =========================================
+#&gt;                        property value
+#&gt; 1 default-bike-downhill-penalty   -10
+#&gt; 2            default-bike-speed    15
+#&gt; 3   default-bike-uphill-penalty    20
+#&gt; 4 default-walk-downhill-penalty     0
+#&gt; 5            default-walk-speed     5
+#&gt; 6   default-walk-uphill-penalty    10
+#&gt; =========================================</div><div class='input'># }
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
