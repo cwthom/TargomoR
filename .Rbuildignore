@@ -14,7 +14,6 @@
 ^CODE_OF_CONDUCT\.md$
 ^sticker$
 ^\.Rprofile$
-^pkgdown$
 ^vignettes$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
