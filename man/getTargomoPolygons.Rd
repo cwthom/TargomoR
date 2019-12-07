@@ -6,21 +6,43 @@
 \alias{addTargomoPolygons}
 \title{Add Targomo Polygons to a Leaflet Map}
 \usage{
-getTargomoPolygons(source_data = NULL, source_lat = NULL,
-  source_lng = NULL, options = targomoOptions(),
+getTargomoPolygons(
+  source_data = NULL,
+  source_lat = NULL,
+  source_lng = NULL,
+  options = targomoOptions(),
   api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE, timeout = NULL)
+  region = Sys.getenv("TARGOMO_REGION"),
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE,
+  timeout = NULL
+)
 
-drawTargomoPolygons(map, polygons, drawOptions = polygonDrawOptions(),
-  group = NULL, ...)
+drawTargomoPolygons(
+  map,
+  polygons,
+  drawOptions = polygonDrawOptions(),
+  group = NULL,
+  ...
+)
 
-addTargomoPolygons(map, source_data = NULL, source_lng = NULL,
-  source_lat = NULL, options = targomoOptions(),
-  drawOptions = polygonDrawOptions(), group = NULL, ...,
+addTargomoPolygons(
+  map,
+  source_data = NULL,
+  source_lng = NULL,
+  source_lat = NULL,
+  options = targomoOptions(),
+  drawOptions = polygonDrawOptions(),
+  group = NULL,
+  ...,
   api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE, timeout = NULL)
+  region = Sys.getenv("TARGOMO_REGION"),
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE,
+  timeout = NULL
+)
 }
 \arguments{
 \item{source_data}{The data object from which source ppoints are derived.}

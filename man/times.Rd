@@ -7,23 +7,53 @@
 \alias{addTargomoTimes}
 \title{Add Targomo Times to a Leaflet Map}
 \usage{
-getTargomoTimes(source_data = NULL, source_lat = NULL,
-  source_lng = NULL, target_data = NULL, target_lat = NULL,
-  target_lng = NULL, source_id = NULL, target_id = NULL,
-  options = targomoOptions(), api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE, timeout = NULL)
+getTargomoTimes(
+  source_data = NULL,
+  source_lat = NULL,
+  source_lng = NULL,
+  target_data = NULL,
+  target_lat = NULL,
+  target_lng = NULL,
+  source_id = NULL,
+  target_id = NULL,
+  options = targomoOptions(),
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  region = Sys.getenv("TARGOMO_REGION"),
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE,
+  timeout = NULL
+)
 
-drawTargomoTimes(map, times, drawOptions = timeDrawOptions(),
-  group = NULL, ...)
+drawTargomoTimes(
+  map,
+  times,
+  drawOptions = timeDrawOptions(),
+  group = NULL,
+  ...
+)
 
-addTargomoTimes(map, source_data = NULL, source_lat = NULL,
-  source_lng = NULL, target_data = NULL, target_lat = NULL,
-  target_lng = NULL, source_id = NULL, target_id = NULL,
-  options = targomoOptions(), drawOptions = timeDrawOptions(),
-  group = NULL, ..., api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE, timeout = NULL)
+addTargomoTimes(
+  map,
+  source_data = NULL,
+  source_lat = NULL,
+  source_lng = NULL,
+  target_data = NULL,
+  target_lat = NULL,
+  target_lng = NULL,
+  source_id = NULL,
+  target_id = NULL,
+  options = targomoOptions(),
+  drawOptions = timeDrawOptions(),
+  group = NULL,
+  ...,
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  region = Sys.getenv("TARGOMO_REGION"),
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE,
+  timeout = NULL
+)
 }
 \arguments{
 \item{source_data, target_data}{The source and target points for your travel times -

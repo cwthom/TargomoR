@@ -1,3 +1,7 @@
+# TargomoR 0.2.0.9000
+
+Development version
+
 # TargomoR 0.2.0 
 
 This is the first release of TargomoR, which wraps the Targomo REST API for R users. It provides an interface familiar to users of leaflet.

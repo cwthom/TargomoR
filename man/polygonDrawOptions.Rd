@@ -4,10 +4,18 @@
 \alias{polygonDrawOptions}
 \title{Options for Drawing Polygons on the Map}
 \usage{
-polygonDrawOptions(stroke = TRUE, weight = 5, color = c("red",
-  "orange", "green"), opacity = 0.5, fill = TRUE, fillColor = color,
-  fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1,
-  noClip = FALSE)
+polygonDrawOptions(
+  stroke = TRUE,
+  weight = 5,
+  color = c("red", "orange", "green"),
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE
+)
 }
 \arguments{
 \item{stroke}{Whether to draw the polygon borders.}

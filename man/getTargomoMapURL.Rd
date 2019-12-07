@@ -4,8 +4,7 @@
 \alias{getTargomoMapURL}
 \title{Targomo Map Tiles URL}
 \usage{
-getTargomoMapURL(style = "basic",
-  api_key = Sys.getenv("TARGOMO_API_KEY"))
+getTargomoMapURL(style = "basic", api_key = Sys.getenv("TARGOMO_API_KEY"))
 }
 \arguments{
 \item{style}{A valid Targomo Map Style - see \code{targomoMapStyles()}}

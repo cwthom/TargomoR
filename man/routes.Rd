@@ -7,23 +7,52 @@
 \alias{addTargomoRoutes}
 \title{Add Targomo Routes to a Leaflet Map}
 \usage{
-getTargomoRoutes(source_data = NULL, source_lat = NULL,
-  source_lng = NULL, target_data = NULL, target_lat = NULL,
-  target_lng = NULL, source_id = NULL, target_id = NULL,
-  options = targomoOptions(), api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE, timeout = NULL)
+getTargomoRoutes(
+  source_data = NULL,
+  source_lat = NULL,
+  source_lng = NULL,
+  target_data = NULL,
+  target_lat = NULL,
+  target_lng = NULL,
+  source_id = NULL,
+  target_id = NULL,
+  options = targomoOptions(),
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  region = Sys.getenv("TARGOMO_REGION"),
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE,
+  timeout = NULL
+)
 
-drawTargomoRoutes(map, routes, drawOptions = routeDrawOptions(),
-  group = NULL, ...)
+drawTargomoRoutes(
+  map,
+  routes,
+  drawOptions = routeDrawOptions(),
+  group = NULL,
+  ...
+)
 
-addTargomoRoutes(map, source_data = NULL, source_lat = NULL,
-  source_lng = NULL, source_id = NULL, target_data = NULL,
-  target_lat = NULL, target_lng = NULL, target_id = NULL,
-  options = targomoOptions(), drawOptions = routeDrawOptions(),
-  group = NULL, api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE, timeout = NULL)
+addTargomoRoutes(
+  map,
+  source_data = NULL,
+  source_lat = NULL,
+  source_lng = NULL,
+  source_id = NULL,
+  target_data = NULL,
+  target_lat = NULL,
+  target_lng = NULL,
+  target_id = NULL,
+  options = targomoOptions(),
+  drawOptions = routeDrawOptions(),
+  group = NULL,
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  region = Sys.getenv("TARGOMO_REGION"),
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE,
+  timeout = NULL
+)
 }
 \arguments{
 \item{source_data, target_data}{The source and target points for your routes -

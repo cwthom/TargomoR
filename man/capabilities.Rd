@@ -6,9 +6,13 @@
 \alias{print.tgm_capabilities}
 \title{Get Account Capabilities}
 \usage{
-getTargomoCapabilities(api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), config = list(),
-  verbose = FALSE, progress = FALSE)
+getTargomoCapabilities(
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  region = Sys.getenv("TARGOMO_REGION"),
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE
+)
 
 \method{print}{tgm_capabilities}(x, ...)
 }

@@ -6,9 +6,14 @@
 \alias{targomoMapStyles}
 \title{Add Targomo Basemaps to a Leaflet Map}
 \usage{
-addTargomoTiles(map, style = "basic",
-  api_key = Sys.getenv("TARGOMO_API_KEY"), layerId = NULL,
-  group = NULL, ...)
+addTargomoTiles(
+  map,
+  style = "basic",
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  layerId = NULL,
+  group = NULL,
+  ...
+)
 
 targomoMapStyles()
 }

@@ -5,18 +5,35 @@
 \alias{targomoOptions}
 \title{Set Targomo Options}
 \usage{
-targomoOptions(travelType = "bike", travelTimes = list(600, 1200,
-  1800), intersectionMode = "union", carRushHour = FALSE,
-  walkSpeed = 5, walkUpHillAdjustment = 10,
-  walkDownHillAdjustment = 0, bikeSpeed = 15,
-  bikeUpHillAdjustment = 20, bikeDownHillAdjustment = -10,
-  transitDate = NULL, transitTime = NULL, transitDuration = NULL,
+targomoOptions(
+  travelType = "bike",
+  travelTimes = list(600, 1200, 1800),
+  intersectionMode = "union",
+  carRushHour = FALSE,
+  walkSpeed = 5,
+  walkUpHillAdjustment = 10,
+  walkDownHillAdjustment = 0,
+  bikeSpeed = 15,
+  bikeUpHillAdjustment = 20,
+  bikeDownHillAdjustment = -10,
+  transitDate = NULL,
+  transitTime = NULL,
+  transitDuration = NULL,
   transitMaxWalkingTimeFromSource = NULL,
-  transitMaxWalkingTimeToTarget = NULL, transitEarliestArrival = FALSE,
-  transitMaxTransfers = NULL, edgeWeight = "time",
-  maxEdgeWeight = 1800, elevation = FALSE, serializer = "geojson",
-  srid = 4326, minPolygonHoleSize = NULL, buffer = NULL,
-  simplify = NULL, quadrantSegments = NULL, decimalPrecision = NULL)
+  transitMaxWalkingTimeToTarget = NULL,
+  transitEarliestArrival = FALSE,
+  transitMaxTransfers = NULL,
+  edgeWeight = "time",
+  maxEdgeWeight = 1800,
+  elevation = FALSE,
+  serializer = "geojson",
+  srid = 4326,
+  minPolygonHoleSize = NULL,
+  buffer = NULL,
+  simplify = NULL,
+  quadrantSegments = NULL,
+  decimalPrecision = NULL
+)
 }
 \arguments{
 \item{travelType}{What mode of transport to use - car, bike, walk or public transport.}

@@ -4,8 +4,12 @@
 \alias{setTargomoVariables}
 \title{Set Targomo Environment Variables}
 \usage{
-setTargomoVariables(api_key = NULL, region = NULL, overwrite = FALSE,
-  global = FALSE)
+setTargomoVariables(
+  api_key = NULL,
+  region = NULL,
+  overwrite = FALSE,
+  global = FALSE
+)
 }
 \arguments{
 \item{api_key}{Your Targomo API key}

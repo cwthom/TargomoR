@@ -13,6 +13,7 @@
 ^\.travis\.yml$
 ^CODE_OF_CONDUCT\.md$
 ^sticker$
+^pkgdown$
 ^\.Rprofile$
 ^vignettes$
 ^cran-comments\.md$

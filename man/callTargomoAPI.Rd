@@ -4,10 +4,16 @@
 \alias{callTargomoAPI}
 \title{Call the Targomo API}
 \usage{
-callTargomoAPI(api_key = Sys.getenv("TARGOMO_API_KEY"),
-  region = Sys.getenv("TARGOMO_REGION"), service, body,
-  config = list(), verbose = FALSE, progress = FALSE,
-  timeout = NULL)
+callTargomoAPI(
+  api_key = Sys.getenv("TARGOMO_API_KEY"),
+  region = Sys.getenv("TARGOMO_REGION"),
+  service,
+  body,
+  config = list(),
+  verbose = FALSE,
+  progress = FALSE,
+  timeout = NULL
+)
 }
 \arguments{
 \item{api_key}{The Targomo API key.}

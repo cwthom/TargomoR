@@ -4,12 +4,24 @@
 \alias{routeDrawOptions}
 \title{Options for Drawing Routes on the Map}
 \usage{
-routeDrawOptions(showMarkers = TRUE, showTransfers = TRUE,
-  walkColour = "green", walkWeight = 5, walkDashArray = "1,10",
-  carColour = "blue", carWeight = 5, carDashArray = NULL,
-  bikeColour = "orange", bikeWeight = 5, bikeDashArray = NULL,
-  transitColour = "red", transitWeight = 5, transitDashArray = NULL,
-  transferColour = "blue", transferRadius = 10)
+routeDrawOptions(
+  showMarkers = TRUE,
+  showTransfers = TRUE,
+  walkColour = "green",
+  walkWeight = 5,
+  walkDashArray = "1,10",
+  carColour = "blue",
+  carWeight = 5,
+  carDashArray = NULL,
+  bikeColour = "orange",
+  bikeWeight = 5,
+  bikeDashArray = NULL,
+  transitColour = "red",
+  transitWeight = 5,
+  transitDashArray = NULL,
+  transferColour = "blue",
+  transferRadius = 10
+)
 }
 \arguments{
 \item{showMarkers}{Whether to show the source/target markers.}

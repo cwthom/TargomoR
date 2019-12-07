@@ -41,8 +41,15 @@ setting up your [environment](#set-up-environment) correctly, and
 
 ## Installation
 
-TargomoR is not yet on CRAN. To install this development version from
-GitHub please use:
+TargomoR is on CRAN. You can install it with
+
+``` r
+install.packages("TargomoR")
+library(TargomoR)
+```
+
+Alternatively, to install the latest development version from GitHub
+please use:
 
 ``` r
 remotes::install_github("cwthom/TargomoR")

@@ -4,8 +4,11 @@
 \alias{timeLegendOptions}
 \title{Time Legend Options}
 \usage{
-timeLegendOptions(position = "topright", title = "Travel Times",
-  layerId = NULL)
+timeLegendOptions(
+  position = "topright",
+  title = "Travel Times",
+  layerId = NULL
+)
 }
 \arguments{
 \item{position}{One of c("topright", "topleft", "bottomright", "bottomleft").}
