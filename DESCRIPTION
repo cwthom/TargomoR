@@ -1,7 +1,7 @@
 Package: TargomoR
 Type: Package
 Title: Interface to the 'Targomo' API
-Version: 0.2.0
+Version: 0.2.0.9000
 Authors@R: person("Chris", "Mason-Thom", email = "chrismasonthom@gmail.com", role=c("aut","cre"))
 Description: Functions to provide an intuitive interface for retrieving travel time data from the
     'Targomo' API (see <https://targomo.com/developers/> for details). Provides support for retrieving
