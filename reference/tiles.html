@@ -146,9 +146,14 @@
     <p>This function wraps round <code><a href='https://rdrr.io/pkg/leaflet/man/map-layers.html'>leaflet::addTiles</a></code> to provide access to the Targomo basemaps.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>addTargomoTiles</span>(<span class='no'>map</span>, <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"basic"</span>,
-  <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>), <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>addTargomoTiles</span>(
+  <span class='no'>map</span>,
+  <span class='kw'>style</span> <span class='kw'>=</span> <span class='st'>"basic"</span>,
+  <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
+  <span class='kw'>layerId</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
 <span class='fu'>targomoMapStyles</span>()</pre>
 

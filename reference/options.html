@@ -148,18 +148,35 @@ For full details of available options see https://docs.targomo.com/core/" />
 For full details of available options see https://docs.targomo.com/core/</p>
     </div>
 
-    <pre class="usage"><span class='fu'>targomoOptions</span>(<span class='kw'>travelType</span> <span class='kw'>=</span> <span class='st'>"bike"</span>, <span class='kw'>travelTimes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>600</span>, <span class='fl'>1200</span>,
-  <span class='fl'>1800</span>), <span class='kw'>intersectionMode</span> <span class='kw'>=</span> <span class='st'>"union"</span>, <span class='kw'>carRushHour</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>walkSpeed</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>walkUpHillAdjustment</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>walkDownHillAdjustment</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>bikeSpeed</span> <span class='kw'>=</span> <span class='fl'>15</span>,
-  <span class='kw'>bikeUpHillAdjustment</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>bikeDownHillAdjustment</span> <span class='kw'>=</span> -<span class='fl'>10</span>,
-  <span class='kw'>transitDate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>transitTime</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>transitDuration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>targomoOptions</span>(
+  <span class='kw'>travelType</span> <span class='kw'>=</span> <span class='st'>"bike"</span>,
+  <span class='kw'>travelTimes</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fl'>600</span>, <span class='fl'>1200</span>, <span class='fl'>1800</span>),
+  <span class='kw'>intersectionMode</span> <span class='kw'>=</span> <span class='st'>"union"</span>,
+  <span class='kw'>carRushHour</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>walkSpeed</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>walkUpHillAdjustment</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>walkDownHillAdjustment</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>bikeSpeed</span> <span class='kw'>=</span> <span class='fl'>15</span>,
+  <span class='kw'>bikeUpHillAdjustment</span> <span class='kw'>=</span> <span class='fl'>20</span>,
+  <span class='kw'>bikeDownHillAdjustment</span> <span class='kw'>=</span> -<span class='fl'>10</span>,
+  <span class='kw'>transitDate</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>transitTime</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>transitDuration</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>transitMaxWalkingTimeFromSource</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>transitMaxWalkingTimeToTarget</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>transitEarliestArrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>transitMaxTransfers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>edgeWeight</span> <span class='kw'>=</span> <span class='st'>"time"</span>,
-  <span class='kw'>maxEdgeWeight</span> <span class='kw'>=</span> <span class='fl'>1800</span>, <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>serializer</span> <span class='kw'>=</span> <span class='st'>"geojson"</span>,
-  <span class='kw'>srid</span> <span class='kw'>=</span> <span class='fl'>4326</span>, <span class='kw'>minPolygonHoleSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>buffer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>quadrantSegments</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>decimalPrecision</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>transitMaxWalkingTimeToTarget</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>transitEarliestArrival</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>transitMaxTransfers</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>edgeWeight</span> <span class='kw'>=</span> <span class='st'>"time"</span>,
+  <span class='kw'>maxEdgeWeight</span> <span class='kw'>=</span> <span class='fl'>1800</span>,
+  <span class='kw'>elevation</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>serializer</span> <span class='kw'>=</span> <span class='st'>"geojson"</span>,
+  <span class='kw'>srid</span> <span class='kw'>=</span> <span class='fl'>4326</span>,
+  <span class='kw'>minPolygonHoleSize</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>buffer</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>simplify</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>quadrantSegments</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>decimalPrecision</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

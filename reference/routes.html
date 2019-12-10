@@ -148,23 +148,52 @@ drawing options, and returns the map with the requested routes." />
 drawing options, and returns the map with the requested routes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getTargomoRoutes</span>(<span class='kw'>source_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>source_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>source_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>target_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>source_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='options.html'>targomoOptions</a></span>(), <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
-  <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>), <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>getTargomoRoutes</span>(
+  <span class='kw'>source_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>source_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>source_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>source_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='options.html'>targomoOptions</a></span>(),
+  <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
+  <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>),
+  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)
 
-<span class='fu'>drawTargomoRoutes</span>(<span class='no'>map</span>, <span class='no'>routes</span>, <span class='kw'>drawOptions</span> <span class='kw'>=</span> <span class='fu'><a href='routeDrawOptions.html'>routeDrawOptions</a></span>(),
-  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+<span class='fu'>drawTargomoRoutes</span>(
+  <span class='no'>map</span>,
+  <span class='no'>routes</span>,
+  <span class='kw'>drawOptions</span> <span class='kw'>=</span> <span class='fu'><a href='routeDrawOptions.html'>routeDrawOptions</a></span>(),
+  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>addTargomoRoutes</span>(<span class='no'>map</span>, <span class='kw'>source_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>source_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>source_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>source_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>target_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>target_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='options.html'>targomoOptions</a></span>(), <span class='kw'>drawOptions</span> <span class='kw'>=</span> <span class='fu'><a href='routeDrawOptions.html'>routeDrawOptions</a></span>(),
-  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
-  <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>), <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>addTargomoRoutes</span>(
+  <span class='no'>map</span>,
+  <span class='kw'>source_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>source_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>source_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>source_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_lat</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_lng</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>target_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>options</span> <span class='kw'>=</span> <span class='fu'><a href='options.html'>targomoOptions</a></span>(),
+  <span class='kw'>drawOptions</span> <span class='kw'>=</span> <span class='fu'><a href='routeDrawOptions.html'>routeDrawOptions</a></span>(),
+  <span class='kw'>group</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_API_KEY"</span>),
+  <span class='kw'>region</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"TARGOMO_REGION"</span>),
+  <span class='kw'>config</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>timeout</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
