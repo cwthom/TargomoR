@@ -56,7 +56,7 @@ library(TargomoR)
 
 The functions in TargomoR all rely on having a Targomo API Key. To get yours, please [sign up with Targomo](https://targomo.com/developers/pricing/). 
 
-You'll also need to know what region of the world to use. For example if you're looking for travel-time information in Germany, your region is "westcentraleurope". [Find your region](https://targomo.com/developers/resources/availability/). In the examples on this page the region is "britishisles".
+You'll also need to know what region of the world to use. For example if you're looking for travel-time information in Germany, your region is "westcentraleurope". [Find your region](https://targomo.com/developers/resources/coverage/). In the examples on this page the region is "britishisles".
 
 You can pass these variables to each function manually if you like, but to avoid this, the functions will default to use the `TARGOMO_API_KEY` and `TARGOMO_REGION` environment variables respectively.
 
@@ -76,9 +76,9 @@ Restart R for these variables to take effect.
 
 You're now ready to use Targomo to get travel-time and routing data. There are three services currently supported:
 
-* [Isochrone Polygons](https://targomo.com/developers/intro/services/polygon/)
-* [Routing](https://targomo.com/developers/intro/services/routing/)
-* [Time](https://targomo.com/developers/intro/services/reachability/)
+* [Isochrone Polygons](https://targomo.com/developers/services/polygon/)
+* [Routing](https://targomo.com/developers/services/routing/)
+* [Time](https://targomo.com/developers/services/reachability/)
 
 For each service there are 3 core functions:
 
