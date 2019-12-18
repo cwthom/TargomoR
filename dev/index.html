@@ -135,7 +135,7 @@
 <h2 class="hasAnchor">
 <a href="#set-up-environment" class="anchor"></a>Set Up Environment</h2>
 <p>The functions in TargomoR all rely on having a Targomo API Key. To get yours, please <a href="https://targomo.com/developers/pricing/">sign up with Targomo</a>.</p>
-<p>You’ll also need to know what region of the world to use. For example if you’re looking for travel-time information in Germany, your region is “westcentraleurope”. <a href="https://targomo.com/developers/resources/availability/">Find your region</a>. In the examples on this page the region is “britishisles”.</p>
+<p>You’ll also need to know what region of the world to use. For example if you’re looking for travel-time information in Germany, your region is “westcentraleurope”. <a href="https://targomo.com/developers/resources/coverage/">Find your region</a>. In the examples on this page the region is “britishisles”.</p>
 <p>You can pass these variables to each function manually if you like, but to avoid this, the functions will default to use the <code>TARGOMO_API_KEY</code> and <code>TARGOMO_REGION</code> environment variables respectively.</p>
 <p>To take advantage of this, you can set these variables in an .Renviron file. Use the following snippet to write the variables to the file.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/setTargomoVariables.html">setTargomoVariables</a></span>(<span class="dt">api_key =</span> <span class="st">"&lt;YOUR KEY&gt;"</span>, <span class="dt">region =</span> <span class="st">"&lt;YOUR REGION&gt;"</span>,</a>
@@ -150,9 +150,9 @@
 <a href="#get-travel-time-data" class="anchor"></a>Get Travel Time Data</h2>
 <p>You’re now ready to use Targomo to get travel-time and routing data. There are three services currently supported:</p>
 <ul>
-<li><a href="https://targomo.com/developers/intro/services/polygon/">Isochrone Polygons</a></li>
-<li><a href="https://targomo.com/developers/intro/services/routing/">Routing</a></li>
-<li><a href="https://targomo.com/developers/intro/services/reachability/">Time</a></li>
+<li><a href="https://targomo.com/developers/services/polygon/">Isochrone Polygons</a></li>
+<li><a href="https://targomo.com/developers/services/routing/">Routing</a></li>
+<li><a href="https://targomo.com/developers/services/reachability/">Time</a></li>
 </ul>
 <p>For each service there are 3 core functions:</p>
 <ul>
