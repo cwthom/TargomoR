@@ -98,7 +98,7 @@ processTimes <- function(payload) {
                                      nrow=length(set$targets),
                                      byrow=T),
                       stringsAsFactors = FALSE)
-    colnames(set) <- c("sourceId", "targetId", "travelTime")
+    colnames(set) <- c("sourceId", "targetId", "travelTime", "travelDistance")
     set$travelTime <- as.integer(set$travelTime)
     set
   })
